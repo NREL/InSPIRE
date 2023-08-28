@@ -97,4 +97,4 @@ ENV/
 .vscode/
 
 # temp folder
-#InSPIRE/TEMP/
+TEMP/
