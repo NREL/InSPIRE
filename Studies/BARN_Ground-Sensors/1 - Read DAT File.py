@@ -23,7 +23,7 @@
 datafolder = 'Data'
 
 
-# In[2]:
+# In[4]:
 
 
 import numpy as np
@@ -36,14 +36,14 @@ import pprint
 import os
 
 
-# In[3]:
+# In[5]:
 
 
 plt.rcParams['timezone'] = 'Etc/GMT+7'
 pd.plotting.register_matplotlib_converters()
 
 
-# In[4]:
+# In[6]:
 
 
 # This information helps with debugging and getting support :)
@@ -55,85 +55,42 @@ print("Pandas version ", pd.__version__)
 
 # # Functions to Update SSRL Data and Save
 
-# In[6]:
+# In[116]:
 
 
-df = pd.read_csv(os.path.join(datafolder, 'BARNirrad.dat'), delimiter='\t')
+# I'm sure there is a more elegant way /faster
+#Get logger data
+df = pd.read_csv(os.path.join(datafolder, 'BARNirrad.dat'))
+loggerdata = df.columns
+loggerdata
+# Get metadata
+df = pd.read_csv(os.path.join(datafolder, 'BARNirrad.dat'), skiprows=1)
+metadata = df.loc[0] 
+df = df[2::] # Removing the garbage intor lines
+# Dealing with index and timestamping properly
+df = df.reset_index()
+df.index.name = 'ind'
+df = df.drop('index', axis=1)
+df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'])
+df.set_index('TIMESTAMP', inplace=True)
+df = df.tz_localize('Etc/GMT+7')
+# Everything got read as object, so now replacing by numeric
+df = df.replace('NAN', np.nan)
+df[df.keys()[1::]] = df[df.keys()[1::]].astype(float)
+df['RECORD'] = df['RECORD'].astype(int)
 
 
-# In[ ]:
+# In[134]:
 
 
-for col in df:
+df2 = df.resample('60T', closed='right', label='right').mean() #
+
+
+# In[136]:
+
+
+for col in df2:
     plt.figure()
-    plt.plot(df[col])
+    plt.plot(df2[col])
     plt.title(col)
-
-
-# In[10]:
-
-
-loc_weatherdata_1T = weatherdata.tz_localize('Etc/GMT+7')
-
-weatherdata_15T = _averageSRRL(loc_weatherdata_1T, interval='15T', closed='right', label='right')
-weatherdata_60T = _averageSRRL(loc_weatherdata_1T, interval='60T', closed='right', label='right')
-
-
-
-# In[11]:
-
-
-freq='60T'
-df = weatherdata_60T.copy()
-
-
-# In[12]:
-
-
-def fillYear(df, freq):
-    import pandas as pd
-    # add zeros for the rest of the year
-    if freq is None:
-        try:
-            freq = pd.infer_freq(df.index)
-        except:
-            freq = '15T'  # 15 minute data by default
-    tzinfo = df.index.tzinfo
-    starttime = pd.to_datetime('%s-%s-%s %s:%s' % (df.index.year[0],1,1,0,0 ) ).tz_localize(tzinfo)
-    endtime = pd.to_datetime('%s-%s-%s %s:%s' % (df.index.year[-1],12,31,23,60-int(freq[:-1])) ).tz_localize(tzinfo)
-    beginning = df.index[0]
-    ending = df.index[-1]
-    df.loc[starttime] = 0  # set first datapt to zero to forward fill w zeros
-    df.loc[endtime] = 0    # set last datapt to zero to forward fill w zeros
-    df = df.sort_index()
-    # add zeroes before data series
-    df2= df[0:2].resample(freq).ffill()
-    combined = pd.concat([df,df2],sort=True)
-    combined = combined.loc[~combined.index.duplicated(keep='first')]
-    # add zeroes after data series
-    df2  = combined.resample(freq).bfill()
-    return df2
-
-
-# In[13]:
-
-
-TMY = fillYear(weatherdata_60T, freq='60T')
-
-
-# In[14]:
-
-
-filterdates = (TMY.index >= '2023-1-1') & ~(is_leap_and_29Feb(TMY)) & (TMY.index < '2024-1-1') 
-TMY = TMY[filterdates]
-TMY
-
-
-# In[15]:
-
-
-saveSAM_SRRLWeatherFile(weatherdata_60T, os.path.join(weatherfolder,'PSM3_60T.csv'), includeminute=False) # No minutes = sunposition T-30min
-saveSAM_SRRLWeatherFile(TMY, os.path.join(weatherfolder,'PSM3_TMY.csv'), includeminute=False) # No minutes = sunposition T-30min
-saveSAM_SRRLWeatherFile(weatherdata, os.path.join(weatherfolder,'PSM3_1T.csv'), includeminute=False) # No minutes = sunposition T-30min
-saveSAM_SRRLWeatherFile(weatherdata_15T, os.path.join(weatherfolder,'PSM3_15T.csv'), includeminute=False) # No minutes = sunposition T-30min
 
