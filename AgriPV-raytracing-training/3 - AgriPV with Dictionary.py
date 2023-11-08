@@ -1,17 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # 3. Agri PV With Dictionary
 # 
-# So far, we explored the more custom-way of doing arrays and simulations in bifacial radiance.
-# 
-# In this tutorial, we will see an alternative option of using bifacial_radiance with the internal "Tracking Dictionary". The tracking dictionary offers a structure that keeps track of the hourly simulation data as one entry each, or of one angle each for a cumulative simulation. It is a better approach to modeling, but it does not currently offer the possibility to add objects extraneous to the simulation. 
-# 
-# ![image-2.png](attachment:image-2.png)
-# 
-# Steps:
-# 1. Get weather data through NREL NSRDB API
-# 2. Model tracking dictionary hourly
 
 # ## 1. Solar Irradiance Data sources
 # 
@@ -60,7 +50,7 @@
 # 
 # **If you have an NREL API key please enter it in the next cell.**
 
-# In[3]:
+# In[1]:
 
 
 NREL_API_KEY = None  # <-- please set your NREL API key here
@@ -74,7 +64,7 @@ if NREL_API_KEY is None:
 # 
 # The example TMY dataset used here is from an airport in North Carolina, but what if we wanted to model a PV system somewhere else? The NSRDB, one of many sources of weather data intended for PV modeling, is free and easy to access using pvlib. As an example, we'll fetch a TMY dataset for San Juan, Puerto Rico at coordinates [(18.4671, -66.1185)](https://goo.gl/maps/ZuYuKFxSpJ1z9HXX8). We use [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html) which returns a Python dictionary of metadata and a Pandas dataframe of the timeseries weather data.
 
-# In[8]:
+# In[25]:
 
 
 import pvlib
@@ -89,85 +79,158 @@ metadata
 
 # TMY datasets from the PSM3 service of the NSRDB are timestamped using the real year that the measurements came from. The [`pvlib.iotools.read_tmy3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.read_tmy3.html) function had a `coerce_year` argument to force everything to align to a single dummy year, but [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html) doesn't have that feature. For convenience let's standardize the data to 1990 and then compare monthly GHI to the North Carolina location:
 
-# In[16]:
+# In[3]:
 
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
 
-# In[18]:
+# In[6]:
 
 
-metdata['Year'] = 1990
-metdata.index = pd.to_datetime(metdata[['Year', 'Month', 'Day', 'Hour']])
+import bifacial_radiance as br
 
-ghi_monthly = pd.DataFrame({
-    'PR': metdata['ghi'].resample('M').sum(),
-})
-
-ghi_monthly.plot.bar()
-plt.ylabel('Monthly GHI [W h/m^2]');
+br.__version__
 
 
-# In[ ]:
+# In[5]:
+
+
+import os
+from pathlib import Path
+
+testfolder = str(Path().resolve().parent / 'TEMP' /  'Tutorial_3')
+
+if not os.path.exists(testfolder):
+    os.makedirs(testfolder)
+    
+print ("Your simulation will be stored in %s" % testfolder)
+
+
+# In[8]:
+
+
+radObj = bifacial_radiance.RadianceObj('Sim3',path=testfolder)
+
+
+# In[31]:
+
+
+metadata['timezone'] = metadata['Time Zone']
+metadata['county'] = 'Candy land'
+metadata['elevation'] = metadata['altitude']
+metadata['state'] = metadata['State']
+metadata['country'] = metadata['Country']
+
+
+# In[36]:
+
+
+metData = radObj.NSRDBWeatherData(metadata, metdata, starttime='11_08_09', endtime='11_08_11',coerce_year=2021)
+#starttime=startdatenaive, endtime=startdatenaive
+
+
+# In[38]:
+
+
+# -- establish tracking angles
+hub_height = 1.5
+pitch = 5
+sazm = 180  # Tracker axis azimuth
+modulename = 'PVmodule'
+fixed_tilt_angle = None
+gcr = 2 / pitch
+
+
+trackerParams = {'limit_angle':50,
+             'angledelta':5,
+             'backtrack':True,
+             'gcr':gcr,
+             'cumulativesky':False,
+             'azimuth': sazm,
+             'fixed_tilt_angle': fixed_tilt_angle
+             }
 
 
 
-
-
-# In[ ]:
+# In[39]:
 
 
 trackerdict = radObj.set1axis(**trackerParams)
- 
- # -- generate sky   
- trackerdict = radObj.gendaylit1axis()
- print(trackerdict)
- print("LEN TRACKERDICT", len(trackerdict.keys()))
- try:
-     tracazm = trackerdict[list(trackerdict.keys())[0]]['surf_azm']
-     tractilt = trackerdict[list(trackerdict.keys())[0]]['surf_tilt']
- except:
-     print("Issue with tracazm/tractilt on trackerdict for ", path )
-     tracazm = np.NaN
-     tractilt = np.NaN  
 
- sceneDict = {'pitch':pitch, 
-              'hub_height': hub_height,
-              'nMods': 19,
-              'nRows': 7,
-             'tilt': fixed_tilt_angle,  
-             'sazm': sazm
-              }
 
- modWanted = 10
- rowWanted = 4
+# In[40]:
 
- trackerdict = radObj.makeScene1axis(module=modulename,sceneDict=sceneDict)
 
- # -- build oct file
- trackerdict = radObj.makeOct1axis()
+trackerdict
 
- # -- run analysis
- # Analysis for Module
- trackerdict = radObj.analysis1axis(trackerdict, customname = 'Module',
-                                    sensorsy=9, modWanted=modWanted,
-                                    rowWanted=rowWanted)
- try:
-     trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=False)
- except:
-     print("**Error on trackerdict WHY!, skipping", gid, startdate)
-     print("Trackerdict error path: " , results_path)
-     print("TRACKERDICT Print:", radObj.trackerdict)
-     results = [np.NaN] * 38
-     #results = None
-     with open(results_path, "wb") as fp:   #Pickling
-         pickle.dump(results, fp)        
-     return results
 
- ResultPVWm2Back = radObj.CompiledResults.iloc[0]['Grear_mean']
- ResultPVWm2Front = radObj.CompiledResults.iloc[0]['Gfront_mean']
+# In[42]:
+
+
+radObj.setGround() 
+
+
+# In[41]:
+
+
+trackerdict = radObj.gendaylit1axis()
+
+
+# In[ ]:
+
+
+radObj.setGround(alb) 
+
+
+# -- generate sky   
+trackerdict = radObj.gendaylit1axis()
+print(trackerdict)
+print("LEN TRACKERDICT", len(trackerdict.keys()))
+try:
+    tracazm = trackerdict[list(trackerdict.keys())[0]]['surf_azm']
+    tractilt = trackerdict[list(trackerdict.keys())[0]]['surf_tilt']
+except:
+    print("Issue with tracazm/tractilt on trackerdict for ", path )
+    tracazm = np.NaN
+    tractilt = np.NaN  
+
+sceneDict = {'pitch':pitch, 
+             'hub_height': hub_height,
+             'nMods': 19,
+             'nRows': 7,
+            'tilt': fixed_tilt_angle,  
+            'sazm': sazm
+             }
+
+modWanted = 10
+rowWanted = 4
+
+trackerdict = radObj.makeScene1axis(module=modulename,sceneDict=sceneDict)
+
+# -- build oct file
+trackerdict = radObj.makeOct1axis()
+
+# -- run analysis
+# Analysis for Module
+trackerdict = radObj.analysis1axis(trackerdict, customname = 'Module',
+                                   sensorsy=9, modWanted=modWanted,
+                                   rowWanted=rowWanted)
+try:
+    trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=False)
+except:
+    print("**Error on trackerdict WHY!, skipping", gid, startdate)
+    print("Trackerdict error path: " , results_path)
+    print("TRACKERDICT Print:", radObj.trackerdict)
+    results = [np.NaN] * 38
+    #results = None
+    with open(results_path, "wb") as fp:   #Pickling
+        pickle.dump(results, fp)        
+    return results
+
+ResultPVWm2Back = radObj.CompiledResults.iloc[0]['Grear_mean']
+ResultPVWm2Front = radObj.CompiledResults.iloc[0]['Gfront_mean']
 
 
 # In[ ]:
