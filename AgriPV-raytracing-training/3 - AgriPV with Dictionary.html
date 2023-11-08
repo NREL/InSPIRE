@@ -14912,7 +14912,7 @@ Making path: materials
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metadata</span><span class="p">[</span><span class="s1">'timezone'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'Time Zone'</span><span class="p">]</span>
@@ -14920,6 +14920,8 @@ Making path: materials
 <span class="n">metadata</span><span class="p">[</span><span class="s1">'elevation'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'altitude'</span><span class="p">]</span>
 <span class="n">metadata</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'State'</span><span class="p">]</span>
 <span class="n">metadata</span><span class="p">[</span><span class="s1">'country'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'Country'</span><span class="p">]</span>
+
+<span class="n">metdata</span><span class="p">[</span><span class="s1">'Albedo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metdata</span><span class="p">[</span><span class="s1">'albedo'</span><span class="p">]</span>
 </pre></div>
 
      </div>
@@ -14932,7 +14934,284 @@ Making path: materials
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metdata</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[67]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Day</th>
+      <th>Hour</th>
+      <th>Minute</th>
+      <th>temp_air</th>
+      <th>Dew Point</th>
+      <th>DHI</th>
+      <th>DNI</th>
+      <th>GHI</th>
+      <th>albedo</th>
+      <th>pressure</th>
+      <th>wind_direction</th>
+      <th>Wspd</th>
+      <th>Albedo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2021-01-01 00:30:00-04:00</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>30</td>
+      <td>25.2</td>
+      <td>21.4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1029.0</td>
+      <td>71.0</td>
+      <td>4.7</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2021-01-01 01:30:00-04:00</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>30</td>
+      <td>25.1</td>
+      <td>21.3</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1028.0</td>
+      <td>72.0</td>
+      <td>4.8</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2021-01-01 02:30:00-04:00</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>30</td>
+      <td>25.1</td>
+      <td>21.1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1028.0</td>
+      <td>73.0</td>
+      <td>4.9</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2021-01-01 03:30:00-04:00</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>30</td>
+      <td>25.0</td>
+      <td>21.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1028.0</td>
+      <td>75.0</td>
+      <td>4.9</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2021-01-01 04:30:00-04:00</th>
+      <td>2019</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>30</td>
+      <td>24.9</td>
+      <td>21.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1028.0</td>
+      <td>76.0</td>
+      <td>4.9</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2021-12-31 19:30:00-04:00</th>
+      <td>2003</td>
+      <td>12</td>
+      <td>31</td>
+      <td>19</td>
+      <td>30</td>
+      <td>24.0</td>
+      <td>19.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.06</td>
+      <td>1030.0</td>
+      <td>56.0</td>
+      <td>5.1</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>2021-12-31 20:30:00-04:00</th>
+      <td>2003</td>
+      <td>12</td>
+      <td>31</td>
+      <td>20</td>
+      <td>30</td>
+      <td>25.3</td>
+      <td>21.6</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1030.0</td>
+      <td>68.0</td>
+      <td>4.4</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2021-12-31 21:30:00-04:00</th>
+      <td>2003</td>
+      <td>12</td>
+      <td>31</td>
+      <td>21</td>
+      <td>30</td>
+      <td>25.3</td>
+      <td>21.5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1030.0</td>
+      <td>69.0</td>
+      <td>4.4</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2021-12-31 22:30:00-04:00</th>
+      <td>2003</td>
+      <td>12</td>
+      <td>31</td>
+      <td>22</td>
+      <td>30</td>
+      <td>25.2</td>
+      <td>21.4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1029.0</td>
+      <td>70.0</td>
+      <td>4.5</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>2022-12-31 23:30:00-04:00</th>
+      <td>2003</td>
+      <td>12</td>
+      <td>31</td>
+      <td>23</td>
+      <td>30</td>
+      <td>25.2</td>
+      <td>21.4</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.08</td>
+      <td>1029.0</td>
+      <td>71.0</td>
+      <td>4.6</td>
+      <td>0.08</td>
+    </tr>
+  </tbody>
+</table>
+<p>8760 rows × 15 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[68]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">metData</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">NSRDBWeatherData</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">metdata</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="s1">'11_08_09'</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s1">'11_08_11'</span><span class="p">,</span><span class="n">coerce_year</span><span class="o">=</span><span class="mi">2021</span><span class="p">)</span>
@@ -14976,7 +15255,7 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[69]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># -- establish tracking angles</span>
@@ -15008,7 +15287,7 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[39]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[70]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">set1axis</span><span class="p">(</span><span class="o">**</span><span class="n">trackerParams</span><span class="p">)</span>
@@ -15024,7 +15303,7 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">trackerdict</span>
@@ -15045,7 +15324,7 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[40]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[71]:</div>
 
 
 
@@ -15080,10 +15359,10 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[74]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">radObj</span><span class="o">.</span><span class="n">setGround</span><span class="p">()</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">radObj</span><span class="o">.</span><span class="n">setGround</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span> 
 </pre></div>
 
      </div>
@@ -15105,9 +15384,8 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>
-Input albedo 0-1, or string from ground.printGroundMaterials().
-Alternatively, run setGround after readWeatherData()and setGround will read metdata.albedo if available
+<pre>Loading albedo, 1 value(s), 0.200 avg
+1 nonzero albedo values.
 </pre>
 </div>
 </div>
@@ -15121,10 +15399,10 @@ Alternatively, run setGround after readWeatherData()and setGround will read metd
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[75]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">gendaylit1axis</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">radObj</span><span class="o">.</span><span class="n">gendaylit1axis</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -15147,6 +15425,7 @@ Alternatively, run setGround after readWeatherData()and setGround will read metd
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Creating ~2 skyfiles. 
+Created 2 skyfiles in /skies/
 </pre>
 </div>
 </div>
@@ -15154,33 +15433,72 @@ Alternatively, run setGround after readWeatherData()and setGround will read metd
 <div class="jp-OutputArea-child">
 
     
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[75]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;2021-11-08_0930&#39;: {&#39;surf_azm&#39;: 90.0,
+  &#39;surf_tilt&#39;: 45.01,
+  &#39;theta&#39;: -45.01,
+  &#39;dni&#39;: 793.0,
+  &#39;ghi&#39;: 583.0,
+  &#39;dhi&#39;: 98.0,
+  &#39;temp_air&#39;: 28.0,
+  &#39;wind_speed&#39;: 1.1,
+  &#39;skyfile&#39;: &#39;skies\\sky2_18.45_-66.1_2021-11-08_0930.rad&#39;},
+ &#39;2021-11-08_1030&#39;: {&#39;surf_azm&#39;: 90.0,
+  &#39;surf_tilt&#39;: 28.41,
+  &#39;theta&#39;: -28.41,
+  &#39;dni&#39;: 850.0,
+  &#39;ghi&#39;: 730.0,
+  &#39;dhi&#39;: 103.0,
+  &#39;temp_air&#39;: 29.0,
+  &#39;wind_speed&#39;: 0.9,
+  &#39;skyfile&#39;: &#39;skies\\sky2_18.45_-66.1_2021-11-08_1030.rad&#39;}}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">module</span><span class="o">=</span><span class="n">radObj</span><span class="o">.</span><span class="n">makeModule</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">modulename</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">AttributeError</span>                            Traceback (most recent call last)
-Cell <span class="ansi-green-intense-fg ansi-bold">In[41], line 1</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span> trackerdict <span style="color: rgb(98,98,98)">=</span> radObj<span style="color: rgb(98,98,98)">.</span>gendaylit1axis()
-
-File <span class="ansi-green-intense-fg ansi-bold">c:\users\sayala\documents\github\bifacial_radiance\bifacial_radiance\main.py:2007</span>, in <span class="ansi-cyan-fg">RadianceObj.gendaylit1axis</span><span class="ansi-blue-intense-fg ansi-bold">(self, metdata, trackerdict, startdate, enddate, debug)</span>
-<span class="ansi-green-fg">   2004</span> <span style="color: rgb(95,135,135)">#check for GHI &gt; 0</span>
-<span class="ansi-green-fg">   2005</span> <span style="color: rgb(95,135,135)">#if metdata.ghi[i] &gt; 0:</span>
-<span class="ansi-green-fg">   2006</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> (metdata<span style="color: rgb(98,98,98)">.</span>ghi[i] <span style="color: rgb(98,98,98)">&gt;</span> <span style="color: rgb(98,98,98)">0</span>) <span style="color: rgb(98,98,98)">&amp;</span> (<span style="color: rgb(98,98,98)">~</span>np<span style="color: rgb(98,98,98)">.</span>isnan(metdata<span style="color: rgb(98,98,98)">.</span>tracker_theta[i])):  
-<span class="ansi-green-intense-fg ansi-bold">-&gt; 2007</span>     skyfile <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>gendaylit(metdata<span style="color: rgb(98,98,98)">=</span>metdata,timeindex<span style="color: rgb(98,98,98)">=</span>i, debug<span style="color: rgb(98,98,98)">=</span>debug)
-<span class="ansi-green-fg">   2008</span>     <span style="color: rgb(95,135,135)"># trackerdict2 reduces the dict to only the range specified.</span>
-<span class="ansi-green-fg">   2009</span>     trackerdict2[filename] <span style="color: rgb(98,98,98)">=</span> trackerdict[filename]  
-
-File <span class="ansi-green-intense-fg ansi-bold">c:\users\sayala\documents\github\bifacial_radiance\bifacial_radiance\main.py:1591</span>, in <span class="ansi-cyan-fg">RadianceObj.gendaylit</span><span class="ansi-blue-intense-fg ansi-bold">(self, timeindex, metdata, debug)</span>
-<span class="ansi-green-fg">   1587</span>         <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">usage: pass metdata, or run after running </span><span style="color: rgb(175,0,0)">&#39;</span> <span style="color: rgb(98,98,98)">+</span>
-<span class="ansi-green-fg">   1588</span>               <span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">readWeatherfile() </span><span style="color: rgb(175,0,0)">&#39;</span>) 
-<span class="ansi-green-fg">   1589</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">return</span>
-<span class="ansi-green-intense-fg ansi-bold">-&gt; 1591</span> ground <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>ground
-<span class="ansi-green-fg">   1593</span> locName <span style="color: rgb(98,98,98)">=</span> metdata<span style="color: rgb(98,98,98)">.</span>city
-<span class="ansi-green-fg">   1594</span> dni <span style="color: rgb(98,98,98)">=</span> metdata<span style="color: rgb(98,98,98)">.</span>dni[timeindex]
-
-<span class="ansi-red-intense-fg ansi-bold">AttributeError</span>: &#39;RadianceObj&#39; object has no attribute &#39;ground&#39;</pre>
+Module Name: PVmodule
+Module PVmodule updated in module.json
+</pre>
 </div>
 </div>
 
@@ -15193,64 +15511,306 @@ File <span class="ansi-green-intense-fg ansi-bold">c:\users\sayala\documents\git
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">radObj</span><span class="o">.</span><span class="n">setGround</span><span class="p">(</span><span class="n">alb</span><span class="p">)</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sceneDict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'pitch'</span><span class="p">:</span><span class="n">pitch</span><span class="p">,</span> 
+             <span class="s1">'hub_height'</span><span class="p">:</span> <span class="n">hub_height</span><span class="p">,</span>
+             <span class="s1">'nMods'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+             <span class="s1">'nRows'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+             <span class="s1">'tilt'</span><span class="p">:</span> <span class="n">fixed_tilt_angle</span><span class="p">,</span>  
+             <span class="s1">'sazm'</span><span class="p">:</span> <span class="n">sazm</span>
+             <span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[76]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">makeScene1axis</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="n">modulename</span><span class="p">,</span><span class="n">sceneDict</span><span class="o">=</span><span class="n">sceneDict</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
 
     
-    <span class="c1"># -- generate sky   </span>
-    <span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">gendaylit1axis</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">trackerdict</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"LEN TRACKERDICT"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">trackerdict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">tracazm</span> <span class="o">=</span> <span class="n">trackerdict</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">trackerdict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">'surf_azm'</span><span class="p">]</span>
-        <span class="n">tractilt</span> <span class="o">=</span> <span class="n">trackerdict</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">trackerdict</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">'surf_tilt'</span><span class="p">]</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Issue with tracazm/tractilt on trackerdict for "</span><span class="p">,</span> <span class="n">path</span> <span class="p">)</span>
-        <span class="n">tracazm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
-        <span class="n">tractilt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>  
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
-    <span class="n">sceneDict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'pitch'</span><span class="p">:</span><span class="n">pitch</span><span class="p">,</span> 
-                 <span class="s1">'hub_height'</span><span class="p">:</span> <span class="n">hub_height</span><span class="p">,</span>
-                 <span class="s1">'nMods'</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
-                 <span class="s1">'nRows'</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-                <span class="s1">'tilt'</span><span class="p">:</span> <span class="n">fixed_tilt_angle</span><span class="p">,</span>  
-                <span class="s1">'sazm'</span><span class="p">:</span> <span class="n">sazm</span>
-                 <span class="p">}</span>
 
-    <span class="n">modWanted</span> <span class="o">=</span> <span class="mi">10</span>
-    <span class="n">rowWanted</span> <span class="o">=</span> <span class="mi">4</span>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>
+Making ~2 .rad files for gendaylit 1-axis workflow (this takes a minute..)
+2 Radfiles created in /objects/
+</pre>
+</div>
+</div>
 
-    <span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">makeScene1axis</span><span class="p">(</span><span class="n">module</span><span class="o">=</span><span class="n">modulename</span><span class="p">,</span><span class="n">sceneDict</span><span class="o">=</span><span class="n">sceneDict</span><span class="p">)</span>
+</div>
 
-    <span class="c1"># -- build oct file</span>
-    <span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">makeOct1axis</span><span class="p">()</span>
+</div>
 
-    <span class="c1"># -- run analysis</span>
-    <span class="c1"># Analysis for Module</span>
-    <span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">analysis1axis</span><span class="p">(</span><span class="n">trackerdict</span><span class="p">,</span> <span class="n">customname</span> <span class="o">=</span> <span class="s1">'Module'</span><span class="p">,</span>
-                                       <span class="n">sensorsy</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">modWanted</span><span class="o">=</span><span class="n">modWanted</span><span class="p">,</span>
-                                       <span class="n">rowWanted</span><span class="o">=</span><span class="n">rowWanted</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">calculateResults</span><span class="p">(</span><span class="n">bifacialityfactor</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">agriPV</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"**Error on trackerdict WHY!, skipping"</span><span class="p">,</span> <span class="n">gid</span><span class="p">,</span> <span class="n">startdate</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Trackerdict error path: "</span> <span class="p">,</span> <span class="n">results_path</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"TRACKERDICT Print:"</span><span class="p">,</span> <span class="n">radObj</span><span class="o">.</span><span class="n">trackerdict</span><span class="p">)</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">]</span> <span class="o">*</span> <span class="mi">38</span>
-        <span class="c1">#results = None</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">results_path</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>   <span class="c1">#Pickling</span>
-            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>        
-        <span class="k">return</span> <span class="n">results</span>
-
-    <span class="n">ResultPVWm2Back</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">CompiledResults</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'Grear_mean'</span><span class="p">]</span>
-    <span class="n">ResultPVWm2Front</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">CompiledResults</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'Gfront_mean'</span><span class="p">]</span>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[77]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">makeOct1axis</span><span class="p">()</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>
+Making 2 octfiles in root directory.
+Created 1axis_2021-11-08_0930.oct
+Created 1axis_2021-11-08_1030.oct
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[77]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;2021-11-08_0930&#39;: {&#39;surf_azm&#39;: 90.0,
+  &#39;surf_tilt&#39;: 45.01,
+  &#39;theta&#39;: -45.01,
+  &#39;dni&#39;: 793.0,
+  &#39;ghi&#39;: 583.0,
+  &#39;dhi&#39;: 98.0,
+  &#39;temp_air&#39;: 28.0,
+  &#39;wind_speed&#39;: 1.1,
+  &#39;skyfile&#39;: &#39;skies\\sky2_18.45_-66.1_2021-11-08_0930.rad&#39;,
+  &#39;radfile&#39;: &#39;objects\\1axis2021-11-08_0930__C_0.79277_rtr_5.00000_tilt_45.01000_5modsx2rows_origin0,0.rad&#39;,
+  &#39;scene&#39;: {&#39;module&#39;: {&#39;x&#39;: 1, &#39;y&#39;: 2, &#39;z&#39;: 0.02, &#39;modulematerial&#39;: &#39;black&#39;, &#39;scenex&#39;: 1.01, &#39;sceney&#39;: 2.0, &#39;scenez&#39;: 0.1, &#39;numpanels&#39;: 1, &#39;bifi&#39;: 1, &#39;text&#39;: &#39;! genbox black PVmodule 1 2 0.02 | xform -t -0.5 -1.0 0 -a 1 -t 0 2.0 0&#39;, &#39;modulefile&#39;: &#39;objects\\PVmodule.rad&#39;, &#39;glass&#39;: False, &#39;offsetfromaxis&#39;: 0, &#39;xgap&#39;: 0.01, &#39;ygap&#39;: 0.0, &#39;zgap&#39;: 0.1}, &#39;modulefile&#39;: &#39;objects\\PVmodule.rad&#39;, &#39;hpc&#39;: False, &#39;name&#39;: &#39;Scene0&#39;, &#39;gcr&#39;: 0.4, &#39;text&#39;: &#39;!xform -rx 45.01 -t 0 0 1.5 -a 5 -t 1.01 0 0 -a 2 -t 0 5 0 -i 1 -t -2.02 -0.0 0 -rz 90.0 -t 0 0 0 objects\\PVmodule.rad&#39;, &#39;radfiles&#39;: &#39;objects\\1axis2021-11-08_0930__C_0.79277_rtr_5.00000_tilt_45.01000_5modsx2rows_origin0,0.rad&#39;, &#39;sceneDict&#39;: {&#39;tilt&#39;: 45.01, &#39;pitch&#39;: 5, &#39;clearance_height&#39;: 0.7927698161689823, &#39;azimuth&#39;: 90.0, &#39;nMods&#39;: 5, &#39;nRows&#39;: 2, &#39;modulez&#39;: 0.02, &#39;axis_tilt&#39;: 0, &#39;originx&#39;: 0, &#39;originy&#39;: 0}},
+  &#39;octfile&#39;: &#39;1axis_2021-11-08_0930.oct&#39;},
+ &#39;2021-11-08_1030&#39;: {&#39;surf_azm&#39;: 90.0,
+  &#39;surf_tilt&#39;: 28.41,
+  &#39;theta&#39;: -28.41,
+  &#39;dni&#39;: 850.0,
+  &#39;ghi&#39;: 730.0,
+  &#39;dhi&#39;: 103.0,
+  &#39;temp_air&#39;: 29.0,
+  &#39;wind_speed&#39;: 0.9,
+  &#39;skyfile&#39;: &#39;skies\\sky2_18.45_-66.1_2021-11-08_1030.rad&#39;,
+  &#39;radfile&#39;: &#39;objects\\1axis2021-11-08_1030__C_1.02422_rtr_5.00000_tilt_28.41000_5modsx2rows_origin0,0.rad&#39;,
+  &#39;scene&#39;: {&#39;module&#39;: {&#39;x&#39;: 1, &#39;y&#39;: 2, &#39;z&#39;: 0.02, &#39;modulematerial&#39;: &#39;black&#39;, &#39;scenex&#39;: 1.01, &#39;sceney&#39;: 2.0, &#39;scenez&#39;: 0.1, &#39;numpanels&#39;: 1, &#39;bifi&#39;: 1, &#39;text&#39;: &#39;! genbox black PVmodule 1 2 0.02 | xform -t -0.5 -1.0 0 -a 1 -t 0 2.0 0&#39;, &#39;modulefile&#39;: &#39;objects\\PVmodule.rad&#39;, &#39;glass&#39;: False, &#39;offsetfromaxis&#39;: 0, &#39;xgap&#39;: 0.01, &#39;ygap&#39;: 0.0, &#39;zgap&#39;: 0.1}, &#39;modulefile&#39;: &#39;objects\\PVmodule.rad&#39;, &#39;hpc&#39;: False, &#39;name&#39;: &#39;Scene0&#39;, &#39;gcr&#39;: 0.4, &#39;text&#39;: &#39;!xform -rx 28.41 -t 0 0 1.5 -a 5 -t 1.01 0 0 -a 2 -t 0 5 0 -i 1 -t -2.02 -0.0 0 -rz 90.0 -t 0 0 0 objects\\PVmodule.rad&#39;, &#39;radfiles&#39;: &#39;objects\\1axis2021-11-08_1030__C_1.02422_rtr_5.00000_tilt_28.41000_5modsx2rows_origin0,0.rad&#39;, &#39;sceneDict&#39;: {&#39;tilt&#39;: 28.41, &#39;pitch&#39;: 5, &#39;clearance_height&#39;: 1.0242222705361053, &#39;azimuth&#39;: 90.0, &#39;nMods&#39;: 5, &#39;nRows&#39;: 2, &#39;modulez&#39;: 0.02, &#39;axis_tilt&#39;: 0, &#39;originx&#39;: 0, &#39;originy&#39;: 0}},
+  &#39;octfile&#39;: &#39;1axis_2021-11-08_1030.oct&#39;}}</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[95]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">analysis1axis</span><span class="p">(</span><span class="n">customname</span> <span class="o">=</span> <span class="s1">'Module'</span><span class="p">,</span>
+                                   <span class="n">sensorsy</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">modWanted</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                   <span class="n">rowWanted</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Linescan in process: 1axis_2021-11-08_0930Module_Row1_Module2_Front
+Linescan in process: 1axis_2021-11-08_0930Module_Row1_Module2_Back
+Saved: results\irr_1axis_2021-11-08_0930Module_Row1_Module2.csv
+Index: 2021-11-08_0930. Wm2Front: 821.90435. Wm2Back: 74.13197
+Linescan in process: 1axis_2021-11-08_1030Module_Row1_Module2_Front
+Linescan in process: 1axis_2021-11-08_1030Module_Row1_Module2_Back
+Saved: results\irr_1axis_2021-11-08_1030Module_Row1_Module2.csv
+Index: 2021-11-08_1030. Wm2Front: 831.4467. Wm2Back: 93.048215
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[98]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resolutionGround</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># use 1 for faster test runs</span>
+<span class="n">numsensors</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">pitch</span><span class="o">/</span><span class="n">resolutionGround</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">modscanback</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'xstart'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+                <span class="s1">'zstart'</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+                <span class="s1">'xinc'</span><span class="p">:</span> <span class="n">resolutionGround</span><span class="p">,</span>
+                <span class="s1">'zinc'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">'Ny'</span><span class="p">:</span><span class="n">numsensors</span><span class="p">,</span>
+                <span class="s1">'orient'</span><span class="p">:</span><span class="s1">'0 0 -1'</span><span class="p">}</span>
+
+<span class="c1"># Analysis for GROUND</span>
+<span class="n">trackerdict</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">analysis1axis</span><span class="p">(</span><span class="n">customname</span> <span class="o">=</span> <span class="s1">'Ground'</span><span class="p">,</span>
+                                   <span class="n">modscanback</span><span class="o">=</span><span class="n">modscanback</span><span class="p">,</span> <span class="n">sensorsy</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Linescan in process: 1axis_2021-11-08_0930Ground_Row1_Module3_Front
+Linescan in process: 1axis_2021-11-08_0930Ground_Row1_Module3_Back
+Saved: results\irr_1axis_2021-11-08_0930Ground_Row1_Module3_Front.csv
+Saved: results\irr_1axis_2021-11-08_0930Ground_Row1_Module3_Back.csv
+Index: 2021-11-08_0930. Wm2Front: 821.935. Wm2Back: 570.2763666666666
+Linescan in process: 1axis_2021-11-08_1030Ground_Row1_Module3_Front
+Linescan in process: 1axis_2021-11-08_1030Ground_Row1_Module3_Back
+Saved: results\irr_1axis_2021-11-08_1030Ground_Row1_Module3_Front.csv
+Saved: results\irr_1axis_2021-11-08_1030Ground_Row1_Module3_Back.csv
+Index: 2021-11-08_1030. Wm2Front: 831.058. Wm2Back: 609.7100466666667
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[99]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trackerdict</span><span class="p">[</span><span class="s1">'2021-11-08_0930'</span><span class="p">]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[99]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>{&#39;surf_azm&#39;: 90.0,
+ &#39;surf_tilt&#39;: 45.01,
+ &#39;theta&#39;: -45.01,
+ &#39;dni&#39;: 793.0,
+ &#39;ghi&#39;: 583.0,
+ &#39;dhi&#39;: 98.0,
+ &#39;temp_air&#39;: 28.0,
+ &#39;wind_speed&#39;: 1.1,
+ &#39;skyfile&#39;: &#39;skies\\sky2_18.45_-66.1_2021-11-08_0930.rad&#39;,
+ &#39;radfile&#39;: &#39;objects\\1axis2021-11-08_0930__C_0.79277_rtr_5.00000_tilt_45.01000_5modsx2rows_origin0,0.rad&#39;,
+ &#39;scene&#39;: {&#39;module&#39;: {&#39;x&#39;: 1, &#39;y&#39;: 2, &#39;z&#39;: 0.02, &#39;modulematerial&#39;: &#39;black&#39;, &#39;scenex&#39;: 1.01, &#39;sceney&#39;: 2.0, &#39;scenez&#39;: 0.1, &#39;numpanels&#39;: 1, &#39;bifi&#39;: 1, &#39;text&#39;: &#39;! genbox black PVmodule 1 2 0.02 | xform -t -0.5 -1.0 0 -a 1 -t 0 2.0 0&#39;, &#39;modulefile&#39;: &#39;objects\\PVmodule.rad&#39;, &#39;glass&#39;: False, &#39;offsetfromaxis&#39;: 0, &#39;xgap&#39;: 0.01, &#39;ygap&#39;: 0.0, &#39;zgap&#39;: 0.1}, &#39;modulefile&#39;: &#39;objects\\PVmodule.rad&#39;, &#39;hpc&#39;: False, &#39;name&#39;: &#39;Scene0&#39;, &#39;gcr&#39;: 0.4, &#39;text&#39;: &#39;!xform -rx 45.01 -t 0 0 1.5 -a 5 -t 1.01 0 0 -a 2 -t 0 5 0 -i 1 -t -2.02 -0.0 0 -rz 90.0 -t 0 0 0 objects\\PVmodule.rad&#39;, &#39;radfiles&#39;: &#39;objects\\1axis2021-11-08_0930__C_0.79277_rtr_5.00000_tilt_45.01000_5modsx2rows_origin0,0.rad&#39;, &#39;sceneDict&#39;: {&#39;tilt&#39;: 45.01, &#39;pitch&#39;: 5, &#39;clearance_height&#39;: 0.7927698161689823, &#39;azimuth&#39;: 90.0, &#39;nMods&#39;: 5, &#39;nRows&#39;: 2, &#39;modulez&#39;: 0.02, &#39;axis_tilt&#39;: 0, &#39;originx&#39;: 0, &#39;originy&#39;: 0}},
+ &#39;octfile&#39;: &#39;1axis_2021-11-08_0930.oct&#39;,
+ &#39;Results&#39;: [{&#39;rowWanted&#39;: 1,
+   &#39;modWanted&#39;: 3,
+   &#39;AnalysisObj&#39;: {&#39;octfile&#39;: &#39;1axis_2021-11-08_0930.oct&#39;, &#39;name&#39;: &#39;1axis_2021-11-08_0930Ground&#39;, &#39;hpc&#39;: False, &#39;modWanted&#39;: 3, &#39;rowWanted&#39;: 1, &#39;Wm2Front&#39;: [821.935], &#39;Wm2Back&#39;: [539.2277, 573.02, 577.169, 576.9775, 577.3217, 577.9423], &#39;backRatio&#39;: 0.6938208895420892, &#39;x&#39;: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0], &#39;y&#39;: [-4.330536e-20, -4.333355e-17, -8.66238e-17, -1.29914e-16, -1.732043e-16, -2.164945e-16], &#39;z&#39;: [0.05, 0.05, 0.05, 0.05, 0.05, 0.05], &#39;mattype&#39;: [&#39;a2.0.a0.PVmodule.6457&#39;], &#39;rearMat&#39;: [&#39;groundplane&#39;, &#39;groundplane&#39;, &#39;groundplane&#39;, &#39;groundplane&#39;, &#39;groundplane&#39;, &#39;groundplane&#39;]},
+   &#39;Wm2Front&#39;: [821.935],
+   &#39;Wm2Back&#39;: [539.2277, 573.02, 577.169, 576.9775, 577.3217, 577.9423],
+   &#39;backRatio&#39;: 0.6938208895420892}]}</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15285,31 +15845,6 @@ File <span class="ansi-green-intense-fg ansi-bold">c:\users\sayala\documents\git
 </div>
 </div>
 
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>It's not too surprising to see that Puerto Rico location is significantly sunnier than the one in North Carolina.</p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><a href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License"></a></p>
-<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">

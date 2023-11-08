@@ -114,7 +114,7 @@ print ("Your simulation will be stored in %s" % testfolder)
 radObj = bifacial_radiance.RadianceObj('Sim3',path=testfolder)
 
 
-# In[31]:
+# In[59]:
 
 
 metadata['timezone'] = metadata['Time Zone']
@@ -123,15 +123,23 @@ metadata['elevation'] = metadata['altitude']
 metadata['state'] = metadata['State']
 metadata['country'] = metadata['Country']
 
+metdata['Albedo'] = metdata['albedo']
 
-# In[36]:
+
+# In[67]:
+
+
+metdata
+
+
+# In[68]:
 
 
 metData = radObj.NSRDBWeatherData(metadata, metdata, starttime='11_08_09', endtime='11_08_11',coerce_year=2021)
 #starttime=startdatenaive, endtime=startdatenaive
 
 
-# In[38]:
+# In[69]:
 
 
 # -- establish tracking angles
@@ -154,83 +162,89 @@ trackerParams = {'limit_angle':50,
 
 
 
-# In[39]:
+# In[70]:
 
 
 trackerdict = radObj.set1axis(**trackerParams)
 
 
-# In[40]:
+# In[71]:
 
 
 trackerdict
 
 
-# In[42]:
+# In[74]:
 
 
-radObj.setGround() 
+radObj.setGround(0.2) 
 
 
-# In[41]:
+# In[75]:
 
 
-trackerdict = radObj.gendaylit1axis()
+radObj.gendaylit1axis()
 
 
-# In[ ]:
+# In[44]:
 
 
-radObj.setGround(alb) 
+module=radObj.makeModule(name=modulename, x=1,y=2)
 
 
-# -- generate sky   
-trackerdict = radObj.gendaylit1axis()
-print(trackerdict)
-print("LEN TRACKERDICT", len(trackerdict.keys()))
-try:
-    tracazm = trackerdict[list(trackerdict.keys())[0]]['surf_azm']
-    tractilt = trackerdict[list(trackerdict.keys())[0]]['surf_tilt']
-except:
-    print("Issue with tracazm/tractilt on trackerdict for ", path )
-    tracazm = np.NaN
-    tractilt = np.NaN  
+# In[46]:
+
 
 sceneDict = {'pitch':pitch, 
              'hub_height': hub_height,
-             'nMods': 19,
-             'nRows': 7,
-            'tilt': fixed_tilt_angle,  
-            'sazm': sazm
+             'nMods': 5,
+             'nRows': 2,
+             'tilt': fixed_tilt_angle,  
+             'sazm': sazm
              }
 
-modWanted = 10
-rowWanted = 4
+
+# In[76]:
+
 
 trackerdict = radObj.makeScene1axis(module=modulename,sceneDict=sceneDict)
 
-# -- build oct file
+
+# In[77]:
+
+
 trackerdict = radObj.makeOct1axis()
 
-# -- run analysis
-# Analysis for Module
-trackerdict = radObj.analysis1axis(trackerdict, customname = 'Module',
-                                   sensorsy=9, modWanted=modWanted,
-                                   rowWanted=rowWanted)
-try:
-    trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=False)
-except:
-    print("**Error on trackerdict WHY!, skipping", gid, startdate)
-    print("Trackerdict error path: " , results_path)
-    print("TRACKERDICT Print:", radObj.trackerdict)
-    results = [np.NaN] * 38
-    #results = None
-    with open(results_path, "wb") as fp:   #Pickling
-        pickle.dump(results, fp)        
-    return results
 
-ResultPVWm2Back = radObj.CompiledResults.iloc[0]['Grear_mean']
-ResultPVWm2Front = radObj.CompiledResults.iloc[0]['Gfront_mean']
+# In[95]:
+
+
+trackerdict = radObj.analysis1axis(customname = 'Module',
+                                   sensorsy=2, modWanted=2,
+                                   rowWanted=1)
+
+
+# In[98]:
+
+
+resolutionGround = 1  # use 1 for faster test runs
+numsensors = int((pitch/resolutionGround)+1)
+modscanback = {'xstart': 0, 
+                'zstart': 0.05,
+                'xinc': resolutionGround,
+                'zinc': 0,
+                'Ny':numsensors,
+                'orient':'0 0 -1'}
+
+# Analysis for GROUND
+trackerdict = radObj.analysis1axis(customname = 'Ground',
+                                   modscanback=modscanback, sensorsy=1)
+
+
+# In[99]:
+
+
+trackerdict['2021-11-08_0930']
 
 
 # In[ ]:
@@ -244,12 +258,6 @@ ResultPVWm2Front = radObj.CompiledResults.iloc[0]['Gfront_mean']
 
 
 
-
-# It's not too surprising to see that Puerto Rico location is significantly sunnier than the one in North Carolina.
-
-# [![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)
-# 
-# This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 
 # In[ ]:
 
