@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Problem Based Learning: Pyranometers at BARN
+# # 2b. SOLUTION Problem Based Learning: Pyranometers at BARN
+# 
+# 
+# <div class="alert alert-block alert-warning"> <b>NOTE</b> This is just one way we can solve the PBL. Try it yourself before reading this solution. </div>
+# 
 # 
 # PREMISE: With what you know, model the irradiance accross the 5 Pyranometer sensors in the bifacial field located beewteen row 7 and 8.
 # 

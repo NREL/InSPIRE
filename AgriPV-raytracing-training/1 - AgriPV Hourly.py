@@ -5,7 +5,7 @@
 # 
 # This journal shows how to model an AgriPV site, calculating the irradiance not only on the modules but also the irradiance received by the ground to evaluate available solar ersource for plants. 
 # 
-# We assume that bifacia_radiacne is already installed in your computer. This works for bifacial_radiance v.3 release.
+# We assume that `bifacia_radiance` and `radiance` are properly installed.
 # 
 # These journal outlines 4 useful uses of bifacial_radiance and some tricks: 
 # 
@@ -76,7 +76,7 @@ print("Pandas version ", pd.__version__)
 print("bifacial_radiance version ", br.__version__)
 
 
-# In[7]:
+# In[5]:
 
 
 simulationname = 'tutorial_1'
@@ -92,7 +92,7 @@ tilt =35 # tilt.
 # MakeModule Parameters
 moduletype='test-module'
 numpanels = 3  # AgriPV site has 3 modules along the y direction
-module_x = 2 # 2 m
+module_x = 2 # m
 module_y = 1 # m. slope we will measure
 # if x > y, landscape. if x < y, portrait
 xgap = 2.0#
@@ -130,7 +130,7 @@ nMods = 6 # six modules per row.
 nRows = 3  # 3 row
 
 
-# In[8]:
+# In[6]:
 
 
 demo = br.RadianceObj(simulationname,path = testfolder)  
@@ -138,7 +138,7 @@ demo.setGround(albedo)
 epwfile = demo.getEPW(lat, lon) # NJ lat/lon 40.0583° N, 74.4057
 
 
-# In[9]:
+# In[7]:
 
 
 # Making module, either as a black Unit or with cell-level detail.
@@ -146,32 +146,31 @@ epwfile = demo.getEPW(lat, lon) # NJ lat/lon 40.0583° N, 74.4057
 # gaps might be really, really wide. Most commercial panels can be approximated by the single-black surface.
 detailedModule = False
 
-#Add torquetube 
-tubeParams = {'tubetype':tubetype,
-              'diameter':diameter,
-              'material':material,
-              'axisofrotation':False,
-              'visible':True}
-
 if detailedModule:
-    module=demo.makeModule(name=moduletype,x=module_x,y=module_y,numpanels=numpanels, 
-                           xgap=xgap, ygap=ygap, tubeParams=tubeParams)
-else:
     cellModule = {'numcellsx': numcellsx, 'numcellsy':numcellsy, 
                              'xcell': xcell, 'ycell': ycell, 'xcellgap': xcellgap, 'ycellgap': ycellgap}
     module=demo.makeModule(name=moduletype,numpanels=numpanels, 
                            xgap=xgap, ygap=ygap, cellModule=cellModule, tubeParams=tubeParams)
+else:
+    module=demo.makeModule(name=moduletype,x=module_x,y=module_y,numpanels=numpanels, 
+                           xgap=xgap, ygap=ygap, tubeParams=tubeParams)
 
 
-# In[10]:
+# In[8]:
 
 
 #Determine Hour to model
 #Valid options: mm_dd, mm_dd_HH, mm_dd_HHMM, YYYY-mm-dd_HHMM
-metdata = demo.readWeatherFile(epwfile, coerce_year=2021, starttime='2021-06-17_1300', endtime='2021-06-17_1500')
+metdata = demo.readWeatherFile(epwfile, coerce_year=2021, starttime='2021-06-21_12', endtime='2021-06-21_13')
 
 
 # In[11]:
+
+
+demo.metdata.__dict__
+
+
+# In[9]:
 
 
 metdata.__dict__
@@ -179,24 +178,35 @@ metdata.__dict__
 
 # We are going to model just one single timeindex at a time.
 
-# In[12]:
+# In[15]:
 
 
-timeindex = metdata.datetime.index(pd.to_datetime('2021-06-17 13:0:0 -5'))  # Make this timezone aware, use -5 for EST.
+timeindex = metdata.datetime.index(pd.to_datetime('2021-06-21 12:0:0 -5'))  # Make this timezone aware, use -5 for EST.
 timeindex
 
 
-# In[13]:
+# In[35]:
+
+
+demo.genCumSky()  
+
+
+# In[16]:
 
 
 demo.gendaylit(timeindex=timeindex)  
 
 
-# In[14]:
+# In[17]:
 
 
 sceneDict = {'tilt':tilt,'pitch': 15,'hub_height':hub_height,'azimuth':azimuth_ang, 'nMods': nMods, 'nRows': nRows}  
 scene = demo.makeScene(module=moduletype, sceneDict=sceneDict) 
+
+
+# In[19]:
+
+
 octfile = demo.makeOct(demo.getfilelist())
 
 
@@ -204,13 +214,13 @@ octfile = demo.makeOct(demo.getfilelist())
 # 
 # ***rvu -vf views\front.vp -e .01 tutorial_1.oct***
 
-# In[15]:
+# In[21]:
 
 
 ## Comment the ! line below to run rvu from the Jupyter notebook instead of your terminal.
 ## Simulation will stop until you close the rvu window
 
-#!rvu -vf views\front.vp -e .01 tutorial_1.oct
+get_ipython().system('rvu -vf views\\front.vp -e .01 tutorial_1.oct')
 
 
 # And adjust the view parameters, you should see this image.
@@ -223,19 +233,19 @@ octfile = demo.makeOct(demo.getfilelist())
 # By using this `genbox` and giving it the right size/position, we can create trees, buildings, or secondary small-area surfaces to add with sampling at specific heights but that do not shade the scene.
 # 
 
-# In[16]:
+# In[24]:
 
 
 name='Center_Patch'
-patchpositionx=-2
-patchpositiony=-1
-text='! genbox white_EPDM CenterPatch 28 12 0.1 | xform -t -14 2 0'.format(patchpositionx, patchpositiony)
+patchpositionx=-14
+patchpositiony=2
+text='! genbox white_EPDM CenterPatch 28 12 0.001 | xform -t {} {} 0'.format(patchpositionx, patchpositiony)
 customObject = demo.makeCustomObject(name,text)
 demo.appendtoScene(scene.radfiles, customObject)
 octfile = demo.makeOct(demo.getfilelist()) 
 
 
-# In[17]:
+# In[23]:
 
 
 #!rvu -vf views\front.vp -e .01 tutorial_1.oct
@@ -254,30 +264,36 @@ octfile = demo.makeOct(demo.getfilelist())
 # 
 # We are also increasign the number of points sampled accross the collector width, with the  variable **sensorsy** passed to **moduleanalysis**. We are also increasing the step between sampling points, to be able to sample in between the rows.
 
-# In[18]:
+# In[26]:
 
 
 analysis = br.AnalysisObj(octfile, demo.name)  
-sensorsy = 20
-frontscan, backscan = analysis.moduleAnalysis(scene, sensorsy=sensorsy)
+frontscan, backscan = analysis.moduleAnalysis(scene, sensorsy=sensorsy, modWanted=4)
 
 
-# In[19]:
+# In[27]:
+
+
+frontscan
+
+
+# In[28]:
 
 
 groundscan = frontscan
 
 
-# In[20]:
+# In[29]:
 
 
 groundscan['zstart'] = 0.05  # setting it 5 cm from the ground.
 groundscan['zinc'] = 0   # no tilt necessary. 
 groundscan['yinc'] = pitch/(sensorsy-1)   # increasing spacing so it covers all distance between rows
+groundscan['orient'] = '0 0 -1' 
 groundscan
 
 
-# In[21]:
+# In[30]:
 
 
 analysis.analysis(octfile, simulationname+"_groundscan", groundscan, backscan)  # compare the back vs front irradiance  
@@ -295,13 +311,13 @@ analysis.analysis(octfile, simulationname+"_groundscan", groundscan, backscan)  
 
 # ![AgriPV modeled step 4](images/spacing_between_modules.PNG)
 
-# In[22]:
+# In[ ]:
 
 
 import seaborn as sns
 
 
-# In[23]:
+# In[ ]:
 
 
 sensorsx = 3
@@ -320,7 +336,7 @@ for i in range (0, sensorsx): # Will map 20 points
 
 # Read all the files generated into one dataframe
 
-# In[29]:
+# In[ ]:
 
 
 filestarter = "irr_tutorial_1_groundscan_"
@@ -361,20 +377,20 @@ resultsdf['filename'] = filenamed
 
 # Creating a new dataframe where  each element in the front irradiance list is a column. Also transpose and reverse so it looks like a top-down view of the ground.
 
-# In[30]:
+# In[ ]:
 
 
 df3 = pd.DataFrame(resultsdf['br_Wm2Front'].to_list())
 reversed_df = df3.T.iloc[::-1]
 
 
-# In[31]:
+# In[ ]:
 
 
 sns.set(rc={'figure.figsize':(11.7,8.27)})
 
 
-# In[32]:
+# In[ ]:
 
 
 # Plot
