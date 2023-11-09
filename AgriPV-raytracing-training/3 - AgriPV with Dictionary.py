@@ -1,7 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Tutorial 3 - Agri PV With dictionary methodology
 # 
+# So far, we explored the more custom-way of doing arrays and simulations in bifacial radiance.
+# 
+# In this tutorial, we will see an alternative option of using bifacial_radiance with the internal "Tracking Dictionary". The tracking dictionary offers a structure that keeps track of the hourly simulation data as one entry each, or of one angle each for a cumulative simulation. It is a better approach to modeling, but it does not currently offer the possibility to add objects extraneous to the simulation. 
+# 
+# ![Diagram of bifacial_radiance options](images/tut3_diagram.PNG)
+# 
+# Included in this tutorial:
+# 1. Get weather data through NREL NSRDB API
+# 2. Model tracking dictionary hourly
 
 # ## 1. Solar Irradiance Data sources
 # 
@@ -35,10 +45,9 @@
 # 
 # At the [NREL Developer Network](https://developer.nrel.gov/), there are [APIs](https://en.wikipedia.org/wiki/API) to a lot of valuable [solar resources](https://developer.nrel.gov/docs/solar/) like [weather data from the NSRDB](https://developer.nrel.gov/docs/solar/nsrdb/), [operational data from PVDAQ](https://developer.nrel.gov/docs/solar/pvdaq-v3/), or indicative calculations using [PVWatts](https://developer.nrel.gov/docs/solar/pvwatts/). In order to use these resources from NREL, you need to [register for a free API key](https://developer.nrel.gov/signup/). You can test out the APIs using the `DEMO_KEY` but it has limited bandwidth compared to the [usage limit for registered users](https://developer.nrel.gov/docs/rate-limits/). NREL has some [API usage instructions](https://developer.nrel.gov/docs/api-key/), but pvlib has a few builtin functions, like [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html), that wrap the NREL API, and call them for you to make it much easier to use. Skip ahead to the next section to learn more. But before you do...
 # 
-# **Please pause now to visit https://developer.nrel.gov/signup/ and get an API key.**
+# <div class="alert alert-block alert-info"> <b>Please pause now to visit <a href="https://developer.nrel.gov/signup/"> https://developer.nrel.gov/signup/ </a> and get an API key</b> </div>
 # 
-# 
-# <div class="alert alert-block alert-info"> <b>What is an API</b> </div>
+# <b><u> What is an API </u></b>
 # 
 # What exactly is an API? Nowadays, the phrase is used interchangeably with a "web API" but in general an API is just a recipe for how to interface with a application programmatically, _IE_: in code. An API could be as simple as a function signature or its published documentation, _EG_: the API for the `solarposition` function is you give it an ISO8601 formatted date with a timezone, the latitude, longitude, and elevation as numbers, and it returns the zenith and azimuth as numbers.
 # 
@@ -79,17 +88,18 @@ metadata
 
 # TMY datasets from the PSM3 service of the NSRDB are timestamped using the real year that the measurements came from. The [`pvlib.iotools.read_tmy3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.read_tmy3.html) function had a `coerce_year` argument to force everything to align to a single dummy year, but [`pvlib.iotools.get_psm3()`](https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html) doesn't have that feature. For convenience let's standardize the data to 1990 and then compare monthly GHI to the North Carolina location:
 
+# ## 2. Modeling with bifacial_radiance
+
 # In[3]:
 
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import bifacial_radiance as br
 
 
 # In[6]:
 
-
-import bifacial_radiance as br
 
 br.__version__
 
@@ -117,29 +127,31 @@ radObj = bifacial_radiance.RadianceObj('Sim3',path=testfolder)
 # In[59]:
 
 
+# Some of the names changed internally. While bifacial_radiance updates their expected names, we are renaming the values here
 metadata['timezone'] = metadata['Time Zone']
-metadata['county'] = 'Candy land'
+metadata['county'] = '-'
 metadata['elevation'] = metadata['altitude']
 metadata['state'] = metadata['State']
 metadata['country'] = metadata['Country']
-
 metdata['Albedo'] = metdata['albedo']
 
 
-# In[67]:
+# Use NSRDBWeatherData to enter data the downloaded data in dataframe and dictionary forma for meteorological data and metadata respectively
+
+# In[102]:
 
 
-metdata
-
-
-# In[68]:
-
-
+#starttime can be 'MM_DD', or 'MM_DD_HH'
 metData = radObj.NSRDBWeatherData(metadata, metdata, starttime='11_08_09', endtime='11_08_11',coerce_year=2021)
-#starttime=startdatenaive, endtime=startdatenaive
 
 
-# In[69]:
+# In[103]:
+
+
+metData.datetime  # printing the contents of metData to see how many times got loaded.
+
+
+# In[105]:
 
 
 # -- establish tracking angles
@@ -159,7 +171,6 @@ trackerParams = {'limit_angle':50,
              'azimuth': sazm,
              'fixed_tilt_angle': fixed_tilt_angle
              }
-
 
 
 # In[70]:

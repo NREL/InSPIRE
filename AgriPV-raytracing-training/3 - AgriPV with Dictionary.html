@@ -14580,6 +14580,14 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Tutorial-3---Agri-PV-With-dictionary-methodology">Tutorial 3 - Agri PV With dictionary methodology<a class="anchor-link" href="#Tutorial-3---Agri-PV-With-dictionary-methodology">&#182;</a></h1><p>So far, we explored the more custom-way of doing arrays and simulations in bifacial radiance.</p>
+<p>In this tutorial, we will see an alternative option of using bifacial_radiance with the internal "Tracking Dictionary". The tracking dictionary offers a structure that keeps track of the hourly simulation data as one entry each, or of one angle each for a cumulative simulation. It is a better approach to modeling, but it does not currently offer the possibility to add objects extraneous to the simulation.</p>
+<p><img src="images/tut3_diagram.PNG" alt="Diagram of bifacial_radiance options"></p>
+<p>Included in this tutorial:</p>
+<ol>
+<li>Get weather data through NREL NSRDB API</li>
+<li>Model tracking dictionary hourly</li>
+</ol>
 
 </div>
 </div>
@@ -14634,8 +14642,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Fetching-TMYs-from-the-NSRDB">Fetching TMYs from the NSRDB<a class="anchor-link" href="#Fetching-TMYs-from-the-NSRDB">&#182;</a></h3><p>At the <a href="https://developer.nrel.gov/">NREL Developer Network</a>, there are <a href="https://en.wikipedia.org/wiki/API">APIs</a> to a lot of valuable <a href="https://developer.nrel.gov/docs/solar/">solar resources</a> like <a href="https://developer.nrel.gov/docs/solar/nsrdb/">weather data from the NSRDB</a>, <a href="https://developer.nrel.gov/docs/solar/pvdaq-v3/">operational data from PVDAQ</a>, or indicative calculations using <a href="https://developer.nrel.gov/docs/solar/pvwatts/">PVWatts</a>. In order to use these resources from NREL, you need to <a href="https://developer.nrel.gov/signup/">register for a free API key</a>. You can test out the APIs using the <code>DEMO_KEY</code> but it has limited bandwidth compared to the <a href="https://developer.nrel.gov/docs/rate-limits/">usage limit for registered users</a>. NREL has some <a href="https://developer.nrel.gov/docs/api-key/">API usage instructions</a>, but pvlib has a few builtin functions, like <a href="https://pvlib-python.readthedocs.io/en/stable/reference/generated/pvlib.iotools.get_psm3.html"><code>pvlib.iotools.get_psm3()</code></a>, that wrap the NREL API, and call them for you to make it much easier to use. Skip ahead to the next section to learn more. But before you do...</p>
-<p><strong>Please pause now to visit <a href="https://developer.nrel.gov/signup/">https://developer.nrel.gov/signup/</a> and get an API key.</strong></p>
-<div class="alert alert-block alert-info"> <b>What is an API</b> </div><p>What exactly is an API? Nowadays, the phrase is used interchangeably with a "web API" but in general an API is just a recipe for how to interface with a application programmatically, <em>IE</em>: in code. An API could be as simple as a function signature or its published documentation, <em>EG</em>: the API for the <code>solarposition</code> function is you give it an ISO8601 formatted date with a timezone, the latitude, longitude, and elevation as numbers, and it returns the zenith and azimuth as numbers.</p>
+<div class="alert alert-block alert-info"> <b>Please pause now to visit <a href="https://developer.nrel.gov/signup/"> https://developer.nrel.gov/signup/ </a> and get an API key</b> </div><p><b><u> What is an API </u></b></p>
+<p>What exactly is an API? Nowadays, the phrase is used interchangeably with a "web API" but in general an API is just a recipe for how to interface with a application programmatically, <em>IE</em>: in code. An API could be as simple as a function signature or its published documentation, <em>EG</em>: the API for the <code>solarposition</code> function is you give it an ISO8601 formatted date with a timezone, the latitude, longitude, and elevation as numbers, and it returns the zenith and azimuth as numbers.</p>
 <p>A web API is the same, except the application is a web service, that you access at its URL using web methods. We won't go into too much more detail here, but the most common web method is <code>GET</code> which is pretty self explanatory. Look over the <a href="https://developer.nrel.gov/docs/api-key/">NREL web usage instructions</a> for some examples, but interacting with a web API can be as easy as entering a URL into a browser. Try the URL below to <em>get</em> the PVWatts energy output for a fixed tilt site in <a href="https://goo.gl/maps/awkEcNGzSur9Has18">Broomfield, CO</a>.</p>
 <p><a href="https://developer.nrel.gov/api/pvwatts/v6.json?api_key=DEMO_KEY&amp;lat=40&amp;lon=-105&amp;system_capacity=4&amp;azimuth=180&amp;tilt=40&amp;array_type=1&amp;module_type=1&amp;losses=10">https://developer.nrel.gov/api/pvwatts/v6.json?api_key=DEMO_KEY&amp;lat=40&amp;lon=-105&amp;system_capacity=4&amp;azimuth=180&amp;tilt=40&amp;array_type=1&amp;module_type=1&amp;losses=10</a></p>
 <p>In addition to just using your browser, you can also access web APIs programmatically. The most popular Python package to interact with web APIs is <a href="https://docs.python-requests.org/en/master/">requests</a>. There's also free open source command-line tools like <a href="https://curl.se/">cURL</a> and <a href="https://httpie.io/">HTTPie</a>, and a popular nagware/freemium GUI application called <a href="https://www.postman.com/">Postman</a>.</p>
@@ -14755,6 +14763,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="2.-Modeling-with-bifacial_radiance">2. Modeling with bifacial_radiance<a class="anchor-link" href="#2.-Modeling-with-bifacial_radiance">&#182;</a></h2>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14765,6 +14784,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">bifacial_radiance</span> <span class="k">as</span> <span class="nn">br</span>
 </pre></div>
 
      </div>
@@ -14780,9 +14800,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">bifacial_radiance</span> <span class="k">as</span> <span class="nn">br</span>
-
-<span class="n">br</span><span class="o">.</span><span class="n">__version__</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">br</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 
      </div>
@@ -14915,12 +14933,12 @@ Making path: materials
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metadata</span><span class="p">[</span><span class="s1">'timezone'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'Time Zone'</span><span class="p">]</span>
-<span class="n">metadata</span><span class="p">[</span><span class="s1">'county'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Candy land'</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Some of the names changed internally. While bifacial_radiance updates their expected names, we are renaming the values here</span>
+<span class="n">metadata</span><span class="p">[</span><span class="s1">'timezone'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'Time Zone'</span><span class="p">]</span>
+<span class="n">metadata</span><span class="p">[</span><span class="s1">'county'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'-'</span>
 <span class="n">metadata</span><span class="p">[</span><span class="s1">'elevation'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'altitude'</span><span class="p">]</span>
 <span class="n">metadata</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'State'</span><span class="p">]</span>
 <span class="n">metadata</span><span class="p">[</span><span class="s1">'country'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">'Country'</span><span class="p">]</span>
-
 <span class="n">metdata</span><span class="p">[</span><span class="s1">'Albedo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">metdata</span><span class="p">[</span><span class="s1">'albedo'</span><span class="p">]</span>
 </pre></div>
 
@@ -14929,293 +14947,28 @@ Making path: materials
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Use NSRDBWeatherData to enter data the downloaded data in dataframe and dictionary forma for meteorological data and metadata respectively</p>
+
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[102]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metdata</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[67]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Year</th>
-      <th>Month</th>
-      <th>Day</th>
-      <th>Hour</th>
-      <th>Minute</th>
-      <th>temp_air</th>
-      <th>Dew Point</th>
-      <th>DHI</th>
-      <th>DNI</th>
-      <th>GHI</th>
-      <th>albedo</th>
-      <th>pressure</th>
-      <th>wind_direction</th>
-      <th>Wspd</th>
-      <th>Albedo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2021-01-01 00:30:00-04:00</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>30</td>
-      <td>25.2</td>
-      <td>21.4</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1029.0</td>
-      <td>71.0</td>
-      <td>4.7</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>2021-01-01 01:30:00-04:00</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>30</td>
-      <td>25.1</td>
-      <td>21.3</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1028.0</td>
-      <td>72.0</td>
-      <td>4.8</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>2021-01-01 02:30:00-04:00</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>30</td>
-      <td>25.1</td>
-      <td>21.1</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1028.0</td>
-      <td>73.0</td>
-      <td>4.9</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>2021-01-01 03:30:00-04:00</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-      <td>30</td>
-      <td>25.0</td>
-      <td>21.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1028.0</td>
-      <td>75.0</td>
-      <td>4.9</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>2021-01-01 04:30:00-04:00</th>
-      <td>2019</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>30</td>
-      <td>24.9</td>
-      <td>21.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1028.0</td>
-      <td>76.0</td>
-      <td>4.9</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>2021-12-31 19:30:00-04:00</th>
-      <td>2003</td>
-      <td>12</td>
-      <td>31</td>
-      <td>19</td>
-      <td>30</td>
-      <td>24.0</td>
-      <td>19.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.06</td>
-      <td>1030.0</td>
-      <td>56.0</td>
-      <td>5.1</td>
-      <td>0.06</td>
-    </tr>
-    <tr>
-      <th>2021-12-31 20:30:00-04:00</th>
-      <td>2003</td>
-      <td>12</td>
-      <td>31</td>
-      <td>20</td>
-      <td>30</td>
-      <td>25.3</td>
-      <td>21.6</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1030.0</td>
-      <td>68.0</td>
-      <td>4.4</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>2021-12-31 21:30:00-04:00</th>
-      <td>2003</td>
-      <td>12</td>
-      <td>31</td>
-      <td>21</td>
-      <td>30</td>
-      <td>25.3</td>
-      <td>21.5</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1030.0</td>
-      <td>69.0</td>
-      <td>4.4</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>2021-12-31 22:30:00-04:00</th>
-      <td>2003</td>
-      <td>12</td>
-      <td>31</td>
-      <td>22</td>
-      <td>30</td>
-      <td>25.2</td>
-      <td>21.4</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1029.0</td>
-      <td>70.0</td>
-      <td>4.5</td>
-      <td>0.08</td>
-    </tr>
-    <tr>
-      <th>2022-12-31 23:30:00-04:00</th>
-      <td>2003</td>
-      <td>12</td>
-      <td>31</td>
-      <td>23</td>
-      <td>30</td>
-      <td>25.2</td>
-      <td>21.4</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.08</td>
-      <td>1029.0</td>
-      <td>71.0</td>
-      <td>4.6</td>
-      <td>0.08</td>
-    </tr>
-  </tbody>
-</table>
-<p>8760 rows × 15 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[68]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metData</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">NSRDBWeatherData</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">metdata</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="s1">'11_08_09'</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s1">'11_08_11'</span><span class="p">,</span><span class="n">coerce_year</span><span class="o">=</span><span class="mi">2021</span><span class="p">)</span>
-<span class="c1">#starttime=startdatenaive, endtime=startdatenaive</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#starttime can be 'MM_DD', or 'MM_DD_HH'</span>
+<span class="n">metData</span> <span class="o">=</span> <span class="n">radObj</span><span class="o">.</span><span class="n">NSRDBWeatherData</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">metdata</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="s1">'11_08_09'</span><span class="p">,</span> <span class="n">endtime</span><span class="o">=</span><span class="s1">'11_08_11'</span><span class="p">,</span><span class="n">coerce_year</span><span class="o">=</span><span class="mi">2021</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15246,6 +14999,63 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 </div>
 </div>
 
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[102]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[Timestamp(&#39;2021-11-08 09:30:00-0400&#39;, tz=&#39;pytz.FixedOffset(-240)&#39;),
+ Timestamp(&#39;2021-11-08 10:30:00-0400&#39;, tz=&#39;pytz.FixedOffset(-240)&#39;)]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[103]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">metData</span><span class="o">.</span><span class="n">datetime</span>  <span class="c1"># printing the contents of metData to see how many times got loaded.</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[103]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[Timestamp(&#39;2021-11-08 09:30:00-0400&#39;, tz=&#39;pytz.FixedOffset(-240)&#39;),
+ Timestamp(&#39;2021-11-08 10:30:00-0400&#39;, tz=&#39;pytz.FixedOffset(-240)&#39;)]</pre>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -15255,7 +15065,7 @@ Calculating Sun position for center labeled data, at exact timestamp in input We
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[69]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[105]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># -- establish tracking angles</span>
