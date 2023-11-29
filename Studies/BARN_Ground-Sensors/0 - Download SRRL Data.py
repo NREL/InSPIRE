@@ -268,7 +268,7 @@ for col in weatherdata:
     plt.title(col)
 
 
-# In[10]:
+# In[16]:
 
 
 loc_weatherdata_1T = weatherdata.tz_localize('Etc/GMT+7')
@@ -278,14 +278,14 @@ weatherdata_60T = _averageSRRL(loc_weatherdata_1T, interval='60T', closed='right
 
 
 
-# In[11]:
+# In[17]:
 
 
 freq='60T'
 df = weatherdata_60T.copy()
 
 
-# In[12]:
+# In[18]:
 
 
 def fillYear(df, freq):
@@ -313,13 +313,13 @@ def fillYear(df, freq):
     return df2
 
 
-# In[13]:
+# In[19]:
 
 
 TMY = fillYear(weatherdata_60T, freq='60T')
 
 
-# In[14]:
+# In[20]:
 
 
 filterdates = (TMY.index >= '2023-1-1') & ~(is_leap_and_29Feb(TMY)) & (TMY.index < '2024-1-1') 
@@ -327,11 +327,17 @@ TMY = TMY[filterdates]
 TMY
 
 
-# In[15]:
+# In[21]:
 
 
 saveSAM_SRRLWeatherFile(weatherdata_60T, os.path.join(weatherfolder,'PSM3_60T.csv'), includeminute=False) # No minutes = sunposition T-30min
 saveSAM_SRRLWeatherFile(TMY, os.path.join(weatherfolder,'PSM3_TMY.csv'), includeminute=False) # No minutes = sunposition T-30min
-saveSAM_SRRLWeatherFile(weatherdata, os.path.join(weatherfolder,'PSM3_1T.csv'), includeminute=False) # No minutes = sunposition T-30min
-saveSAM_SRRLWeatherFile(weatherdata_15T, os.path.join(weatherfolder,'PSM3_15T.csv'), includeminute=False) # No minutes = sunposition T-30min
+saveSAM_SRRLWeatherFile(weatherdata, os.path.join(weatherfolder,'PSM3_1T.csv'), includeminute=True) # No minutes = sunposition T-30min
+saveSAM_SRRLWeatherFile(weatherdata_15T, os.path.join(weatherfolder,'PSM3_15T.csv'), includeminute=True) # No minutes = sunposition T-30min
+
+
+# In[ ]:
+
+
+
 

@@ -169,7 +169,7 @@ demo.genCumSky()
 #demo.gendaylit(timeindex=timeindex)  
 
 
-# In[29]:
+# In[11]:
 
 
 sceneDict_1 = {'tilt':tilt,'pitch': pitch,'hub_height':hub_height,'azimuth':azimuth_ang, 'nMods': nMods_1, 'nRows': nRows}
@@ -184,25 +184,25 @@ scene_3 = demo.makeScene(module=module_3, sceneDict=sceneDict_3)
 
 
 
-# In[30]:
+# In[12]:
 
 
 demo.getfilelist()
 
 
-# In[15]:
+# In[ ]:
 
 
-demo.gendaylit(timeindex=5)  
+#demo.gendaylit(timeindex=5)  
 
 
-# In[31]:
+# In[13]:
 
 
 octfile = demo.makeOct()
 
 
-# In[32]:
+# In[ ]:
 
 
 ## Comment the ! line below to run rvu from the Jupyter notebook instead of your terminal.
@@ -211,80 +211,49 @@ octfile = demo.makeOct()
 #!rvu -vf views\front.vp -e .01 tutorial_1.oct
 
 
-# In[35]:
+# In[26]:
 
 
 analysis = br.AnalysisObj(octfile, demo.name)  
-frontscan, backscan = analysis.moduleAnalysis(scene_1, sensorsy=sensorsy, modWanted=3)
+frontscan, backscan = analysis.moduleAnalysis(scene_1, sensorsy=sensorsy, sensorsx=4, modWanted=3)
 
 
-# In[36]:
-
-
-frontscan
-
-
-# In[39]:
-
-
-xcoords_3
-
-
-# In[37]:
+# In[27]:
 
 
 groundscan = frontscan
+groundscan
 
 
-# In[ ]:
+# In[28]:
 
 
-groundscan['zstart'] = 0.05  # setting it 5 cm from the ground.
-groundscan['zinc'] = 0   # no tilt necessary. 
-groundscan['yinc'] = pitch/(sensorsy-1)   # increasing spacing so it covers all distance between rows
+groundscan['xstart'] = -4  
+groundscan['ystart'] = -1.0  
+groundscan['zstart'] = 0.05  
+groundscan['xinc'] = 0    
+groundscan['yinc'] = 1  
+groundscan['zinc'] = 0   
+groundscan['sx_xinc'] = 2   # here's hte trick. this moves the xstart once every loop.
+groundscan['sy_xinc'] = 0 
+groundscan['sz_xinc'] = 0   
+groundscan['Nx'] = 10   
+groundscan['Ny'] = 3  
+groundscan['Nz'] = 1  
 groundscan['orient'] = '0 0 -1' 
 groundscan
 
 
-# In[ ]:
+# In[41]:
 
 
-analysis.analysis(octfile, simulationname+"_groundscan", groundscan, backscan)  # compare the back vs front irradiance  
+results_ground, results_ignore = analysis.analysis(octfile, simulationname+"_groundscan", groundscan, backscan)  # compare the back vs front irradiance  
 
 
-# This is the result for only one 'chord' accross the ground. Let's now do a X-Y scan of the ground.
-
-# <a id='step3'></a>
-
-# ## 3. Analyse and MAP the Ground Irradiance
-
-#  We will use the same technique to find the irradiance on the ground used above, but will move it along the X-axis to map from the start of one module to the next.
-#  
-#  We will sample around the module that is placed at the center of the field.
-
-# ![AgriPV modeled step 4](images/spacing_between_modules.PNG)
-
-# In[ ]:
+# In[47]:
 
 
 import seaborn as sns
-
-
-# In[ ]:
-
-
-sensorsx = 3
-startgroundsample=-module.scenex
-spacingbetweensamples = module.scenex/(sensorsx-1)
-
-for i in range (0, sensorsx): # Will map 20 points    
-    frontscan, backscan = analysis.moduleAnalysis(scene, sensorsy=sensorsy)
-    groundscan = frontscan
-    groundscan['zstart'] = 0.05  # setting it 5 cm from the ground.
-    groundscan['zinc'] = 0   # no tilt necessary. 
-    groundscan['yinc'] = pitch/(sensorsy-1)   # increasing spacing so it covers all distance between rows
-    groundscan['xstart'] = startgroundsample + i*spacingbetweensamples   # increasing spacing so it covers all distance between rows
-    analysis.analysis(octfile, simulationname+"_groundscan_"+str(i), groundscan, backscan)  # compare the back vs front irradiance  
 
 
 # Read all the files generated into one dataframe
