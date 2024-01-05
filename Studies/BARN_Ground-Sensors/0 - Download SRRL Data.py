@@ -96,7 +96,6 @@ def updateSRRL(srrlfile='bifacial_MIDC_2023.txt', interval='1T', start=None, end
     #     end = '20191231'
         
     if (pd.to_datetime(end) - pd.to_datetime(start)).days < 200:
-        
         newdata = _getSRRL(start,end)
     else: # just get the maximum increment of 200 days
         end = (pd.to_datetime(start)+pd.to_timedelta('200d')).strftime('%Y%m%d') 
@@ -181,22 +180,24 @@ def is_leap_and_29Feb(s):
 
 # ## DOWNLOAD DATA
 
-# In[7]:
+# In[ ]:
 
 
 srrlfile = os.path.join(weatherfolder,'bifacial_MIDC_2023.txt')
 interval = '1T'
 start = pd.to_datetime('2023-08-28').strftime('%Y%m%d')
-end = None # up to current data, or as far as it can get; if too many days have to run _getSRRl a couple times.
+end = pd.to_datetime('2023-11-02').strftime('%Y%m%d') # End fo experiment on 11/01
+# up to current data, or as far as it can get; if too many days have to run _getSRRl a couple times.
+# Note that format changed on 01/05/2024
 
-weatherdata = updateSRRL(srrlfile)
+weatherdata = updateSRRL(srrlfile, end=end)
 weatherdata = cleanSRRL(weatherdata)
 weatherdata['Albedo (CMP11)'] = weatherdata['Albedo (CMP11)'].clip(0.0,1.0)
 
 
 # ## LOAD Data
 
-# In[8]:
+# In[ ]:
 
 
 def saveSAM_SRRLWeatherFile(srrl15, savefile='BARN_SamFile.csv', includeminute = True):
@@ -259,7 +260,7 @@ def saveSAM_SRRLWeatherFile(srrl15, savefile='BARN_SamFile.csv', includeminute =
         savedata.to_csv(ict, index=False)
 
 
-# In[9]:
+# In[ ]:
 
 
 for col in weatherdata:
@@ -268,7 +269,7 @@ for col in weatherdata:
     plt.title(col)
 
 
-# In[16]:
+# In[ ]:
 
 
 loc_weatherdata_1T = weatherdata.tz_localize('Etc/GMT+7')
@@ -278,14 +279,14 @@ weatherdata_60T = _averageSRRL(loc_weatherdata_1T, interval='60T', closed='right
 
 
 
-# In[17]:
+# In[ ]:
 
 
 freq='60T'
 df = weatherdata_60T.copy()
 
 
-# In[18]:
+# In[ ]:
 
 
 def fillYear(df, freq):
@@ -313,13 +314,13 @@ def fillYear(df, freq):
     return df2
 
 
-# In[19]:
+# In[ ]:
 
 
 TMY = fillYear(weatherdata_60T, freq='60T')
 
 
-# In[20]:
+# In[ ]:
 
 
 filterdates = (TMY.index >= '2023-1-1') & ~(is_leap_and_29Feb(TMY)) & (TMY.index < '2024-1-1') 
@@ -327,7 +328,7 @@ TMY = TMY[filterdates]
 TMY
 
 
-# In[21]:
+# In[ ]:
 
 
 saveSAM_SRRLWeatherFile(weatherdata_60T, os.path.join(weatherfolder,'PSM3_60T.csv'), includeminute=False) # No minutes = sunposition T-30min
