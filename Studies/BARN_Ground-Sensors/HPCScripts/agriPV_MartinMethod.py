@@ -75,143 +75,390 @@ def start_dask(hpc=None):
 
 
 # Run simulation using the given timestamp and wavelength
-def simulate_single(daydate=None, wfile=None, system=None, results_folder_fmt=None):    
+def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
+             startdate=None, rootPath=None):
 
-    loc_name=os.path.split(wfile)[-1].split("_")[1]
-    loc_name=loc_name.replace('.csv','')
+    startdatenaive = startdate.tz_convert(pytz.FixedOffset(meta_dict['timezone']*60))
+    startdatenaive = startdatenaive.replace(tzinfo=None)
+    startdatestr = str(startdatenaive).replace(':','_').replace(' ','__')
+    startdateorigstr = str(startdate).replace(':','_').replace(' ','__')
 
-    # Main configuration
-    if system == "mL_utility": #good for comparing with bifacial_vf
-        moduletype = 'module_2x1m'
-        clearance_height = 1.0
-        nMods=21
-        iMod = 10
-        sensorsx=5
-        sim_general_name = 'bifivert_utility'
-        tilt = 90
-        azimuth = 90 #180 for N-S
-        collector_length = 1.0
-    elif system == "mP_utility_S": #good for comparing with bifacial_vf
-        moduletype = 'module_1x2m'
-        clearance_height = 1.0
-        nMods=21
-        iMod = 10
-        sensorsx=5
-        sim_general_name = 'bifi-s-tilted_mP'
-        azimuth = 180
-        collector_length = 2.0
-    elif system == "mL_utility_NS": #good for comparing with bifacial_vf
-        moduletype = 'module_2x1m'
-        clearance_height = 1.0
-        nMods=21
-        iMod = 10
-        sensorsx=5
-        sim_general_name = 'bifivert-NS_utility'
-        tilt = 90
-        azimuth = 180
-        collector_length = 1.0
-    elif system == "mP_utility_S30": #good for comparing with bifacial_vf
-        moduletype = 'module_1x2m'
-        clearance_height = 1.0
-        nMods=21
-        iMod = 10
-        sensorsx=5
-        sim_general_name = 'bifi-s-tilted-30_mP'
-        azimuth = 180
-        collector_length = 2.0
-
-     # Verify test_folder exists 
-    test_folder = results_folder_fmt.format(loc_name,system,daydate)      
-    if not os.path.exists(test_folder):
-        os.makedirs(test_folder)
-
-    # Variables to grab from weather file
-    #  Strip latitude and longitude from header of csv, lat/long may be called lat/long or degree lat/long
-    df = pd.read_csv(wfile)
-    if "Latitude" not in df:
-        df["Latitude"] = df["Degree latitude"]
-    if "Longitude" not in df:
-        df["Longitude"] = df["Degree longitude"]
-    df = df.head(1)
-    lat = float(df["Latitude"].values[0])
-    lon = float(df["Longitude"].values[0])
-
-    if system == "mP_utility_S":
-        tilt = lat-10
-    elif system == "mP_utility_S30":
-        tilt = 30
-
-    if spacingType == "single-row":
-        nRows = 1
-        iRow = 1
-        pitch = 100
-    elif spacingType == "single-spacing":
-        nRows = 7
-        iRow = 4
-        pitch = 7
-    elif spacingType == "latitude-dependent":
-        nRows = 7
-        iRow = 4
-        if system == "mL_utility":
-            m_v=-6.87e-4
-            b_v=0.155
-            pitch = 1/((m_v*lat)+b_v)
-        elif system == "mP_utility_S":
-            P=-0.560
-            k=0.133
-            a_0=40.2
-            GCR_0=0.70
-            pitch = 2/((P/(1+np.exp(-k*(lat-a_0))))+GCR_0)
-        elif system == "mL_utility_NS":
-            m_v=-6.87e-4
-            b_v=0.155
-            pitch = 1/((m_v*lat)+b_v)
-        elif system == "mP_utility_S30":
-            P=-0.560
-            k=0.133
-            a_0=40.2
-            GCR_0=0.70
-            pitch = 2/((P/(1+np.exp(-k*(lat-a_0))))+GCR_0)
-    gcr = collector_length/pitch
-    print(spacingType+" pitch = "+str(pitch)+", gcr = "+str(gcr))
-
-    #Main Variables needed throughout
-    sensorsy=8
-    hpc = True
-    cumulativesky = False
-    limit_angle = 90
-    backtrack = False
-
-    #Grab daydate and format for what is needed for readWeatherFile
-    date=daydate.replace("_","-")
-    starttime="20"+date+"_0300"
-    endtime="20"+date+"_2200"
-
-    #START SIMULATION
-    sim_name = '_'+loc_name+'_lat='+str(lat)+'_long='+str(lon)+'_'+sim_general_name+'_'+moduletype+'_tilt='+str(round(tilt,1))+'_imod='+str(round(iMod))+'_pitch='+str(round(pitch,1))
-    demo = bifacial_radiance.RadianceObj(sim_name,str(test_folder),hpc=hpc)
-    if FullYear == True:
-        metdata = demo.readWeatherFile(wfile,starttime=starttime,endtime=endtime,source='sam',label='center',coerce_year=2023)
+    #startdate = None
+    #enddate = None
+    simpath = f'{state}_{gid}_setup_{setup}_{startdatestr}'
+    if rootPath is None:
+        path = os.path.join(state,str(setup),simpath)
     else:
-        metdata = demo.readWeatherFile(wfile,starttime=starttime,endtime=endtime,source='sam',label='center',coerce_year=2023)
-    demo.setGround()
-    sceneDict = {'tilt':tilt,'pitch':pitch,'clearance_height':clearance_height,'azimuth':azimuth, 'nMods': nMods, 'nRows': nRows} 
-    trackerdict = demo.set1axis(azimuth=azimuth, fixed_tilt_angle=tilt, gcr=gcr, backtrack = backtrack, cumulativesky = cumulativesky)
-    trackerdict = demo.gendaylit1axis()
-    trackerdict = demo.makeScene1axis(module=moduletype,sceneDict=sceneDict) 
-    trackerdict = demo.makeOct1axis(customname = sim_name) 
-    demo.analysis1axis(customname = sim_name, sensorsx=sensorsx, sensorsy=sensorsy, modWanted=iMod, rowWanted=iRow) 
+        path = os.path.join(rootPath,state,str(setup),simpath)
+    results_path = os.path.join(path, 'results.pkl')
 
-    #scene.saveImage() #try this with gendaylit for one hour to see array
-    # Make a color render and falsecolor image of the scene.
-    #analysis.makeImage('side.vp')
-    #analysis.makeFalseColor('side.vp')
+    #os.path.isfile(path)
+    #Check if simulation has already completed
+    print("Current path", path)
+
+    if os.path.isfile(results_path):
+        with open(results_path, "rb") as fp:   # Unpickling
+            results = pickle.load(fp)
+        
+        print("***** SIM Done for ", simpath)
+        print("Results are: ", results)
+        
+        if results is None:
+            print("Results are NONE for ", results_path)
+            results = [np.NaN] * 38
+            with open(results_path, "wb") as fp:   #Pickling
+                pickle.dump(results, fp)    
+        return results
+
+    if not os.path.exists(path):
+        os.makedirs(path, exist_ok=True)
+
+    alb = 0.2
+    radObj = br.RadianceObj(simpath,path)
+    radObj.setGround(alb) 
+
+    metData = radObj.NSRDBWeatherData(meta_dict, df_tmy, starttime=startdatenaive, 
+                                      endtime=startdatenaive, coerce_year=2021)
+    if len(metData.datetime) == 0:
+        print("**Night hour, skipping", gid, startdate)
+        results = [np.NaN] * 38
+        #results = None
+        with open(results_path, "wb") as fp:   #Pickling
+            pickle.dump(results, fp)        
+        return results
+    # Tracker Projection of half the module into the ground, 
+    # for 1-up module in portrait orientation
+    # Assuming still 1 m for fixed-tilt systems even if a bit less 
+    # VERTICAL setup changes xp to just a margin 20 cm for protection of the modules.
+    xp = 10 
+    y = 2
+    solposAzi = metData.solpos['azimuth'][0]
+    solposZen = metData.solpos['zenith'][0]
+    timezonesave = metData.timezone
+
+    tilt = np.round(metData.latitude)
+    if tilt > 40.0:
+        tilt = 40.0
+    
+    DD = bifacialvf.vf.rowSpacing(beta = tilt, 
+                                  sazm=180, lat = metData.latitude, 
+                                  lng = metData.longitude, 
+                                  tz = metData.timezone, 
+                                  hour = 9, 
+                                  minute = 0.0)
+    if (DD <= 0) or (DD > 3.725):
+        DD = 3.725
+        print("Cannot find ideal pitch for location, setting D to 3.725")
+
+    normalized_pitch = DD + np.cos(np.round(metData.latitude) / 180.0 * np.pi)
+    pitch_temp = normalized_pitch*y
+    print("PITCH_temp ", pitch_temp)
+
+    if setup == 1:
+        hub_height = 1.5
+        pitch = 5
+        sazm = 180  # Tracker axis azimuth
+        modulename = 'PVmodule'
+        bedsWanted = 3
+        fixed_tilt_angle = None
+    if setup == 2:
+        hub_height = 2.4
+        pitch = 5
+        sazm = 180
+        modulename = 'PVmodule'
+        bedsWanted = 3
+        fixed_tilt_angle = None
+    if setup == 3:
+        hub_height = 2.4
+        pitch = 5
+        sazm = 180
+        modulename = 'PVmodule_1mxgap'
+        bedsWanted = 3
+        fixed_tilt_angle = None
+    if setup == 4:
+        hub_height = 1.5
+        pitch = 8
+        sazm = 180
+        modulename = 'PVmodule'
+        bedsWanted = 6
+        fixed_tilt_angle = None
+    if setup == 5:
+        hub_height = 1.5
+        pitch = 11
+        sazm = 180
+        modulename = 'PVmodule'
+        bedsWanted = 9
+        fixed_tilt_angle = None
+    if setup == 6:
+        hub_height = 1.5
+        #tilt = None # fixed
+        sazm = 180
+        pitchfactor = 1
+        modulename = 'PVmodule'
+        pitch = pitch_temp * pitchfactor
+        bedsWanted = 3
+        fixed_tilt_angle = tilt
+    if setup == 7:
+        hub_height = 2.4 
+        sazm = 180
+        pitchfactor = 1
+        pitch = pitch_temp * pitchfactor
+        modulename = 'PVmodule'
+        bedsWanted = 3
+        fixed_tilt_angle = tilt
+    if setup == 8:
+        hub_height = 2.4 
+        sazm = 180
+        pitchfactor = 1
+        pitch = pitch_temp * pitchfactor
+        modulename = 'PVmodule_1mxgap'
+        bedsWanted = 3
+        fixed_tilt_angle = tilt
+    if setup == 9:
+        hub_height = 1.5 
+        sazm = 180
+        pitchfactor = 2
+        pitch = pitch_temp * pitchfactor
+        modulename = 'PVmodule'
+        bedsWanted = 6
+        fixed_tilt_angle = tilt
+    if setup == 10:
+        hub_height = 2 
+        sazm = 90
+        pitch = 8.6 
+        modulename = 'PVmodule'
+        bedsWanted = 7
+        xp = 8
+        fixed_tilt_angle = 90
+
+    # TILT & PITCH CALCULATION HERE
+
+    gcr = 2/pitch
+
+    # -- establish tracking angles
+    trackerParams = {'limit_angle':50,
+                     'angledelta':5,
+                     'backtrack':True,
+                     'gcr':gcr,
+                     'cumulativesky':False,
+                     'azimuth': sazm,
+                     'fixed_tilt_angle': fixed_tilt_angle,
+                     }
+
+    trackerdict = radObj.set1axis(**trackerParams)
+    
+    # -- generate sky   
+    trackerdict = radObj.gendaylit1axis()
+    print(trackerdict)
+    print("LEN TRACKERDICT", len(trackerdict.keys()))
+    try:
+        tracazm = trackerdict[list(trackerdict.keys())[0]]['surf_azm']
+        tractilt = trackerdict[list(trackerdict.keys())[0]]['surf_tilt']
+    except:
+        print("Issue with tracazm/tractilt on trackerdict for ", path )
+        tracazm = np.NaN
+        tractilt = np.NaN  
+
+    sceneDict = {'pitch':pitch, 
+                 'hub_height': hub_height,
+                 'nMods': 19,
+                 'nRows': 7,
+                'tilt': fixed_tilt_angle,  
+                'sazm': sazm
+                 }
+
+    modWanted = 10
+    rowWanted = 4
+
+    trackerdict = radObj.makeScene1axis(module=modulename,sceneDict=sceneDict)
+
+    # -- build oct file
+    trackerdict = radObj.makeOct1axis()
+
+    # -- run analysis
+    # Analysis for Module
+    trackerdict = radObj.analysis1axis(trackerdict, customname = 'Module',
+                                       sensorsy=9, modWanted=modWanted,
+                                       rowWanted=rowWanted)
+    try:
+        trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=False)
+    except:
+        print("**Error on trackerdict WHY!, skipping", gid, startdate)
+        print("Trackerdict error path: " , results_path)
+        print("TRACKERDICT Print:", radObj.trackerdict)
+        results = [np.NaN] * 38
+        #results = None
+        with open(results_path, "wb") as fp:   #Pickling
+            pickle.dump(results, fp)        
+        return results
+
+    ResultPVWm2Back = radObj.CompiledResults.iloc[0]['Grear_mean']
+    ResultPVWm2Front = radObj.CompiledResults.iloc[0]['Gfront_mean']
+
+    # Modify modscanfront for Ground
+    resolutionGround = 0.1  # use 1 for faster test runs
+    numsensors = int((pitch/resolutionGround)+1)
+    modscanback = {'xstart': 0, 
+                    'zstart': 0.05,
+                    'xinc': resolutionGround,
+                    'zinc': 0,
+                    'Ny':numsensors,
+                    'orient':'0 0 -1'}
+
+    # Analysis for GROUND
+    trackerdict = radObj.analysis1axis(trackerdict, customname = 'Ground',
+                                       modWanted=modWanted, rowWanted=rowWanted,
+                                        modscanback=modscanback, sensorsy=1)
+
+    trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=True)
+    mykey = list(radObj.trackerdict.keys())[0]
+    ResultPVGround = radObj.trackerdict[mykey]['Results'][0]['AnalysisObj'].Wm2Back
+    # This worked with Cumulative sky...
+    # ResultPVGround = radObj.CompiledResults.iloc[0]['Wm2Back']  # Wm2Back Grear_mean
+
+    # Cleanup of Front files from the Ground simulation
+    filesall = os.listdir('results')
+    filestoclean = [e for e in filesall if e.endswith('_Front.csv')]
+    for cc in range(0, len(filestoclean)):
+        filetoclean = filestoclean[cc]
+        os.remove(os.path.join('results', filetoclean))
+
+    ghi_sum = metData.ghi.sum()
+
+    # GROUND TESTBEDS COMPILATION
+    df_temp = ResultPVGround
+    # Under panel irradiance calculation
+    edgemean = np.mean(df_temp[:xp] + df_temp[-xp:])
+    edge_normGHI = edgemean / ghi_sum
+
+    # All testbeds irradiance average
+    insidemean = np.mean(df_temp[xp:-xp])
+    inside_normGHI = insidemean / ghi_sum
+
+    # Length of each testbed between rows
+    dist1 = int(np.floor(len(df_temp[xp:-xp])/bedsWanted))
+
+    Astart = xp + dist1*0
+    Bstart = xp + dist1*1
+    Cstart = xp + dist1*2
+
+    if bedsWanted == 3:
+        Dstart = -xp # in this case it is Cend
+    if bedsWanted > 3:
+        Dstart = xp + dist1*3
+        Estart = xp + dist1*4
+        Fstart = xp + dist1*5
+        Gstart = -xp  # in this case it is Fend
+    if bedsWanted > 6:
+        Gstart = xp + dist1*6
+        Hstart = -xp # this is I end
+    if bedsWanted > 7:
+        Hstart = xp + dist1*7
+        Istart = xp + dist1*8
+        Iend = -xp # this is I end
+
+    testbedA = df_temp[Astart:Bstart]
+    testbedAmean = np.mean(testbedA)
+    testbedA_normGHI = testbedAmean / ghi_sum
+
+    testbedB = df_temp[Bstart:Cstart]
+    testbedBmean = np.mean(testbedB)
+    testbedB_normGHI = testbedBmean / ghi_sum
+
+    testbedC = df_temp[Cstart:Dstart]
+    testbedCmean = np.mean(testbedC)
+    testbedC_normGHI = testbedCmean / ghi_sum
+
+    testbedDmean = np.NaN
+    testbedEmean = np.NaN
+    testbedFmean = np.NaN
+    testbedGmean = np.NaN
+    testbedHmean = np.NaN
+    testbedImean = np.NaN
+
+    testbedD_normGHI = np.NaN
+    testbedE_normGHI = np.NaN
+    testbedF_normGHI = np.NaN
+    testbedG_normGHI = np.NaN 
+    testbedH_normGHI = np.NaN
+    testbedI_normGHI = np.NaN    
+
+    # Will run for bedswanted 6 and 9
+    if bedsWanted > 3:
+        testbedD = df_temp[Dstart:Estart]
+        testbedDmean = np.mean(testbedD)
+        testbedD_normGHI = testbedDmean / ghi_sum
+
+        testbedE = df_temp[Estart:Fstart]
+        testbedEmean = np.mean(testbedE)
+        testbedE_normGHI = testbedEmean / ghi_sum
+
+        testbedF = df_temp[Fstart:Gstart]
+        testbedFmean = np.mean(testbedF)
+        testbedF_normGHI = testbedFmean / ghi_sum
+
+    # Will only run for bedsawnted 9
+    if bedsWanted > 6:
+        testbedG = df_temp[Gstart:Hstart]
+        testbedGmean = np.mean(testbedG)
+        testbedG_normGHI = testbedGmean / ghi_sum
+
+    if bedsWanted > 7:
+        testbedH = df_temp[Hstart:Istart]
+        testbedHmean = np.mean(testbedH)
+        testbedH_normGHI = testbedHmean / ghi_sum
+
+        testbedI = df_temp[Istart:Iend]
+        testbedImean = np.mean(testbedI)
+        testbedI_normGHI = testbedImean / ghi_sum
+
+    # Compiling for return
+    results = [gid, setup, metData.latitude, metData.longitude, pitch, 
+            startdateorigstr, startdatestr,
+            timezonesave, solposAzi, solposZen, tracazm, tractilt,
+            ghi_sum,
+            ResultPVWm2Front, ResultPVWm2Back, ResultPVGround,
+            edgemean, insidemean,
+            testbedAmean, testbedBmean, testbedCmean,
+            testbedDmean, testbedEmean, testbedFmean,
+            testbedGmean, testbedHmean, testbedImean,
+            edge_normGHI, inside_normGHI,
+            testbedA_normGHI, testbedB_normGHI, testbedC_normGHI,
+            testbedD_normGHI, testbedE_normGHI, testbedF_normGHI,
+            testbedG_normGHI, testbedH_normGHI, testbedI_normGHI
+            ]
+
+    # save to folder    
+    with open(results_path, "wb") as fp:   #Pickling
+        pickle.dump(results, fp)
+    print("Results pickled!")
+
+    while not os.path.exists(results_path):
+        print("Waited for file to exist...")
+        time.sleep(10) 
+
+    if os.path.isfile(results_path):
+        # Verifies CSV file was created, then deletes unneeded files.
+        for clean_up in os.listdir(path):
+            if not clean_up.endswith('results.pkl'):
+                clean_upfile = os.path.join(path, clean_up)
+                if os.path.isfile(clean_upfile):    
+                    os.remove(clean_upfile)
+                else:
+                    shutil.rmtree(clean_upfile)
+    print("Results len ", len(results), " type ", type(results))
+    print("All other files cleaned!")
+
+    print("***** SIM Done for ", simpath, len(results), " \n Results: ", results)
+
+    
     results = 1
 
     return results
 
 
-def run_simulations_dask(daylist,wfiles,systems,kwargs,hpc):
+def run_simulations_dask(df_weather, meta, startdates, 
+                         setups, rootPath, state, hpc):
     # Create client
 
     client = start_dask(hpc)
@@ -219,12 +466,36 @@ def run_simulations_dask(daylist,wfiles,systems,kwargs,hpc):
     # Iterate over inputs
     futures = []
     
-    # Add Iterations HERE
 
-    for wfile in wfiles:
-        for system in systems:
-            for daydate in daylist:
-                futures.append(client.submit(simulate_single,daydate=daydate,wfile=wfile,system=system,**kwargs)) #Creates jobID for future workers to be called on
+    # Add Iterations HERE
+        #loop through dataframe and perform computation
+    for setup in setups:
+        for dd in range(0, len(startdates)):
+            startdate = startdates[dd]
+            for gid, row in meta.iterrows():
+                #prepare input for PVDegTools
+                meta_dict = row.to_dict()
+                df_tmy = df_weather.loc[:, gid]
+                tz_convert_val = meta_dict['timezone']
+                df_tmy = df_tmy.tz_convert(pytz.FixedOffset(tz_convert_val*60))
+                df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2021)) 
+                df_tmy = df_tmy.sort_index()
+                
+                print("type ", type(meta_dict))
+                debug = False
+                if debug:
+                    df_tmy.to_pickle('df_convert_'+str(gid)+'.pkl')
+                    filesavepic = 'meta_convert_'+str(gid)+'.pkl'
+                    with open(filesavepic, "wb") as ffp:   # pickling
+                        pickle.dump(meta_dict,ffp)
+                    print("Meta dict", meta_dict)
+                futures.append(client.submit(simulate_single, df_tmy=df_tmy, 
+                                             meta_dict=meta_dict, gid=gid,
+                                             setup=setup, 
+                                             startdate=startdate, 
+                                             rootPath=rootPath)) 
+
+
 
     # Get results for all simulations
     res = client.gather(futures)
@@ -249,7 +520,6 @@ if __name__ == "__main__":
     sim_start_time=datetime.now()
     
     FullYear = True
-    spacingType = "latitude-dependent" #single-row; latitude-dependent; single-spacing
     
     if FullYear:
         start = datetime.strptime("01-01-2023", "%d-%m-%Y")
@@ -282,36 +552,141 @@ if __name__ == "__main__":
         #'interface': 'lo'
         #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
         }
-    
-    wfiles=[]
-    directory="/home/etonita/WeatherFiles/All-TMY-and-CWEC/"
-    for path, subdirs, files in os.walk(directory):
-        for filename in files:
-            f = os.path.join(path, filename)
-            wfiles.append(f)
-
-    print(wfiles)
-
-    systems=['mL_utility_NS','mP_utility_S30']
 
     now=datetime.now()
     results_path = "/scratch/etonita/Bifacial_Radiance_Simulations/HourlyNSS30"+"_"+now.strftime('%Y-%m-%d_%Hh%M')
     if not os.path.exists(results_path):
         os.makedirs(results_path)
     
-    results_folder_fmt = results_path+"/{}/{}/DAY_{}"
+    smallSim = False
 
-    # Define inputs    
-    kwargs = {
-        'results_folder_fmt': results_folder_fmt
-    }
+    print("Bifacial_radiance version ", br.__version__)
+    print("Pandas version ", pd.__version__)
+    print("Numpy version ", np.__version__)
 
+    starttimer = timer()
 
-    # Pass variables being looped on, and kwargs
-    run_simulations_dask(daylist, wfiles, systems, kwargs, hpc=kestrel)
+    #rootPath = r'/scratch/sayala/AgriDebugUS_Aug4'
+    rootPath = os.getcwd()
+    nsrdb_file = '/datasets/NSRDB/current/nsrdb_tmy-2021.h5'
+    #TMY data located on eagle about 900GB
 
-    print("*********** DONE ************")
-    print(datetime.now())
-    sim_end_time=datetime.now()
-    print("Total time to run simulation = "+ str(sim_end_time - sim_start_time))
+    #Input
+    parameters = ['dhi', 'ghi', 'dni', 'air_temperature',  'wind_speed', 'wind_direction', 'surface_albedo', 
+                  'dew_point', 'surface_pressure']
+
+    with NSRDBX(nsrdb_file, hsds=False) as f:
+        meta = f.meta
+   
+    # meta_USA = meta[meta['country'] == 'Puerto Rico']
+    meta_USA = meta[meta['country'] == 'United States']
+
+    startdates = []
+    with open('/home/sayala/AgriDebug/startdates_CO.txt', 'r') as fp:
+        for line in fp:
+            # remove linebreak from a current name
+            # linebreak is the last character of each line
+            x = line[:-1]
+
+            # add current item to the list
+            startdates.append(x)
+
+    def gid_downsampling(meta, n):
+        lon_sub = sorted(meta['longitude'].unique())[0:-1:max(1,2*n)]
+        lat_sub = sorted(meta['latitude'].unique())[0:-1:max(1,2*n)]
+        lon_sub2 = sorted(meta['longitude'].unique())[1:-1:max(1,2*n)]
+        lat_sub2 = sorted(meta['latitude'].unique())[1:-1:max(1,2*n)]
+        gids_sub = meta[(meta['longitude'].isin(lon_sub)) & (meta['latitude'].isin(lat_sub))].index
+        meta_sub = meta.loc[gids_sub]
+        return meta_sub, gids_sub
+
+    if smallSim:
+        meta_USA = meta_USA.loc[[219559,219563]]
+        nsampling = 3
+        setups = [1] # , 2, 3, 4, 5] #, 6, 7, 8, 9, 10] 
+        startdates = [pd.to_datetime(i) for i in startdates]
+        #startdates = startdates[3:6]
+    else:
+        meta_USA = meta_USA[meta_USA['state'] == 'Oregon']
+        nsampling = 2 # 2
+        setups = [1, 2] #, 3, 4, 5] #, 6, 7, 8, 9, 10] 
+        startdates = [pd.to_datetime(i) for i in startdates]
+
+    # Create client
+    client = Client(scheduler_file=scheduler_file)
     
+    #region_col = 'country' 
+    region_col = 'state' # 'state'
+
+
+
+    for state in meta_USA[region_col].unique():
+        region = state
+        #Load time and geographical infos
+        with NSRDBX(nsrdb_file, hsds=False) as f:
+            # Get time index
+            times = f.time_index
+            # Get geographical index for region of interest
+            gids = f.region_gids(region=region, region_col=region_col)   
+            # Get meta data
+            meta = f.meta[f.meta.index.isin(gids)]
+
+        if smallSim:
+            gids_sub = [219559,219563] 
+            meta2 = meta_USA
+        else:
+            meta2, gids_sub = gid_downsampling(meta, n=nsampling)
+
+
+        data = []
+        with NSRDBX(nsrdb_file, hsds=False) as f:
+            for p in parameters:
+                data.append(f.get_gid_df(p, np.array(list(gids_sub)))) #.values 
+
+        #Create multi-level dataframe
+        columns = pd.MultiIndex.from_product([parameters, np.array(list(gids_sub))], names=["par", "gid"])
+        df_weather = pd.concat(data, axis=1)
+        df_weather.columns = columns
+        df_weather = df_weather.swaplevel(axis=1).sort_index(axis=1)
+
+        #meta = meta.iloc[::500] # Downsampling every 10 entries...
+        #meta2 = meta2.iloc[1:3] # Downsampling every 10 entries...
+
+        # Saving list of GIDs sent to simulate for sanity checking
+        # with open('RUN_'+str(n)+'_'+state+'.pkl', "wb") as ffp:   # Unpickling
+        #    pickle.dump(list(gids_sub),ffp)
+        # df_weather.to_pickle('df_weather.pkl')
+
+        # Pass variables being looped on, and kwargs
+        run_simulations_dask(df_weather = df_weather, meta = meta2, 
+                             setups = setups, startdates = startdates, 
+                             rootPath = rootPath, state = state, hpc=kestrel)
+
+
+        print("*********** DONE ************", state)
+        stop = timer()
+        runTime = round(stop-starttimer,2)
+
+        #with open('TIMER_'+str(n)+'_'+state+'.pkl', "wb") as tfp:   # Unpickling
+        #    pickle.dump(runTime,tfp)
+
+    client.shutdown()
+
+    # =========== Perform Simulation Set ===========
+    stop = timer()
+    runTime = round(stop-starttimer,2)
+    min = int(runTime//60)
+    sec = int(round((runTime/60 - min)*60,0))
+    print('=======================================')
+    print(f'Simulation Run Time: {min:02}:{sec:02}')
+    print('=======================================')
+    
+    with open('TIMER_'+str(nsampling)+'_'+'ALL.pkl', "wb") as tfp:   # Unpickling
+        pickle.dump(runTime,tfp)
+    #compile(rootPath)
+
+    # Puerto rico (~472 locations), 1 day (13 timestamps) for 5 setups, with about 1/3 of it already modeled
+    # took 70 minutes in 10 nodes
+    #
+
+
