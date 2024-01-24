@@ -15,7 +15,7 @@
 	"om_capacity" : [ 18 ],
 	"om_capacity_escal" : 0,
 	"add_om_num_types" : 1,
-	"om_batt_nameplate" : 565.25184000000013,
+	"om_batt_nameplate" : 204.96384000000003,
 	"om_batt_fixed_cost" : [ 0 ],
 	"om_batt_capacity_cost" : [ 6.2800000000000002 ],
 	"depr_fed_type" : 1,
@@ -134,8 +134,8 @@
 	"pbi_oth_tax_sta" : 1,
 	"en_wave_batt" : 0,
 	"battery_per_kWh" : 225.06,
-	"total_installed_cost" : 347507.0995731093,
+	"total_installed_cost" : 259794.20633939339,
 	"salvage_percentage" : 0,
 	"batt_salvage_percentage" : 0,
-	"battery_total_cost_lcos" : 156895.84178183583
+	"battery_total_cost_lcos" : 72556.521364801258
 }
