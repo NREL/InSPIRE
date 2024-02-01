@@ -44,22 +44,24 @@ ui <- fluidPage(
            plotlyOutput(outputId = "haitiPlotDay", width = "100%"),
            downloadButton("downloadDaily", "Download Daily Irradiance (CSV)"),
            downloadButton("downloadDailyPlot", "Download Daily Plot"),
-           textInput("widthDay", "Plot Width:", value = 12),
-           textInput("heightDay", "Plot Height:", value = 4)
+           textInput("widthDay", "Plot Width:", value = 12, width = "100px"),
+           textInput("heightDay", "Plot Height:", value = 4, width = "100px")
     ),
     column(width = 6,
            plotlyOutput(outputId = "haitiPlotMonth", width = "100%"),
            downloadButton("downloadMonthly", "Download Monthly Irradiance (CSV)"),
            downloadButton("downloadMonthlyPlot", "Download Monthly Plot"),
-           textInput("widthMonth", "Plot Width:", value = 6),
-           textInput("heightMonth", "Plot Height:", value = 6)
+           textInput("widthMonth", "Plot Width:", value = 6, width = "100px"),
+           textInput("heightMonth", "Plot Height:", value = 6, width = "100px"),
+           checkboxInput("monthFlip", "Flip", value = FALSE)
     ),
     column(width = 6,
            plotlyOutput(outputId = "haitiPlotMonthP", width = "100%"),
            downloadButton("downloadMonthlyPercent", "Download Monthly Percent Irradiance (CSV)"),
            downloadButton("downloadMonthlyPPlot", "Download Monthly Percent Plot"),
-           textInput("widthMonthP", "Plot Width:", value = 6),
-           textInput("heightMonthP", "Plot Height:", value = 6)
+           textInput("widthMonthP", "Plot Width:", value = 6, width = "100px"),
+           textInput("heightMonthP", "Plot Height:", value = 6, width = "100px"),
+           checkboxInput("monthPFlip", "Flip", value = FALSE)
     )
   )
 )
@@ -112,9 +114,9 @@ server <- function(input, output, session) {
     irradiance_arr[irradiance_arr == 0] <- NA
     percent_arr[percent_arr == 0] <- NA
     
-    # Take the median values for each day and position within the array and convert to a dataframe
-    irradiance_day <- as.data.frame(apply(irradiance_arr, MARGIN = c(3, 2), median, na.rm = T))
-    percent_day <- as.data.frame(apply(percent_arr, MARGIN = c(3, 2), median, na.rm = T))
+    # Take the mean values for each day and position within the array and convert to a dataframe
+    irradiance_day <- as.data.frame(apply(irradiance_arr, MARGIN = c(3, 2), mean, na.rm = T))
+    percent_day <- as.data.frame(apply(percent_arr, MARGIN = c(3, 2), mean, na.rm = T))
     
     # Add a day of year column
     irradiance_day$Day <- 1:365
@@ -147,7 +149,7 @@ server <- function(input, output, session) {
   
   irradiance_m <- reactive({
     
-    # Grab daily median irradiance data
+    # Grab daily mean irradiance data
     irradiance_day <- irradiance_d()[[1]]
     
     # Assign months
@@ -167,12 +169,12 @@ server <- function(input, output, session) {
         Day >= 335 & Day <= 365 ~ 12
       ))
     
-    # Take monthly medians
+    # Take monthly means
     irradiance_month <- irradiance_day %>%
       group_by(Month) %>%
-      summarize(across(where(is.numeric), ~ median(.x, na.rm = TRUE)))
+      summarize(across(where(is.numeric), ~ mean(.x, na.rm = TRUE)))
     
-    # Grab daily median irradiance data
+    # Grab daily mean irradiance data
     irradiance_day_percent <- irradiance_d()[[2]]
     
     # Assign months
@@ -192,10 +194,10 @@ server <- function(input, output, session) {
         Day >= 335 & Day <= 365 ~ 12
       ))
     
-    # Take monthly medians
+    # Take monthly means
     irradiance_month_percent <- irradiance_day_percent %>%
       group_by(Month) %>%
-      summarize(across(where(is.numeric), median, na.rm = TRUE))
+      summarize(across(where(is.numeric), mean, na.rm = TRUE))
     
     # Round to whole percentages
     irradiance_month_percent[,2:11] <- round(irradiance_month_percent[,2:11])
@@ -237,11 +239,11 @@ server <- function(input, output, session) {
                 ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
       geom_hline(yintercept = gcr_y) +
       ylim(0, 5.5) +
-      scale_fill_distiller(palette = "YlOrRd") +
+      scale_fill_gradientn(limits = c(0, 700), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
       scale_x_discrete(breaks = seq(0, 365, 5)) +
       theme_bw() + 
       theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      labs(title = "Median Daily Irradiance (W/m^2)", x = "Day of Year", y = "Position within Array (m)")
+      labs(title = "Mean Daily Irradiance (W/m^2)", x = "Day of Year", y = "Position within Array (m)")
     
     # Return
     heat
@@ -253,22 +255,36 @@ server <- function(input, output, session) {
     # Grab the freshly processed data
     irradiance_monthly <- irradiance_m()[[1]]
     
-    # Calculate GCR intercepts for panels
-    gcr_y <- 1.71 # Lenght of panel (1.797m) * cos(18 degree tilt)
+    if (input$monthFlip) {
+      
+      # Plot a heatmap
+      heat <- ggplot(irradiance_monthly, aes(y = as.factor(Month), x = as.factor(Position), fill = Irradiance)) + 
+        geom_tile() + 
+        scale_fill_gradientn(limits = c(0, 700), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
+        theme_bw() + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(title = "", x = "", y = "")
     
-    # Plot a heatmap
-    heat <- ggplot(irradiance_monthly, aes(as.factor(Month), Position, fill = Irradiance)) + 
-      geom_tile() + 
-      geom_rect(xmin = as.factor(0),
-                xmax = as.factor(13),
-                ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
-      geom_hline(yintercept = gcr_y) +
-      ylim(0, 5.5) +
-      scale_fill_distiller(palette = "YlOrRd") +
-      scale_x_discrete(labels = month.name) +
-      theme_bw() + 
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      labs(title = "Median Monthly Irradiance (W/m^2)", x = "Month", y = "Position within Array (m)")
+    } else {
+        
+      # Calculate GCR intercepts for panels
+      gcr_y <- 1.71 # Lenght of panel (1.797m) * cos(18 degree tilt)
+      
+      # Plot a heatmap
+      heat <- ggplot(irradiance_monthly, aes(as.factor(Month), Position, fill = Irradiance)) + 
+        geom_tile() + 
+        geom_rect(xmin = as.factor(0),
+                  xmax = as.factor(13),
+                  ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
+        geom_hline(yintercept = gcr_y) +
+        ylim(0, 5.5) +
+        scale_fill_gradientn(limits = c(0, 700), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
+        scale_x_discrete(labels = month.name) +
+        theme_bw() + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(title = "Mean Monthly Irradiance (W/m^2)", x = "Month", y = "Position within Array (m)")
+      
+    }
     
     # Return
     heat
@@ -280,22 +296,36 @@ server <- function(input, output, session) {
     # Grab the freshly processed data
     irradiance_monthly_p <- irradiance_m()[[2]]
     
-    # Calculate GCR intercepts for panels
-    gcr_y <- 1.71 # Lenght of panel (1.797m) * cos(18 degree tilt)
-    
-    # Plot a heatmap
-    heat <- ggplot(irradiance_monthly_p, aes(as.factor(Month), Position, fill = Percent)) + 
-      geom_tile() + 
-      geom_rect(xmin = as.factor(0),
-                xmax = as.factor(13),
-                ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
-      geom_hline(yintercept = gcr_y) +
-      ylim(0, 5.5) +
-      scale_fill_distiller(palette = "YlOrRd") +
-      scale_x_discrete(labels = month.name) +
-      theme_bw() + 
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      labs(title = "Percent GHI (%)", x = "Month", y = "Position within Array (m)")
+    if (input$monthPFlip) {
+      
+      # Plot a heatmap
+      heat <- ggplot(irradiance_monthly_p, aes(y = as.factor(Month), x = as.factor(Position), fill = Percent)) + 
+        geom_tile() + 
+        scale_fill_gradientn(limits = c(0, 100), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
+        theme_bw() + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(title = "", x = "", y = "")
+      
+    } else {
+      
+      # Calculate GCR intercepts for panels
+      gcr_y <- 1.71 # Lenght of panel (1.797m) * cos(18 degree tilt)
+      
+      # Plot a heatmap
+      heat <- ggplot(irradiance_monthly_p, aes(as.factor(Month), Position, fill = Percent)) + 
+        geom_tile() + 
+        geom_rect(xmin = as.factor(0),
+                  xmax = as.factor(13),
+                  ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
+        geom_hline(yintercept = gcr_y) +
+        ylim(0, 5.5) +
+        scale_fill_gradientn(limits = c(0, 100), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
+        scale_x_discrete(labels = month.name) +
+        theme_bw() + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(title = "Percent GHI (%)", x = "Month", y = "Position within Array (m)")
+      
+    }
     
     # Return
     heat
@@ -328,7 +358,7 @@ server <- function(input, output, session) {
   
   output$downloadDaily <- downloadHandler(
     filename = function() {
-      paste("Haiti_Daily_Median_Irradiance", ".csv", sep = "")
+      paste(sam_shading_files[match(input$config, sam_options)], "_Daily.csv", sep = "")
     },
     content = function(file) {
       day_long_out <- irradiance_d_l()
@@ -340,7 +370,7 @@ server <- function(input, output, session) {
   
   output$downloadMonthly <- downloadHandler(
     filename = function() {
-      paste("Haiti_Monthly_Median_Irradiance", ".csv", sep = "")
+      paste(sam_shading_files[match(input$config, sam_options)], "_Monthly.csv", sep = "")
     },
     content = function(file) {
       month_out <- irradiance_m()[[1]]
@@ -352,7 +382,7 @@ server <- function(input, output, session) {
   
   output$downloadMonthlyPercent <- downloadHandler(
     filename = function() {
-      paste("Haiti_Monthly_Median_Percent", ".csv", sep = "")
+      paste(sam_shading_files[match(input$config, sam_options)], "_Monthly_Percent.csv", sep = "")
     },
     content = function(file) {
       month_out_percent <- irradiance_m()[[2]]
@@ -386,7 +416,7 @@ server <- function(input, output, session) {
       png(file, width = as.numeric(input$widthMonth),
           height = as.numeric(input$heightMonth),
           units = "in",
-          res = 300,)
+          res = 300)
       print(heat_in)
       dev.off()
     }
