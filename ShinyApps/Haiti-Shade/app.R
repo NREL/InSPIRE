@@ -13,7 +13,7 @@ library(ggplot2)
 library(plotly)
 
 # working directory
-setwd("/Users/klepley/Library/CloudStorage/OneDrive-NREL/Haiti Crop Shading")
+#setwd("~/Documents/GitHub/InSPIRE/ShinyApps/Haiti-Shade")
 
 # Set SAM file folder
 sam_folder <- "SAM_irradiance"
@@ -41,27 +41,45 @@ ui <- fluidPage(
            h5("The dropdown on the left allows you to select the location and configuration of the minigrid system. On each of the graphs below, North is up. The transparent white box on the bottom with a black line at the top represents the solar panel. Cells on the graph underneath this box represent ground beneath the solar panel in the configuration. Click, hold and drag anywhere on the graph to zoom in; hover to see specific values; press the home icon to reset the graph space.")
     ),
     column(width = 12,
-           plotlyOutput(outputId = "haitiPlotDay", width = "100%"),
-           downloadButton("downloadDaily", "Download Daily Irradiance (CSV)"),
-           downloadButton("downloadDailyPlot", "Download Daily Plot"),
-           textInput("widthDay", "Plot Width:", value = 12, width = "100px"),
-           textInput("heightDay", "Plot Height:", value = 4, width = "100px")
+           tags$hr(style = "border-top: 1px solid #ccc;")
     ),
-    column(width = 6,
+    column(width = 11,
+           plotlyOutput(outputId = "haitiPlotDay", width = "100%"),
+    ),
+    column(width = 1,
+           h4("Download"),
+           downloadButton("downloadDaily", "CSV"),
+           downloadButton("downloadDailyPlot", "Plot"),
+           textInput("widthDay", "Width:", value = 12, width = "50px"),
+           textInput("heightDay", "Height:", value = 4, width = "50px")
+    ),
+    column(width = 12,
+           tags$hr(style = "border-top: 1px solid #ccc;")
+    ),
+    column(width = 5,
            plotlyOutput(outputId = "haitiPlotMonth", width = "100%"),
-           downloadButton("downloadMonthly", "Download Monthly Irradiance (CSV)"),
-           downloadButton("downloadMonthlyPlot", "Download Monthly Plot"),
-           textInput("widthMonth", "Plot Width:", value = 6, width = "100px"),
-           textInput("heightMonth", "Plot Height:", value = 6, width = "100px"),
+    ),
+    column(width = 1,
+           h4("Download"),
+           downloadButton("downloadMonthly", "CSV"),
+           downloadButton("downloadMonthlyPlot", "Plot"),
+           textInput("widthMonth", "Width:", value = 6, width = "50px"),
+           textInput("heightMonth", "Height:", value = 6, width = "50px"),
            checkboxInput("monthFlip", "Flip", value = FALSE)
     ),
-    column(width = 6,
+    column(width = 5,
            plotlyOutput(outputId = "haitiPlotMonthP", width = "100%"),
-           downloadButton("downloadMonthlyPercent", "Download Monthly Percent Irradiance (CSV)"),
-           downloadButton("downloadMonthlyPPlot", "Download Monthly Percent Plot"),
-           textInput("widthMonthP", "Plot Width:", value = 6, width = "100px"),
-           textInput("heightMonthP", "Plot Height:", value = 6, width = "100px"),
-           checkboxInput("monthPFlip", "Flip", value = FALSE)
+    ),
+    column(width = 1,
+           h4("Download"),
+           downloadButton("downloadMonthlyPercent", "CSV"),
+           downloadButton("downloadMonthlyPPlot", "Plot"),
+           textInput("widthMonthP", "Width:", value = 6, width = "50px"),
+           textInput("heightMonthP", "Height:", value = 6, width = "50px"),
+           checkboxInput("monthPFlip", "Flip", value = FALSE) 
+    ),
+    column(width = 12,
+           tags$hr(style = "border-top: 1px solid #ccc;")
     )
   )
 )
@@ -87,7 +105,7 @@ server <- function(input, output, session) {
     # Put the csv from the selection input into a dataframe
     irradiance_out <- irradiance_o()
     
-    # Create percent shade column (% GHI for each column)
+    # Create percent shade dataframe (% GHI for each column)
     irradiance_out_percent <- irradiance_out / irradiance_out[,12]
     irradiance_out_percent <- round(irradiance_out_percent * 100, 2)[,2:11]
     irradiance_out_percent$Timestep <- irradiance_out$Timestep
@@ -100,12 +118,6 @@ server <- function(input, output, session) {
     for (i in 1:365){
       
       irradiance_arr[1:24, 1:10, i] <- as.matrix(irradiance_out[((24 * (i - 1)) + 1):(24 * i), 2:11])
-      
-    }
-    
-    # For each day of the year, fill the array with 24 hour x 10 bins of percent values
-    for (i in 1:365){
-      
       percent_arr[1:24, 1:10, i] <- as.matrix(irradiance_out_percent[((24 * (i - 1)) + 1):(24 * i), 1:10])
       
     }
@@ -136,8 +148,13 @@ server <- function(input, output, session) {
     # Put the csv from the selection input into a dataframe
     irradiance_day <- irradiance_d()[[1]]
     
+    # Repeat the pattern through the next row of panels
+    irradiance_day_copy <- irradiance_day[, 1:10]
+    colnames(irradiance_day_copy) <- as.numeric(colnames(irradiance_day_copy)) + as.numeric(colnames(irradiance_day)[10])
+    irradiance_day_longer <- cbind(irradiance_day, irradiance_day_copy)
+    
     # Transform the dataframe into a long format (column format) for plotting
-    irradiance_long <- pivot_longer(irradiance_day, 1:10, names_to = "Position", values_to = "Irradiance")
+    irradiance_long <- pivot_longer(irradiance_day_longer, -"Day", names_to = "Position", values_to = "Irradiance")
     
     # Make positions numeric
     irradiance_long$Position <- as.numeric(irradiance_long$Position)
@@ -202,17 +219,21 @@ server <- function(input, output, session) {
     # Round to whole percentages
     irradiance_month_percent[,2:11] <- round(irradiance_month_percent[,2:11])
     
-    # Create percent shade column (% GHI for each column)
-    #irradiance_month_percent <- as.data.frame(irradiance_month[,1:12])
-    #irradiance_month_percent <- irradiance_month_percent / irradiance_month_percent[,12]
-    #irradiance_month_percent <- round(irradiance_month_percent * 100, 0)[,2:11]
-    #irradiance_month_percent$Month <- irradiance_month$Month
+    # Repeat the pattern through the next row of panels
+    irradiance_month_copy <- irradiance_month[, 2:11]
+    colnames(irradiance_month_copy) <- as.numeric(colnames(irradiance_month_copy)) + as.numeric(colnames(irradiance_month)[11])
+    irradiance_month_longer <- cbind(irradiance_month[, 1:11], irradiance_month_copy)
+    
+    # Repeat the pattern through the next row of panels
+    irradiance_month_percent_copy <- irradiance_month_percent[, 2:11]
+    colnames(irradiance_month_percent_copy) <- as.numeric(colnames(irradiance_month_percent_copy)) + as.numeric(colnames(irradiance_month_percent)[11])
+    irradiance_month_percent_longer <- cbind(irradiance_month_percent[, 1:11], irradiance_month_percent_copy)
     
     # Transform the dataframe into a long format (column format) for plotting
-    irradiance_month_long <- pivot_longer(irradiance_month[, 1:11], 2:11, names_to = "Position", values_to = "Irradiance")
+    irradiance_month_long <- pivot_longer(irradiance_month_longer, 2:21, names_to = "Position", values_to = "Irradiance")
     
     # Transform the dataframe into a long format (column format) for plotting
-    irradiance_month_percent_long <- pivot_longer(irradiance_month_percent[, 1:11], 2:11, names_to = "Position", values_to = "Percent")
+    irradiance_month_percent_long <- pivot_longer(irradiance_month_percent_longer, 2:21, names_to = "Position", values_to = "Percent")
     
     # Make positions numeric
     irradiance_month_long$Position <- as.numeric(irradiance_month_long$Position)
@@ -231,14 +252,22 @@ server <- function(input, output, session) {
     # Calculate GCR intercepts for panels
     gcr_y <- 1.71 # Lenght of panel (1.797m) * cos(18 degree tilt)
     
+    if(max(irradiance_processed$Position) > 6){
+      second_row <- 5.4
+    }else {second_row <- 2.92}
+    
     # Plot a heatmap
     heat <- ggplot(irradiance_processed, aes(as.factor(Day), Position, fill = Irradiance)) + 
       geom_tile() + 
       geom_rect(xmin = as.factor(0),
                 xmax = as.factor(366),
-                ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
-      geom_hline(yintercept = gcr_y) +
-      ylim(0, 5.5) +
+                ymin = 0, ymax = gcr_y, fill = "black", alpha = 0.5) +
+      #geom_hline(yintercept = gcr_y) +
+      geom_rect(xmin = as.factor(0),
+                xmax = as.factor(366),
+                ymin = second_row, ymax = second_row + gcr_y, fill = "black", alpha = 0.5) +
+      #geom_hline(yintercept = second_row) + geom_hline(yintercept = second_row + gcr_y) +
+      ylim(0, 10.5) +
       scale_fill_gradientn(limits = c(0, 700), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
       scale_x_discrete(breaks = seq(0, 365, 5)) +
       theme_bw() + 
@@ -270,14 +299,22 @@ server <- function(input, output, session) {
       # Calculate GCR intercepts for panels
       gcr_y <- 1.71 # Lenght of panel (1.797m) * cos(18 degree tilt)
       
+      if(max(irradiance_monthly$Position) > 6){
+        second_row <- 5.4
+      }else {second_row <- 2.92}
+      
       # Plot a heatmap
       heat <- ggplot(irradiance_monthly, aes(as.factor(Month), Position, fill = Irradiance)) + 
         geom_tile() + 
         geom_rect(xmin = as.factor(0),
                   xmax = as.factor(13),
-                  ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
-        geom_hline(yintercept = gcr_y) +
-        ylim(0, 5.5) +
+                  ymin = 0, ymax = gcr_y, fill = "black", alpha = 0.5) +
+        #geom_hline(yintercept = gcr_y) +
+        geom_rect(xmin = as.factor(0),
+                  xmax = as.factor(366),
+                  ymin = second_row, ymax = second_row + gcr_y, fill = "black", alpha = 0.5) +
+        #geom_hline(yintercept = second_row) + geom_hline(yintercept = second_row + gcr_y) +
+        ylim(0, 10.5) +
         scale_fill_gradientn(limits = c(0, 700), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
         scale_x_discrete(labels = month.name) +
         theme_bw() + 
@@ -311,14 +348,22 @@ server <- function(input, output, session) {
       # Calculate GCR intercepts for panels
       gcr_y <- 1.71 # Lenght of panel (1.797m) * cos(18 degree tilt)
       
+      if(max(irradiance_monthly_p$Position) > 6){
+        second_row <- 5.4
+      }else {second_row <- 2.92}
+      
       # Plot a heatmap
       heat <- ggplot(irradiance_monthly_p, aes(as.factor(Month), Position, fill = Percent)) + 
         geom_tile() + 
         geom_rect(xmin = as.factor(0),
                   xmax = as.factor(13),
-                  ymin = 0, ymax = gcr_y, fill = "white", alpha = 0.5) +
-        geom_hline(yintercept = gcr_y) +
-        ylim(0, 5.5) +
+                  ymin = 0, ymax = gcr_y, fill = "black", alpha = 0.5) +
+        #geom_hline(yintercept = gcr_y) +
+        geom_rect(xmin = as.factor(0),
+                  xmax = as.factor(366),
+                  ymin = second_row, ymax = second_row + gcr_y, fill = "black", alpha = 0.5) +
+        #geom_hline(yintercept = second_row) + geom_hline(yintercept = second_row + gcr_y) +
+        ylim(0, 10.5) +
         scale_fill_gradientn(limits = c(0, 100), colors = c("#FFF2CC", "#E8C872", "#F1BC31", "#E25822", "#B22222", "#7C0A02", "#461111")) +
         scale_x_discrete(labels = month.name) +
         theme_bw() + 
