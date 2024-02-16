@@ -5,10 +5,16 @@ import time
 import math
 from itertools import chain
 from itertools import product
-import bifacial_radiance
+import bifacial_radiance as br
 from dask.distributed import Client, LocalCluster, secede
 import math
-from datetime import datetime, timedelta
+import datetime
+from timeit import default_timer as timer
+from time import sleep
+from rex import NSRDBX
+import pytz
+import pickle
+import bifacialvf
 # import subprocess
 
 # rc = subprocess.call("/home/etonita/BasicSimulations/start_script.sh")
@@ -78,10 +84,7 @@ def start_dask(hpc=None):
 def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
              startdate=None, rootPath=None):
 
-    startdatenaive = startdate.tz_convert(pytz.FixedOffset(meta_dict['timezone']*60))
-    startdatenaive = startdatenaive.replace(tzinfo=None)
-    startdatestr = str(startdatenaive).replace(':','_').replace(' ','__')
-    startdateorigstr = str(startdate).replace(':','_').replace(' ','__')
+    startdatestr = str(startdate).replace(':','_').replace(' ','__')
 
     #startdate = None
     #enddate = None
@@ -117,8 +120,10 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     radObj = br.RadianceObj(simpath,path)
     radObj.setGround(alb) 
 
-    metData = radObj.NSRDBWeatherData(meta_dict, df_tmy, starttime=startdatenaive, 
-                                      endtime=startdatenaive, coerce_year=2021)
+    enddate = startdate + datetime.timedelta(hours=23)
+
+    metData = radObj.NSRDBWeatherData(meta_dict, df_tmy, starttime=startdate, 
+                                      endtime=enddate, coerce_year=2023)
     if len(metData.datetime) == 0:
         print("**Night hour, skipping", gid, startdate)
         results = [np.NaN] * 38
@@ -280,6 +285,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     trackerdict = radObj.analysis1axis(trackerdict, customname = 'Module',
                                        sensorsy=9, modWanted=modWanted,
                                        rowWanted=rowWanted)
+    print("analysis1axis 1")
     try:
         trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=False)
     except:
@@ -309,7 +315,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     trackerdict = radObj.analysis1axis(trackerdict, customname = 'Ground',
                                        modWanted=modWanted, rowWanted=rowWanted,
                                         modscanback=modscanback, sensorsy=1)
-
+    print("analysis1axis 2")
     trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=True)
     mykey = list(radObj.trackerdict.keys())[0]
     ResultPVGround = radObj.trackerdict[mykey]['Results'][0]['AnalysisObj'].Wm2Back
@@ -414,7 +420,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
 
     # Compiling for return
     results = [gid, setup, metData.latitude, metData.longitude, pitch, 
-            startdateorigstr, startdatestr,
+            startdatestr,
             timezonesave, solposAzi, solposZen, tracazm, tractilt,
             ghi_sum,
             ResultPVWm2Front, ResultPVWm2Back, ResultPVGround,
@@ -463,6 +469,8 @@ def run_simulations_dask(df_weather, meta, startdates,
 
     client = start_dask(hpc)
     
+    print("dask client started")
+
     # Iterate over inputs
     futures = []
     
@@ -471,6 +479,7 @@ def run_simulations_dask(df_weather, meta, startdates,
         #loop through dataframe and perform computation
     for setup in setups:
         for dd in range(0, len(startdates)):
+            print("setup: ", setup, ", startdate: ", dd)
             startdate = startdates[dd]
             for gid, row in meta.iterrows():
                 #prepare input for PVDegTools
@@ -481,7 +490,8 @@ def run_simulations_dask(df_weather, meta, startdates,
                 df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2021)) 
                 df_tmy = df_tmy.sort_index()
                 
-                print("type ", type(meta_dict))
+                print("startdate ", startdate)
+                print("startdatetype ", type(startdate))
                 debug = False
                 if debug:
                     df_tmy.to_pickle('df_convert_'+str(gid)+'.pkl')
@@ -516,23 +526,32 @@ def run_simulations_dask(df_weather, meta, startdates,
 if __name__ == "__main__":
 
     print(">>>>>>>>>>>>>>>>>> STARTING HERE !")
-    print(datetime.now())
-    sim_start_time=datetime.now()
+    print(datetime.datetime.now())
+    sim_start_time=datetime.datetime.now()
     
-    FullYear = True
+    FullYear = False
     
     if FullYear:
-        start = datetime.strptime("01-01-2023", "%d-%m-%Y")
-        end = datetime.strptime("31-12-2023", "%d-%m-%Y")
+        # start = datetime.strptime("01-01-2023", "%d-%m-%Y")
+        start = datetime.datetime(2023, 1, 1, 0, 0)
+        # end = datetime.strptime("31-12-2023", "%d-%m-%Y")
+        end = datetime.datetime(2023, 12, 31, 0, 0)
     else:
-        start = datetime.strptime("01-11-2023", "%d-%m-%Y")
-        end = datetime.strptime("30-11-2023", "%d-%m-%Y")
-    date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days)]
-    daylist = []
-    for date in date_generated:
-        daylist.append(date.strftime("%y_%m_%d"))
+        # start = datetime.strptime("01-11-2023", "%d-%m-%Y")
+        # end = datetime.strptime("02-11-2023", "%d-%m-%Y")
+        start = datetime.datetime(2023, 1, 11, 0, 0)
+        end = datetime.datetime(2023, 2, 11, 0, 0)
+    # date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days)]
+    # daylist = []
+    # for date in date_generated:
+    #     daylist.append(date.strftime("%y_%m_%d"))
     # loop doesn't add last day :
-    daylist.append('23_12_31')
+    # daylist.append('23_12_31')
+    daylist = []
+    while start <= end:
+        daylist.append(start)
+        start += datetime.timedelta(days=1)
+
     print(daylist) #check no repeated elements
     
 
@@ -542,23 +561,23 @@ if __name__ == "__main__":
         }
     kestrel = {
         'manager': 'slurm',
-        'n_jobs': 4,  # Number of nodes used for parallel processing
+        'n_jobs': 1, #4,  # Number of nodes used for parallel processing
         'cores': 104, #This is the total number of threads in all workers
         'memory': '256GB',
-        'account': 'pvsoiling',
+        'account': 'inspire',
         'queue': 'standard',
-        'walltime': '6:59:00', 
+        'walltime': '0:25:00', 
         'processes': 102, #This is the number of workers
         #'interface': 'lo'
         #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
         }
 
-    now=datetime.now()
-    results_path = "/scratch/etonita/Bifacial_Radiance_Simulations/HourlyNSS30"+"_"+now.strftime('%Y-%m-%d_%Hh%M')
+    now=datetime.datetime.now()
+    results_path = "/scratch/kdoubled/test"+"_"+now.strftime('%Y-%m-%d_%Hh%M')
     if not os.path.exists(results_path):
         os.makedirs(results_path)
     
-    smallSim = False
+    smallSim = True # one location
 
     print("Bifacial_radiance version ", br.__version__)
     print("Pandas version ", pd.__version__)
@@ -567,8 +586,8 @@ if __name__ == "__main__":
     starttimer = timer()
 
     #rootPath = r'/scratch/sayala/AgriDebugUS_Aug4'
-    rootPath = os.getcwd()
-    nsrdb_file = '/datasets/NSRDB/current/nsrdb_tmy-2021.h5'
+    # rootPath = os.getcwd()
+    nsrdb_file = '/kfs2/pdatasets/NSRDB/current/nsrdb_tmy-2021.h5'
     #TMY data located on eagle about 900GB
 
     #Input
@@ -578,18 +597,20 @@ if __name__ == "__main__":
     with NSRDBX(nsrdb_file, hsds=False) as f:
         meta = f.meta
    
+    print("NSRDB accessed")
+
     # meta_USA = meta[meta['country'] == 'Puerto Rico']
     meta_USA = meta[meta['country'] == 'United States']
 
-    startdates = []
-    with open('/home/sayala/AgriDebug/startdates_CO.txt', 'r') as fp:
-        for line in fp:
-            # remove linebreak from a current name
-            # linebreak is the last character of each line
-            x = line[:-1]
+    # startdates = []
+    # with open('/home/sayala/AgriDebug/startdates_CO.txt', 'r') as fp:
+    #     for line in fp:
+    #         # remove linebreak from a current name
+    #         # linebreak is the last character of each line
+    #         x = line[:-1]
 
-            # add current item to the list
-            startdates.append(x)
+    #         # add current item to the list
+    #         startdates.append(x)
 
     def gid_downsampling(meta, n):
         lon_sub = sorted(meta['longitude'].unique())[0:-1:max(1,2*n)]
@@ -604,7 +625,7 @@ if __name__ == "__main__":
         meta_USA = meta_USA.loc[[219559,219563]]
         nsampling = 3
         setups = [1] # , 2, 3, 4, 5] #, 6, 7, 8, 9, 10] 
-        startdates = [pd.to_datetime(i) for i in startdates]
+        # startdates = [pd.to_datetime(i) for i in startdates]
         #startdates = startdates[3:6]
     else:
         meta_USA = meta_USA[meta_USA['state'] == 'Oregon']
@@ -613,7 +634,7 @@ if __name__ == "__main__":
         startdates = [pd.to_datetime(i) for i in startdates]
 
     # Create client
-    client = Client(scheduler_file=scheduler_file)
+    # client = Client(scheduler_file=scheduler_file)
     
     #region_col = 'country' 
     region_col = 'state' # 'state'
@@ -643,6 +664,8 @@ if __name__ == "__main__":
             for p in parameters:
                 data.append(f.get_gid_df(p, np.array(list(gids_sub)))) #.values 
 
+        print("GIDs appended")
+
         #Create multi-level dataframe
         columns = pd.MultiIndex.from_product([parameters, np.array(list(gids_sub))], names=["par", "gid"])
         df_weather = pd.concat(data, axis=1)
@@ -659,8 +682,8 @@ if __name__ == "__main__":
 
         # Pass variables being looped on, and kwargs
         run_simulations_dask(df_weather = df_weather, meta = meta2, 
-                             setups = setups, startdates = startdates, 
-                             rootPath = rootPath, state = state, hpc=kestrel)
+                             setups = setups, startdates = daylist, 
+                             rootPath = results_path, state = state, hpc=kestrel)
 
 
         print("*********** DONE ************", state)
@@ -670,7 +693,7 @@ if __name__ == "__main__":
         #with open('TIMER_'+str(n)+'_'+state+'.pkl', "wb") as tfp:   # Unpickling
         #    pickle.dump(runTime,tfp)
 
-    client.shutdown()
+    # client.shutdown()
 
     # =========== Perform Simulation Set ===========
     stop = timer()
