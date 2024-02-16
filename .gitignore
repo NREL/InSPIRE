@@ -98,3 +98,5 @@ ENV/
 
 # temp folder
 TEMP/
+
+*.DS_Store
