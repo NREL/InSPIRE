@@ -171,21 +171,26 @@ trackerdict = radObj.analysis1axis(customname = 'Module',
 trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=False)
 
 
-# In[21]:
-
-
-ResultPVWm2Back = radObj.CompiledResults.iloc[0]['Grear_mean']
-ResultPVWm2Front = radObj.CompiledResults.iloc[0]['Gfront_mean']
-ResultPVWm2Back
-
-
 # In[26]:
 
 
 radObj.CompiledResults
 
 
-# In[23]:
+# In[29]:
+
+
+ResultPVWm2Back = list(radObj.CompiledResults['Grear_mean'])
+ResultPVWm2Front = list(radObj.CompiledResults['Gfront_mean'])
+ResultGHI = list(radObj.CompiledResults['GHI'])
+ResultDHI = list(radObj.CompiledResults['DHI'])
+ResultDNI = list(radObj.CompiledResults['DNI'])
+ResultPout = list(radObj.CompiledResults['Pout'])
+ResultWindSpeed = list(radObj.CompiledResults['Wind Speed'])
+ResultPVWm2Back
+
+
+# In[30]:
 
 
 resolutionGround = 1  #meter. use 1 for faster test runs
@@ -198,55 +203,45 @@ modscanback = {'xstart': 0,
                 'orient':'0 0 -1'}
 
 # Analysis for GROUND
-trackerdict = radObj.analysis1axis(customname = 'Ground',
+trackerdict = radObj.analysis1axis(customname = 'Ground', 
                                    modscanfront=modscanback, sensorsy=1)
 
 
-# In[41]:
+# In[46]:
+
+
+metData.latitude
+
+
+# In[43]:
 
 
 keys=list(trackerdict.keys())
 
 groundIrrad = []
-moduleGfront = []
-moduleGrear = []
-
+temp_air = []
+pitch= []
 for key in keys:
-    groundIrrad.append(c]['Results'][1]['Wm2Front'])
-    moduleGfront.append(trackerdict[keys[key]]['Results'][0]['Wm2Front'])
-    moduleGrear.append(trackerdict[keys[key]]['Results'][0]['Wm2Back'])
+    groundIrrad.append(trackerdict[key]['Results'][1]['Wm2Front'])
+    temp_air.append(trackerdict[key]['temp_air'])
+    pitch.append(trackerdict[key]['scene'].sceneDict['pitch'])
     
 
 
-# In[58]:
+# In[47]:
 
 
-trackerdict[keys[key]]['Results'][1]['Wm2Front']
+results = pd.DataFrame(list(zip(ResultPVWm2Back, ResultPVWm2Front)), columns = ["Back","Front"])
 
 
-# In[50]:
+# In[48]:
 
 
-trackerdict[keys[key]]
-trackerdict[keys[key]]['dni']
-trackerdict[keys[key]]['ghi']
-trackerdict[keys[key]]['dhi']
-trackerdict[keys[key]]['temp_air']
-trackerdict[keys[key]]['wind_speed']
-trackerdict[keys[key]]['scene'].sceneDict['pitch']
-trackerdict[keys[]]
-trackerdict[]
-
-
-# In[56]:
-
-
-
+results['pitch']=trackerdict[key]['scene'].sceneDict['pitch']
 
 
 # In[ ]:
 
 
-moduleGfront = trackerdict[keys[key]]['Results'][0]['Wm2Front']
-moduleGrear = trackerdict[keys[key]]['Results'][0]['Wm2Back']
+results.to_pickle(results_path)
 
