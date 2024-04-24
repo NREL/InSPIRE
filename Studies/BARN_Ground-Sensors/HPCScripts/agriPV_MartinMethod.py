@@ -100,18 +100,10 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     print("Current path", path)
 
     if os.path.isfile(results_path):
-        with open(results_path, "rb") as fp:   # Unpickling
-            results = pickle.load(fp)
-        
         print("***** SIM Done for ", simpath)
         print("Results are: ", results)
         
-        if results is None:
-            print("Results are NONE for ", results_path)
-            results = [np.NaN] * 38
-            with open(results_path, "wb") as fp:   #Pickling
-                pickle.dump(results, fp)    
-        return results
+        return 1
 
     if not os.path.exists(path):
         os.makedirs(path, exist_ok=True)
@@ -124,13 +116,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
 
     metData = radObj.NSRDBWeatherData(meta_dict, df_tmy, starttime=startdate, 
                                       endtime=enddate, coerce_year=2023)
-    if len(metData.datetime) == 0:
-        print("**Night hour, skipping", gid, startdate)
-        results = [np.NaN] * 38
-        #results = None
-        with open(results_path, "wb") as fp:   #Pickling
-            pickle.dump(results, fp)        
-        return results
+    
     # Tracker Projection of half the module into the ground, 
     # for 1-up module in portrait orientation
     # Assuming still 1 m for fixed-tilt systems even if a bit less 
@@ -285,26 +271,27 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     trackerdict = radObj.analysis1axis(trackerdict, customname = 'Module',
                                        sensorsy=9, modWanted=modWanted,
                                        rowWanted=rowWanted)
-    print("analysis1axis 1")
+
     try:
         trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=False)
     except:
         print("**Error on trackerdict WHY!, skipping", gid, startdate)
         print("Trackerdict error path: " , results_path)
-        print("TRACKERDICT Print:", radObj.trackerdict)
-        results = [np.NaN] * 38
-        #results = None
-        with open(results_path, "wb") as fp:   #Pickling
-            pickle.dump(results, fp)        
-        return results
+        print("TRACKERDICT Print:", radObj.trackerdict)      
+        return 0
 
-    ResultPVWm2Back = radObj.CompiledResults.iloc[0]['Grear_mean']
-    ResultPVWm2Front = radObj.CompiledResults.iloc[0]['Gfront_mean']
+    ResultPVWm2Back = list(radObj.CompiledResults['Grear_mean'])
+    ResultPVWm2Front = list(radObj.CompiledResults['Gfront_mean'])
+    ResultGHI = list(radObj.CompiledResults['GHI'])
+    ResultDNI = list(radObj.CompiledResults['DNI'])
+    ResultDHI = list(radObj.CompiledResults['DHI'])
+    ResultPout = list(radObj.CompiledResults['Pout'])
+    ResultWindSpeed = list(radObj.CompiledResults['Wind Speed'])
 
     # Modify modscanfront for Ground
     resolutionGround = 0.1  # use 1 for faster test runs
     numsensors = int((pitch/resolutionGround)+1)
-    modscanback = {'xstart': 0, 
+    modscanfront = {'xstart': 0, 
                     'zstart': 0.05,
                     'xinc': resolutionGround,
                     'zinc': 0,
@@ -314,134 +301,41 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     # Analysis for GROUND
     trackerdict = radObj.analysis1axis(trackerdict, customname = 'Ground',
                                        modWanted=modWanted, rowWanted=rowWanted,
-                                        modscanback=modscanback, sensorsy=1)
-    print("analysis1axis 2")
-    trackerdict = radObj.calculateResults(bifacialityfactor=0.7, agriPV=True)
-    mykey = list(radObj.trackerdict.keys())[0]
-    ResultPVGround = radObj.trackerdict[mykey]['Results'][0]['AnalysisObj'].Wm2Back
-    # This worked with Cumulative sky...
-    # ResultPVGround = radObj.CompiledResults.iloc[0]['Wm2Back']  # Wm2Back Grear_mean
+                                        modscanfront=modscanfront, sensorsy=1)
+ 
+    keys=list(trackerdict.keys())
+
+    ResultGroundIrrad = []
+    ResultTemp = []
+    for key in keys:
+        ResultGroundIrrad.append(trackerdict[key]['Results'][1]['Wm2Front'])
+        ResultTemp.append(trackerdict[key]['temp_air'])
 
     # Cleanup of Front files from the Ground simulation
     filesall = os.listdir('results')
-    filestoclean = [e for e in filesall if e.endswith('_Front.csv')]
+    filestoclean = [e for e in filesall if e.endswith('_Back.csv')]
     for cc in range(0, len(filestoclean)):
         filetoclean = filestoclean[cc]
         os.remove(os.path.join('results', filetoclean))
 
-    ghi_sum = metData.ghi.sum()
-
-    # GROUND TESTBEDS COMPILATION
-    df_temp = ResultPVGround
-    # Under panel irradiance calculation
-    edgemean = np.mean(df_temp[:xp] + df_temp[-xp:])
-    edge_normGHI = edgemean / ghi_sum
-
-    # All testbeds irradiance average
-    insidemean = np.mean(df_temp[xp:-xp])
-    inside_normGHI = insidemean / ghi_sum
-
-    # Length of each testbed between rows
-    dist1 = int(np.floor(len(df_temp[xp:-xp])/bedsWanted))
-
-    Astart = xp + dist1*0
-    Bstart = xp + dist1*1
-    Cstart = xp + dist1*2
-
-    if bedsWanted == 3:
-        Dstart = -xp # in this case it is Cend
-    if bedsWanted > 3:
-        Dstart = xp + dist1*3
-        Estart = xp + dist1*4
-        Fstart = xp + dist1*5
-        Gstart = -xp  # in this case it is Fend
-    if bedsWanted > 6:
-        Gstart = xp + dist1*6
-        Hstart = -xp # this is I end
-    if bedsWanted > 7:
-        Hstart = xp + dist1*7
-        Istart = xp + dist1*8
-        Iend = -xp # this is I end
-
-    testbedA = df_temp[Astart:Bstart]
-    testbedAmean = np.mean(testbedA)
-    testbedA_normGHI = testbedAmean / ghi_sum
-
-    testbedB = df_temp[Bstart:Cstart]
-    testbedBmean = np.mean(testbedB)
-    testbedB_normGHI = testbedBmean / ghi_sum
-
-    testbedC = df_temp[Cstart:Dstart]
-    testbedCmean = np.mean(testbedC)
-    testbedC_normGHI = testbedCmean / ghi_sum
-
-    testbedDmean = np.NaN
-    testbedEmean = np.NaN
-    testbedFmean = np.NaN
-    testbedGmean = np.NaN
-    testbedHmean = np.NaN
-    testbedImean = np.NaN
-
-    testbedD_normGHI = np.NaN
-    testbedE_normGHI = np.NaN
-    testbedF_normGHI = np.NaN
-    testbedG_normGHI = np.NaN 
-    testbedH_normGHI = np.NaN
-    testbedI_normGHI = np.NaN    
-
-    # Will run for bedswanted 6 and 9
-    if bedsWanted > 3:
-        testbedD = df_temp[Dstart:Estart]
-        testbedDmean = np.mean(testbedD)
-        testbedD_normGHI = testbedDmean / ghi_sum
-
-        testbedE = df_temp[Estart:Fstart]
-        testbedEmean = np.mean(testbedE)
-        testbedE_normGHI = testbedEmean / ghi_sum
-
-        testbedF = df_temp[Fstart:Gstart]
-        testbedFmean = np.mean(testbedF)
-        testbedF_normGHI = testbedFmean / ghi_sum
-
-    # Will only run for bedsawnted 9
-    if bedsWanted > 6:
-        testbedG = df_temp[Gstart:Hstart]
-        testbedGmean = np.mean(testbedG)
-        testbedG_normGHI = testbedGmean / ghi_sum
-
-    if bedsWanted > 7:
-        testbedH = df_temp[Hstart:Istart]
-        testbedHmean = np.mean(testbedH)
-        testbedH_normGHI = testbedHmean / ghi_sum
-
-        testbedI = df_temp[Istart:Iend]
-        testbedImean = np.mean(testbedI)
-        testbedI_normGHI = testbedImean / ghi_sum
-
-    # Compiling for return
-    results = [gid, setup, metData.latitude, metData.longitude, pitch, 
-            startdatestr,
-            timezonesave, solposAzi, solposZen, tracazm, tractilt,
-            ghi_sum,
-            ResultPVWm2Front, ResultPVWm2Back, ResultPVGround,
-            edgemean, insidemean,
-            testbedAmean, testbedBmean, testbedCmean,
-            testbedDmean, testbedEmean, testbedFmean,
-            testbedGmean, testbedHmean, testbedImean,
-            edge_normGHI, inside_normGHI,
-            testbedA_normGHI, testbedB_normGHI, testbedC_normGHI,
-            testbedD_normGHI, testbedE_normGHI, testbedF_normGHI,
-            testbedG_normGHI, testbedH_normGHI, testbedI_normGHI
-            ]
+    results = pd.DataFrame(list(zip(ResultPVWm2Back, ResultPVWm2Front,
+                                    ResultGHI, ResultDNI, ResultDHI, ResultPout, 
+                                    ResultWindSpeed, ResultGroundIrrad, 
+                                    ResultTemp)), 
+                                    columns=["PVWm2Back", "PVWM2Front",
+                                                  "GHI", "DNI", "DHI",
+                                                  "WindSpeed", "GroundIrrad",
+                                                  "Temp"])
+    results["gid"] = gid
+    results["setup"] = setup
+    results["startdate"] = startdate
+    results["latitude"] = metData.latitude
+    results["longitude"] = metData.longitude
+    results["pitch"] = trackerdict[key]['scene'].sceneDict['pitch']
 
     # save to folder    
-    with open(results_path, "wb") as fp:   #Pickling
-        pickle.dump(results, fp)
+    results.to_pickle(results_path)
     print("Results pickled!")
-
-    while not os.path.exists(results_path):
-        print("Waited for file to exist...")
-        time.sleep(10) 
 
     if os.path.isfile(results_path):
         # Verifies CSV file was created, then deletes unneeded files.
@@ -457,10 +351,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
 
     print("***** SIM Done for ", simpath, len(results), " \n Results: ", results)
 
-    
-    results = 1
-
-    return results
+    return 1
 
 
 def run_simulations_dask(df_weather, meta, startdates, 
@@ -479,7 +370,7 @@ def run_simulations_dask(df_weather, meta, startdates,
         #loop through dataframe and perform computation
     for setup in setups:
         for dd in range(0, len(startdates)):
-            print("setup: ", setup, ", startdate: ", dd)
+            #print("setup: ", setup, ", startdate: ", dd)
             startdate = startdates[dd]
             for gid, row in meta.iterrows():
                 #prepare input for PVDegTools
@@ -489,9 +380,16 @@ def run_simulations_dask(df_weather, meta, startdates,
                 df_tmy = df_tmy.tz_convert(pytz.FixedOffset(tz_convert_val*60))
                 df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2021)) 
                 df_tmy = df_tmy.sort_index()
+
+                metadata['timezone'] = metadata['Time Zone']
+                metadata['county'] = '-'
+                metadata['elevation'] = metadata['altitude']
+                metadata['state'] = metadata['State']
+                metadata['country'] = metadata['Country']
+                metdata['Albedo'] = metdata['albedo']
                 
-                print("startdate ", startdate)
-                print("startdatetype ", type(startdate))
+                # print("startdate ", startdate)
+                # print("startdatetype ", type(startdate))
                 debug = False
                 if debug:
                     df_tmy.to_pickle('df_convert_'+str(gid)+'.pkl')
@@ -540,7 +438,7 @@ if __name__ == "__main__":
         # start = datetime.strptime("01-11-2023", "%d-%m-%Y")
         # end = datetime.strptime("02-11-2023", "%d-%m-%Y")
         start = datetime.datetime(2023, 1, 11, 0, 0)
-        end = datetime.datetime(2023, 2, 11, 0, 0)
+        end = datetime.datetime(2023, 1, 12, 0, 0)
     # date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days)]
     # daylist = []
     # for date in date_generated:
@@ -552,9 +450,6 @@ if __name__ == "__main__":
         daylist.append(start)
         start += datetime.timedelta(days=1)
 
-    print(daylist) #check no repeated elements
-    
-
     local = {'manager': 'local',
         'n_workers': 32,
         'threads_per_worker': 1, # Number of CPUs
@@ -562,12 +457,12 @@ if __name__ == "__main__":
     kestrel = {
         'manager': 'slurm',
         'n_jobs': 1, #4,  # Number of nodes used for parallel processing
-        'cores': 104, #This is the total number of threads in all workers
+        'cores': 26, #104, #This is the total number of threads in all workers
         'memory': '256GB',
         'account': 'inspire',
-        'queue': 'standard',
+        'queue': 'debug', #'standard',
         'walltime': '0:25:00', 
-        'processes': 102, #This is the number of workers
+        'processes': 24# 102, #This is the number of workers
         #'interface': 'lo'
         #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
         }
