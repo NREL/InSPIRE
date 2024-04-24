@@ -15,6 +15,7 @@ from rex import NSRDBX
 import pytz
 import pickle
 import bifacialvf
+import shutil
 # import subprocess
 
 # rc = subprocess.call("/home/etonita/BasicSimulations/start_script.sh")
@@ -280,12 +281,15 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         print("TRACKERDICT Print:", radObj.trackerdict)      
         return 0
 
+    ResultDatetime = list(radObj.CompiledResults['timestamp']) 
     ResultPVWm2Back = list(radObj.CompiledResults['Grear_mean'])
     ResultPVWm2Front = list(radObj.CompiledResults['Gfront_mean'])
     ResultGHI = list(radObj.CompiledResults['GHI'])
     ResultDNI = list(radObj.CompiledResults['DNI'])
     ResultDHI = list(radObj.CompiledResults['DHI'])
     ResultPout = list(radObj.CompiledResults['Pout'])
+    # Commenting out due to using version 0.4.2+236.g6801d3d
+    # ResultModuleTemp = list(radObj.CompiledResults['Module_temp'])
     ResultWindSpeed = list(radObj.CompiledResults['Wind Speed'])
 
     # Modify modscanfront for Ground
@@ -318,17 +322,17 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         filetoclean = filestoclean[cc]
         os.remove(os.path.join('results', filetoclean))
 
-    results = pd.DataFrame(list(zip(ResultPVWm2Back, ResultPVWm2Front,
-                                    ResultGHI, ResultDNI, ResultDHI, ResultPout, 
-                                    ResultWindSpeed, ResultGroundIrrad, 
-                                    ResultTemp)), 
-                                    columns=["PVWm2Back", "PVWM2Front",
-                                                  "GHI", "DNI", "DHI",
-                                                  "WindSpeed", "GroundIrrad",
-                                                  "Temp"])
+    results = pd.DataFrame(list(zip(ResultDatetime, ResultGHI, ResultDNI, ResultDHI, 
+                                    ResultTemp, ResultWindSpeed, 
+                                    ResultPVWm2Back, ResultPVWm2Front,
+                                    ResultPout, ResultGroundIrrad #ResultModuleTemp, 
+                                    )), 
+                                    columns=["Timestamp", "GHI", "DNI", "DHI", "AirTemp", 
+                                             "WindSpeed", "PVWm2Back", "PVWM2Front",
+                                                  "PVPowerOutputW", "GroundIrrad" # "PVModuleTemp",
+                                                  ])
     results["gid"] = gid
     results["setup"] = setup
-    results["startdate"] = startdate
     results["latitude"] = metData.latitude
     results["longitude"] = metData.longitude
     results["pitch"] = trackerdict[key]['scene'].sceneDict['pitch']
@@ -381,15 +385,6 @@ def run_simulations_dask(df_weather, meta, startdates,
                 df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2021)) 
                 df_tmy = df_tmy.sort_index()
 
-                metadata['timezone'] = metadata['Time Zone']
-                metadata['county'] = '-'
-                metadata['elevation'] = metadata['altitude']
-                metadata['state'] = metadata['State']
-                metadata['country'] = metadata['Country']
-                metdata['Albedo'] = metdata['albedo']
-                
-                # print("startdate ", startdate)
-                # print("startdatetype ", type(startdate))
                 debug = False
                 if debug:
                     df_tmy.to_pickle('df_convert_'+str(gid)+'.pkl')
@@ -427,7 +422,7 @@ if __name__ == "__main__":
     print(datetime.datetime.now())
     sim_start_time=datetime.datetime.now()
     
-    FullYear = False
+    FullYear = True
     
     if FullYear:
         # start = datetime.strptime("01-01-2023", "%d-%m-%Y")
@@ -437,8 +432,8 @@ if __name__ == "__main__":
     else:
         # start = datetime.strptime("01-11-2023", "%d-%m-%Y")
         # end = datetime.strptime("02-11-2023", "%d-%m-%Y")
-        start = datetime.datetime(2023, 1, 11, 0, 0)
-        end = datetime.datetime(2023, 1, 12, 0, 0)
+        start = datetime.datetime(2023, 3, 9, 0, 0)
+        end = datetime.datetime(2023, 3, 10, 0, 0)
     # date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days)]
     # daylist = []
     # for date in date_generated:
@@ -456,13 +451,13 @@ if __name__ == "__main__":
         }
     kestrel = {
         'manager': 'slurm',
-        'n_jobs': 1, #4,  # Number of nodes used for parallel processing
-        'cores': 26, #104, #This is the total number of threads in all workers
+        'n_jobs': 4,  # Number of nodes used for parallel processing #1
+        'cores': 104, #This is the total number of threads in all workers was #26
         'memory': '256GB',
         'account': 'inspire',
-        'queue': 'debug', #'standard',
-        'walltime': '0:25:00', 
-        'processes': 24# 102, #This is the number of workers
+        'queue': 'standard', #'debug'
+        'walltime': '8:00:00', 
+        'processes': 102, #This is the number of workers #24
         #'interface': 'lo'
         #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
         }
@@ -482,7 +477,7 @@ if __name__ == "__main__":
 
     #rootPath = r'/scratch/sayala/AgriDebugUS_Aug4'
     # rootPath = os.getcwd()
-    nsrdb_file = '/kfs2/pdatasets/NSRDB/current/nsrdb_tmy-2021.h5'
+    nsrdb_file = '/kfs2/datasets/NSRDB/current/nsrdb_tmy-2021.h5'
     #TMY data located on eagle about 900GB
 
     #Input
@@ -519,7 +514,7 @@ if __name__ == "__main__":
     if smallSim:
         meta_USA = meta_USA.loc[[219559,219563]]
         nsampling = 3
-        setups = [1] # , 2, 3, 4, 5] #, 6, 7, 8, 9, 10] 
+        setups = [1, 2, 3, 4, 5]#, 6, 7, 8, 9, 10] 
         # startdates = [pd.to_datetime(i) for i in startdates]
         #startdates = startdates[3:6]
     else:
