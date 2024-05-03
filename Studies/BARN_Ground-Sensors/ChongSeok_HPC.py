@@ -13,7 +13,6 @@ from timeit import default_timer as timer
 from time import sleep
 import pytz
 import pickle
-import bifacialvf
 import shutil
 # import subprocess
 
@@ -49,7 +48,7 @@ def start_dask(hpc=None):
             'cores': 104,
             'memory': '256GB',
             'account': 'inspire',
-            'walltime': '4:00:00',
+            'walltime': '0:15:00',
             'processes': 52,
             'local_directory': '/tmp/scratch',
             'job_extra_directives': ['-o ./logs/slurm-%j.out'],
@@ -91,9 +90,9 @@ def simulate_single(weatherfile, startdate, results_path, smaller_sim):
     if not os.path.exists(path):
         os.makedirs(path, exist_ok=True)
 
-    radObj = br.RadianceObj(simpath,path)
+    radObj = br.RadianceObj(simpath,path, hpc=True)
     if smaller_sim:
-        enddate = startdate + datetime.timedelta(hours=2)
+        enddate = startdate + datetime.timedelta(hours=11)
     else:
         enddate = startdate + datetime.timedelta(hours=23)
     
@@ -118,7 +117,7 @@ def simulate_single(weatherfile, startdate, results_path, smaller_sim):
                      'backtrack':True,
                      'gcr':gcr,
                      'cumulativesky':False, # doing hourly sims.
-                     'azimuth': sazm, # N-S : 180
+                     'azimuth': 180, # N-S : 180
                      }
 
     trackerdict = radObj.set1axis(**trackerParams)
@@ -138,17 +137,17 @@ def simulate_single(weatherfile, startdate, results_path, smaller_sim):
     
     for sensor in range(0, simsnum):
 
-        offset = offsets[ii]*inchtom  # passing to meters.
         xstart = sensorsposition_x[sensor]
     
         modscanground = {'xstart': xstart-2*inchtom, # an inch east of 0.4 meter starting point
                         'zstart': 0.05,
                         'xinc': 0,                                                                                                                                                                                                                                                        
                         'zinc': 0,
-                        'yinc': 1*inchtom
+                        'xinc': 1*inchtom,
                         'Ny':5,
                         'orient':'0 0 -1'}
         # counts from bottom right ...
+
         trackerdict = radObj.analysis1axis(trackerdict, customname = 'Ground_S'+str(sensor+1), modscanfront=modscanground)
 
     print("***** SIM Done for ", simpath)
@@ -220,18 +219,33 @@ if __name__ == "__main__":
         'n_workers': 32,
         'threads_per_worker': 1, # Number of CPUs
         }
-    kestrel = {
-        'manager': 'slurm',
-        'n_jobs': 4,  # Number of nodes used for parallel processing #1
-        'cores': 104, #This is the total number of threads in all workers was #26
-        'memory': '256GB',
-        'account': 'inspire',
-        'queue': 'standard', #'debug'
-        'walltime': '8:00:00', 
-        'processes': 102, #This is the number of workers #24
-        #'interface': 'lo'
-        #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
-        }
+
+    if smaller_sim:
+           kestrel = {
+            'manager': 'slurm',
+            'n_jobs': 1,  # Number of nodes used for parallel processing #1
+            'cores': 104, #This is the total number of threads in all workers was #26
+            'memory': '256GB',
+            'account': 'inspire',
+            'queue': 'debug', #'standard' or 'debug'
+            'walltime': '0:30:00', 
+            'processes': 24, #This is the number of workers #24
+            #'interface': 'lo'
+            #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
+            } 
+    else: # full sim
+        kestrel = {
+            'manager': 'slurm',
+            'n_jobs': 3,  # Number of nodes used for parallel processing #1
+            'cores': 104, #This is the total number of threads in all workers was #26
+            'memory': '256GB',
+            'account': 'inspire',
+            'queue': 'standard', #'standard' or 'debug'
+            'walltime': '1:00:00', 
+            'processes': 40, #This is the number of workers #24
+            #'interface': 'lo'
+            #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
+            }
 
     now=datetime.datetime.now()
     
