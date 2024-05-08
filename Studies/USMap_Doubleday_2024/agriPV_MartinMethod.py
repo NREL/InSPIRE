@@ -141,6 +141,9 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     if (DD <= 0) or (DD > 3.725):
         DD = 3.725
         print("Cannot find ideal pitch for location, setting D to 3.725")
+    # Set minimum of 2.0 m inter-row spacing (accounting for y = 2)
+    if (DD <= 1.0):
+        DD = 1.0
 
     normalized_pitch = DD + np.cos(np.round(metData.latitude) / 180.0 * np.pi)
     pitch_temp = normalized_pitch*y
@@ -215,7 +218,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         bedsWanted = 6
         fixed_tilt_angle = tilt
     if setup == 10:
-        hub_height = 2 
+        hub_height = 1.6 
         sazm = 90
         pitch = 8.6 
         modulename = 'PVmodule'
@@ -402,12 +405,6 @@ def run_simulations_dask(df_weather, meta, startdates,
 
     # Get results for all simulations
     res = client.gather(futures)
-    
-    # Close all dask workers and scheduler
-    try:
-    	client.shutdown()
-    except:
-        pass
 
     # Close client
     client.close()
@@ -452,14 +449,19 @@ if __name__ == "__main__":
     kestrel = {
         'manager': 'slurm',
         'n_jobs': 4,  # Number of nodes used for parallel processing #1
-        'cores': 104, #This is the total number of threads in all workers was #26
+        'cores': 100, #This is the total number of threads in all workers
         'memory': '256GB',
         'account': 'inspire',
         'queue': 'standard', #'debug'
         'walltime': '8:00:00', 
-        'processes': 102, #This is the number of workers #24
+        'processes': 25, #This is the number of workers (each thread has more CPUs with a 100 cores:25 thread ratio)
+        # Can experiment with this ratio to see what works
         #'interface': 'lo'
         #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
+        # This is useful if you get some sort of "could not connect to the Dask nanny" error
+        #'death_timeout': 600
+        # Use this if having memory issues
+        # 'local_directory': '$TMPDIR',
         }
 
     now=datetime.datetime.now()
@@ -514,7 +516,7 @@ if __name__ == "__main__":
     if smallSim:
         meta_USA = meta_USA.loc[[219559,219563]]
         nsampling = 3
-        setups = [1, 2, 3, 4, 5]#, 6, 7, 8, 9, 10] 
+        setups = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
         # startdates = [pd.to_datetime(i) for i in startdates]
         #startdates = startdates[3:6]
     else:
