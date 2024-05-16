@@ -110,7 +110,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         os.makedirs(path, exist_ok=True)
 
     alb = 0.2
-    radObj = br.RadianceObj(simpath,path)
+    radObj = br.RadianceObj(simpath,path, hpc=True)
     radObj.setGround(alb) 
 
     enddate = startdate + datetime.timedelta(hours=23)
@@ -344,15 +344,15 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     results.to_pickle(results_path)
     print("Results pickled!")
 
-    if os.path.isfile(results_path):
-        # Verifies CSV file was created, then deletes unneeded files.
-        for clean_up in os.listdir(path):
-            if not clean_up.endswith('results.pkl'):
-                clean_upfile = os.path.join(path, clean_up)
-                if os.path.isfile(clean_upfile):    
-                    os.remove(clean_upfile)
-                else:
-                    shutil.rmtree(clean_upfile)
+    # if os.path.isfile(results_path):
+    #     # Verifies CSV file was created, then deletes unneeded files.
+    #     for clean_up in os.listdir(path):
+    #         if not clean_up.endswith('results.pkl'):
+    #             clean_upfile = os.path.join(path, clean_up)
+    #             if os.path.isfile(clean_upfile):    
+    #                 os.remove(clean_upfile)
+    #             else:
+    #                 shutil.rmtree(clean_upfile)
     print("Results len ", len(results), " type ", type(results))
     print("All other files cleaned!")
 
@@ -419,7 +419,7 @@ if __name__ == "__main__":
     print(datetime.datetime.now())
     sim_start_time=datetime.datetime.now()
     
-    FullYear = True
+    FullYear = False
     
     if FullYear:
         # start = datetime.strptime("01-01-2023", "%d-%m-%Y")
@@ -429,8 +429,8 @@ if __name__ == "__main__":
     else:
         # start = datetime.strptime("01-11-2023", "%d-%m-%Y")
         # end = datetime.strptime("02-11-2023", "%d-%m-%Y")
-        start = datetime.datetime(2023, 3, 9, 0, 0)
-        end = datetime.datetime(2023, 3, 10, 0, 0)
+        start = datetime.datetime(2023, 12, 13, 0, 0)
+        end = datetime.datetime(2023, 12, 14, 0, 0)
     # date_generated = [start + timedelta(days=x) for x in range(0, (end-start).days)]
     # daylist = []
     # for date in date_generated:
@@ -448,12 +448,12 @@ if __name__ == "__main__":
         }
     kestrel = {
         'manager': 'slurm',
-        'n_jobs': 4,  # Number of nodes used for parallel processing #1
+        'n_jobs': 1, # 4,  # Number of nodes used for parallel processing #1
         'cores': 100, #This is the total number of threads in all workers
         'memory': '256GB',
         'account': 'inspire',
-        'queue': 'standard', #'debug'
-        'walltime': '8:00:00', 
+        'queue': 'debug', #'standard'
+        'walltime': '1:00:00',  #'8:00:00'
         'processes': 25, #This is the number of workers (each thread has more CPUs with a 100 cores:25 thread ratio)
         # Can experiment with this ratio to see what works
         #'interface': 'lo'
