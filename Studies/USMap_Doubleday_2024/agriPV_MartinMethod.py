@@ -115,8 +115,9 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
 
     enddate = startdate + datetime.timedelta(hours=23)
 
-    metData = radObj.NSRDBWeatherData(meta_dict, df_tmy, starttime=startdate, 
-                                      endtime=enddate, coerce_year=2023)
+    metData = radObj.readWeatherData(metadata=meta_dict, metdata-df_tmy, starttime=startdate, 
+                                      endtime=enddate, coerce_year=2023,
+                                      label='center')
     
     # Tracker Projection of half the module into the ground, 
     # for 1-up module in portrait orientation
@@ -244,15 +245,6 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     
     # -- generate sky   
     trackerdict = radObj.gendaylit1axis()
-    print(trackerdict)
-    print("LEN TRACKERDICT", len(trackerdict.keys()))
-    try:
-        tracazm = trackerdict[list(trackerdict.keys())[0]]['surf_azm']
-        tractilt = trackerdict[list(trackerdict.keys())[0]]['surf_tilt']
-    except:
-        print("Issue with tracazm/tractilt on trackerdict for ", path )
-        tracazm = np.NaN
-        tractilt = np.NaN  
 
     sceneDict = {'pitch':pitch, 
                  'hub_height': hub_height,
@@ -315,7 +307,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     ResultGroundIrrad = []
     ResultTemp = []
     for key in keys:
-        ResultGroundIrrad.append(trackerdict[key]['Results'][1]['Wm2Front'])
+        ResultGroundIrrad.append(list(trackerdict[key]['AnalysisObj'][1].Wm2Front))
         ResultTemp.append(trackerdict[key]['temp_air'])
 
     # Cleanup of Front files from the Ground simulation
