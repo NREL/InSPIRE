@@ -1,0 +1,1 @@
+! genbox black PVmodule 1 2 0.02 | xform -t -0.5 -1.0 0 -a 1 -t 0 2.0 0

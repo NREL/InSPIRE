@@ -1,0 +1,36 @@
+# start of sky definition for daylighting studies
+# location name: Measured LAT: 39.742 LON: -105.179 Elev: 1829.0
+# Sun position calculated w. PVLib
+!gendaylit -ang 37.458211517735116 47.377969895956255 -W 902.774 86.07309333333333 -g 0.1868 -O 1 
+skyfunc glow sky_mat
+0
+0
+4 1 1 1 0
+
+sky_mat source sky
+0
+0
+4 0 0 1 180
+
+skyfunc glow ground_glow
+0
+0
+4 0.9966115208291808 0.9966115208291808 0.9966115208291808 0
+
+ground_glow source ground
+0
+0
+4 0 0 -1 180
+
+void plastic custom
+0
+0
+5 0.187 0.187 0.187 0 0
+
+custom ring groundplane
+0
+0
+8
+0 0 -.01
+0 0 1
+0 100

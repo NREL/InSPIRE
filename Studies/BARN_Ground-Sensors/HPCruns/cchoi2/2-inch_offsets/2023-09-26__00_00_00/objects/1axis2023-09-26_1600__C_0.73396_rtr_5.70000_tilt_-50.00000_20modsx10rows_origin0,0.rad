@@ -1,0 +1,1 @@
+!xform -rx -50.0 -t 0 0 1.5 -a 20 -t 1.01 0 0 -a 10 -t 0 5.7 0 -i 1 -t -9.09 -22.8 0 -rz 90.0 -t 0 0 0 objects/PVmodule.rad
