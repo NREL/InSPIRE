@@ -114,8 +114,8 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     radObj.setGround(alb) 
 
     enddate = startdate + datetime.timedelta(hours=23)
-
-    metData = radObj.readWeatherData(metadata=meta_dict, metdata-df_tmy, starttime=startdate, 
+    print("Meta_dict into readWeatherData")
+    metData = radObj.readWeatherData(metadata=meta_dict, metdata=df_tmy, starttime=startdate,
                                       endtime=enddate, coerce_year=2023,
                                       label='center')
     
@@ -139,7 +139,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
                                   tz = metData.timezone, 
                                   hour = 9, 
                                   minute = 0.0)
-    if (DD <= 0) or (DD > 3.725):
+    if (DD <= 0) | (DD > 3.725):
         DD = 3.725
         print("Cannot find ideal pitch for location, setting D to 3.725")
     # Set minimum of 2.0 m inter-row spacing (accounting for y = 2)
@@ -264,7 +264,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
 
     # -- run analysis
     # Analysis for Module
-    trackerdict = radObj.analysis1axis(trackerdict, customname = 'Module',
+    trackerdict = radObj.analysis1axis(customname = 'Module',
                                        sensorsy=9, modWanted=modWanted,
                                        rowWanted=rowWanted)
 
@@ -298,7 +298,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
                     'orient':'0 0 -1'}
 
     # Analysis for GROUND
-    trackerdict = radObj.analysis1axis(trackerdict, customname = 'Ground',
+    trackerdict = radObj.analysis1axis(customname = 'Ground',
                                        modWanted=modWanted, rowWanted=rowWanted,
                                         modscanfront=modscanfront, sensorsy=1)
  
@@ -330,7 +330,8 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     results["setup"] = setup
     results["latitude"] = metData.latitude
     results["longitude"] = metData.longitude
-    results["pitch"] = trackerdict[key]['scene'].sceneDict['pitch']
+
+    results["pitch"] = trackerdict[key]['scenes'][0].sceneDict['pitch']
 
     # save to folder    
     results.to_pickle(results_path)
