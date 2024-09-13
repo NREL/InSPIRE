@@ -1,0 +1,2 @@
+load("/Users/kdoubled/Documents/Projects/Agrivoltaics/MA 2016-2018 Crop data/Processed data/light_2018.Rda")
+load("/Users/kdoubled/Documents/Projects/Agrivoltaics/MA 2016-2018 Crop data/Processed data/swiss_chard_2016-2018.Rda")
