@@ -41,7 +41,7 @@ Put the following in the file:
 
 I hereby agree to the terms of the Contributors License
 Agreement, version 1.0, with MD5 checksum
-6e53acc1506fff5cf4335e0fee943da4.
+239511D9C5CD34470263BED258E9B75EDFE453C4B8F33379A8B29606787F5739
 
 I furthermore declare that I am authorized and able to make this
 agreement and sign this declaration.
@@ -62,7 +62,7 @@ You can confirm the MD5 checksum of the CLA by running the md5 program over `cla
 
 ```
 md5 cla-1.0.md
-MD5 (cla-1.0.md) = 6e53acc1506fff5cf4335e0fee943da4
+MD5 (cla-1.0.md) =  239511D9C5CD34470263BED258E9B75EDFE453C4B8F33379A8B29606787F5739
 ```
 
 If the output is different from above, do not sign the CLA and let us know.
@@ -74,10 +74,10 @@ That's it!
 Sending the Email
 -----------------
 
-Send an email to PV_DEMICE's official Open Sourceror
-at [silvana.ayala@nrel.gov](mailto:silvana.ayala@nrel.gov), 
-cc-ing [Alberta.Carpenter@nrel.gov](mailto:Alberta.Carpenter@nrel.gov), with
-the subject "CLA PV Dynamic Energy and Materials in Circular Economy (PV_DEMICE)" 
+Send an email to InSPIRE's official Open Sourceror
+at [silvana.ovaitt@nrel.gov](mailto:silvana.ayala@nrel.gov), 
+cc-ing [Jordan.Macknick@nrel.gov](mailto:Jordan.Macknick@nrel.gov), with
+the subject "CLA InSPIRE" 
 and the following body:
 
 ```
