@@ -11,10 +11,9 @@ Contributors License Agreement. It's easy and pretty painless!
 2. Make an account on [GitHub](https://github.com/) if you don't already
    have one.
 
-3. File a pull request on this project (the PV Dynamic Energy and Materials in 
-   Circular Economy (PV_DEMICE) Project), as [outlined below](#filing-the-pull-request).
+3. File a pull request on this project (the InSPIRE Project), as [outlined below](#filing-the-pull-request).
 
-4. Email the PV_DEMICE Sourceror, as [outlined below](#sending-the-email).
+4. Email the InSPIRE Sourceror, as [outlined below](#sending-the-email).
 
 5. Wait for an Alliance team member to merge your pull request. You may start
    opening pull requests for the project you're contributing to but we will
