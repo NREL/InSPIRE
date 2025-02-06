@@ -1,0 +1,1541 @@
+Crop,Variety,Bed,Plant #,Observation Type,0,18,25,34,42,49,56,63,70,73,77,84,91,98,105,112,119,130,133
+Tomato,1,A,1,Buds,,0,3,11,2,,,,,,,,,,,,,,
+Tomato,1,A,1,Flowers,,0,0,6,8,,,,,,,,,,,,,,
+Tomato,1,A,1,Fruit,,0,0,0,0,2,6,9,11,,9,10,,3,4,11,7,6,
+Tomato,1,A,1,Insect damage? (0-3),,1,0,0,0,0,0,0,,,0,0,0,0,0,0,0,0,
+Tomato,1,A,1,Animal damage? (0-3),,0,0,0,0,0,0,0,,,0,0,1,0,0,0,0,0,
+Tomato,1,A,1,Water stress? (0-2),,1,0,1,0,1,2,2,2,2,2,2,2,2,2,0,2,2,
+Tomato,1,A,1,Height,,17,33,63,77,,,,,,,,,,,,,,
+Tomato,1,A,1,Width,,28.5,46,62,73,,,,,,,,,,,,,,
+Tomato,1,A,1,Marketable Fruit Count,,,,,,,,,,,,,1,2,,,,,
+Tomato,1,A,1,Marketable Fruit Mass,,,,,,,,,,,,,176,457,,,,,
+Tomato,1,A,1,Nonedible Fruit Count,,,,,,,,,,,,,2,,,,,,12
+Tomato,1,A,1,Nonedible Fruit Mass,,,,,,,,,,,,,328,,,,,,1080
+Tomato,1,A,1,Total Fruit Count,,,,,,,,,,,,,3,2,,,,,12
+Tomato,1,A,1,Total Fruit Mass,,,,,,,,,,,,,504,457,,,,,1080
+Tomato,1,A,2,Buds,,,2,10,3,,,,,,,,,,,,,,
+Tomato,1,A,2,Flowers,,,0,2,6,,,,,,,,,,,,,,
+Tomato,1,A,2,Fruit,,,0,0,0,1,5,5,7,,8,4,,4,4,3,3,4,
+Tomato,1,A,2,Insect damage?,,,0,0,0,0,0,0,,,0,0,,0,0,,0,0,
+Tomato,1,A,2,Animal damage?,,,0,0,0,0,0,0,,,0,0,,0,0,,0,0,
+Tomato,1,A,2,Water stress?,,,1,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,
+Tomato,1,A,2,Height,,15,27,45,62,,,,,,,,,,,,,,
+Tomato,1,A,2,Width,,21,32,61,74,,,,,,,,,,,,,,
+Tomato,1,A,2,Marketable Fruit Count,,,,,,,,,,,,,,2,,,,,
+Tomato,1,A,2,Marketable Fruit Mass,,,,,,,,,,,,,,276,,,,,
+Tomato,1,A,2,Nonedible Fruit Count,,,,,,,,,1,,1,,1,,,,,,4
+Tomato,1,A,2,Nonedible Fruit Mass,,,,,,,,,130,,72,,100,,,,,,470
+Tomato,1,A,2,Total Fruit Count,,,,,,,,,1,,1,,1,2,,,,,4
+Tomato,1,A,2,Total Fruit Mass,,,,,,,,,130,,72,,100,276,,,,,470
+Tomato,1,A,3,Buds,,0,2,10,,,,,,,,,,,,,,,
+Tomato,1,A,3,Flowers,,,,3,9,,,,,,,,,,,,,,
+Tomato,1,A,3,Fruit,,,,,,3,9,7,7,,3,8,,2,3,6,2,3,
+Tomato,1,A,3,Insect damage?,,0,0,0,0,0,0,0,,,0,0,0,0,0,,0,0,
+Tomato,1,A,3,Animal damage?,,0,0,0,0,0,0,0,,,0,0,0,0,0,,0,0,
+Tomato,1,A,3,Water stress?,,0,1,0,0,2,1,2,2,2,2,2,2,2,2,2,2,2,
+Tomato,1,A,3,Height,,17,30,45,72,,,,,,,,,,,,,,
+Tomato,1,A,3,Width,,16,30,57,60,,,,,,,,,,,,,,
+Tomato,1,A,3,Marketable Fruit Count,,,,,,,,,,,,,,1,2,,,,
+Tomato,1,A,3,Marketable Fruit Mass,,,,,,,,,,,,,,242,429,,,,
+Tomato,1,A,3,Nonedible Fruit Count,,,,,,,,,1,,1,2,,,,,,,8
+Tomato,1,A,3,Nonedible Fruit Mass,,,,,,,,,78,,55,127,,,,,,,667
+Tomato,1,A,3,Total Fruit Count,,,,,,,,,1,,1,2,,1,2,,,,8
+Tomato,1,A,3,Total Fruit Mass,,,,,,,,,78,,55,127,,242,429,,,,667
+Tomato,1,A,4,Buds,,0,3,11,4,,,,,,,,,,,,,,
+Tomato,1,A,4,Flowers,,,,3,4,,,,,,,,,,,,,,
+Tomato,1,A,4,Fruit,,,,,,1,6,11,13,,4,10,,2,2,2,2,2,
+Tomato,1,A,4,Insect damage? (0-3),,0,0,0,0,0,0,0,,,0,0,0,0,0,,0,0,
+Tomato,1,A,4,Animal damage? (0-3),,0,0,0,0,0,0,0,,,0,0,0,0,0,,0,0,
+Tomato,1,A,4,Water stress? (0-2),,0,1,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,
+Tomato,1,A,4,Height,,17,28,54,61,,,,,,,,,,,,,,
+Tomato,1,A,4,Width,,23,38,67,66,,,,,,,,,,,,,,
+Tomato,1,A,4,Marketable Fruit Count,,,,,,,,,,,,,,1,,,,,
+Tomato,1,A,4,Marketable Fruit Mass,,,,,,,,,,,,,,410,,,,,
+Tomato,1,A,4,Nonedible Fruit Count,,,,,,,,,1,,,,,,,,,,2
+Tomato,1,A,4,Nonedible Fruit Mass,,,,,,,,,31,,,,,,,,,,286
+Tomato,1,A,4,Total Fruit Count,,,,,,,,,1,,,,,1,,,,,2
+Tomato,1,A,4,Total Fruit Mass,,,,,,,,,31,,,,,410,,,,,286
+Tomato,1,A,5,Buds,,0,1,8,2,,,,,,,,,,,,,,
+Tomato,1,A,5,Flowers,,,,1,4,,,,,,,,,,,,,,
+Tomato,1,A,5,Fruit,,,,,1,2,4,6,7,,4,3,,2,2,2,3,2,
+Tomato,1,A,5,Insect damage?,,0,0,0,0,0,0,0,,,0,0,0,0,0,,0,0,
+Tomato,1,A,5,Animal damage?,,,,,,,,,,,,,1,,,,,,
+Tomato,1,A,5,Water stress?,,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,,
+Tomato,1,A,5,Height,,15,27,45,68,,,,,,,,,,,,,,
+Tomato,1,A,5,Width,,23,36,62,53,,,,,,,,,,,,,,
+Tomato,1,A,5,Marketable Fruit Count,,,,,,,,,,,,,,,2,1,,,
+Tomato,1,A,5,Marketable Fruit Mass,,,,,,,,,,,,,,,497,231,,,
+Tomato,1,A,5,Nonedible Fruit Count,,,,,,,,,,,,2,1,,,,,,2
+Tomato,1,A,5,Nonedible Fruit Mass,,,,,,,,,,,,174,201,,,,,,303
+Tomato,1,A,5,Total Fruit Count,,,,,,,,,,,,2,1,,2,1,,,2
+Tomato,1,A,5,Total Fruit Mass,,,,,,,,,,,,174,201,,497,231,,,303
+Tomato,1,A,6,Buds,,0,1,9,3,,,,,,,,,,,,,,
+Tomato,1,A,6,Flowers,,,,2,9,,,,,,,,,,,,,,
+Tomato,1,A,6,Fruit,,,,,1,4,5,8,9,,9,8,,5,4,9,6,6,
+Tomato,1,A,6,Insect damage? (0-3),,0,0,0,0,0,0,0,,,0,0,0,0,0,,0,0,
+Tomato,1,A,6,Animal damage? (0-3),,0,0,0,0,0,0,1,,,,,1,,,,,,
+Tomato,1,A,6,Water stress? (0-2),,1,0,0,0,0,1,2,2,2,2,2,2,2,1,1,1,1,
+Tomato,1,A,6,Height,,14,26,48,63,,,,,,,,,,,,,,
+Tomato,1,A,6,Width,,21,33,62,65,,,,,,,,,,,,,,
+Tomato,1,A,6,Marketable Fruit Count,,,,,,,,,,,,,1,1,,,,,
+Tomato,1,A,6,Marketable Fruit Mass,,,,,,,,,,,,,305,200,,,,,
+Tomato,1,A,6,Nonedible Fruit Count,,,,,,,,,,,,,1,,,,,,11
+Tomato,1,A,6,Nonedible Fruit Mass,,,,,,,,,,,,,227,,,,,,1161
+Tomato,1,A,6,Total Fruit Count,,,,,,,,,,,,,2,1,,,,,11
+Tomato,1,A,6,Total Fruit Mass,,,,,,,,,,,,,532,200,,,,,1161
+Tomato,1,A,7,Buds,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Flowers,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Fruit,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Insect damage?,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Animal damage?,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Water stress?,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Height,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Width,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,A,7,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,A,1,Buds,,,6,27,23,,,,,,,,,,,,,,
+Tomato,2,A,1,Flowers,,,,6,0,,,,,,,,,,,,,,
+Tomato,2,A,1,Fruit,,,,,3,4,10,15,7,,10,6,,12,14,17,12,18,
+Tomato,2,A,1,Insect damage? (0-3),,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Tomato,2,A,1,Animal damage? (0-3),,0,0,0,0,0,0,0,0,2,0,0,0,0,1,0,0,0,
+Tomato,2,A,1,Water stress? (0-2),,0,0,0,0,0,1,1,1,1,1,1,1,2,2,2,2,1,
+Tomato,2,A,1,Height,,,23,42,58,,,,,,,,,,,,,,
+Tomato,2,A,1,Width,,,43,75,75,,,,,,,,,,,,,,
+Tomato,2,A,1,Marketable Fruit Count,,,,,,,,,1,,2,,1,2,,,,,
+Tomato,2,A,1,Marketable Fruit Mass,,,,,,,,,110,,265,,78,190,,,,,
+Tomato,2,A,1,Nonedible Fruit Count,,,,,,,,,1,3,,,,1,,,,,19
+Tomato,2,A,1,Nonedible Fruit Mass,,,,,,,,,110,242,,,,160,,,,,1758
+Tomato,2,A,1,Total Fruit Count,,,,,,,,,2,3,2,,1,3,,,,,19
+Tomato,2,A,1,Total Fruit Mass,,,,,,,,,220,242,265,,78,350,,,,,1758
+Tomato,2,A,2,Buds,,,3,30,7,,,,,,,,,,,,,,
+Tomato,2,A,2,Flowers,,,0,2,2,,,,,,,,,,,,,,
+Tomato,2,A,2,Fruit,,,,,3,6,9,9,7,,8,7,,3,8,17,16,7,
+Tomato,2,A,2,Insect damage? (0-3),,,1,0,0,0,0,0,0,0,0,0,0,0,,,,,
+Tomato,2,A,2,Animal damage? (0-3),,,0,0,0,0,0,0,0,1,0,0,1,0,2,,,,
+Tomato,2,A,2,Water stress? (0-2),,,0,0,0,0,0,1,0,0,0,2,2,2,2,2,2,2,
+Tomato,2,A,2,Height,,,19,35,48,,,,,,,,,,,,,,
+Tomato,2,A,2,Width,,,37,54,65,,,,,,,,,,,,,,
+Tomato,2,A,2,Marketable Fruit Count,,,,,,,,,,,3,,1,,,,,,
+Tomato,2,A,2,Marketable Fruit Mass,,,,,,,,,,,480,,90,,,,,,
+Tomato,2,A,2,Nonedible Fruit Count,,,,,,,,,,5,1,1,2,,,,,,17
+Tomato,2,A,2,Nonedible Fruit Mass,,,,,,,,,,471,55,141,105,,,,,,1258
+Tomato,2,A,2,Total Fruit Count,,,,,,,,,,5,4,1,3,,,,,,17
+Tomato,2,A,2,Total Fruit Mass,,,,,,,,,,471,535,141,195,,,,,,1258
+Tomato,2,A,3,Buds,,,7,45,11,,,,,,,,,,,,,,
+Tomato,2,A,3,Flowers,,,,5,12,,,,,,,,,,,,,,
+Tomato,2,A,3,Fruit,,,,0,1,13,15,7,8,,9,9,,7,7,9,14,7,
+Tomato,2,A,3,Insect damage? (0-3),,,0,0,0,1,0,0,0,0,0,0,,0,,,,,
+Tomato,2,A,3,Animal damage? (0-3),,,0,0,0,0,0,0,0,0,0,2,,1,,,,,
+Tomato,2,A,3,Water stress? (0-2),,,0,0,0,0,1,1,0,0,1,1,1,2,2,2,2,2,
+Tomato,2,A,3,Height,,,26,32,58,,,,,,,,,,,,,,
+Tomato,2,A,3,Width,,,40,62,52,,,,,,,,,,,,,,
+Tomato,2,A,3,Marketable Fruit Count,,,,,,,,,4,,2,3,1,1,,3,2,2,
+Tomato,2,A,3,Marketable Fruit Mass,,,,,,,,,468,,94,98,125,29,,23,21,5,
+Tomato,2,A,3,Nonedible Fruit Count,,,,,,,,,,,,1,,,,,,,
+Tomato,2,A,3,Nonedible Fruit Mass,,,,,,,,,,,,33,,,,,,,
+Tomato,2,A,3,Total Fruit Count,,,,,,,,,4,,2,4,1,1,,3,2,2,
+Tomato,2,A,3,Total Fruit Mass,,,,,,,,,468,,94,131,125,29,,23,21,5,
+Tomato,2,A,4,Buds,,,6,36,7,,,,,,,,,,,,,,
+Tomato,2,A,4,Flowers,,,,3,10,,,,,,,,,,,,,,
+Tomato,2,A,4,Fruit,,,,,3,8,10,13,12,,15,20,,13,18,19,26,20,
+Tomato,2,A,4,Insect damage? (0-3),,,0,0,1,,,,,,,,,,,,,,
+Tomato,2,A,4,Animal damage? (0-3),,,0,0,0,,,,,,,,,2,1,,,,
+Tomato,2,A,4,Water stress? (0-2),,,0,0,0,0,0,1,1,1,3,3,3,1,2,2,2,2,
+Tomato,2,A,4,Height,,,24,41,67,,,,,,,,,,,,,,
+Tomato,2,A,4,Width,,,38,64,78,,,,,,,,,,,,,,
+Tomato,2,A,4,Marketable Fruit Count,,,,,,,,,2,,3,3,,1,,,,,
+Tomato,2,A,4,Marketable Fruit Mass,,,,,,,,,341,,417,389,,45,,,,,
+Tomato,2,A,4,Nonedible Fruit Count,,,,,,,,,,,1,,,,,,,,26
+Tomato,2,A,4,Nonedible Fruit Mass,,,,,,,,,2,,383,,,,,,,,2101
+Tomato,2,A,4,Total Fruit Count,,,,,,,,,341,,4,3,,1,,,,,26
+Tomato,2,A,4,Total Fruit Mass,,,,,,,,,,,800,389,,45,,,,,2101
+Tomato,2,A,5,Buds,,,4,26,2,,,,,,,,,,,,,,
+Tomato,2,A,5,Flowers,,,,2,12,,,,,,,,,,,,,,
+Tomato,2,A,5,Fruit,,,,,3,7,12,9,7,,6,5,,9,11,0,9,8,
+Tomato,2,A,5,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,A,5,Animal damage? (0-3),,,,,1,,,,,,,2,,1,,,,,
+Tomato,2,A,5,Water stress? (0-2),,,0,0,0,1,1,1,1,1,2,2,2,1,1,1,1,1,
+Tomato,2,A,5,Height,,,18,36,75,,,,,,,,,,,,,,
+Tomato,2,A,5,Width,,,32,60,70,,,,,,,,,,,,,,
+Tomato,2,A,5,Marketable Fruit Count,,,,,,,,,1,,,2,2,,,,,,
+Tomato,2,A,5,Marketable Fruit Mass,,,,,,,,,168,,,213,182,,,,,,
+Tomato,2,A,5,Nonedible Fruit Count,,,,,,,,,,2,3,,,,,,,,9
+Tomato,2,A,5,Nonedible Fruit Mass,,,,,,,,,,171,498,,,,,,,,536
+Tomato,2,A,5,Total Fruit Count,,,,,,,,,1,2,3,2,2,,,,,,9
+Tomato,2,A,5,Total Fruit Mass,,,,,,,,,168,171,498,213,182,,,,,,536
+Tomato,2,A,6,Buds,,,6,34,4,,,,,,,,,,,,,,
+Tomato,2,A,6,Flowers,,,,6,9,,,,,,,,,,,,,,
+Tomato,2,A,6,Fruit,,,,,2,10,15,12,11,,17,8,,6,11,,5,3,
+Tomato,2,A,6,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,A,6,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,A,6,Water stress? (0-2),,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,
+Tomato,2,A,6,Height,,,22,38,65,,,,,,,,,,,,,,
+Tomato,2,A,6,Width,,,41,64,75,,,,,,,,,,,,,,
+Tomato,2,A,6,Marketable Fruit Count,,,,,,,,,3,,8,5,,1,,,,,
+Tomato,2,A,6,Marketable Fruit Mass,,,,,,,,,317,,274,336,,10,,,,,
+Tomato,2,A,6,Nonedible Fruit Count,,,,,,,,,1,,,,1,,,,,,16
+Tomato,2,A,6,Nonedible Fruit Mass,,,,,,,,,106,,,,33,,,,,,1955
+Tomato,2,A,6,Total Fruit Count,,,,,,,,,4,,8,5,1,1,,,,,16
+Tomato,2,A,6,Total Fruit Mass,,,,,,,,,423,,274,336,33,10,,,,,1955
+Tomato,2,A,7,Buds,,,4,22,9,,,,,,,,,,,,,,
+Tomato,2,A,7,Flowers,,,,2,7,,,,,,,,,,,,,,
+Tomato,2,A,7,Fruit,,,,,2,7,16,14,14,,13,7,,25,24,23,23,24,
+Tomato,2,A,7,Insect damage? (0-3),,,,,,,,1,,,,,,,,,,,
+Tomato,2,A,7,Animal damage? (0-3),,,,,,,,,,,,,,,2,,,,
+Tomato,2,A,7,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,
+Tomato,2,A,7,Height,,,23,35,64,,,,,,,,,,,,,,
+Tomato,2,A,7,Width,,,38,87,85,,,,,,,,,,,,,,
+Tomato,2,A,7,Marketable Fruit Count,,,,,,,,,,,3,2,2,1,,1,,1,
+Tomato,2,A,7,Marketable Fruit Mass,,,,,,,,,,,654,379,183,142,,119,,113,
+Tomato,2,A,7,Nonedible Fruit Count,,,,,,,,,,,1,1,,,,,,,17
+Tomato,2,A,7,Nonedible Fruit Mass,,,,,,,,,,,94,189,,,,,,,1955
+Tomato,2,A,7,Total Fruit Count,,,,,,,,,,,4,3,3,1,,1,,1,17
+Tomato,2,A,7,Total Fruit Mass,,,,,,,,,,,748,568,183,142,,119,,113,1955
+Tomato,1,D,1,Buds,,,4,2,,,,,,,,,,,,,,,
+Tomato,1,D,1,Flowers,,,,2,,,,,,,,,,,,,,,
+Tomato,1,D,1,Fruit,,,,,1,2,2,2,,2,3,,2,2,3,3,2,,
+Tomato,1,D,1,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,D,1,Animal damage? (0-3),,,,,,1,,,,,,,,,,,,,
+Tomato,1,D,1,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,1,D,1,Height,,,17,37,52,,,,,,,,,,,,,,
+Tomato,1,D,1,Width,,,25,51,42,,,,,,,,,,,,,,
+Tomato,1,D,1,Marketable Fruit Count,,,,,,,,,,,,,1,,,,,,
+Tomato,1,D,1,Marketable Fruit Mass,,,,,,,,,,,,,311,,,,,,
+Tomato,1,D,1,Nonedible Fruit Count,,,,,,,,,,,2,,,,,,,,4
+Tomato,1,D,1,Nonedible Fruit Mass,,,,,,,,,,,261,,,,,,,,600
+Tomato,1,D,1,Total Fruit Count,,,,,,,,,,,2,,1,,,,,,4
+Tomato,1,D,1,Total Fruit Mass,,,,,,,,,,,261,,311,,,,,,600
+Tomato,1,D,2,Buds,,,1,3,1,,,,,,,,,,,,,,
+Tomato,1,D,2,Flowers,,,,2,5,,,,,,,,,,,,,,
+Tomato,1,D,2,Fruit,,,,,,4,6,7,7,,1,3,,1,2,0,0,0,
+Tomato,1,D,2,Insect damage?,,,1,,,,,,,,,,,,,,,,
+Tomato,1,D,2,Animal damage?,,,,,,,,,,,,,,,,,,,
+Tomato,1,D,2,Water stress?,,,0,0,0,0,0,2,2,2,2,2,2,1,1,1,1,1,
+Tomato,1,D,2,Height,,,21,40,57,,,,,,,,,,,,,,
+Tomato,1,D,2,Width,,,30,51,54,,,,,,,,,,,,,,
+Tomato,1,D,2,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,D,2,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,D,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,2
+Tomato,1,D,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,402
+Tomato,1,D,2,Total Fruit Count,,,,,,,,,,,,,,,,,,,2
+Tomato,1,D,2,Total Fruit Mass,,,,,,,,,,,,,,,,,,,402
+Tomato,1,D,3,Buds,,,,2,3,,,,,,,,,,,,,,
+Tomato,1,D,3,Flowers,,,,,2,,,,,,,,,,,,,,
+Tomato,1,D,3,Fruit,,,,,,0,4,4,4,,3,4,,2,1,2,2,2,
+Tomato,1,D,3,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,D,3,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,D,3,Water stress? (0-2),,,,,,,,2,,,1,,,1,1,,,1,
+Tomato,1,D,3,Height,,,17,36,51,,,,,,,,,,,,,,
+Tomato,1,D,3,Width,,,26,42,58,,,,,,,,,,,,,,
+Tomato,1,D,3,Marketable Fruit Count,,,,,,,,,,,,,,1,,,,,
+Tomato,1,D,3,Marketable Fruit Mass,,,,,,,,,,,,,,180,,,,,
+Tomato,1,D,3,Nonedible Fruit Count,,,,,,,,,,,3,,,,,,,,1
+Tomato,1,D,3,Nonedible Fruit Mass,,,,,,,,,,,193,,,,,,,,285
+Tomato,1,D,3,Total Fruit Count,,,,,,,,,,,3,,,1,,,,,1
+Tomato,1,D,3,Total Fruit Mass,,,,,,,,,,,193,,,180,,,,,285
+Tomato,1,D,4,Buds,,,,2,,,,,,,,,,,,,,,
+Tomato,1,D,4,Flowers,,,,,,,,,,,,,,,,,,,
+Tomato,1,D,4,Fruit,,,,,,0,0,0,0,,0,0,,0,2,0,0,1,
+Tomato,1,D,4,Insect damage? (0-3),,,,1,,,,,,,,,,,,,,,
+Tomato,1,D,4,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,D,4,Water stress? (0-2),,,,,,1,1,2,2,2,2,1,1,1,1,1,1,1,
+Tomato,1,D,4,Height,,,10,23,30,,,,,,,,,,,,,,
+Tomato,1,D,4,Width,,,15,34,28,,,,,,,,,,,,,,
+Tomato,1,D,4,Marketable Fruit Count,,,,,,,,,,,,,,,2,,,,
+Tomato,1,D,4,Marketable Fruit Mass,,,,,,,,,,,,,,,546,,,,
+Tomato,1,D,4,Nonedible Fruit Count,,,,,,,,,,,,1,,,,,,,
+Tomato,1,D,4,Nonedible Fruit Mass,,,,,,,,,,,,23,,,,,,,
+Tomato,1,D,4,Total Fruit Count,,,,,,,,,,,,1,,,2,,,,
+Tomato,1,D,4,Total Fruit Mass,,,,,,,,,,,,23,,,546,,,,
+Tomato,1,D,5,Buds,,,2,3,1,,,,,,,,,,,,,,
+Tomato,1,D,5,Flowers,,,,1,7,,,,,,,,,,,,,,
+Tomato,1,D,5,Fruit,,,,,,0,3,5,5,,8,,5,11,8,7,8,9,
+Tomato,1,D,5,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,1,D,5,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,D,5,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,1,D,5,Height,,,21,39,60,,,,,,,,,,,,,,
+Tomato,1,D,5,Width,,,28,47,45,,,,,,,,,,,,,,
+Tomato,1,D,5,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,D,5,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,D,5,Nonedible Fruit Count,,,,,,,,,,,,,,1,,,,,14
+Tomato,1,D,5,Nonedible Fruit Mass,,,,,,,,,,,,,,319,,,,,1508
+Tomato,1,D,5,Total Fruit Count,,,,,,,,,,,,,,1,,,,,14
+Tomato,1,D,5,Total Fruit Mass,,,,,,,,,,,,,,319,,,,,1508
+Tomato,1,D,6,Buds,,,1,5,6,,,,,,,,,,,,,,
+Tomato,1,D,6,Flowers,,,,,5,,,,,,,,,,,,,,
+Tomato,1,D,6,Fruit,,,,,,0,6,6,6,,5,6,,6,3,6,4,10,
+Tomato,1,D,6,Insect damage? (0-3),,,1,,,,,1,,,,,,,,,,,
+Tomato,1,D,6,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,D,6,Water stress? (0-2),,,1,,,,,1,,,,,,,1,,,,
+Tomato,1,D,6,Height,,,21,37,63,,,,,,,,,,,,,,
+Tomato,1,D,6,Width,,,29,53,52,,,,,,,,,,,,,,
+Tomato,1,D,6,Marketable Fruit Count,,,,,,,,,,,,,,2,2,,,,
+Tomato,1,D,6,Marketable Fruit Mass,,,,,,,,,,,,,,560,725,,,,
+Tomato,1,D,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,13
+Tomato,1,D,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,981
+Tomato,1,D,6,Total Fruit Count,,,,,,,,,,,,,,2,2,,,,13
+Tomato,1,D,6,Total Fruit Mass,,,,,,,,,,,,,,560,725,,,,981
+Tomato,1,D,7,Buds,,,1,5,3,,,,,,,,,,,,,,
+Tomato,1,D,7,Flowers,,,,,5,,,,,,,,,,,,,,
+Tomato,1,D,7,Fruit,,,,,,0,1,3,3,,6,3,,6,8,14,8,8,
+Tomato,1,D,7,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,1,D,7,Animal damage? (0-3),,,1,,,,,,,,,,,,,2,,,
+Tomato,1,D,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,
+Tomato,1,D,7,Height,,,19,38,52,,,,,,,,,,,,,,
+Tomato,1,D,7,Width,,,30,46,68,,,,,,,,,,,,,,
+Tomato,1,D,7,Marketable Fruit Count,,,,,,,,,,,,,,,2,1,,1,
+Tomato,1,D,7,Marketable Fruit Mass,,,,,,,,,,,,,,,914,322,,388,
+Tomato,1,D,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,1,1,22
+Tomato,1,D,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,9,14,2429
+Tomato,1,D,7,Total Fruit Count,,,,,,,,,,,,,,,2,1,1,2,22
+Tomato,1,D,7,Total Fruit Mass,,,,,,,,,,,,,,,914,322,9,402,2429
+Tomato,2,D,1,Buds,,,5,19,20,,,,,,,,,,,,,,
+Tomato,2,D,1,Flowers,,,,4,11,,,,,,,,,,,,,,
+Tomato,2,D,1,Fruit,,,,,6,6,7,8,9,,8,8,,7,9,17,14,16,
+Tomato,2,D,1,Insect damage? (0-3),,,,,,,,1,,,,,,,,,,,
+Tomato,2,D,1,Animal damage? (0-3),,,,,,,,,,,,,,1,,,,,
+Tomato,2,D,1,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,D,1,Height,,,28,41,18,,,,,,,,,,,,,,
+Tomato,2,D,1,Width,,,38,61,88,,,,,,,,,,,,,,
+Tomato,2,D,1,Marketable Fruit Count,,,,,,,,,,,1,2,,1,,,,,
+Tomato,2,D,1,Marketable Fruit Mass,,,,,,,,,,,105,255,,94,,,,,
+Tomato,2,D,1,Nonedible Fruit Count,,,,,,,,,1,,2,1,1,,,,,,18
+Tomato,2,D,1,Nonedible Fruit Mass,,,,,,,,,93,,144,38,100,,,,,,322
+Tomato,2,D,1,Total Fruit Count,,,,,,,,,1,,3,3,1,1,,,,,18
+Tomato,2,D,1,Total Fruit Mass,,,,,,,,,93,,149,293,100,94,,,,,322
+Tomato,2,D,2,Buds,,,4,17,24,,,,,,,,,,,,,,
+Tomato,2,D,2,Flowers,,,,2,9,,,,,,,,,,,,,,
+Tomato,2,D,2,Fruit,,,,,2,6,9,7,8,,6,4,,7,5,9,9,8,
+Tomato,2,D,2,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,D,2,Animal damage? (0-3),,,,,,,,,,,,1,,2,,,,,
+Tomato,2,D,2,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,D,2,Height,,,21,33,44,,,,,,,,,,,,,,
+Tomato,2,D,2,Width,,,32,56,74,,,,,,,,,,,,,,
+Tomato,2,D,2,Marketable Fruit Count,,,,,,,,,1,,1,,,1,,,,,10
+Tomato,2,D,2,Marketable Fruit Mass,,,,,,,,,329,,154,,,137,,,,,892
+Tomato,2,D,2,Nonedible Fruit Count,,,,,,,,,,,1,1,,,,,,,
+Tomato,2,D,2,Nonedible Fruit Mass,,,,,,,,,,,40,111,,,,,,,
+Tomato,2,D,2,Total Fruit Count,,,,,,,,,1,,2,1,,1,,,,,10
+Tomato,2,D,2,Total Fruit Mass,,,,,,,,,329,,194,111,,137,,,,,892
+Tomato,2,D,3,Buds,,,3,20,12,,,,,,,,,,,,,,
+Tomato,2,D,3,Flowers,,,,2,16,,,,,,,,,,,,,,
+Tomato,2,D,3,Fruit,,,,,4,9,10,11,12,,8,7,,9,14,13,16,16,
+Tomato,2,D,3,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,D,3,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,D,3,Water stress? (0-2),,,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,D,3,Height,,,22,37,45,,,,,,,,,,,,,,
+Tomato,2,D,3,Width,,,34,54,72,,,,,,,,,,,,,,
+Tomato,2,D,3,Marketable Fruit Count,,,,,,,,,,,1,4,1,2,,,,,16
+Tomato,2,D,3,Marketable Fruit Mass,,,,,,,,,,,153,418,93,146,,,,,1064
+Tomato,2,D,3,Nonedible Fruit Count,,,,,,,,,,,4,,,,,,,,
+Tomato,2,D,3,Nonedible Fruit Mass,,,,,,,,,,,253,,,,,,,,
+Tomato,2,D,3,Total Fruit Count,,,,,,,,,,,5,4,1,2,,,,,16
+Tomato,2,D,3,Total Fruit Mass,,,,,,,,,,,406,418,93,146,,,,,1064
+Tomato,2,D,4,Buds,,,4,8,23,,,,,,,,,,,,,,
+Tomato,2,D,4,Flowers,,,,3,3,,,,,,,,,,,,,,
+Tomato,2,D,4,Fruit,,,,,3,6,11,10,8,,9,4,,7,8,13,10,16,
+Tomato,2,D,4,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,2,D,4,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,D,4,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,D,4,Height,,,23,29,,,,,,,,,,,,,,,
+Tomato,2,D,4,Width,,,36,62,,,,,,,,,,,,,,,
+Tomato,2,D,4,Marketable Fruit Count,,,,,,,,,,,2,1,2,3,,,,,15
+Tomato,2,D,4,Marketable Fruit Mass,,,,,,,,,,,316,163,233,452,,,,,1383
+Tomato,2,D,4,Nonedible Fruit Count,,,,,,,,,,,,1,,,,,,,
+Tomato,2,D,4,Nonedible Fruit Mass,,,,,,,,,,,,211,,,,,,,
+Tomato,2,D,4,Total Fruit Count,,,,,,,,,,,2,2,2,3,,,,,15
+Tomato,2,D,4,Total Fruit Mass,,,,,,,,,,,316,374,233,452,,,,,1383
+Tomato,2,D,5,Buds,,,4,23,17,,,,,,,,,,,,,,
+Tomato,2,D,5,Flowers,,,,3,1,,,,,,,,,,,,,,
+Tomato,2,D,5,Fruit,,,,,,2,12,13,10,,12,14,,14,2,17,15,15,
+Tomato,2,D,5,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,2,D,5,Animal damage? (0-3),,,,,3,,,,,,,,,,,,,,
+Tomato,2,D,5,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,D,5,Height,,,23,36,43,,,,,,,,,,,,,,
+Tomato,2,D,5,Width,,,40,63,80,,,,,,,,,,,,,,
+Tomato,2,D,5,Marketable Fruit Count,,,,,,,,,,,,,7,4,2,,,,
+Tomato,2,D,5,Marketable Fruit Mass,,,,,,,,,,,,,1089,560,201,,,,
+Tomato,2,D,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,2,D,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,D,5,Total Fruit Count,,,,,,,,,,,,,7,4,2,,,,
+Tomato,2,D,5,Total Fruit Mass,,,,,,,,,,,,,1089,560,201,,,,
+Tomato,2,D,6,Buds,,,3,19,13,,,,,,,,,,,,,,
+Tomato,2,D,6,Flowers,,,,2,5,,,,,,,,,,,,,,
+Tomato,2,D,6,Fruit,,,,,2,5,9,11,9,,7,11,,6,2,12,7,7,
+Tomato,2,D,6,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,2,D,6,Animal damage? (0-3),,,,,,,,,,,,,,1,,,,,
+Tomato,2,D,6,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,D,6,Height,,,24,34,53,,,,,,,,,,,,,,
+Tomato,2,D,6,Width,,,39,54,83,,,,,,,,,,,,,,
+Tomato,2,D,6,Marketable Fruit Count,,,,,,,,,,,2,,,5,,,,,
+Tomato,2,D,6,Marketable Fruit Mass,,,,,,,,,,,531,,,610,,,,,
+Tomato,2,D,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,22
+Tomato,2,D,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,955
+Tomato,2,D,6,Total Fruit Count,,,,,,,,,,,2,,,5,,,,,22
+Tomato,2,D,6,Total Fruit Mass,,,,,,,,,,,531,,,610,,,,,955
+Tomato,2,D,7,Buds,,,3,19,12,,,,,,,,,,,,,,
+Tomato,2,D,7,Flowers,,,,3,9,,,,,,,,,,,,,,
+Tomato,2,D,7,Fruit,,,,,4,3,15,19,15,,15,2,,11,4,17,28,23,
+Tomato,2,D,7,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,D,7,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,D,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+Tomato,2,D,7,Height,,,20,31,48,,,,,,,,,,,,,,
+Tomato,2,D,7,Width,,,38,64,80,,,,,,,,,,,,,,
+Tomato,2,D,7,Marketable Fruit Count,,,,,,,,,,,2,,3,7,4,1,,,
+Tomato,2,D,7,Marketable Fruit Mass,,,,,,,,,,,327,,439,805,469,374,,,
+Tomato,2,D,7,Nonedible Fruit Count,,,,,,,,,,,,,1,1,,,,,20
+Tomato,2,D,7,Nonedible Fruit Mass,,,,,,,,,,,,,100,196,,,,,1141
+Tomato,2,D,7,Total Fruit Count,,,,,,,,,,,2,,4,8,4,1,,,20
+Tomato,2,D,7,Total Fruit Mass,,,,,,,,,,,327,,539,1001,469,374,,,1141
+Tomato,1,E,1,Buds,,,1,4,3,,,,,,,,,,,,,,
+Tomato,1,E,1,Flowers,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,1,Fruit,,,,,,0,0,0,0,,0,0,,0,0,0,0,,
+Tomato,1,E,1,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,E,1,Animal damage? (0-3),,,,2,2,,,,,,,,,,,,,,
+Tomato,1,E,1,Water stress? (0-2),,,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,
+Tomato,1,E,1,Height,,,21,30,40,,,,,,,,,,,,,,
+Tomato,1,E,1,Width,,,27,49,37,,,,,,,,,,,,,,
+Tomato,1,E,1,Marketable Fruit Count,,,,,,,,,,,,,,,,,,2,
+Tomato,1,E,1,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,21,
+Tomato,1,E,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,1,Total Fruit Count,,,,,,,,,,,,,,,,,,2,
+Tomato,1,E,1,Total Fruit Mass,,,,,,,,,,,,,,,,,,21,
+Tomato,1,E,2,Buds,,,23,10,,,,,,,,,,,,,,,
+Tomato,1,E,2,Flowers,,,,2,,,,,,,,,,,,,,,
+Tomato,1,E,2,Fruit,,,,0,0,,0,4,,0,0,,0,1,1,2,3,,
+Tomato,1,E,2,Insect damage?,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,2,Animal damage?,,,1,1,2,,,,,,,,,,,,,,
+Tomato,1,E,2,Water stress?,,,0,0,0,1,2,1,1,1,1,1,1,1,1,1,1,,
+Tomato,1,E,2,Height,,,22,34,52,,,,,,,,,,,,,,
+Tomato,1,E,2,Width,,,31,66,79,,,,,,,,,,,,,,
+Tomato,1,E,2,Marketable Fruit Count,,,,,,,,,,,,,,,,1,,,1
+Tomato,1,E,2,Marketable Fruit Mass,,,,,,,,,,,,,,,,163,,,43
+Tomato,1,E,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,2,Total Fruit Count,,,,,,,,,,,,,,,,1,,,1
+Tomato,1,E,2,Total Fruit Mass,,,,,,,,,,,,,,,,163,,,43
+Tomato,1,E,3,Buds,,,2,2,18,,,,,,,,,,,,,,
+Tomato,1,E,3,Flowers,,,,,6,,,,,,,,,,,,,,
+Tomato,1,E,3,Fruit,,,,,,1,5,10,7,,3,8,,3,2,6,4,4,
+Tomato,1,E,3,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,E,3,Animal damage? (0-3),,,1,2,,,,,,,,,,,,,,,
+Tomato,1,E,3,Water stress? (0-2),,,0,0,0,1,1,1,1,1,1,2,2,1,1,1,1,1,
+Tomato,1,E,3,Height,,,25,35,56,,,,,,,,,,,,,,
+Tomato,1,E,3,Width,,,30,48,64,,,,,,,,,,,,,,
+Tomato,1,E,3,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,3,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,3,Nonedible Fruit Count,,,,,,,,,,,3,,,1,,2,,,5
+Tomato,1,E,3,Nonedible Fruit Mass,,,,,,,,,,,202,,,168,,611,,,599
+Tomato,1,E,3,Total Fruit Count,,,,,,,,,,,3,,,1,,2,,,5
+Tomato,1,E,3,Total Fruit Mass,,,,,,,,,,,202,,,168,,611,,,559
+Tomato,1,E,4,Buds,,,,5,23,,,,,,,,,,,,,,
+Tomato,1,E,4,Flowers,,,,,8,,,,,,,,,,,,,,
+Tomato,1,E,4,Fruit,,,,,,0,7,9,8,,4,6,,5,9,16,8,4,
+Tomato,1,E,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,E,4,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,1,E,4,Water stress? (0-2),,,0,0,0,0,0,2,2,2,1,1,1,1,1,1,1,1,
+Tomato,1,E,4,Height,,,22,44,60,,,,,,,,,,,,,,
+Tomato,1,E,4,Width,,,31,54,93,,,,,,,,,,,,,,
+Tomato,1,E,4,Marketable Fruit Count,,,,,,,,,,,,,,1,1,,,,13
+Tomato,1,E,4,Marketable Fruit Mass,,,,,,,,,,,,,,298,226,,,,1177
+Tomato,1,E,4,Nonedible Fruit Count,,,,,,,,,,,2,,,,,1,,,
+Tomato,1,E,4,Nonedible Fruit Mass,,,,,,,,,,,244,,,,,88,,,
+Tomato,1,E,4,Total Fruit Count,,,,,,,,,,,2,,,1,1,1,,,13
+Tomato,1,E,4,Total Fruit Mass,,,,,,,,,,,244,,,298,226,88,,,1177
+Tomato,1,E,5,Buds,,,2,2,,,,,,,,,,,,,,,
+Tomato,1,E,5,Flowers,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Fruit,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Water stress? (0-2),,,1,2,,,,,,,,,,,,,,,
+Tomato,1,E,5,Height,,,22,31,,,,,,,,,,,,,,,
+Tomato,1,E,5,Width,,,32,35,,,,,,,,,,,,,,,
+Tomato,1,E,5,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,5,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,6,Buds,,,,4,14,,,,,,,,,,,,,,
+Tomato,1,E,6,Flowers,,,,,4,,,,,,,,,,,,,,
+Tomato,1,E,6,Fruit,,,,,,2,3,4,5,,8,5,,9,9,5,9,3,
+Tomato,1,E,6,Insect damage? (0-3),,,,,1,,,,,,,,,,,,,,
+Tomato,1,E,6,Animal damage? (0-3),,,,,,,1,,,,1,,,,,,,,
+Tomato,1,E,6,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,
+Tomato,1,E,6,Height,,,19,40,63,,,,,,,,,,,,,,
+Tomato,1,E,6,Width,,,29,44,88,,,,,,,,,,,,,,
+Tomato,1,E,6,Marketable Fruit Count,,,,,,,,,,,,,,2,1,,,,
+Tomato,1,E,6,Marketable Fruit Mass,,,,,,,,,,,,,,772,402,,,,
+Tomato,1,E,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,9
+Tomato,1,E,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,1243
+Tomato,1,E,6,Total Fruit Count,,,,,,,,,,,,,,2,1,,,,9
+Tomato,1,E,6,Total Fruit Mass,,,,,,,,,,,,,,772,402,,,,1243
+Tomato,1,E,7,Buds,,,1,7,14,,,,,,,,,,,,,,
+Tomato,1,E,7,Flowers,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,7,Fruit,,,,,,0,0,5,0,,0,4,,3,,4,7,4,
+Tomato,1,E,7,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,E,7,Animal damage? (0-3),,,,,1,,,,,,,,,,,,,,
+Tomato,1,E,7,Water stress? (0-2),,,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,
+Tomato,1,E,7,Height,,,21,49,55,,,,,,,,,,,,,,
+Tomato,1,E,7,Width,,,30,54,95,,,,,,,,,,,,,,
+Tomato,1,E,7,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,7,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,E,7,Nonedible Fruit Count,,,,,,,,,,,,2,,,,,1,,3
+Tomato,1,E,7,Nonedible Fruit Mass,,,,,,,,,,,,48,,,,,206,,205
+Tomato,1,E,7,Total Fruit Count,,,,,,,,,,,,2,,,,,1,,3
+Tomato,1,E,7,Total Fruit Mass,,,,,,,,,,,,48,,,,,206,,205
+Tomato,2,E,1,Buds,,,3,22,21,,,,,,,,,,,,,,
+Tomato,2,E,1,Flowers,,,1,3,11,,,,,,,,,,,,,,
+Tomato,2,E,1,Fruit,,,,,5,5,5,9,7,,8,7,,8,8,8,9,8,
+Tomato,2,E,1,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,E,1,Animal damage? (0-3),,,1,,,1,,,,,,1,,,,,,,
+Tomato,2,E,1,Water stress? (0-2),,,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,E,1,Height,,,23,39,52,,,,,,,,,,,,,,
+Tomato,2,E,1,Width,,,34,55,70,,,,,,,,,,,,,,
+Tomato,2,E,1,Marketable Fruit Count,,,,,,,,,,,1,,,,,4,1,,
+Tomato,2,E,1,Marketable Fruit Mass,,,,,,,,,,,100,,,,,112,40,,
+Tomato,2,E,1,Nonedible Fruit Count,,,,,,,,,,,2,,,,,,,,5
+Tomato,2,E,1,Nonedible Fruit Mass,,,,,,,,,,,263,,,,,,,,75
+Tomato,2,E,1,Total Fruit Count,,,,,,,,,,,3,,,,,4,1,,5
+Tomato,2,E,1,Total Fruit Mass,,,,,,,,,,,363,,,,,112,40,,75
+Tomato,2,E,2,Buds,,,2,24,22,,,,,,,,,,,,,,
+Tomato,2,E,2,Flowers,,,1,3,18,,,,,,,,,,,,,,
+Tomato,2,E,2,Fruit,,,,,7,6,7,12,9,,13,13,,5,6,6,6,5,
+Tomato,2,E,2,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,E,2,Animal damage? (0-3),,,,,,,,,,,1,,,,,,,,
+Tomato,2,E,2,Water stress? (0-2),,,0,0,0,0,0,2,2,2,1,1,1,2,2,2,2,2,
+Tomato,2,E,2,Height,,,26,44,54,,,,,,,,,,,,,,
+Tomato,2,E,2,Width,,,36,54,84,,,,,,,,,,,,,,
+Tomato,2,E,2,Marketable Fruit Count,,,,,,,,,2,,1,,,,,,1,,
+Tomato,2,E,2,Marketable Fruit Mass,,,,,,,,,119,,75,,,,,,49,,
+Tomato,2,E,2,Nonedible Fruit Count,,,,,,,,,5,,1,,,,,,,,3
+Tomato,2,E,2,Nonedible Fruit Mass,,,,,,,,,285,,181,,,,,,,,67
+Tomato,2,E,2,Total Fruit Count,,,,,,,,,7,,2,,,,,,1,,3
+Tomato,2,E,2,Total Fruit Mass,,,,,,,,,404,,256,,,,,,49,,67
+Tomato,2,E,3,Buds,,,5,26,26,,,,,,,,,,,,,,
+Tomato,2,E,3,Flowers,,,,2,11,,,,,,,,,,,,,,
+Tomato,2,E,3,Fruit,,,,,6,9,10,12,13,,9,8,,5,2,5,15,17,
+Tomato,2,E,3,Insect damage?,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,3,Animal damage?,,,,,1,,,,,,,,,,,,,,
+Tomato,2,E,3,Water stress?,,,0,0,0,0,1,2,2,2,2,2,2,1,1,1,1,1,
+Tomato,2,E,3,Height,,,26,46,54,,,,,,,,,,,,,,
+Tomato,2,E,3,Width,,,42,77,94,,,,,,,,,,,,,,
+Tomato,2,E,3,Marketable Fruit Count,,,,,,,,,,,,3,,1,,,,2,
+Tomato,2,E,3,Marketable Fruit Mass,,,,,,,,,,,,394,,93,,,,169,
+Tomato,2,E,3,Nonedible Fruit Count,,,,,,,,,1,,,1,,,,,,1,3
+Tomato,2,E,3,Nonedible Fruit Mass,,,,,,,,,73,,,59,,,,,,49,877
+Tomato,2,E,3,Total Fruit Count,,,,,,,,,1,,,4,,1,,,,3,3
+Tomato,2,E,3,Total Fruit Mass,,,,,,,,,73,,,453,,93,,,,218,877
+Tomato,2,E,4,Buds,,,4,23,28,,,,,,,,,,,,,,
+Tomato,2,E,4,Flowers,,,,3,15,,,,,,,,,,,,,,
+Tomato,2,E,4,Fruit,,,,,4,2,0,5,1,,,,,,,,,,
+Tomato,2,E,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,E,4,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,E,4,Water stress? (0-2),,,1,1,1,1,2,2,2,,,,,,,,,,
+Tomato,2,E,4,Height,,,28,45,50,,,,,,,,,,,,,,
+Tomato,2,E,4,Width,,,42,70,90,,,,,,,,,,,,,,
+Tomato,2,E,4,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,4,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,4,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,4,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,5,Buds,,,2,17,33,,,,,,,,,,,,,,
+Tomato,2,E,5,Flowers,,,,2,19,,,,,,,,,,,,,,
+Tomato,2,E,5,Fruit,,,,,3,5,16,19,16,,13,9,,6,3,22,21,25,
+Tomato,2,E,5,Insect damage? (0-3),,,,1,,,,,,,,,,,,,,,
+Tomato,2,E,5,Animal damage? (0-3),,,,,,,,,,,,,,1,,,,,
+Tomato,2,E,5,Water stress? (0-2),,,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,
+Tomato,2,E,5,Height,,,29,45,61,,,,,,,,,,,,,,
+Tomato,2,E,5,Width,,,46,63,85,,,,,,,,,,,,,,
+Tomato,2,E,5,Marketable Fruit Count,,,,,,,,,,,1,3,,3,,,1,,
+Tomato,2,E,5,Marketable Fruit Mass,,,,,,,,,,,175,523,,433,,,98,,
+Tomato,2,E,5,Nonedible Fruit Count,,,,,,,,,,,4,,,,,,,,18
+Tomato,2,E,5,Nonedible Fruit Mass,,,,,,,,,,,279,,,,,,,,1844
+Tomato,2,E,5,Total Fruit Count,,,,,,,,,,,5,3,,3,,,1,,18
+Tomato,2,E,5,Total Fruit Mass,,,,,,,,,,,454,523,,433,,,98,,1844
+Tomato,2,E,6,Buds,,,5,7,,,,,,,,,,,,,,,
+Tomato,2,E,6,Flowers,,,,1,,,,,,,,,,,,,,,
+Tomato,2,E,6,Fruit,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Water stress? (0-2),,,0,2,,,,,,,,,,,,,,,
+Tomato,2,E,6,Height,,,28,34,,,,,,,,,,,,,,,
+Tomato,2,E,6,Width,,,38,45,,,,,,,,,,,,,,,
+Tomato,2,E,6,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,6,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,2,E,7,Buds,,,3,22,28,,,,,,,,,,,,,,
+Tomato,2,E,7,Flowers,,,,4,17,,,,,,,,,,,,,,
+Tomato,2,E,7,Fruit,,,,,3,13,16,20,25,,29,22,,13,28,18,26,19,
+Tomato,2,E,7,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,E,7,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,2,E,7,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,
+Tomato,2,E,7,Height,,,30,45,60,,,,,,,,,,,,,,
+Tomato,2,E,7,Width,,,48,69,100,,,,,,,,,,,,,,
+Tomato,2,E,7,Marketable Fruit Count,,,,,,,,,,,1,3,,2,3,,,,52
+Tomato,2,E,7,Marketable Fruit Mass,,,,,,,,,,,230,745,,347,356,,,,4278
+Tomato,2,E,7,Nonedible Fruit Count,,,,,,,,,,,,3,,,,,,,
+Tomato,2,E,7,Nonedible Fruit Mass,,,,,,,,,,,,215,,,,,,,
+Tomato,2,E,7,Total Fruit Count,,,,,,,,,,,1,6,,2,3,,,,52
+Tomato,2,E,7,Total Fruit Mass,,,,,,,,,,,230,960,,347,356,,,,4278
+Tomato,1,F,1,Buds,,,7,7,10,,,,,,,,,,,,,,
+Tomato,1,F,1,Flowers,,,,,1,,,,,,,,,,,,,,
+Tomato,1,F,1,Fruit,,,,,,0,1,1,1,,0,0,,0,1,0,4,0,
+Tomato,1,F,1,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,1,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,1,F,1,Water stress? (0-2),,,0,0,0,1,1,1,1,1,2,2,2,1,1,1,1,1,
+Tomato,1,F,1,Height,,,29,51,51,,,,,,,,,,,,,,
+Tomato,1,F,1,Width,,,40,48,66,,,,,,,,,,,,,,
+Tomato,1,F,1,Marketable Fruit Count,,,,,,,,,,,,,,,1,,,,
+Tomato,1,F,1,Marketable Fruit Mass,,,,,,,,,,,,,,,88,,,,
+Tomato,1,F,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,2
+Tomato,1,F,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,64
+Tomato,1,F,1,Total Fruit Count,,,,,,,,,,,,,,,1,,,,2
+Tomato,1,F,1,Total Fruit Mass,,,,,,,,,,,,,,,88,,,,64
+Tomato,1,F,2,Buds,,,3,11,8,,,,,,,,,,,,,,
+Tomato,1,F,2,Flowers,,,1,2,3,,,,,,,,,,,,,,
+Tomato,1,F,2,Fruit,,,,,2,2,8,6,6,,4,4,,3,2,6,1,3,
+Tomato,1,F,2,Insect damage?,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,2,Animal damage?,,,,,,,,,,,,2,,1,,,,,
+Tomato,1,F,2,Water stress?,,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,1,F,2,Height,,,33,54,69,,,,,,,,,,,,,,
+Tomato,1,F,2,Width,,,36,54,73,,,,,,,,,,,,,,
+Tomato,1,F,2,Marketable Fruit Count,,,,,,,,,,,1,,,1,,,,,
+Tomato,1,F,2,Marketable Fruit Mass,,,,,,,,,,,44,,,67,,,,,
+Tomato,1,F,2,Nonedible Fruit Count,,,,,,,,,,,,,1,,,,,,6
+Tomato,1,F,2,Nonedible Fruit Mass,,,,,,,,,,,,,6,,,,,,645
+Tomato,1,F,2,Total Fruit Count,,,,,,,,,,,1,,1,1,,,,,6
+Tomato,1,F,2,Total Fruit Mass,,,,,,,,,,,44,,6,67,,,,,645
+Tomato,1,F,3,Buds,,,2,4,13,,,,,,,,,,,,,,
+Tomato,1,F,3,Flowers,,,,,5,,,,,,,,,,,,,,
+Tomato,1,F,3,Fruit,,,,,1,0,5,1,6,,1,2,,3,1,2,1,2,
+Tomato,1,F,3,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,3,Animal damage? (0-3),,,1,,1,,,,,,,,,,,,,,
+Tomato,1,F,3,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,
+Tomato,1,F,3,Height,,,26,48,60,,,,,,,,,,,,,,
+Tomato,1,F,3,Width,,,39,59,74,,,,,,,,,,,,,,
+Tomato,1,F,3,Marketable Fruit Count,,,,,,,,,,,,,,1,,,,,
+Tomato,1,F,3,Marketable Fruit Mass,,,,,,,,,,,,,,436,,,,,
+Tomato,1,F,3,Nonedible Fruit Count,,,,,,,,,,,,,1,,,,,,2
+Tomato,1,F,3,Nonedible Fruit Mass,,,,,,,,,,,,,3,,,,,,237
+Tomato,1,F,3,Total Fruit Count,,,,,,,,,,,,,1,1,,,,,2
+Tomato,1,F,3,Total Fruit Mass,,,,,,,,,,,,,3,436,,,,,237
+Tomato,1,F,4,Buds,,,2,4,8,,,,,,,,,,,,,,
+Tomato,1,F,4,Flowers,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,4,Fruit,,,,,,0,0,0,0,,1,0,,2,0,3,2,4,
+Tomato,1,F,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,4,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,4,Water stress? (0-2),,,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,1,F,4,Height,,,26,38,56,,,,,,,,,,,,,,
+Tomato,1,F,4,Width,,,31,49,93,,,,,,,,,,,,,,
+Tomato,1,F,4,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,4,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,3
+Tomato,1,F,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,155
+Tomato,1,F,4,Total Fruit Count,,,,,,,,,,,,,,,,,,,3
+Tomato,1,F,4,Total Fruit Mass,,,,,,,,,,,,,,,,,,,155
+Tomato,1,F,5,Buds,,,2,8,10,,,,,,,,,,,,,,
+Tomato,1,F,5,Flowers,,,,1,2,,,,,,,,,,,,,,
+Tomato,1,F,5,Fruit,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Water stress? (0-2),,,0,0,1,2,,,,,,,,,,,,,
+Tomato,1,F,5,Height,,,33,47,47,,,,,,,,,,,,,,
+Tomato,1,F,5,Width,,,33,51,54,,,,,,,,,,,,,,
+Tomato,1,F,5,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,5,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Buds,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Flowers,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Fruit,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Water stress? (0-2),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Height,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Width,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,6,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Tomato,1,F,7,Buds,,,3,6,,,,,,,,,,,,,,,
+Tomato,1,F,7,Flowers,,,,6,,,,,,,,,,,,,,,
+Tomato,1,F,7,Fruit,,,,,0,5,7,5,,7,5,,6,6,11,3,2,,
+Tomato,1,F,7,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,1,F,7,Animal damage? (0-3),,,1,,,,1,,,,,,,,,,,,
+Tomato,1,F,7,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,
+Tomato,1,F,7,Height,,,21,43,63,,,,,,,,,,,,,,
+Tomato,1,F,7,Width,,,31,47,69,,,,,,,,,,,,,,
+Tomato,1,F,7,Marketable Fruit Count,,,,,,,,,,,,,,2,3,2,,,
+Tomato,1,F,7,Marketable Fruit Mass,,,,,,,,,,,,,,544,671,567,,,
+Tomato,1,F,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,3
+Tomato,1,F,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,161
+Tomato,1,F,7,Total Fruit Count,,,,,,,,,,,,,,2,3,2,,,3
+Tomato,1,F,7,Total Fruit Mass,,,,,,,,,,,,,,544,671,567,,,161
+Tomato,2,F,1,Buds,,,4,12,16,,,,,,,,,,,,,,
+Tomato,2,F,1,Flowers,,,,1,12,,,,,,,,,,,,,,
+Tomato,2,F,1,Fruit,,,,,3,3,4,5,5,,1,3,,1,3,4,3,6,
+Tomato,2,F,1,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,1,Animal damage? (0-3),,,1,,,,,,,,,,,1,,,,,
+Tomato,2,F,1,Water stress? (0-2),,,0,0,0,1,1,1,1,1,2,1,1,1,1,1,1,1,
+Tomato,2,F,1,Height,,,30,41,51,,,,,,,,,,,,,,
+Tomato,2,F,1,Width,,,35,49,64,,,,,,,,,,,,,,
+Tomato,2,F,1,Marketable Fruit Count,,,,,,,,,1,,,,,,,,,,
+Tomato,2,F,1,Marketable Fruit Mass,,,,,,,,,144,,,,,,,,,,
+Tomato,2,F,1,Nonedible Fruit Count,,,,,,,,,,,4,,,,,,,,4
+Tomato,2,F,1,Nonedible Fruit Mass,,,,,,,,,,,245,,,,,,,,278
+Tomato,2,F,1,Total Fruit Count,,,,,,,,,,,,,,,,,,,4
+Tomato,2,F,1,Total Fruit Mass,,,,,,,,,,,,,,,,,,,278
+Tomato,2,F,2,Buds,,,3,18,10,,,,,,,,,,,,,,
+Tomato,2,F,2,Flowers,,,,4,10,,,,,,,,,,,,,,
+Tomato,2,F,2,Fruit,,,,,5,8,12,12,13,,1,14,,6,6,5,5,7,
+Tomato,2,F,2,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,2,Animal damage? (0-3),,,,,,,,,,,,,,1,1,,,,
+Tomato,2,F,2,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,
+Tomato,2,F,2,Height,,,22,42,56,,,,,,,,,,,,,,
+Tomato,2,F,2,Width,,,40,63,86,,,,,,,,,,,,,,
+Tomato,2,F,2,Marketable Fruit Count,,,,,,,,,,,1,,,,,,,,
+Tomato,2,F,2,Marketable Fruit Mass,,,,,,,,,,,98,,,,,,,,
+Tomato,2,F,2,Nonedible Fruit Count,,,,,,,,,1,,4,2,,,,,,,5
+Tomato,2,F,2,Nonedible Fruit Mass,,,,,,,,,79,,284,87,,,,,,,368
+Tomato,2,F,2,Total Fruit Count,,,,,,,,,,,1,,,,,,,,
+Tomato,2,F,2,Total Fruit Mass,,,,,,,,,,,98,,,,,,,,
+Tomato,2,F,3,Buds,,,2,13,20,,,,,,,,,,,,,,
+Tomato,2,F,3,Flowers,,,,1,5,,,,,,,,,,,,,,
+Tomato,2,F,3,Fruit,,,,,3,3,10,10,11,,6,14,,5,5,10,0,8,
+Tomato,2,F,3,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,3,Animal damage? (0-3),,,,,,,,,,,,,,2,,,,,
+Tomato,2,F,3,Water stress? (0-2),,,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,F,3,Height,,,20,38,54,,,,,,,,,,,,,,
+Tomato,2,F,3,Width,,,37,61,70,,,,,,,,,,,,,,
+Tomato,2,F,3,Marketable Fruit Count,,,,,,,,,,,2,,,,,,,,
+Tomato,2,F,3,Marketable Fruit Mass,,,,,,,,,,,169,,,,,,,,
+Tomato,2,F,3,Nonedible Fruit Count,,,,,,,,,,,3,,,,,,,,10
+Tomato,2,F,3,Nonedible Fruit Mass,,,,,,,,,,,290,,,,,,,,941
+Tomato,2,F,3,Total Fruit Count,,,,,,,,,,,5,,,,,,,,10
+Tomato,2,F,3,Total Fruit Mass,,,,,,,,,,,459,,,,,,,,941
+Tomato,2,F,4,Buds,,,3,18,18,,,,,,,,,,,,,,
+Tomato,2,F,4,Flowers,,,,2,15,,,,,,,,,,,,,,
+Tomato,2,F,4,Fruit,,,,,4,4,16,13,16,,11,15,,6,5,6,3,16,
+Tomato,2,F,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,4,Animal damage? (0-3),,,,,,,,,,,2,,,,,,,,
+Tomato,2,F,4,Water stress? (0-2),,,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+Tomato,2,F,4,Height,,,20,39,54,,,,,,,,,,,,,,
+Tomato,2,F,4,Width,,,36,51,102,,,,,,,,,,,,,,
+Tomato,2,F,4,Marketable Fruit Count,,,,,,,,,,,2,1,,2,,,,,15
+Tomato,2,F,4,Marketable Fruit Mass,,,,,,,,,,,344,164,,220,,,,,946
+Tomato,2,F,4,Nonedible Fruit Count,,,,,,,,,,,1,,,1,,,,,
+Tomato,2,F,4,Nonedible Fruit Mass,,,,,,,,,,,73,,,167,,,,,
+Tomato,2,F,4,Total Fruit Count,,,,,,,,,,,4,1,,3,,,,,15
+Tomato,2,F,4,Total Fruit Mass,,,,,,,,,,,417,164,,387,,,,,946
+Tomato,2,F,5,Buds,,,4,17,21,,,,,,,,,,,,,,
+Tomato,2,F,5,Flowers,,,,3,11,,,,,,,,,,,,,,
+Tomato,2,F,5,Fruit,,,,,3,5,11,13,12,,7,10,,4,3,5,0,10,
+Tomato,2,F,5,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,5,Animal damage? (0-3),,,,,1,,,,,,,,,,,,,,
+Tomato,2,F,5,Water stress? (0-2),,,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,F,5,Height,,,25,41,60,,,,,,,,,,,,,,
+Tomato,2,F,5,Width,,,42,58,85,,,,,,,,,,,,,,
+Tomato,2,F,5,Marketable Fruit Count,,,,,,,,,,,2,,,,2,,,,
+Tomato,2,F,5,Marketable Fruit Mass,,,,,,,,,,,374,,,,108,,,,
+Tomato,2,F,5,Nonedible Fruit Count,,,,,,,,,,,1,,,,,,,,3
+Tomato,2,F,5,Nonedible Fruit Mass,,,,,,,,,,,45,,,,,,,,91
+Tomato,2,F,5,Total Fruit Count,,,,,,,,,,,3,,,,2,,,,3
+Tomato,2,F,5,Total Fruit Mass,,,,,,,,,,,419,,,,108,,,,91
+Tomato,2,F,6,Buds,,,2,13,20,,,,,,,,,,,,,,
+Tomato,2,F,6,Flowers,,,,1,11,,,,,,,,,,,,,,
+Tomato,2,F,6,Fruit,,,,,5,2,8,7,8,,9,6,,10,4,9,8,12,
+Tomato,2,F,6,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,6,Animal damage? (0-3),,,1,,,,,,,,,,,1,,,,,
+Tomato,2,F,6,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Tomato,2,F,6,Height,,,20,33,43,,,,,,,,,,,,,,
+Tomato,2,F,6,Width,,,37,58,82,,,,,,,,,,,,,,
+Tomato,2,F,6,Marketable Fruit Count,,,,,,,,,,,1,1,,1,,,,,
+Tomato,2,F,6,Marketable Fruit Mass,,,,,,,,,,,356,265,,79,,,,,
+Tomato,2,F,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,12
+Tomato,2,F,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,714
+Tomato,2,F,6,Total Fruit Count,,,,,,,,,,,1,1,,1,,,,,12
+Tomato,2,F,6,Total Fruit Mass,,,,,,,,,,,356,265,,79,,,,,714
+Tomato,2,F,7,Buds,,,4,17,19,,,,,,,,,,,,,,
+Tomato,2,F,7,Flowers,,,1,3,15,,,,,,,,,,,,,,
+Tomato,2,F,7,Fruit,,,,,3,5,10,13,13,,12,11,,8,9,4,3,16,
+Tomato,2,F,7,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,7,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Tomato,2,F,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2,
+Tomato,2,F,7,Height,,,28,40,44,,,,,,,,,,,,,,
+Tomato,2,F,7,Width,,,37,61,70,,,,,,,,,,,,,,
+Tomato,2,F,7,Marketable Fruit Count,,,,,,,,,2,,2,,4,,1,,,,
+Tomato,2,F,7,Marketable Fruit Mass,,,,,,,,,395,,509,,600,,122,,,,
+Tomato,2,F,7,Nonedible Fruit Count,,,,,,,,,,,,,1,,,,,,17
+Tomato,2,F,7,Nonedible Fruit Mass,,,,,,,,,,,,,165,,,,,,1478
+Tomato,2,F,7,Total Fruit Count,,,,,,,,,2,,2,,5,,1,,,,17
+Tomato,2,F,7,Total Fruit Mass,,,,,,,,,395,,509,,765,,122,,,,1478
+Pepper ,1,A,1,Buds,,,,,,16,15,5,10,,1,,,1,3,0,0,7,
+Pepper ,1,A,1,Flowers,,,,,,,,6,7,4,,3,1,,0,0,0,0,
+Pepper ,1,A,1,Fruit,,,,,,,,4,13,,6,5,,1,1,1,1,1,
+Pepper ,1,A,1,Insect damage? (0-3),,,,,,,,,1,,,,,,,,,,
+Pepper ,1,A,1,Animal damage? (0-3),,,3,,,,,,,,1,3,3,3,3,,,,
+Pepper ,1,A,1,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,A,1,Height,,,29,28,31,31,32,32,36,,35,32,30,31,32,32,32,34,
+Pepper ,1,A,1,Width,,,19,16,26,28,33,23,33,,35,28,20,18,28,15,25,39,
+Pepper ,1,A,1,Marketable Fruit Count,,,,,,,,,,,3,2,,,,,,17,
+Pepper ,1,A,1,Marketable Fruit Mass,,,,,,,,,,,35,23,,,,,,17,
+Pepper ,1,A,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,1,Total Fruit Count,,,,,,,,,,,3,2,,,,,,17,
+Pepper ,1,A,1,Total Fruit Mass,,,,,,,,,,,35,23,,,,,,17,
+Pepper ,1,A,2,Buds,,,,,1,25,23,7,33,,0,,,0,2,3,2,10,
+Pepper ,1,A,2,Flowers,,,,,,3,11,9,5,,5,1,,0,0,0,0,1,
+Pepper ,1,A,2,Fruit,,,,,,,5,6,11,,12,6,,8,1,3,3,4,
+Pepper ,1,A,2,Insect damage? (0-3),,,,,2,,,,,,,1,,,,,,,
+Pepper ,1,A,2,Animal damage? (0-3),,,3,3,,1,,,,,,1,3,3,3,2,,,
+Pepper ,1,A,2,Water stress? (0-2),,,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,A,2,Height,,,20,20,26,30,43,44,41,,45,38,39,38,37,41,38,37,
+Pepper ,1,A,2,Width,,,11,20,25,39,43,25,43,,46,36,27,25,31,27,35,36,
+Pepper ,1,A,2,Marketable Fruit Count,,,,,,,,,,,,1,,3,,1,,4,
+Pepper ,1,A,2,Marketable Fruit Mass,,,,,,,,,,,,19,,51,,30,,89,
+Pepper ,1,A,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,2,Total Fruit Count,,,,,,,,,,,,1,,3,,1,,4,
+Pepper ,1,A,2,Total Fruit Mass,,,,,,,,,,,,19,,51,,30,,89,
+Pepper ,1,A,3,Buds,,,,,,14,25,10,27,,2,,,3,3,13,7,15,
+Pepper ,1,A,3,Flowers,,,,,,6,9,8,13,,11,2,,0,0,0,1,4,
+Pepper ,1,A,3,Fruit,,,,,,1,4,10,16,,16,12,,7,2,5,4,4,
+Pepper ,1,A,3,Insect damage? (0-3),,,,,,1,,,,,,,,,,,,,
+Pepper ,1,A,3,Animal damage? (0-3),,,3,2,1,2,1,,,,,2,3,3,3,1,,,
+Pepper ,1,A,3,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,A,3,Height,,,10,12,20,29,38,42,43,,45,40,40,39,42,42,45,46,
+Pepper ,1,A,3,Width,,,12,23,20,33,46,30,47,,48,37,25,22,28,28,39,39,
+Pepper ,1,A,3,Marketable Fruit Count,,,,,,,,1,,,6,7,,3,,1,,4,
+Pepper ,1,A,3,Marketable Fruit Mass,,,,,,,,11,,,110,122,,35,,12,,82,
+Pepper ,1,A,3,Nonedible Fruit Count,,,,,,,,,,,,,3,,,,,,
+Pepper ,1,A,3,Nonedible Fruit Mass,,,,,,,,,,,,,5,,,,,,
+Pepper ,1,A,3,Total Fruit Count,,,,,,,,1,,,6,7,3,3,,1,,4,
+Pepper ,1,A,3,Total Fruit Mass,,,,,,,,11,,,110,122,5,35,,12,,82,
+Pepper ,1,A,4,Buds,,,,,,24,40,14,32,,2,,,0,3,10,0,18,
+Pepper ,1,A,4,Flowers,,,,,,1,8,4,14,,20,4,,0,0,0,0,2,
+Pepper ,1,A,4,Fruit,,,,,,,2,9,18,,15,8,,12,0,2,3,2,
+Pepper ,1,A,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,4,Animal damage? (0-3),,,3,1,1,1,,,,,2,,3,3,3,2,,,
+Pepper ,1,A,4,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,A,4,Height,,,18,19,26,33,51,58,55,,55,51,45,50,50,48,54,51,
+Pepper ,1,A,4,Width,,,11,17,28,38,45,37,54,,55,38,40,36,32,34,38,53,
+Pepper ,1,A,4,Marketable Fruit Count,,,,,,,,1,,,10,9,,4,,,,1,1
+Pepper ,1,A,4,Marketable Fruit Mass,,,,,,,,13,,,213,178,,47,,,,29,13
+Pepper ,1,A,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,4,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,4,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,5,Buds,,,,2,5,28,46,11,14,,3,3,,10,6,15,12,51,
+Pepper ,1,A,5,Flowers,,,,,2,3,8,10,5,,11,3,,0,0,3,3,10,
+Pepper ,1,A,5,Fruit,,,,,,6,9,14,19,,18,10,,13,4,5,5,7,
+Pepper ,1,A,5,Insect damage? (0-3),,,,,,,1,,,,,,,,,,,,
+Pepper ,1,A,5,Animal damage? (0-3),,,3,2,1,1,,,,,,2,2,3,2,1,,,
+Pepper ,1,A,5,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,A,5,Height,,,20,26,34,44,57,62,72,,69,71,70,67,66,77,71,68,
+Pepper ,1,A,5,Width,,,16,25,38,49,51,42,57,,62,55,48,41,49,44,54,57,
+Pepper ,1,A,5,Marketable Fruit Count,,,,,,,,6,,,13,3,,5,2,1,,4,4
+Pepper ,1,A,5,Marketable Fruit Mass,,,,,,,,144,,,380,55,,66,37,20,,72,37
+Pepper ,1,A,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,5,Total Fruit Count,,,,,,,,6,,,13,3,,5,2,1,,4,4
+Pepper ,1,A,5,Total Fruit Mass,,,,,,,,144,,,380,55,,66,37,20,,72,37
+Pepper ,1,A,6,Buds,,,,1,3,20,32,14,13,,0,,,9,10,20,7,37,
+Pepper ,1,A,6,Flowers,,,,6,14,12,4,,3,,,0,1,2,6,10,,,
+Pepper ,1,A,6,Fruit,,,,2,8,10,26,,22,6,,8,3,3,2,4,,,
+Pepper ,1,A,6,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,A,6,Animal damage? (0-3),,,3,1,,1,,,,,1,2,3,3,1,1,,,
+Pepper ,1,A,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,A,6,Height,,,26,29,38,43,49,51,62,,49,47,44,45,48,52,51,52,
+Pepper ,1,A,6,Width,,,9,16,28,37,48,43,70,,54,57,41,30,52,38,54,60,
+Pepper ,1,A,6,Marketable Fruit Count,,,,,,,,3,,,15,4,,6,4,1,,,2
+Pepper ,1,A,6,Marketable Fruit Mass,,,,,,,,64,,,390,94,,61,68,31,,,22
+Pepper ,1,A,6,Nonedible Fruit Count,,,,,,,,,,2,,,,,,,,,
+Pepper ,1,A,6,Nonedible Fruit Mass,,,,,,,,,,34,,,,,,,,,
+Pepper ,1,A,6,Total Fruit Count,,,,,,,,3,,2,15,4,,6,4,1,,,2
+Pepper ,1,A,6,Total Fruit Mass,,,,,,,,64,,34,390,94,,61,68,31,,,22
+Pepper ,2,A,1,Buds,,,7,,1,15,12,5,10,,2,1,,2,4,5,3,25,
+Pepper ,2,A,1,Flowers,,,,,,,6,6,4,,3,,,0,0,0,0,1,
+Pepper ,2,A,1,Fruit,,,,,,,1,4,26,,10,5,,0,0,0,0,0,
+Pepper ,2,A,1,Insect damage? (0-3),,,,,,,1,1,,,,,,,,,,,
+Pepper ,2,A,1,Animal damage? (0-3),,,3,3,2,2,,,,,,,2,3,3,3,,,
+Pepper ,2,A,1,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,2,A,1,Height,,,29,28,29,36,38,38,40,,41,36,37,35,36,38,38,44,
+Pepper ,2,A,1,Width,,,23,24,25,26,33,24,36,,36,28,27,33,22,27,33,28,
+Pepper ,2,A,1,Marketable Fruit Count,,,,,,,,,,,5,4,,,,,,,
+Pepper ,2,A,1,Marketable Fruit Mass,,,,,,,,,,,61,47,,,,,,,
+Pepper ,2,A,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,1,Total Fruit Count,,,,,,,,,,,5,4,,,,,,,
+Pepper ,2,A,1,Total Fruit Mass,,,,,,,,,,,61,47,,,,,,,
+Pepper ,2,A,2,Buds,,,,1,4,47,49,7,27,,0,1,,2,19,25,47,102,
+Pepper ,2,A,2,Flowers,,,,,,8,6,14,5,,1,2,,0,1,0,0,4,
+Pepper ,2,A,2,Fruit,,,,,,,20,7,17,,15,9,,8,3,2,3,1,
+Pepper ,2,A,2,Insect damage? (0-3),,,,,,,,1,,,,,,,,,,,
+Pepper ,2,A,2,Animal damage? (0-3),,,3,3,,,,,,,,,2,2,2,2,,,
+Pepper ,2,A,2,Water stress? (0-2),,,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,2,A,2,Height,,,17,20,33,46,43,52,55,,54,37,47,49,50,53,52,50,
+Pepper ,2,A,2,Width,,,14,20,33,36,40,32,48,,61,36,44,45,34,38,46,39,
+Pepper ,2,A,2,Marketable Fruit Count,,,,,,,,,,,,3,,1,,1,,,1
+Pepper ,2,A,2,Marketable Fruit Mass,,,,,,,,,,,,123,,54,,50,,,74
+Pepper ,2,A,2,Nonedible Fruit Count,,,,,,,,,,,,,2,,,,,,
+Pepper ,2,A,2,Nonedible Fruit Mass,,,,,,,,,,,,,28,,,,,,
+Pepper ,2,A,2,Total Fruit Count,,,,,,,,,,,,3,2,1,,1,,,1
+Pepper ,2,A,2,Total Fruit Mass,,,,,,,,,,,,123,28,54,,50,,,74
+Pepper ,2,A,3,Buds,,,2,7,5,92,65,8,17,,2,1,,7,23,18,86,164,
+Pepper ,2,A,3,Flowers,,,,1,5,20,10,15,10,,4,4,,0,0,0,0,7,
+Pepper ,2,A,3,Fruit,,,,,,13,18,18,26,,20,13,,10,0,0,0,0,
+Pepper ,2,A,3,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,3,Animal damage? (0-3),,,2,,,1,,,,,,,,2,2,,,,
+Pepper ,2,A,3,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,2,A,3,Height,,,25,34,45,50,49,50,50,,53,49,43,45,47,48,40,44,
+Pepper ,2,A,3,Width,,,19,31,46,54,62,43,66,,71,62,57,54,66,50,86,61,
+Pepper ,2,A,3,Marketable Fruit Count,,,,,,,,,,,3,9,,8,,,,,
+Pepper ,2,A,3,Marketable Fruit Mass,,,,,,,,,,,157,383,,380,,,,,
+Pepper ,2,A,3,Nonedible Fruit Count,,,,,,,,,,,,,,2,,,,,
+Pepper ,2,A,3,Nonedible Fruit Mass,,,,,,,,,,,,,,44,,,,,
+Pepper ,2,A,3,Total Fruit Count,,,,,,,,,,,3,9,,10,,,,,
+Pepper ,2,A,3,Total Fruit Mass,,,,,,,,,,,157,383,,424,,,,,
+Pepper ,2,A,4,Buds,,,3,5,2,27,63,32,42,,12,3,,15,24,45,76,157,
+Pepper ,2,A,4,Flowers,,,,1,2,1,10,10,8,,19,7,,0,0,0,0,5,
+Pepper ,2,A,4,Fruit,,,,,,5,12,18,21,,18,9,,4,1,1,0,0,
+Pepper ,2,A,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,4,Animal damage? (0-3),,,2,2,,,,,,,,,2,2,2,,,,
+Pepper ,2,A,4,Water stress? (0-2),,,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,2,A,4,Height,,,25,30,40,39,49,56,60,,63,63,56,65,64,68,71,68,
+Pepper ,2,A,4,Width,,,17,25,45,49,50,58,60,,70,74,63,64,76,67,79,63,
+Pepper ,2,A,4,Marketable Fruit Count,,,,,,,,1,,,6,6,,2,,1,,,
+Pepper ,2,A,4,Marketable Fruit Mass,,,,,,,,17,,,293,271,,81,,40,,,
+Pepper ,2,A,4,Nonedible Fruit Count,,,,,,,,,,,,,1,,,,,,
+Pepper ,2,A,4,Nonedible Fruit Mass,,,,,,,,,,,,,18,,,,,,
+Pepper ,2,A,4,Total Fruit Count,,,,,,,,1,,,6,6,1,2,,1,,,
+Pepper ,2,A,4,Total Fruit Mass,,,,,,,,17,,,293,271,18,81,,40,,,
+Pepper ,2,A,5,Buds,,,4,7,7,42,93,8,31,,7,5,,39,62,50,137,142,
+Pepper ,2,A,5,Flowers,,,,,2,3,7,13,16,,11,7,,2,2,4,5,21,
+Pepper ,2,A,5,Fruit,,,,,,,27,15,19,,21,17,,11,5,5,5,4,
+Pepper ,2,A,5,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,5,Animal damage? (0-3),,,2,,,,,,,,,,2,,1,,,,
+Pepper ,2,A,5,Water stress? (0-2),,,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,2,A,5,Height,,,27,37,52,49,60,60,68,,69,71,74,82,76,76,78,74,
+Pepper ,2,A,5,Width,,,30,27,41,47,64,59,70,,63,65,68,54,73,59,63,75,
+Pepper ,2,A,5,Marketable Fruit Count,,,,,,,,,,,4,12,,2,,3,,,
+Pepper ,2,A,5,Marketable Fruit Mass,,,,,,,,,,,174,572,,101,,78,,,
+Pepper ,2,A,5,Nonedible Fruit Count,,,,,,,,,,,,,,4,,,,,
+Pepper ,2,A,5,Nonedible Fruit Mass,,,,,,,,,,,,,,96,,,,,
+Pepper ,2,A,5,Total Fruit Count,,,,,,,,,,,4,12,,6,,3,,,
+Pepper ,2,A,5,Total Fruit Mass,,,,,,,,,,,174,572,,197,,78,,,
+Pepper ,2,A,6,Buds,,,2,,2,24,37,10,10,,0,4,,85,67,131,85,46,
+Pepper ,2,A,6,Flowers,,,,,,2,10,8,7,,3,2,,3,3,7,21,18,
+Pepper ,2,A,6,Fruit,,,,,,,6,4,5,,5,3,,2,2,6,5,7,
+Pepper ,2,A,6,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,6,Animal damage? (0-3),,,1,3,2,,,,,,,,,1,,,,,
+Pepper ,2,A,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,A,6,Height,,,24,18,32,42,49,58,62,,55,59,70,77,74,66,67,63,
+Pepper ,2,A,6,Width,,,18,17,22,28,38,32,50,,46,49,44,37,56,74,86,64,
+Pepper ,2,A,6,Marketable Fruit Count,,,,,,,,,,,1,2,,,,1,,,3
+Pepper ,2,A,6,Marketable Fruit Mass,,,,,,,,,,,55,111,,,,43,,,190
+Pepper ,2,A,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,A,6,Total Fruit Count,,,,,,,,,,,1,2,,,,1,,,3
+Pepper ,2,A,6,Total Fruit Mass,,,,,,,,,,,55,111,,,,43,,,190
+Pepper ,1,D,1,Buds,,,4,7,6,17,8,6,8,,0,0,,,5,9,12,21,
+Pepper ,1,D,1,Flowers,,,5,7,4,4,2,,,,2,0,,,0,0,0,1,
+Pepper ,1,D,1,Fruit,,,,,6,8,14,22,13,,11,8,,6,2,4,4,4,
+Pepper ,1,D,1,Insect damage? (0-3),,,1,,,1,,1,,,,,,1,,,,,
+Pepper ,1,D,1,Animal damage? (0-3),,,,,,,1,,,,,2,,,,,,,
+Pepper ,1,D,1,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,D,1,Height,,,33,41,45,48,51,48,51,,50,49,52,49,50,50,50,55,
+Pepper ,1,D,1,Width,,,27,27,28,33,49,41,43,,43,29,43,45,45,46,45,47,
+Pepper ,1,D,1,Marketable Fruit Count,,,,,,5,,2,,,4,5,,4,,,1,3,
+Pepper ,1,D,1,Marketable Fruit Mass,,,,,,,,63,,,70,81,,59,,,26,,
+Pepper ,1,D,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,1,Total Fruit Count,,,,,,5,,2,,,4,5,,4,,,1,3,
+Pepper ,1,D,1,Total Fruit Mass,,,,,,,,63,,,70,81,,59,,,26,,
+Pepper ,1,D,2,Buds,,,,3,2,8,28,14,14,,5,0,,,0,0,9,15,
+Pepper ,1,D,2,Flowers,,,4,6,6,4,1,5,4,,3,1,,1,0,0,0,0,
+Pepper ,1,D,2,Fruit,,,,1,2,6,10,11,15,,11,9,,13,5,7,5,6,
+Pepper ,1,D,2,Insect damage? (0-3),,,1,,,1,1,2,,,,,,,,2,,,
+Pepper ,1,D,2,Animal damage? (0-3),,,,,,,,,,,,,,1,,,,,
+Pepper ,1,D,2,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,D,2,Height,,,23,33,41,43,52,55,57,,59,58,57,60,59,57,63,59,
+Pepper ,1,D,2,Width,,,30,31,39,45,49,52,55,,55,50,60,58,56,51,58,55,
+Pepper ,1,D,2,Marketable Fruit Count,,,,,,2,,2,,,7,2,,11,1,2,2,5,2
+Pepper ,1,D,2,Marketable Fruit Mass,,,,,,,,42,,,140,32,,155,22,35,43,60,28
+Pepper ,1,D,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,2,Total Fruit Count,,,,,,2,,2,,,7,2,,11,1,2,2,5,2
+Pepper ,1,D,2,Total Fruit Mass,,,,,,,,42,,,140,32,,155,22,35,43,60,28
+Pepper ,1,D,3,Buds,,,4,4,2,11,15,27,15,,6,2,,,0,4,12,14,
+Pepper ,1,D,3,Flowers,,,3,2,,1,4,3,4,,7,5,,3,0,0,0,1,
+Pepper ,1,D,3,Fruit,,,,,2,2,3,9,,,8,10,,12,6,9,14,11,
+Pepper ,1,D,3,Insect damage? (0-3),,,1,1,1,,1,,,,,,,,,,,,
+Pepper ,1,D,3,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,3,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,D,3,Height,,,29,35,41,48,49,55,61,,63,66,68,74,74,72,74,73,
+Pepper ,1,D,3,Width,,,24,20,24,33,40,45,44,,45,35,47,51,54,49,56,49,
+Pepper ,1,D,3,Marketable Fruit Count,,,,,,1,,1,,,5,2,,10,2,2,7,3,
+Pepper ,1,D,3,Marketable Fruit Mass,,,,,,,,37,,,79,35,,136,34,20,100,26,
+Pepper ,1,D,3,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,3,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,3,Total Fruit Count,,,,,,1,,1,,,5,2,,10,2,2,7,3,
+Pepper ,1,D,3,Total Fruit Mass,,,,,,,,37,,,79,35,,136,34,20,100,26,
+Pepper ,1,D,4,Buds,,,0,,3,19,24,16,14,,5,0,,,0,0,5,15,
+Pepper ,1,D,4,Flowers,,,,,,2,5,8,10,,9,2,,,0,0,0,0,
+Pepper ,1,D,4,Fruit,,,,,,,3,9,10,,12,17,,13,7,11,10,11,
+Pepper ,1,D,4,Insect damage? (0-3),,,,,1,,1,1,,,,,,1,,1,,,
+Pepper ,1,D,4,Animal damage? (0-3),,,2,3,,,1,,,,,,,1,,,,,
+Pepper ,1,D,4,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,D,4,Height,,,27,32,33,42,46,52,59,,55,53,56,64,58,55,56,53,
+Pepper ,1,D,4,Width,,,28,21,30,30,42,50,50,,58,41,54,53,59,57,59,62,
+Pepper ,1,D,4,Marketable Fruit Count,,,,,,,,,,,8,5,,12,4,2,4,4,
+Pepper ,1,D,4,Marketable Fruit Mass,,,,,,,,,,,212,145,,187,44,31,82,37,
+Pepper ,1,D,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,4,Total Fruit Count,,,,,,,,,,,8,5,,12,4,2,4,4,
+Pepper ,1,D,4,Total Fruit Mass,,,,,,,,,,,212,145,,187,44,31,82,37,
+Pepper ,1,D,5,Buds,,,1,5,2,14,17,8,13,,1,3,,,8,6,14,17,
+Pepper ,1,D,5,Flowers,,,,,5,1,4,4,3,,1,1,,,0,0,1,5,
+Pepper ,1,D,5,Fruit,,,,,1,5,6,12,15,,15,14,,9,4,6,3,4,
+Pepper ,1,D,5,Insect damage? (0-3),,,,,1,1,,,,,,,,,,,,,
+Pepper ,1,D,5,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,1,D,5,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,D,5,Height,,,34,41,45,44,46,48,57,,57,54,57,64,65,64,63,64,
+Pepper ,1,D,5,Width,,,24,27,38,40,49,51,55,,56,38,55,43,52,63,55,58,
+Pepper ,1,D,5,Marketable Fruit Count,,,,,,,,4,1,,4,5,,8,2,2,1,3,
+Pepper ,1,D,5,Marketable Fruit Mass,,,,,,,,127,29,,75,92,,229,63,36,13,53,
+Pepper ,1,D,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,5,Total Fruit Count,,,,,,,,4,1,,4,5,,8,2,2,1,3,
+Pepper ,1,D,5,Total Fruit Mass,,,,,,,,127,29,,75,92,,229,63,36,13,53,
+Pepper ,1,D,6,Buds,,,2,3,3,8,14,11,9,,1,1,,,3,6,14,25,
+Pepper ,1,D,6,Flowers,,,,2,4,6,3,5,4,,1,2,,1,0,0,0,2,
+Pepper ,1,D,6,Fruit,,,,,1,4,7,12,20,,13,12,,11,3,5,5,5,
+Pepper ,1,D,6,Insect damage? (0-3),,,1,,,2,1,2,,,,,,,,,,,
+Pepper ,1,D,6,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,D,6,Height,,,19,27,33,37,42,45,57,,53,58,60,61,63,67,69,69,
+Pepper ,1,D,6,Width,,,21,21,33,41,52,49,47,,50,38,58,49,58,54,52,59,
+Pepper ,1,D,6,Marketable Fruit Count,,,,,,,,3,,,4,3,,11,,1,1,9,1
+Pepper ,1,D,6,Marketable Fruit Mass,,,,,,,,82,,,100,55,,251,,23,19,204,18
+Pepper ,1,D,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,6,Total Fruit Count,,,,,,,,3,,,4,3,,11,,1,1,9,1
+Pepper ,1,D,6,Total Fruit Mass,,,,,,,,82,,,100,55,,251,,23,19,204,18
+Pepper ,1,D,7,Buds,,,0,3,4,10,20,14,13,,5,3,,1,12,6,8,12,
+Pepper ,1,D,7,Flowers,,,,,3,5,1,1,7,,0,1,,1,0,0,2,5,
+Pepper ,1,D,7,Fruit,,,,,,4,7,8,17,,11,10,,7,7,8,9,9,
+Pepper ,1,D,7,Insect damage? (0-3),,,1,,,1,1,,,,,,,1,,2,,,
+Pepper ,1,D,7,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,D,7,Height,,,29,34,38,40,47,58,60,,63,52,68,59,73,58,78,75,
+Pepper ,1,D,7,Width,,,23,16,23,38,45,59,53,,51,35,60,50,53,59,75,62,
+Pepper ,1,D,7,Marketable Fruit Count,,,,,,,,3,1,,3,5,,7,,3,1,,
+Pepper ,1,D,7,Marketable Fruit Mass,,,,,,,,82,32,,73,92,,223,,53,14,,
+Pepper ,1,D,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,D,7,Total Fruit Count,,,,,,,,3,1,,3,5,,7,,3,1,,
+Pepper ,1,D,7,Total Fruit Mass,,,,,,,,82,32,,73,92,,223,,53,14,,
+Pepper ,2,D,1,Buds,,,3,3,17,32,17,6,12,,6,28,,16,65,98,33,26,
+Pepper ,2,D,1,Flowers,,,,6,13,3,10,4,12,,1,1,,4,6,13,8,14,
+Pepper ,2,D,1,Fruit,,,,,5,10,14,15,10,,5,2,,2,4,8,16,6,
+Pepper ,2,D,1,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,1,Animal damage? (0-3),,,1,,,,,,,,,,,2,,,1,,
+Pepper ,2,D,1,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,D,1,Height,,,37,45,49,48,51,52,56,,55,52,77,81,85,83,90,78,
+Pepper ,2,D,1,Width,,,25,30,34,37,39,54,52,,62,35,44,47,56,57,49,50,
+Pepper ,2,D,1,Marketable Fruit Count,,,,,,,,1,2,,3,1,,,,1,,,3
+Pepper ,2,D,1,Marketable Fruit Mass,,,,,,,,56,98,,139,44,,,,24,,,95
+Pepper ,2,D,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,1,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,1,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,2,Buds,,,,1,17,38,75,38,26,,3,4,,6,0,73,21,40,
+Pepper ,2,D,2,Flowers,,,,,7,6,6,4,12,,5,9,,,0,1,4,6,
+Pepper ,2,D,2,Fruit,,,,,3,5,9,12,10,,9,7,,4,5,3,2,2,
+Pepper ,2,D,2,Insect damage? (0-3),,,,,1,,,,,,,,,,,,,,
+Pepper ,2,D,2,Animal damage? (0-3),,,1,,,,,,,,1,2,,1,,,1,,
+Pepper ,2,D,2,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,2,D,2,Height,,,34,46,58,59,64,66,73,,74,68,79,76,59,82,81,80,
+Pepper ,2,D,2,Width,,,23,22,34,37,56,64,54,,45,49,57,51,56,74,57,71,
+Pepper ,2,D,2,Marketable Fruit Count,,,,,,,,,2,,1,2,,1,1,2,,,2
+Pepper ,2,D,2,Marketable Fruit Mass,,,,,,,,,121,,60,94,,35,35,66,,,80
+Pepper ,2,D,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,2,Total Fruit Count,,,,,,,,,2,,1,2,,1,1,2,,,2
+Pepper ,2,D,2,Total Fruit Mass,,,,,,,,,121,,60,94,,35,35,66,,,80
+Pepper ,2,D,3,Buds,,,5,8,16,35,53,34,21,,2,12,,,0,31,10,32,
+Pepper ,2,D,3,Flowers,,,1,10,10,,5,10,17,,8,4,,,0,0,0,0,
+Pepper ,2,D,3,Fruit,,,,,3,2,6,10,8,,8,7,,8,6,3,0,0,
+Pepper ,2,D,3,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,3,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,2,D,3,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,D,3,Height,,,40,48,57,64,69,72,79,,78,81,87,76,74,78,80,81,
+Pepper ,2,D,3,Width,,,20,41,29,30,48,42,49,,47,32,52,40,54,58,49,54,
+Pepper ,2,D,3,Marketable Fruit Count,,,,,,,,1,,,1,3,,2,1,3,,,1
+Pepper ,2,D,3,Marketable Fruit Mass,,,,,,,,60,,,45,130,,107,78,145,,,33
+Pepper ,2,D,3,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,3,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,3,Total Fruit Count,,,,,,,,1,,,1,3,,2,1,3,,,1
+Pepper ,2,D,3,Total Fruit Mass,,,,,,,,60,,,45,130,,107,78,145,,,33
+Pepper ,2,D,4,Buds,,,4,4,18,24,52,31,17,,6,11,,2,0,81,23,13,
+Pepper ,2,D,4,Flowers,,,7,3,6,4,5,10,,13,4,,2,0,4,3,16,,
+Pepper ,2,D,4,Fruit,,,,4,7,9,15,10,,11,8,,7,7,12,5,5,,
+Pepper ,2,D,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,4,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,2,D,4,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,D,4,Height,,,41,49,59,66,70,73,79,,82,64,85,87,58,64,59,61,
+Pepper ,2,D,4,Width,,,25,22,30,34,47,51,56,,56,56,61,64,59,68,83,82,
+Pepper ,2,D,4,Marketable Fruit Count,,,,,,,,,2,,3,5,,1,,4,2,6,3
+Pepper ,2,D,4,Marketable Fruit Mass,,,,,,,,,100,,141,242,,48,,169,67,,146
+Pepper ,2,D,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,4,Total Fruit Count,,,,,,,,,2,,3,5,,1,,4,2,6,3
+Pepper ,2,D,4,Total Fruit Mass,,,,,,,,,100,,141,242,,48,,169,67,,146
+Pepper ,2,D,5,Buds,,,3,5,21,36,35,12,14,,7,17,,16,8,17,17,16,
+Pepper ,2,D,5,Flowers,,,1,5,7,5,8,5,5,,4,1,,7,0,16,5,5,
+Pepper ,2,D,5,Fruit,,,,,5,5,10,16,9,,8,8,,6,4,7,4,5,
+Pepper ,2,D,5,Insect damage? (0-3),,,,,1,1,,,,,,,,,,,,,
+Pepper ,2,D,5,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,2,D,5,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,D,5,Height,,,39,42,50,50,49,52,60,,59,66,73,67,65,55,56,57,
+Pepper ,2,D,5,Width,,,26,23,26,35,50,50,60,,61,50,52,48,52,83,75,81,
+Pepper ,2,D,5,Marketable Fruit Count,,,,,,,,,2,,3,2,,2,,2,1,,
+Pepper ,2,D,5,Marketable Fruit Mass,,,,,,,,,96,,129,92,,119,,83,33,,
+Pepper ,2,D,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,5,Total Fruit Count,,,,,,,,,2,,3,2,,2,,2,1,,
+Pepper ,2,D,5,Total Fruit Mass,,,,,,,,,96,,129,92,,119,,83,33,,
+Pepper ,2,D,6,Buds,,,,2,12,42,64,38,23,,10,11,,8,3,25,24,35,
+Pepper ,2,D,6,Flowers,,,1,2,,4,5,5,7,,11,6,,5,0,6,5,10,
+Pepper ,2,D,6,Fruit,,,,,,3,10,12,9,,8,11,,5,3,7,6,6,
+Pepper ,2,D,6,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,2,D,6,Animal damage? (0-3),,,2,1,1,,,,,,,,,,,,,,
+Pepper ,2,D,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,D,6,Height,,,39,46,38,62,62,64,66,,66,73,67,75,63,74,72,76,
+Pepper ,2,D,6,Width,,,25,20,24,36,56,65,59,,44,46,59,59,58,66,81,73,
+Pepper ,2,D,6,Marketable Fruit Count,,,,,,,,,1,,3,1,,2,3,1,,,4
+Pepper ,2,D,6,Marketable Fruit Mass,,,,,,,,,59,,102,58,,116,175,54,,,164
+Pepper ,2,D,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,D,6,Total Fruit Count,,,,,,,,,1,,3,1,,2,3,1,,,4
+Pepper ,2,D,6,Total Fruit Mass,,,,,,,,,59,,102,58,,116,175,54,,,164
+Pepper ,2,E,7,Buds,,,,,12,14,53,51,55,,5,23,,6,12,63,27,40,
+Pepper ,2,E,7,Flowers,,,,,,2,1,7,8,,13,13,,2,0,0,5,15,
+Pepper ,2,E,7,Fruit,,,,,,,2,6,6,,12,12,,10,7,14,10,10,
+Pepper ,2,E,7,Insect damage? (0-3),,,,,,1,,,,,,,,,,,,,
+Pepper ,2,E,7,Animal damage? (0-3),,,2,2,2,2,,,,,,,,,,,,,
+Pepper ,2,E,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,7,Height,,,28,29,38,42,50,58,69,,72,70,71,81,73,82,77,76,
+Pepper ,2,E,7,Width,,,16,19,24,29,43,50,48,,48,55,78,84,53,89,102,73,
+Pepper ,2,E,7,Marketable Fruit Count,,,,,,,,,,,1,2,,4,1,1,2,3,
+Pepper ,2,E,7,Marketable Fruit Mass,,,,,,,,,,,52,89,,253,43,55,91,155,
+Pepper ,2,E,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,7,Total Fruit Count,,,,,,,,,,,1,2,,4,1,1,2,3,
+Pepper ,2,E,7,Total Fruit Mass,,,,,,,,,,,52,89,,253,43,55,91,155,
+Pepper ,1,E,1,Buds,,,0,,8,11,24,5,15,,1,0,,,4,18,11,14,
+Pepper ,1,E,1,Flowers,,,,,12,5,2,3,6,,3,2,,,0,1,0,4,
+Pepper ,1,E,1,Fruit,,,,,4,4,9,22,10,,11,10,,5,3,2,3,0,
+Pepper ,1,E,1,Insect damage? (0-3),,,1,,1,1,,,,,,,,1,,,,,
+Pepper ,1,E,1,Animal damage? (0-3),,,,,,,,,,,1,,,2,2,,,,
+Pepper ,1,E,1,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,E,1,Height,,,30,36,39,41,46,50,53,,52,56,59,74,44,47,48,56,
+Pepper ,1,E,1,Width,,,16,20,30,35,43,60,47,,48,34,50,45,45,37,55,52,
+Pepper ,1,E,1,Marketable Fruit Count,,,,,,,,5,,,4,3,,4,1,,3,,
+Pepper ,1,E,1,Marketable Fruit Mass,,,,,,,,100,,,63,55,,67,11,,56,,
+Pepper ,1,E,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,1,Total Fruit Count,,,,,,,,5,,,4,3,,4,1,,3,,
+Pepper ,1,E,1,Total Fruit Mass,,,,,,,,100,,,63,55,,67,11,,56,,
+Pepper ,1,E,2,Buds,,,2,8,9,9,14,4,10,,7,6,,1,2,16,8,24,
+Pepper ,1,E,2,Flowers,,,1,,9,4,2,0,1,,2,2,,1,0,0,0,3,
+Pepper ,1,E,2,Fruit,,,,,2,3,4,9,8,,6,7,,4,5,4,4,2,
+Pepper ,1,E,2,Insect damage? (0-3),,,1,,1,1,,,,,,,,,,,,,
+Pepper ,1,E,2,Animal damage? (0-3),,,1,1,,,,,,,,,,2,1,,,,
+Pepper ,1,E,2,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,E,2,Height,,,30,36,45,45,55,59,60,,63,62,66,63,66,65,65,67,
+Pepper ,1,E,2,Width,,,19,23,25,38,43,44,32,,39,34,43,55,40,36,39,46,
+Pepper ,1,E,2,Marketable Fruit Count,,,,,,,,3,,,1,3,,4,2,1,1,2,
+Pepper ,1,E,2,Marketable Fruit Mass,,,,,,,,98,,,18,47,,77,27,16,19,31,
+Pepper ,1,E,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,2,Total Fruit Count,,,,,,,,3,,,1,3,,4,2,1,1,2,
+Pepper ,1,E,2,Total Fruit Mass,,,,,,,,98,,,18,47,,77,27,16,19,31,
+Pepper ,1,E,3,Buds,,,,5,6,11,26,17,10,,4,2,,,3,14,16,21,
+Pepper ,1,E,3,Flowers,,,,,12,6,3,6,10,,5,5,,,0,0,1,2,
+Pepper ,1,E,3,Fruit,,,,,3,5,8,14,14,,13,14,,10,5,8,6,2,
+Pepper ,1,E,3,Insect damage? (0-3),,,1,,1,,1,1,,,1,,,,,,,,
+Pepper ,1,E,3,Animal damage? (0-3),,,,,,,,,,,,,,2,2,,,,
+Pepper ,1,E,3,Water stress? (0-2),,,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,E,3,Height,,,27,33,41,49,59,67,74,,73,58,60,102,61,65,63,59,
+Pepper ,1,E,3,Width,,,22,24,35,38,51,59,52,,57,47,55,49,64,58,65,66,
+Pepper ,1,E,3,Marketable Fruit Count,,,,,,,,5,,,6,6,,13,1,2,5,1,
+Pepper ,1,E,3,Marketable Fruit Mass,,,,,,,,115,,,170,113,,237,12,37,75,16,
+Pepper ,1,E,3,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,3,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,3,Total Fruit Count,,,,,,,,5,,,6,6,,13,1,2,5,1,
+Pepper ,1,E,3,Total Fruit Mass,,,,,,,,115,,,170,113,,237,12,37,75,16,
+Pepper ,1,E,4,Buds,,,,3,17,17,34,19,23,,4,5,,,2,9,6,0,
+Pepper ,1,E,4,Flowers,,,,,6,4,5,5,10,,7,8,,,1,0,0,1,
+Pepper ,1,E,4,Fruit,,,,,,,5,18,14,,12,16,,8,10,18,23,17,
+Pepper ,1,E,4,Insect damage? (0-3),,,1,,,2,1,,,,,,,,,,,,
+Pepper ,1,E,4,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,4,Water stress? (0-2),,,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,E,4,Height,,,28,34,45,47,61,64,63,,67,65,83,91,77,72,75,70,
+Pepper ,1,E,4,Width,,,17,22,33,43,51,53,49,,56,38,58,62,59,38,70,66,
+Pepper ,1,E,4,Marketable Fruit Count,,,,,,,,3,,,5,10,,10,1,3,3,8,8
+Pepper ,1,E,4,Marketable Fruit Mass,,,,,,,,49,,,136,175,,250,12,47,44,124,88
+Pepper ,1,E,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,4,Total Fruit Count,,,,,,,,3,,,5,10,,10,1,3,3,8,8
+Pepper ,1,E,4,Total Fruit Mass,,,,,,,,49,,,136,175,,250,12,47,44,124,88
+Pepper ,1,E,5,Buds,,,,3,17,15,38,23,10,,2,0,,,5,11,7,16,
+Pepper ,1,E,5,Flowers,,,,,7,3,4,6,8,,9,5,,,1,0,4,7,
+Pepper ,1,E,5,Fruit,,,,,,4,5,20,18,,14,17,,13,5,16,15,14,
+Pepper ,1,E,5,Insect damage? (0-3),,,1,,1,2,,1,,,,,,1,,,,,
+Pepper ,1,E,5,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,5,Water stress? (0-2),,,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,E,5,Height,,,31,36,48,49,63,66,68,,66,67,75,89,72,80,78,80,
+Pepper ,1,E,5,Width,,,17,23,32,30,51,52,55,,53,36,67,58,61,57,62,59,
+Pepper ,1,E,5,Marketable Fruit Count,,,,,,,,,3,,10,6,,12,5,1,2,7,5
+Pepper ,1,E,5,Marketable Fruit Mass,,,,,,,,,97,,229,116,,200,82,16,37,122,47
+Pepper ,1,E,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,5,Total Fruit Count,,,,,,,,,3,,10,6,,12,5,1,2,7,5
+Pepper ,1,E,5,Total Fruit Mass,,,,,,,,,97,,229,116,,200,82,16,37,122,47
+Pepper ,1,E,6,Buds,,,,,8,8,47,37,17,,6,4,,,4,4,3,6,
+Pepper ,1,E,6,Flowers,,,,,4,3,4,5,7,,7,10,,,0,0,0,2,
+Pepper ,1,E,6,Fruit,,,,,,,3,21,17,,19,18,,15,12,17,13,6,
+Pepper ,1,E,6,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,1,E,6,Animal damage? (0-3),,,,,,,,1,,,,,,,,,,,
+Pepper ,1,E,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,E,6,Height,,,24,30,34,50,48,54,58,,54,63,66,69,63,68,68,59,
+Pepper ,1,E,6,Width,,,24,20,33,40,61,72,63,,76,49,79,78,73,59,84,65,
+Pepper ,1,E,6,Marketable Fruit Count,,,,,,,,,,,11,13,,7,7,11,7,3,2
+Pepper ,1,E,6,Marketable Fruit Mass,,,,,,,,,,,351,270,,123,121,180,118,49,32
+Pepper ,1,E,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,6,Total Fruit Count,,,,,,,,,,,11,13,,7,7,11,7,3,2
+Pepper ,1,E,6,Total Fruit Mass,,,,,,,,,,,351,270,,123,121,180,118,49,32
+Pepper ,1,E,7,Buds,,,,,4,13,36,38,30,,2,4,,3,6,11,8,11,
+Pepper ,1,E,7,Flowers,,,,,2,2,3,3,3,,6,5,,1,3,,3,4,
+Pepper ,1,E,7,Fruit,,,,,,,2,11,13,,13,13,,16,16,27,14,14,
+Pepper ,1,E,7,Insect damage? (0-3),,,,,1,,,,,,1,,,,,,,,
+Pepper ,1,E,7,Animal damage? (0-3),,,2,,,,,,,,,,,,,,,,
+Pepper ,1,E,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,E,7,Height,,,27,30,30,38,43,52,55,,61,67,79,73,79,79,78,80,
+Pepper ,1,E,7,Width,,,18,17,16,47,56,51,58,,58,45,68,82,64,65,72,63,
+Pepper ,1,E,7,Marketable Fruit Count,,,,,,,,,,,14,6,,8,8,13,5,7,3
+Pepper ,1,E,7,Marketable Fruit Mass,,,,,,,,,,,429,159,,213,186,257,98,116,30
+Pepper ,1,E,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,E,7,Total Fruit Count,,,,,,,,,,,14,6,,8,8,13,5,7,3
+Pepper ,1,E,7,Total Fruit Mass,,,,,,,,,,,429,159,,213,186,257,98,116,30
+Pepper ,2,E,1,Buds,,,0,3,18,11,55,22,10,,4,10,,6,21,9,16,34,
+Pepper ,2,E,1,Flowers,,,,,7,5,5,3,12,,6,5,,1,0,3,2,1,
+Pepper ,2,E,1,Fruit,,,,,,4,9,15,8,,8,5,,2,4,4,4,2,
+Pepper ,2,E,1,Insect damage? (0-3),,,1,,,1,,,,,,,,3,2,2,,1,
+Pepper ,2,E,1,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,1,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,1,Height,,,33,39,49,56,60,67,68,,62,64,71,53,70,64,62,61,
+Pepper ,2,E,1,Width,,,21,22,31,36,43,44,47,,61,40,62,46,70,42,64,67,
+Pepper ,2,E,1,Marketable Fruit Count,,,,,,,,,1,,1,5,,1,,,,,3
+Pepper ,2,E,1,Marketable Fruit Mass,,,,,,,,,22,,13,203,,31,,,,,114
+Pepper ,2,E,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,1,Total Fruit Count,,,,,,,,,1,,1,5,,1,,,,,3
+Pepper ,2,E,1,Total Fruit Mass,,,,,,,,,22,,13,203,,31,,,,,114
+Pepper ,2,E,2,Buds,,,,8,17,21,26,73,19,15,,4,3,,,43,30,30,70
+Pepper ,2,E,2,Flowers,,,,2,4,21,5,9,4,7,,3,5,,,0,0,4,13
+Pepper ,2,E,2,Fruit,,,,,,4,7,16,25,14,,12,9,,6,3,3,3,1
+Pepper ,2,E,2,Insect damage? (0-3),,,,,,1,,,,,,,,,,,,,
+Pepper ,2,E,2,Animal damage? (0-3),,,,,,,,,,,,,,2,,,,,
+Pepper ,2,E,2,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,2,Height,,,41,49,59,57,60,59,58,,62,66,70,61,64,64,68,65,
+Pepper ,2,E,2,Width,,,24,22,37,50,44,70,64,,64,50,69,45,57,50,71,66,
+Pepper ,2,E,2,Marketable Fruit Count,,,,,,,,,1,,3,5,,3,,,2,,
+Pepper ,2,E,2,Marketable Fruit Mass,,,,,,,,,52,,130,190,,111,,,127,,
+Pepper ,2,E,2,Nonedible Fruit Count,,,,,,,,,,,,,,2,,,,,
+Pepper ,2,E,2,Nonedible Fruit Mass,,,,,,,,,,,,,,38,,,,,
+Pepper ,2,E,2,Total Fruit Count,,,,,,,,,1,,3,5,,5,,,2,,
+Pepper ,2,E,2,Total Fruit Mass,,,,,,,,,52,,130,190,,149,,,127,,
+Pepper ,2,E,3,Buds,,,0,6,24,41,35,15,10,,8,20,,12,21,25,28,13,
+Pepper ,2,E,3,Flowers,,,,1,13,7,7,1,12,,6,4,,9,7,1,3,6,
+Pepper ,2,E,3,Fruit,,,,,7,7,12,15,9,,8,9,,13,10,11,6,5,
+Pepper ,2,E,3,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,2,E,3,Animal damage? (0-3),,,,,,,,,,,,,,2,,,,,
+Pepper ,2,E,3,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,3,Height,,,26,38,53,57,65,72,79,,84,88,94,56,103,112,102,97,
+Pepper ,2,E,3,Width,,,24,28,35,35,45,46,55,,54,53,68,51,74,55,97,100,
+Pepper ,2,E,3,Marketable Fruit Count,,,,,,,,,2,,2,2,,4,,3,1,,5
+Pepper ,2,E,3,Marketable Fruit Mass,,,,,,,,,123,,112,77,,113,,144,29,,158
+Pepper ,2,E,3,Nonedible Fruit Count,,,,,,,,,,,,,,1,,,,,
+Pepper ,2,E,3,Nonedible Fruit Mass,,,,,,,,,,,,,,18,,,,,
+Pepper ,2,E,3,Total Fruit Count,,,,,,,,,2,,2,2,,5,,3,1,,5
+Pepper ,2,E,3,Total Fruit Mass,,,,,,,,,123,,112,77,,131,,144,29,,158
+Pepper ,2,E,4,Buds,,,0,4,24,39,71,43,8,,3,28,,3,23,20,10,34,
+Pepper ,2,E,4,Flowers,,,,,17,8,6,6,16,,9,3,,5,4,8,1,5,
+Pepper ,2,E,4,Fruit,,,,,,7,14,28,14,,15,16,,10,9,11,6,12,
+Pepper ,2,E,4,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,2,E,4,Animal damage? (0-3),,,,,,,,,,,,,,1,,,,,
+Pepper ,2,E,4,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,4,Height,,,38,47,55,64,70,75,84,,82,89,90,71,88,84,84,80,
+Pepper ,2,E,4,Width,,,28,28,24,40,45,53,61,,61,42,59,52,79,70,83,70,
+Pepper ,2,E,4,Marketable Fruit Count,,,,,,,,,,,4,6,,3,1,2,1,,7
+Pepper ,2,E,4,Marketable Fruit Mass,,,,,,,,,,,192,269,,32,31,109,22,,272
+Pepper ,2,E,4,Nonedible Fruit Count,,,,,,,,,,,,,,2,,,,,
+Pepper ,2,E,4,Nonedible Fruit Mass,,,,,,,,,,,,,,72,,,,,
+Pepper ,2,E,4,Total Fruit Count,,,,,,,,,,,4,6,,5,1,2,1,,7
+Pepper ,2,E,4,Total Fruit Mass,,,,,,,,,,,192,269,,104,31,109,22,,272
+Pepper ,2,E,5,Buds,,,1,4,28,46,95,27,4,,9,15,,7,51,52,53,37,
+Pepper ,2,E,5,Flowers,,,,,15,3,6,9,18,,8,2,,5,2,6,6,18,
+Pepper ,2,E,5,Fruit,,,,,,6,10,23,14,,11,10,,7,10,13,7,13,
+Pepper ,2,E,5,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,2,E,5,Animal damage? (0-3),,,,2,1,,,,,,,,,,,,,,
+Pepper ,2,E,5,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,5,Height,,,35,43,55,63,68,71,72,,72,74,86,71,94,99,92,99,
+Pepper ,2,E,5,Width,,,24,26,36,32,48,45,50,,57,52,69,66,93,56,94,93,
+Pepper ,2,E,5,Marketable Fruit Count,,,,,,,,,1,,4,4,,2,3,,1,,5
+Pepper ,2,E,5,Marketable Fruit Mass,,,,,,,,,13,,208,162,,110,98,,37,,198
+Pepper ,2,E,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,5,Total Fruit Count,,,,,,,,,1,,4,4,,2,3,,1,,5
+Pepper ,2,E,5,Total Fruit Mass,,,,,,,,,13,,208,162,,110,98,,37,,198
+Pepper ,2,E,6,Buds,,,0,6,17,24,57,22,5,,7,13,,10,35,30,23,53,
+Pepper ,2,E,6,Flowers,,,,,12,3,6,4,15,,9,3,,5,2,3,6,8,
+Pepper ,2,E,6,Fruit,,,,,2,4,11,21,10,,11,10,,7,7,10,7,14,
+Pepper ,2,E,6,Insect damage? (0-3),,,1,,1,1,,,,,,,,,,,,,
+Pepper ,2,E,6,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,6,Height,,,31,41,49,56,59,67,59,,62,71,69,63,74,78,78,70,
+Pepper ,2,E,6,Width,,,26,24,29,35,55,54,68,,70,42,73,73,81,66,75,79,
+Pepper ,2,E,6,Marketable Fruit Count,,,,,,,,1,,,3,2,,2,1,2,,,5
+Pepper ,2,E,6,Marketable Fruit Mass,,,,,,,,44,,,142,83,,116,64,94,,,204
+Pepper ,2,E,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,1,1,,
+Pepper ,2,E,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,28,32,,
+Pepper ,2,E,6,Total Fruit Count,,,,,,,,1,,,3,2,,2,1,3,1,,5
+Pepper ,2,E,6,Total Fruit Mass,,,,,,,,44,,,142,83,,116,64,122,32,,204
+Pepper ,2,E,7,Buds,,,2,9,35,32,89,65,13,,8,21,,22,77,56,42,102,
+Pepper ,2,E,7,Flowers,,,,2,17,1,7,6,15,,7,9,,5,8,13,3,14,
+Pepper ,2,E,7,Fruit,,,,,4,5,15,33,15,,13,16,,15,11,17,6,13,
+Pepper ,2,E,7,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,2,E,7,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,E,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,E,7,Height,,,34,42,52,52,57,66,65,,69,74,75,76,74,76,77,81,
+Pepper ,2,E,7,Width,,,28,26,34,47,47,64,60,,59,69,67,52,94,86,94,91,
+Pepper ,2,E,7,Marketable Fruit Count,,,,,,,,,2,,2,6,,1,1,8,3,,2
+Pepper ,2,E,7,Marketable Fruit Mass,,,,,,,,,91,,88,257,,39,43,370,150,,86
+Pepper ,2,E,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,1,,
+Pepper ,2,E,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,25,,
+Pepper ,2,E,7,Total Fruit Count,,,,,,,,,2,,2,6,,1,1,8,4,,2
+Pepper ,2,E,7,Total Fruit Mass,,,,,,,,,91,,88,257,,39,43,370,175,,86
+Pepper ,1,F,1,Buds,,,1,3,7,25,17,6,5,,7,4,,,,14,10,13,
+Pepper ,1,F,1,Flowers,,,,,3,,4,6,4,,1,0,,,,0,1,0,
+Pepper ,1,F,1,Fruit,,,,,5,2,8,9,7,,8,6,,4,0,0,1,2,
+Pepper ,1,F,1,Insect damage? (0-3),,,1,,2,1,,,,,,,,,,,,,
+Pepper ,1,F,1,Animal damage? (0-3),,,,,,,1,,,,,,,2,2,,,,
+Pepper ,1,F,1,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,F,1,Height,,,32,38,49,59,61,64,66,,68,70,62,55,52,60,63,64,
+Pepper ,1,F,1,Width,,,20,26,31,40,49,37,50,,49,36,53,39,40,38,49,43,
+Pepper ,1,F,1,Marketable Fruit Count,,,,,,,,4,,,3,,,6,1,,,,1
+Pepper ,1,F,1,Marketable Fruit Mass,,,,,,,,100,,,60,,,134,19,,,,8
+Pepper ,1,F,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,1,Total Fruit Count,,,,,,,,4,,,3,,,6,1,,,,1
+Pepper ,1,F,1,Total Fruit Mass,,,,,,,,100,,,60,,,134,19,,,,8
+Pepper ,1,F,2,Buds,,,,2,12,14,28,16,10,,6,2,,2,5,6,4,2,
+Pepper ,1,F,2,Flowers,,,,,12,8,4,11,11,,7,7,,,0,0,0,1,
+Pepper ,1,F,2,Fruit,,,,,,7,10,15,18,,16,12,,11,5,16,8,7,
+Pepper ,1,F,2,Insect damage? (0-3),,,1,,1,1,1,,,,,,,,,,,,
+Pepper ,1,F,2,Animal damage? (0-3),,,,,1,,,,,,,,,2,,,,,
+Pepper ,1,F,2,Water stress? (0-2),,,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,1,F,2,Height,,,27,33,49,52,62,68,71,,69,70,59,71,74,54,72,75,
+Pepper ,1,F,2,Width,,,25,28,36,40,54,60,51,,66,36,60,65,64,48,67,59,
+Pepper ,1,F,2,Marketable Fruit Count,,,,,,,,4,,,7,6,,9,2,6,,4,2
+Pepper ,1,F,2,Marketable Fruit Mass,,,,,,,,78,,,152,124,,184,28,91,,55,30
+Pepper ,1,F,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,2,Total Fruit Count,,,,,,,,4,,,7,6,,9,2,6,,4,2
+Pepper ,1,F,2,Total Fruit Mass,,,,,,,,78,,,152,124,,184,28,91,,55,30
+Pepper ,1,F,3,Buds,,,,3,7,20,37,27,16,,5,1,,,2,6,3,3,
+Pepper ,1,F,3,Flowers,,,,,9,3,2,15,6,,13,2,,3,0,0,0,2,
+Pepper ,1,F,3,Fruit,,,,,1,4,8,13,17,,17,18,,14,13,14,10,11,
+Pepper ,1,F,3,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,1,F,3,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,3,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,F,3,Height,,,29,35,41,50,62,69,65,,72,61,74,85,60,84,69,66,
+Pepper ,1,F,3,Width,,,23,27,40,40,58,57,54,,57,45,62,55,60,55,57,52,
+Pepper ,1,F,3,Marketable Fruit Count,,,,,,,,4,1,,6,13,,7,9,4,2,6,3
+Pepper ,1,F,3,Marketable Fruit Mass,,,,,,,,91,29,,117,207,,120,138,53,35,105,34
+Pepper ,1,F,3,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,3,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,3,Total Fruit Count,,,,,,,,4,1,,6,13,,7,9,4,2,6,3
+Pepper ,1,F,3,Total Fruit Mass,,,,,,,,91,29,,117,207,,120,138,53,35,105,34
+Pepper ,1,F,4,Buds,,,,,8,10,27,23,10,,6,1,,,3,1,1,3,
+Pepper ,1,F,4,Flowers,,,,,5,1,3,15,7,,5,6,,2,0,2,0,0,
+Pepper ,1,F,4,Fruit,,,,,,,5,12,11,,16,11,,18,19,14,8,7,
+Pepper ,1,F,4,Insect damage? (0-3),,,,,1,1,1,,,,,,,,,,,,
+Pepper ,1,F,4,Animal damage? (0-3),,,2,,1,,,,,,,,,,,,,,
+Pepper ,1,F,4,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,F,4,Height,,,23,26,32,38,51,60,66,,63,65,61,67,63,65,61,62,
+Pepper ,1,F,4,Width,,,11,17,33,38,51,50,67,,63,41,58,55,59,47,59,62,
+Pepper ,1,F,4,Marketable Fruit Count,,,,,,,,1,,,8,8,,6,8,13,1,2,4
+Pepper ,1,F,4,Marketable Fruit Mass,,,,,,,,16,,,204,156,,180,106,160,18,29,34
+Pepper ,1,F,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,4,Total Fruit Count,,,,,,,,1,,,8,8,,6,8,13,1,2,4
+Pepper ,1,F,4,Total Fruit Mass,,,,,,,,16,,,204,156,,180,106,160,18,29,34
+Pepper ,1,F,5,Buds,,,,1,16,17,52,26,16,,3,0,,4,4,16,8,4,
+Pepper ,1,F,5,Flowers,,,,,7,3,6,13,7,,7,4,,3,0,0,2,1,
+Pepper ,1,F,5,Fruit,,,,,,3,8,9,12,,12,13,,16,13,17,10,15,
+Pepper ,1,F,5,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,1,F,5,Animal damage? (0-3),,,,,1,,,,,,,,,,,,,,
+Pepper ,1,F,5,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,F,5,Height,,,25,25,41,51,59,71,68,,70,78,77,86,,89,84,82,
+Pepper ,1,F,5,Width,,,21,30,43,44,52,53,48,,56,42,56,66,,58,65,62,
+Pepper ,1,F,5,Marketable Fruit Count,,,,,,,,2,2,,7,10,,9,6,7,1,3,9
+Pepper ,1,F,5,Marketable Fruit Mass,,,,,,,,29,42,,143,177,,236,112,93,15,48,96
+Pepper ,1,F,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,5,Total Fruit Count,,,,,,,,2,2,,7,10,,9,6,7,1,3,9
+Pepper ,1,F,5,Total Fruit Mass,,,,,,,,29,42,,143,177,,236,112,93,15,48,96
+Pepper ,1,F,6,Buds,,,,,7,7,33,23,14,,2,2,,,0,6,2,1,
+Pepper ,1,F,6,Flowers,,,,,7,1,4,7,4,,6,5,,,0,0,0,0,
+Pepper ,1,F,6,Fruit,,,,,,,3,9,17,,13,7,,22,16,25,15,10,
+Pepper ,1,F,6,Insect damage? (0-3),,,,,1,1,,,,,,,,,,,,,
+Pepper ,1,F,6,Animal damage? (0-3),,,2,,1,,,,,,,,,,,,,,
+Pepper ,1,F,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,F,6,Height,,,17,17,27,37,49,56,59,,60,57,63,67,66,68,63,65,
+Pepper ,1,F,6,Width,,,11,19,28,34,43,55,51,,59,51,59,55,53,48,61,51,
+Pepper ,1,F,6,Marketable Fruit Count,,,,,,,,1,,,7,9,,1,2,14,4,9,2
+Pepper ,1,F,6,Marketable Fruit Mass,,,,,,,,20,,,195,196,,19,24,208,62,220,27
+Pepper ,1,F,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,1,F,6,Total Fruit Count,,,,,,,,1,,,7,9,,1,2,14,4,9,2
+Pepper ,1,F,6,Total Fruit Mass,,,,,,,,20,,,195,196,,19,24,208,62,220,27
+Pepper ,1,F,7,Buds,,,1,,7,14,31,30,19,,3,3,,,7,10,4,6,
+Pepper ,1,F,7,Flowers,,,,,4,,3,7,9,,12,12,,2,0,0,1,2,
+Pepper ,1,F,7,Fruit,,,,,,1,3,9,22,,18,14,,23,13,21,10,8,
+Pepper ,1,F,7,Insect damage? (0-3),,,1,,1,1,1,,,,,,,1,,,,,
+Pepper ,1,F,7,Animal damage? (0-3),,,,,2,3,1,,,,,,,1,,,,,
+Pepper ,1,F,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,1,F,7,Height,,,36,41,51,60,69,78,75,,78,83,79,86,74,81,80,82,
+Pepper ,1,F,7,Width,,,26,25,36,40,37,49,51,,50,49,56,60,57,56,60,55,
+Pepper ,1,F,7,Marketable Fruit Count,,,,,,,,1,2,,12,10,,13,4,11,1,5,2
+Pepper ,1,F,7,Marketable Fruit Mass,,,,,,,,23,46,,285,217,,420,95,228,17,96,22
+Pepper ,1,F,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,1
+Pepper ,1,F,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,11
+Pepper ,1,F,7,Total Fruit Count,,,,,,,,1,2,,12,10,,13,4,11,1,5,3
+Pepper ,1,F,7,Total Fruit Mass,,,,,,,,23,46,,285,217,,420,95,228,17,96,33
+Pepper ,2,F,1,Buds,,,1,4,9,21,29,23,8,,4,12,,1,0,14,19,52,
+Pepper ,2,F,1,Flowers,,,,,7,2,4,3,2,,3,4,,2,0,0,2,7,
+Pepper ,2,F,1,Fruit,,,,,,4,4,4,4,,4,4,,1,2,2,2,1,
+Pepper ,2,F,1,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,1,Animal damage? (0-3),,,,,,,,,,,,,,,2,,2,,
+Pepper ,2,F,1,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,F,1,Height,,,29,36,45,50,54,57,53,,54,57,54,61,58,58,54,55,
+Pepper ,2,F,1,Width,,,22,20,23,30,39,33,44,,60,44,50,60,48,45,52,54,
+Pepper ,2,F,1,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,1
+Pepper ,2,F,1,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,34
+Pepper ,2,F,1,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,1,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,1,Total Fruit Count,,,,,,,,,,,,,,,,,,,1
+Pepper ,2,F,1,Total Fruit Mass,,,,,,,,,,,,,,,,,,,34
+Pepper ,2,F,2,Buds,,,1,4,28,38,54,64,10,,5,12,,1,0,17,25,72,
+Pepper ,2,F,2,Flowers,,,,,10,1,8,11,17,,12,12,,1,0,0,2,2,
+Pepper ,2,F,2,Fruit,,,,,,2,3,4,9,,11,9,,9,5,2,2,3,
+Pepper ,2,F,2,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,2,F,2,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,2,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,F,2,Height,,,34,43,53,59,66,74,75,,75,77,80,83,83,84,84,79,
+Pepper ,2,F,2,Width,,,25,22,29,40,47,37,52,,52,43,48,60,53,40,82,77,
+Pepper ,2,F,2,Marketable Fruit Count,,,,,,,,,,,3,4,,5,3,,,,1
+Pepper ,2,F,2,Marketable Fruit Mass,,,,,,,,,,,122,175,,244,86,,,,33
+Pepper ,2,F,2,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,2,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,2,Total Fruit Count,,,,,,,,,,,3,4,,5,3,,,,1
+Pepper ,2,F,2,Total Fruit Mass,,,,,,,,,,,122,175,,244,86,,,,33
+Pepper ,2,F,3,Buds,,,0,5,23,47,69,54,13,,7,14,,15,8,20,17,28,
+Pepper ,2,F,3,Flowers,,,,,18,3,6,5,15,,6,8,,4,0,3,8,16,
+Pepper ,2,F,3,Fruit,,,,,,4,6,8,10,,9,9,,12,14,9,3,2,
+Pepper ,2,F,3,Insect damage? (0-3),,,1,,,1,,,,,,,,,,,,,
+Pepper ,2,F,3,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,3,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,F,3,Height,,,33,41,55,59,67,71,79,,80,82,77,79,74,78,83,87,
+Pepper ,2,F,3,Width,,,28,30,38,45,54,57,58,,58,52,73,54,68,58,77,73,
+Pepper ,2,F,3,Marketable Fruit Count,,,,,,,,,1,,5,3,,2,1,6,1,,
+Pepper ,2,F,3,Marketable Fruit Mass,,,,,,,,,62,,239,139,,93,44,268,59,,
+Pepper ,2,F,3,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,3,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,3,Total Fruit Count,,,,,,,,,1,,5,3,,2,1,6,1,,
+Pepper ,2,F,3,Total Fruit Mass,,,,,,,,,62,,239,139,,93,44,268,59,,
+Pepper ,2,F,4,Buds,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Flowers,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Fruit,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Insect damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Water stress? (0-2),,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Height,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Width,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Total Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,4,Total Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,5,Buds,,,0,2,23,25,62,49,17,,8,9,,5,0,9,24,62,
+Pepper ,2,F,5,Flowers,,,,,11,,5,6,5,,8,6,,1,0,0,0,0,
+Pepper ,2,F,5,Fruit,,,,,,,2,2,5,,7,9,,8,2,4,2,2,
+Pepper ,2,F,5,Insect damage? (0-3),,,,,,2,,,,,,,,,,,,,
+Pepper ,2,F,5,Animal damage? (0-3),,,2,,1,,,,,,,,,,,,,,
+Pepper ,2,F,5,Water stress? (0-2),,,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+Pepper ,2,F,5,Height,,,26,26,37,36,51,62,70,,74,74,79,74,83,84,81,76,
+Pepper ,2,F,5,Width,,,19,16,28,29,36,38,53,,56,44,54,56,52,48,61,73,
+Pepper ,2,F,5,Marketable Fruit Count,,,,,,,,,,,,4,,5,,2,1,,1
+Pepper ,2,F,5,Marketable Fruit Mass,,,,,,,,,,,,160,,274,,84,58,,23
+Pepper ,2,F,5,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,5,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,5,Total Fruit Count,,,,,,,,,,,,4,,5,,2,1,,1
+Pepper ,2,F,5,Total Fruit Mass,,,,,,,,,,,,160,,274,,84,58,,23
+Pepper ,2,F,6,Buds,,,0,3,23,20,86,93,17,,8,17,,15,9,35,60,91,
+Pepper ,2,F,6,Flowers,,,,,7,2,6,7,20,,12,15,,5,1,5,4,23,
+Pepper ,2,F,6,Fruit,,,,,,,5,9,15,,14,14,,14,6,8,8,10,
+Pepper ,2,F,6,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,2,F,6,Animal damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,2,F,6,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,F,6,Height,,,27,33,49,59,68,79,84,,85,85,94,66,97,92,96,93,
+Pepper ,2,F,6,Width,,,25,26,37,40,48,49,59,,70,45,73,55,58,60,97,84,
+Pepper ,2,F,6,Marketable Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,6,Marketable Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,6,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,6,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,6,Total Fruit Count,,,,,,,,,,,1,4,,6,1,4,3,,2
+Pepper ,2,F,6,Total Fruit Mass,,,,,,,,,,,57,205,,255,44,193,128,,55
+Pepper ,2,F,7,Buds,,,0,1,4,4,13,13,5,,3,0,,,0,0,0,4,
+Pepper ,2,F,7,Flowers,,,,,2,,,3,4,,3,1,,,0,0,0,0,
+Pepper ,2,F,7,Fruit,,,,,1,1,2,3,6,,5,7,,4,1,1,0,0,
+Pepper ,2,F,7,Insect damage? (0-3),,,1,,,,,,,,,,,,,,,,
+Pepper ,2,F,7,Animal damage? (0-3),,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,7,Water stress? (0-2),,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+Pepper ,2,F,7,Height,,,14,19,21,22,25,29,32,,32,33,30,95,31,32,29,28,
+Pepper ,2,F,7,Width,,,15,17,16,22,28,30,33,,38,34,36,89,36,32,44,50,
+Pepper ,2,F,7,Marketable Fruit Count,,,,,,,,,1,,,3,,3,,1,,,
+Pepper ,2,F,7,Marketable Fruit Mass,,,,,,,,,39,,,80,,100,,26,,,
+Pepper ,2,F,7,Nonedible Fruit Count,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,7,Nonedible Fruit Mass,,,,,,,,,,,,,,,,,,,
+Pepper ,2,F,7,Total Fruit Count,,,,,,,,,1,,,3,,3,,1,,,
+Pepper ,2,F,7,Total Fruit Mass,,,,,,,,,39,,,80,,100,,26,,,

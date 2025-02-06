@@ -1,10 +1,11 @@
-library(readr)
-tomatopepper_calendar <- read_csv("C:/Users/cchoi2/OneDrive - NREL/NREL_projects/BARN_veg/2022/tomatopepper_calendar.csv")
-tomatopepper_jd <- read_csv("C:/Users/cchoi2/OneDrive - NREL/NREL_projects/BARN_veg/2022/tomatopepper_jd.csv")
-
 library(tidyverse)
-# Set the directory to the current script location
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+tomatopepper_calendar <- read_csv("2022-2024/2022/tomatopepper_calendar.csv")
+tomatopepper_jd <- read_csv("2022-2024/2022/tomatopepper_jd.csv")
+
+
+# Set the directory to the current script location
+
 
 # 2022 --------------------------------------------------------------------
 
@@ -18,19 +19,22 @@ long_df <- tomatopepper_calendar %>%
   mutate(
     Date = as.Date(Date, format = "%m/%d/%Y"),
     `Observation Type` = case_when(
-      `Observation Type` == "Insect Damage? (0-3)" ~ "Insect damage?",
-      `Observation Type` == "Animal Damage? (0-3)" ~ "Animal damage?",
-      `Observation Type` == "Water Stress? (0-2)" ~ "Water stress?",
-      `Observation Type` == "Insect damage? (0-3)" ~ "Insect damage?",
-      `Observation Type` == "Animal damage? (0-3)" ~ "Animal damage?",
-      `Observation Type` == "Water stress? (0-2)" ~ "Water stress?",
+      `Observation Type` == "Insect Damage? (0-3)" ~ "Insect damage",
+      `Observation Type` == "Animal Damage? (0-3)" ~ "Animal damage",
+      `Observation Type` == "Water Stress? (0-2)" ~ "Water stress",
+      `Observation Type` == "Insect damage? (0-3)" ~ "Insect damage",
+      `Observation Type` == "Animal damage? (0-3)" ~ "Animal damage",
+      `Observation Type` == "Water stress? (0-2)" ~ "Water stress",
       TRUE ~ `Observation Type`
     )
   ) %>%
   distinct() %>%
   mutate(
     Age = as.numeric(Date - as.Date("2022-06-10"))
-  )
+  ) %>%
+  select(Crop, Variety, Bed, `Plant #`, Date, Age, `Observation Type`, Value)
+
+write_csv(long_df, "formatted/tplong_2022.csv")
 
 # Pivot wider to spread "Observation Type" to multiple columns
 wide_df <- long_df %>%
@@ -56,7 +60,7 @@ tp_wide_df <- wide_df
 
 write_csv(tp_wide_df, "tomatopepper_2022.csv")
 
-leafy_calendar <- read_csv("C:/Users/cchoi2/OneDrive - NREL/NREL_projects/BARN_veg/2022/tomatopepper_calendar.csv")
+leafy_calendar <- read_csv("2022-2024/2022/leafy_calendar.csv")
 
 # Pivot longer to gather all date columns under "Date"
 long_leafy <- leafy_calendar %>%
@@ -68,17 +72,19 @@ long_leafy <- leafy_calendar %>%
   mutate(
     Date = as.Date(Date, format = "%m/%d/%Y"),
     `Observation Type` = case_when(
-      `Observation Type` == "Insect Damage? (0-3)" ~ "Insect damage?",
-      `Observation Type` == "Animal Damage? (0-3)" ~ "Animal damage?",
-      `Observation Type` == "Water Stress? (0-2)" ~ "Water stress?",
+      `Observation Type` == "Insect Damage? (0-3)" ~ "Insect damage",
+      `Observation Type` == "Animal Damage? (0-3)" ~ "Animal damage",
+      `Observation Type` == "Water Stress? (0-2)" ~ "Water stress",
       TRUE ~ `Observation Type`
     )
   ) %>%
   distinct() %>%
   mutate(
     Age = as.numeric(Date - as.Date("2022-06-10"))
-  )
+  ) %>%
+  select(Crop, Variety, Bed, `Plant #`, Date, Age, `Observation Type`, Value)
 
+write_csv(long_df, "formatted/leafylong_2022.csv")
 # Pivot wider to spread "Observation Type" to multiple columns
 wide_leafy <- long_leafy %>%
   pivot_wider(
@@ -101,3 +107,8 @@ duplicates <- long_leafy %>%
 leafy_wide_df <- wide_leafy
 
 write_csv(leafy_wide_df, "leafy_2022.csv")
+
+
+# 2023 --------------------------------------------------------------------
+all2023 <- read.csv("2022-2024/2023 BARN Raw Data.csv")
+
