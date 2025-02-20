@@ -1,0 +1,1861 @@
+Crop,Variety,Bed,Plant #,Observation Type,6/10/2022,6/28/2022,7/5/2022,7/14/2022,7/22/2022,7/29/2022,8/5/2022,8/12/2022,8/19/2022,8/22/2022,8/26/2022,9/2/2022,9/9/2022,9/16/2022,9/23/2022,9/30/2022,10/18/2022,10/21/2022
+Kale,1,B ,1,Leaf harvest count,,,,,57,,,35,,,24,,,,14,,,
+Kale,1,B ,1,Leaf harvest mass,,,,,472,,,744,,,248,,,,414,,,
+Kale,1,B ,1,Leaf 1 height,,,,,26,,,34,,,37,,,,,,,
+Kale,1,B ,1,Leaf 2 height,,,,,25,,,29,,,25,,,,,,,
+Kale,1,B ,1,Leaf 3 height,,,,,26,,,33,,,37,,,,,,,
+Kale,1,B ,1,Leaf 4 height,,,,,21,,,32,,,,,,,,,,
+Kale,1,B ,1,Leaf 5 height,,,,,21,,,29,,,,,,,,,,
+Kale,1,B ,1,Leaf 1 width,,,,,18,,,30,,,28,,,,,,,
+Kale,1,B ,1,Leaf 2 width,,,,,15,,,25,,,19,,,,,,,
+Kale,1,B ,1,Leaf 3 width,,,,,17,,,32,,,25,,,,,,,
+Kale,1,B ,1,Leaf 4 width,,,,,19,,,27,,,,,,,,,,
+Kale,1,B ,1,Leaf 5 width,,,,,15,,,29,,,,,,,,,,
+Kale,1,B ,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,B ,1,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Kale,1,B ,1,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,B ,2,Leaf harvest count,,,,,79,,,55,,,35,,,,,,,
+Kale,1,B ,2,Leaf harvest mass,,,,,824,,,983,,,456,,,,,,,
+Kale,1,B ,2,Leaf 1 height,,,,,24,,,38,,,32,,,,,,,
+Kale,1,B ,2,Leaf 2 height,,,,,28,,,32,,,36,,,,,,,
+Kale,1,B ,2,Leaf 3 height,,,,,21,,,37,,,31,,,,,,,
+Kale,1,B ,2,Leaf 4 height,,,,,27,,,43,,,33,,,,,,,
+Kale,1,B ,2,Leaf 5 height,,,,,31,,,32,,,26,,,,,,,
+Kale,1,B ,2,Leaf 1 width,,,,,22,,,33,,,30,,,,,,,
+Kale,1,B ,2,Leaf 2 width,,,,,20,,,32,,,31,,,,,,,
+Kale,1,B ,2,Leaf 3 width,,,,,20,,,33,,,25,,,,,,,
+Kale,1,B ,2,Leaf 4 width,,,,,20,,,31,,,26,,,,,,,
+Kale,1,B ,2,Leaf 5 width,,,,,24,,,29,,,23,,,,,,,
+Kale,1,B ,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,B ,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,B ,2,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,B ,3,Leaf harvest count,,,,,81,,,57,,,20,,,,6,,,
+Kale,1,B ,3,Leaf harvest mass,,,,,808,,,1080,,,612,,,,128,,,
+Kale,1,B ,3,Leaf 1 height,,,,,25,,,33,,,32,,,,,,,
+Kale,1,B ,3,Leaf 2 height,,,,,26,,,33,,,33,,,,,,,
+Kale,1,B ,3,Leaf 3 height,,,,,31,,,30,,,36,,,,,,,
+Kale,1,B ,3,Leaf 4 height,,,,,28,,,31,,,37,,,,,,,
+Kale,1,B ,3,Leaf 5 height,,,,,19,,,38,,,38,,,,,,,
+Kale,1,B ,3,Leaf 1 width,,,,,22,,,29,,,24,,,,,,,
+Kale,1,B ,3,Leaf 2 width,,,,,25,,,32,,,30,,,,,,,
+Kale,1,B ,3,Leaf 3 width,,,,,25,,,28,,,33,,,,,,,
+Kale,1,B ,3,Leaf 4 width,,,,,22,,,28,,,34,,,,,,,
+Kale,1,B ,3,Leaf 5 width,,,,,17,,,32,,,31,,,,,,,
+Kale,1,B ,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,B ,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,B ,3,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf harvest count,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf harvest mass,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,B ,4,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,B ,5,Leaf harvest count,,,,,78,,,32,,,8,,,,9,,,
+Kale,1,B ,5,Leaf harvest mass,,,,,612,,,661,,,304,,,,338,,,
+Kale,1,B ,5,Leaf 1 height,,,,,20,,,39,,,24,,,,,,,
+Kale,1,B ,5,Leaf 2 height,,,,,24,,,35,,,29,,,,,,,
+Kale,1,B ,5,Leaf 3 height,,,,,29,,,33,,,30,,,,,,,
+Kale,1,B ,5,Leaf 4 height,,,,,30,,,36,,,33,,,,,,,
+Kale,1,B ,5,Leaf 5 height,,,,,24,,,33,,,37,,,,,,,
+Kale,1,B ,5,Leaf 1 width,,,,,17,,,28,,,19,,,,,,,
+Kale,1,B ,5,Leaf 2 width,,,,,21,,,29,,,24,,,,,,,
+Kale,1,B ,5,Leaf 3 width,,,,,22,,,28,,,23,,,,,,,
+Kale,1,B ,5,Leaf 4 width,,,,,25,,,34,,,29,,,,,,,
+Kale,1,B ,5,Leaf 5 width,,,,,19,,,32,,,31,,,,,,,
+Kale,1,B ,5,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Kale,1,B ,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,B ,5,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,B ,6,Leaf harvest count,,,,,23,,,17,,,9,,,,15,,,
+Kale,1,B ,6,Leaf harvest mass,,,,,505,,,824,,,358,,,,510,,,
+Kale,1,B ,6,Leaf 1 height,,,,,30,,,38,,,28,,,,,,,
+Kale,1,B ,6,Leaf 2 height,,,,,32,,,32,,,29,,,,,,,
+Kale,1,B ,6,Leaf 3 height,,,,,23,,,34,,,34,,,,,,,
+Kale,1,B ,6,Leaf 4 height,,,,,26,,,35,,,33,,,,,,,
+Kale,1,B ,6,Leaf 5 height,,,,,27,,,34,,,33,,,,,,,
+Kale,1,B ,6,Leaf 1 width,,,,,24,,,29,,,21,,,,,,,
+Kale,1,B ,6,Leaf 2 width,,,,,26,,,32,,,24,,,,,,,
+Kale,1,B ,6,Leaf 3 width,,,,,19,,,28,,,23,,,,,,,
+Kale,1,B ,6,Leaf 4 width,,,,,25,,,31,,,24,,,,,,,
+Kale,1,B ,6,Leaf 5 width,,,,,23,,,32,,,25,,,,,,,
+Kale,1,B ,6,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,B ,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,B ,6,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,1,Leaf harvest count,,,,,18,,,13,,,10,,,,9,,,
+Kale,1,G,1,Leaf harvest mass,,,,,298,,,742,,,651,,,,565,,,
+Kale,1,G,1,Leaf 1 height,,,,,28,,,33,,,34,,,,36,,,
+Kale,1,G,1,Leaf 2 height,,,,,25,,,35,,,40,,,,45,,,
+Kale,1,G,1,Leaf 3 height,,,,,28,,,35,,,36,,,,43,,,
+Kale,1,G,1,Leaf 4 height,,,,,29,,,30,,,38,,,,37,,,
+Kale,1,G,1,Leaf 5 height,,,,,28,,,32,,,33,,,,39,,,
+Kale,1,G,1,Leaf 1 width,,,,,20,,,30,,,28,,,,18,,,
+Kale,1,G,1,Leaf 2 width,,,,,19,,,30,,,32,,,,21,,,
+Kale,1,G,1,Leaf 3 width,,,,,20,,,28,,,28,,,,20,,,
+Kale,1,G,1,Leaf 4 width,,,,,23,,,27,,,30,,,,20,,,
+Kale,1,G,1,Leaf 5 width,,,,,21,,,28,,,29,,,,16,,,
+Kale,1,G,1,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,1,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,2,Leaf harvest count,,,,,14,,,14,,,7,,,,11,,6,
+Kale,1,G,2,Leaf harvest mass,,,,,366,,,991,,,608,,,,769,,287,
+Kale,1,G,2,Leaf 1 height,,,,,31,,,34,,,37,,,,31,,17,
+Kale,1,G,2,Leaf 2 height,,,,,29,,,36,,,31,,,,36,,24,
+Kale,1,G,2,Leaf 3 height,,,,,27,,,35,,,36,,,,37,,22,
+Kale,1,G,2,Leaf 4 height,,,,,30,,,35,,,39,,,,38,,21,
+Kale,1,G,2,Leaf 5 height,,,,,30,,,34,,,32,,,,33,,27,
+Kale,1,G,2,Leaf 1 width,,,,,26,,,29,,,28,,,,18,,25,
+Kale,1,G,2,Leaf 2 width,,,,,26,,,34,,,26,,,,26,,31,
+Kale,1,G,2,Leaf 3 width,,,,,24,,,30,,,32,,,,28,,28,
+Kale,1,G,2,Leaf 4 width,,,,,27,,,30,,,35,,,,27,,26,
+Kale,1,G,2,Leaf 5 width,,,,,27,,,29,,,28,,,,23,,31,
+Kale,1,G,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,2,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,3,Leaf harvest count,,,,,38,,,14,,,12,,,,12,,7,
+Kale,1,G,3,Leaf harvest mass,,,,,229,,,649,,,572,,,,805,,365,
+Kale,1,G,3,Leaf 1 height,,,,,26,,,37,,,35,,,,37,,22,
+Kale,1,G,3,Leaf 2 height,,,,,21,,,36,,,33,,,,31,,28,
+Kale,1,G,3,Leaf 3 height,,,,,20,,,36,,,37,,,,29,,25,
+Kale,1,G,3,Leaf 4 height,,,,,21,,,36,,,34,,,,40,,25,
+Kale,1,G,3,Leaf 5 height,,,,,29,,,36,,,40,,,,29,,27,
+Kale,1,G,3,Leaf 1 width,,,,,18,,,26,,,33,,,,29,,32,
+Kale,1,G,3,Leaf 2 width,,,,,19,,,31,,,34,,,,24,,30,
+Kale,1,G,3,Leaf 3 width,,,,,13,,,29,,,30,,,,24,,28,
+Kale,1,G,3,Leaf 4 width,,,,,17,,,30,,,32,,,,27,,30,
+Kale,1,G,3,Leaf 5 width,,,,,20,,,30,,,31,,,,25,,34,
+Kale,1,G,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,3,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,4,Leaf harvest count,,,,,21,,,13,,,10,,,,17,,7,
+Kale,1,G,4,Leaf harvest mass,,,,,293,,,763,,,647,,,,1045,,385,
+Kale,1,G,4,Leaf 1 height,,,,,22,,,36,,,32,,,,31,,25,
+Kale,1,G,4,Leaf 2 height,,,,,28,,,39,,,34,,,,37,,25,
+Kale,1,G,4,Leaf 3 height,,,,,27,,,33,,,32,,,,46,,22,
+Kale,1,G,4,Leaf 4 height,,,,,27,,,31,,,36,,,,35,,25,
+Kale,1,G,4,Leaf 5 height,,,,,27,,,32,,,34,,,,44,,29,
+Kale,1,G,4,Leaf 1 width,,,,,18,,,29,,,29,,,,25,,30,
+Kale,1,G,4,Leaf 2 width,,,,,23,,,26,,,33,,,,25,,31,
+Kale,1,G,4,Leaf 3 width,,,,,20,,,27,,,31,,,,19,,32,
+Kale,1,G,4,Leaf 4 width,,,,,18,,,28,,,30,,,,32,,37,
+Kale,1,G,4,Leaf 5 width,,,,,20,,,26,,,32,,,,27,,36,
+Kale,1,G,4,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,4,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,5,Leaf harvest count,,,,,21,,,12,,,8,,,,14,,8,
+Kale,1,G,5,Leaf harvest mass,,,,,381,,,841,,,586,,,,890,,392,
+Kale,1,G,5,Leaf 1 height,,,,,25,,,30,,,33,,,,36,,22,
+Kale,1,G,5,Leaf 2 height,,,,,30,,,40,,,36,,,,35,,23,
+Kale,1,G,5,Leaf 3 height,,,,,31,,,40,,,36,,,,32,,27,
+Kale,1,G,5,Leaf 4 height,,,,,28,,,32,,,35,,,,30,,23,
+Kale,1,G,5,Leaf 5 height,,,,,31,,,35,,,34,,,,34,,28,
+Kale,1,G,5,Leaf 1 width,,,,,19,,,28,,,30,,,,28,,28,
+Kale,1,G,5,Leaf 2 width,,,,,22,,,32,,,35,,,,27,,33,
+Kale,1,G,5,Leaf 3 width,,,,,26,,,36,,,30,,,,21,,34,
+Kale,1,G,5,Leaf 4 width,,,,,22,,,29,,,30,,,,28,,31,
+Kale,1,G,5,Leaf 5 width,,,,,25,,,29,,,35,,,,25,,32,
+Kale,1,G,5,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,5,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,6,Leaf harvest count,,,,,25,,,12,,,11,,,,13,,6,
+Kale,1,G,6,Leaf harvest mass,,,,,409,,,816,,,414,,,,509,,243,
+Kale,1,G,6,Leaf 1 height,,,,,28,,,33,,,28,,,,30,,18,
+Kale,1,G,6,Leaf 2 height,,,,,25,,,30,,,29,,,,27,,23,
+Kale,1,G,6,Leaf 3 height,,,,,33,,,40,,,31,,,,30,,22,
+Kale,1,G,6,Leaf 4 height,,,,,28,,,32,,,31,,,,29,,22,
+Kale,1,G,6,Leaf 5 height,,,,,29,,,38,,,34,,,,22,,23,
+Kale,1,G,6,Leaf 1 width,,,,,23,,,32,,,24,,,,25,,25,
+Kale,1,G,6,Leaf 2 width,,,,,21,,,26,,,26,,,,22,,28,
+Kale,1,G,6,Leaf 3 width,,,,,25,,,32,,,31,,,,18,,28,
+Kale,1,G,6,Leaf 4 width,,,,,20,,,29,,,28,,,,22,,27,
+Kale,1,G,6,Leaf 5 width,,,,,25,,,36,,,30,,,,23,,28,
+Kale,1,G,6,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,6,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,7,Leaf harvest count,,,,,16,,,13,,,8,,,,13,,8,
+Kale,1,G,7,Leaf harvest mass,,,,,319,,,903,,,589,,,,748,,394,
+Kale,1,G,7,Leaf 1 height,,,,,28,,,34,,,31,,,,30,,18,
+Kale,1,G,7,Leaf 2 height,,,,,27,,,35,,,34,,,,30,,21,
+Kale,1,G,7,Leaf 3 height,,,,,26,,,36,,,39,,,,34,,22,
+Kale,1,G,7,Leaf 4 height,,,,,31,,,40,,,34,,,,40,,24,
+Kale,1,G,7,Leaf 5 height,,,,,27,,,39,,,38,,,,35,,19,
+Kale,1,G,7,Leaf 1 width,,,,,20,,,28,,,27,,,,17,,25,
+Kale,1,G,7,Leaf 2 width,,,,,20,,,29,,,30,,,,18,,39,
+Kale,1,G,7,Leaf 3 width,,,,,23,,,30,,,33,,,,20,,34,
+Kale,1,G,7,Leaf 4 width,,,,,22,,,29,,,27,,,,28,,34,
+Kale,1,G,7,Leaf 5 width,,,,,24,,,29,,,31,,,,25,,34,
+Kale,1,G,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,7,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,7,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,G,8,Leaf harvest count,,,,,15,,,15,,,12,,,,19,,9,
+Kale,1,G,8,Leaf harvest mass,,,,,436,,,1074,,,555,,,,994,,533,
+Kale,1,G,8,Leaf 1 height,,,,,29,,,37,,,30,,,,37,,21,
+Kale,1,G,8,Leaf 2 height,,,,,30,,,33,,,32,,,,36,,26,
+Kale,1,G,8,Leaf 3 height,,,,,27,,,34,,,37,,,,38,,29,
+Kale,1,G,8,Leaf 4 height,,,,,30,,,32,,,37,,,,34,,29,
+Kale,1,G,8,Leaf 5 height,,,,,26,,,37,,,38,,,,31,,27,
+Kale,1,G,8,Leaf 1 width,,,,,26,,,37,,,26,,,,29,,24,
+Kale,1,G,8,Leaf 2 width,,,,,23,,,29,,,27,,,,26,,32,
+Kale,1,G,8,Leaf 3 width,,,,,24,,,31,,,30,,,,23,,39,
+Kale,1,G,8,Leaf 4 width,,,,,26,,,30,,,33,,,,23,,35,
+Kale,1,G,8,Leaf 5 width,,,,,23,,,32,,,31,,,,22,,36,
+Kale,1,G,8,Insect damage? ,,,,,,,,,,,,,,,,,,
+Kale,1,G,8,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,G,8,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,1,Leaf harvest count,,,,,25,,,28,,,10,,,,,,,
+Kale,1,H,1,Leaf harvest mass,,,,,380,,,1224,,,351,,,,,,,
+Kale,1,H,1,Leaf 1 height,,,,,31,,,36,,,43,,,,,,,
+Kale,1,H,1,Leaf 2 height,,,,,29,,,36,,,31,,,,,,,
+Kale,1,H,1,Leaf 3 height,,,,,30,,,38,,,35,,,,,,,
+Kale,1,H,1,Leaf 4 height,,,,,29,,,32,,,21,,,,,,,
+Kale,1,H,1,Leaf 5 height,,,,,32,,,35,,,31,,,,,,,
+Kale,1,H,1,Leaf 1 width,,,,,18,,,24,,,28,,,,,,,
+Kale,1,H,1,Leaf 2 width,,,,,21,,,34,,,25,,,,,,,
+Kale,1,H,1,Leaf 3 width,,,,,24,,,28,,,25,,,,,,,
+Kale,1,H,1,Leaf 4 width,,,,,24,,,25,,,14,,,,,,,
+Kale,1,H,1,Leaf 5 width,,,,,24,,,29,,,23,,,,,,,
+Kale,1,H,1,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,H,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,1,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,2,Leaf harvest count,,,,,33,,,16,,,13,,,,,,,
+Kale,1,H,2,Leaf harvest mass,,,,,540,,,763,,,474,,,,,,,
+Kale,1,H,2,Leaf 1 height,,,,,30,,,30,,,29,,,,,,,
+Kale,1,H,2,Leaf 2 height,,,,,27,,,30,,,30,,,,,,,
+Kale,1,H,2,Leaf 3 height,,,,,23,,,32,,,31,,,,,,,
+Kale,1,H,2,Leaf 4 height,,,,,27,,,32,,,37,,,,,,,
+Kale,1,H,2,Leaf 5 height,,,,,27,,,32,,,33,,,,,,,
+Kale,1,H,2,Leaf 1 width,,,,,21,,,23,,,23,,,,,,,
+Kale,1,H,2,Leaf 2 width,,,,,19,,,23,,,23,,,,,,,
+Kale,1,H,2,Leaf 3 width,,,,,20,,,27,,,25,,,,,,,
+Kale,1,H,2,Leaf 4 width,,,,,20,,,27,,,32,,,,,,,
+Kale,1,H,2,Leaf 5 width,,,,,24,,,26,,,28,,,,,,,
+Kale,1,H,2,Insect damage? ,,,,,19,,,,,,,,,,3,,,
+Kale,1,H,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,2,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,3,Leaf harvest count,,,,,38,,,16,,,12,,,,,,,
+Kale,1,H,3,Leaf harvest mass,,,,,545,,,1014,,,400,,,,,,,
+Kale,1,H,3,Leaf 1 height,,,,,18,,,30,,,28,,,,,,,
+Kale,1,H,3,Leaf 2 height,,,,,26,,,37,,,33,,,,,,,
+Kale,1,H,3,Leaf 3 height,,,,,21,,,32,,,32,,,,,,,
+Kale,1,H,3,Leaf 4 height,,,,,26,,,32,,,38,,,,,,,
+Kale,1,H,3,Leaf 5 height,,,,,26,,,36,,,33,,,,,,,
+Kale,1,H,3,Leaf 1 width,,,,,15,,,26,,,23,,,,,,,
+Kale,1,H,3,Leaf 2 width,,,,,21,,,28,,,26,,,,,,,
+Kale,1,H,3,Leaf 3 width,,,,,19,,,26,,,25,,,,,,,
+Kale,1,H,3,Leaf 4 width,,,,,22,,,28,,,32,,,,,,,
+Kale,1,H,3,Leaf 5 width,,,,,22,,,32,,,30,,,,,,,
+Kale,1,H,3,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,H,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,3,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,4,Leaf harvest count,,,,,5,,,10,,,4,,,,,,,
+Kale,1,H,4,Leaf harvest mass,,,,,21,,,243,,,115,,,,,,,
+Kale,1,H,4,Leaf 1 height,,,,,16,,,23,,,25,,,,,,,
+Kale,1,H,4,Leaf 2 height,,,,,14,,,21,,,27,,,,,,,
+Kale,1,H,4,Leaf 3 height,,,,,12,,,23,,,23,,,,,,,
+Kale,1,H,4,Leaf 4 height,,,,,,,,24,,,29,,,,,,,
+Kale,1,H,4,Leaf 5 height,,,,,,,,26,,,22,,,,,,,
+Kale,1,H,4,Leaf 1 width,,,,,12,,,20,,,24,,,,,,,
+Kale,1,H,4,Leaf 2 width,,,,,9,,,20,,,19,,,,,,,
+Kale,1,H,4,Leaf 3 width,,,,,7,,,18,,,23,,,,,,,
+Kale,1,H,4,Leaf 4 width,,,,,,,,18,,,,,,,,,,
+Kale,1,H,4,Leaf 5 width,,,,,,,,21,,,,,,,,,,
+Kale,1,H,4,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,H,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,4,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,5,Leaf harvest count,,,,,75,,,30,,,9,,,,,,,
+Kale,1,H,5,Leaf harvest mass,,,,,505,,,800,,,300,,,,,,,
+Kale,1,H,5,Leaf 1 height,,,,,16,,,32,,,30,,,,,,,
+Kale,1,H,5,Leaf 2 height,,,,,22,,,31,,,31,,,,,,,
+Kale,1,H,5,Leaf 3 height,,,,,23,,,32,,,30,,,,,,,
+Kale,1,H,5,Leaf 4 height,,,,,18,,,33,,,30,,,,,,,
+Kale,1,H,5,Leaf 5 height,,,,,20,,,30,,,,,,,,,,
+Kale,1,H,5,Leaf 1 width,,,,,14,,,24,,,27,,,,,,,
+Kale,1,H,5,Leaf 2 width,,,,,15,,,23,,,28,,,,,,,
+Kale,1,H,5,Leaf 3 width,,,,,17,,,26,,,25,,,,,,,
+Kale,1,H,5,Leaf 4 width,,,,,15,,,24,,,24,,,,,,,
+Kale,1,H,5,Leaf 5 width,,,,,13,,,26,,,,,,,,,,
+Kale,1,H,5,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,H,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,5,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,6,Leaf harvest count,,,,,49,,,38,,,23,,,,,,,
+Kale,1,H,6,Leaf harvest mass,,,,,591,,,1038,,,351,,,,,,,
+Kale,1,H,6,Leaf 1 height,,,,,22,,,37,,,30,,,,,,,
+Kale,1,H,6,Leaf 2 height,,,,,26,,,34,,,30,,,,,,,
+Kale,1,H,6,Leaf 3 height,,,,,25,,,33,,,33,,,,,,,
+Kale,1,H,6,Leaf 4 height,,,,,26,,,28,,,26,,,,,,,
+Kale,1,H,6,Leaf 5 height,,,,,26,,,30,,,24,,,,,,,
+Kale,1,H,6,Leaf 1 width,,,,,19,,,26,,,24,,,,,,,
+Kale,1,H,6,Leaf 2 width,,,,,22,,,27,,,32,,,,,,,
+Kale,1,H,6,Leaf 3 width,,,,,18,,,25,,,28,,,,,,,
+Kale,1,H,6,Leaf 4 width,,,,,18,,,30,,,23,,,,,,,
+Kale,1,H,6,Leaf 5 width,,,,,17,,,30,,,19,,,,,,,
+Kale,1,H,6,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,H,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,6,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,7,Leaf harvest count,,,,,40,,,24,,,12,,,,,,,
+Kale,1,H,7,Leaf harvest mass,,,,,648,,,1255,,,380,,,,,,,
+Kale,1,H,7,Leaf 1 height,,,,,28,,,37,,,33,,,,,,,
+Kale,1,H,7,Leaf 2 height,,,,,27,,,34,,,31,,,,,,,
+Kale,1,H,7,Leaf 3 height,,,,,28,,,38,,,34,,,,,,,
+Kale,1,H,7,Leaf 4 height,,,,,26,,,38,,,36,,,,,,,
+Kale,1,H,7,Leaf 5 height,,,,,33,,,33,,,,,,,,,,
+Kale,1,H,7,Leaf 1 width,,,,,21,,,32,,,28,,,,,,,
+Kale,1,H,7,Leaf 2 width,,,,,21,,,32,,,29,,,,,,,
+Kale,1,H,7,Leaf 3 width,,,,,26,,,33,,,25,,,,,,,
+Kale,1,H,7,Leaf 4 width,,,,,21,,,33,,,33,,,,,,,
+Kale,1,H,7,Leaf 5 width,,,,,26,,,30,,,,,,,,,,
+Kale,1,H,7,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,H,7,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,7,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,H,8,Leaf harvest count,,,,,,,,,,,10,,,,,,,
+Kale,1,H,8,Leaf harvest mass,,,,,,,,,,,145,,,,,,,
+Kale,1,H,8,Leaf 1 height,,,,,,,,,,,21,,,,,,,
+Kale,1,H,8,Leaf 2 height,,,,,,,,,,,20,,,,,,,
+Kale,1,H,8,Leaf 3 height,,,,,,,,,,,21,,,,,,,
+Kale,1,H,8,Leaf 4 height,,,,,,,,,,,20,,,,,,,
+Kale,1,H,8,Leaf 5 height,,,,,,,,,,,23,,,,,,,
+Kale,1,H,8,Leaf 1 width,,,,,,,,,,,19,,,,,,,
+Kale,1,H,8,Leaf 2 width,,,,,,,,,,,17,,,,,,,
+Kale,1,H,8,Leaf 3 width,,,,,,,,,,,17,,,,,,,
+Kale,1,H,8,Leaf 4 width,,,,,,,,,,,18,,,,,,,
+Kale,1,H,8,Leaf 5 width,,,,,,,,,,,20,,,,,,,
+Kale,1,H,8,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,H,8,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,H,8,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,1,Leaf harvest count,,,,,19,,,14,,,,,,,,,,
+Kale,1,I,1,Leaf harvest mass,,,,,282,,,640,,,,,,,,,,
+Kale,1,I,1,Leaf 1 height,,,,,27,,,31,,,,,,,,,,
+Kale,1,I,1,Leaf 2 height,,,,,26,,,27,,,,,,,,,,
+Kale,1,I,1,Leaf 3 height,,,,,29,,,33,,,,,,,,,,
+Kale,1,I,1,Leaf 4 height,,,,,27,,,31,,,,,,,,,,
+Kale,1,I,1,Leaf 5 height,,,,,24,,,25,,,,,,,,,,
+Kale,1,I,1,Leaf 1 width,,,,,22,,,30,,,,,,,,,,
+Kale,1,I,1,Leaf 2 width,,,,,21,,,22,,,,,,,,,,
+Kale,1,I,1,Leaf 3 width,,,,,22,,,27,,,,,,,,,,
+Kale,1,I,1,Leaf 4 width,,,,,21,,,28,,,,,,,,,,
+Kale,1,I,1,Leaf 5 width,,,,,19,,,23,,,,,,,,,,
+Kale,1,I,1,Insect damage? ,,,,,,,,,,,3,,,,,,,
+Kale,1,I,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,I,1,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,2,Leaf harvest count,,,,,43,,,12,,,,,,,,,,
+Kale,1,I,2,Leaf harvest mass,,,,,504,,,878,,,,,,,,,,
+Kale,1,I,2,Leaf 1 height,,,,,25,,,37,,,,,,,,,,
+Kale,1,I,2,Leaf 2 height,,,,,27,,,32,,,,,,,,,,
+Kale,1,I,2,Leaf 3 height,,,,,26,,,37,,,,,,,,,,
+Kale,1,I,2,Leaf 4 height,,,,,27,,,37,,,,,,,,,,
+Kale,1,I,2,Leaf 5 height,,,,,28,,,35,,,,,,,,,,
+Kale,1,I,2,Leaf 1 width,,,,,20,,,30,,,,,,,,,,
+Kale,1,I,2,Leaf 2 width,,,,,21,,,25,,,,,,,,,,
+Kale,1,I,2,Leaf 3 width,,,,,20,,,28,,,,,,,,,,
+Kale,1,I,2,Leaf 4 width,,,,,22,,,35,,,,,,,,,,
+Kale,1,I,2,Leaf 5 width,,,,,23,,,31,,,,,,,,,,
+Kale,1,I,2,Insect damage? ,,,,,,,,,,,3,,,,,,,
+Kale,1,I,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,I,2,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,3,Leaf harvest count,,,,,26,,,11,,,,,,,,,,
+Kale,1,I,3,Leaf harvest mass,,,,,291,,,572,,,,,,,,,,
+Kale,1,I,3,Leaf 1 height,,,,,23,,,37,,,,,,,,,,
+Kale,1,I,3,Leaf 2 height,,,,,24,,,35,,,,,,,,,,
+Kale,1,I,3,Leaf 3 height,,,,,23,,,34,,,,,,,,,,
+Kale,1,I,3,Leaf 4 height,,,,,23,,,32,,,,,,,,,,
+Kale,1,I,3,Leaf 5 height,,,,,24,,,35,,,,,,,,,,
+Kale,1,I,3,Leaf 1 width,,,,,17,,,28,,,,,,,,,,
+Kale,1,I,3,Leaf 2 width,,,,,19,,,30,,,,,,,,,,
+Kale,1,I,3,Leaf 3 width,,,,,19,,,25,,,,,,,,,,
+Kale,1,I,3,Leaf 4 width,,,,,19,,,24,,,,,,,,,,
+Kale,1,I,3,Leaf 5 width,,,,,23,,,36,,,,,,,,,,
+Kale,1,I,3,Insect damage? ,,,,,,,,,,,3,,,,,,,
+Kale,1,I,3,Animal damage?,,,,1,,,,,,,,,,,,,,
+Kale,1,I,3,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,4,Leaf harvest count,,,,,16,,,13,,,6,,,,,,,
+Kale,1,I,4,Leaf harvest mass,,,,,382,,,873,,,316,,,,,,,
+Kale,1,I,4,Leaf 1 height,,,,,25,,,32,,,26,,,,,,,
+Kale,1,I,4,Leaf 2 height,,,,,27,,,34,,,29,,,,,,,
+Kale,1,I,4,Leaf 3 height,,,,,23,,,32,,,34,,,,,,,
+Kale,1,I,4,Leaf 4 height,,,,,28,,,32,,,42,,,,,,,
+Kale,1,I,4,Leaf 5 height,,,,,31,,,37,,,35,,,,,,,
+Kale,1,I,4,Leaf 1 width,,,,,23,,,25,,,21,,,,,,,
+Kale,1,I,4,Leaf 2 width,,,,,17,,,27,,,24,,,,,,,
+Kale,1,I,4,Leaf 3 width,,,,,19,,,32,,,24,,,,,,,
+Kale,1,I,4,Leaf 4 width,,,,,24,,,32,,,32,,,,,,,
+Kale,1,I,4,Leaf 5 width,,,,,22,,,24,,,27,,,,,,,
+Kale,1,I,4,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,I,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,I,4,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,5,Leaf harvest count,,,,,21,,,13,,,6,,,,,,,
+Kale,1,I,5,Leaf harvest mass,,,,,439,,,814,,,330,,,,,,,
+Kale,1,I,5,Leaf 1 height,,,,,25,,,29,,,25,,,,,,,
+Kale,1,I,5,Leaf 2 height,,,,,31,,,33,,,32,,,,,,,
+Kale,1,I,5,Leaf 3 height,,,,,23,,,34,,,32,,,,,,,
+Kale,1,I,5,Leaf 4 height,,,,,30,,,36,,,38,,,,,,,
+Kale,1,I,5,Leaf 5 height,,,,,27,,,32,,,33,,,,,,,
+Kale,1,I,5,Leaf 1 width,,,,,20,,,30,,,24,,,,,,,
+Kale,1,I,5,Leaf 2 width,,,,,23,,,25,,,26,,,,,,,
+Kale,1,I,5,Leaf 3 width,,,,,19,,,29,,,29,,,,,,,
+Kale,1,I,5,Leaf 4 width,,,,,22,,,26,,,27,,,,,,,
+Kale,1,I,5,Leaf 5 width,,,,,21,,,24,,,26,,,,,,,
+Kale,1,I,5,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,I,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,I,5,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,6,Leaf harvest count,,,,,20,,,11,,,9,,,,,,,
+Kale,1,I,6,Leaf harvest mass,,,,,423,,,636,,,342,,,,,,,
+Kale,1,I,6,Leaf 1 height,,,,,32,,,34,,,33,,,,,,,
+Kale,1,I,6,Leaf 2 height,,,,,29,,,36,,,32,,,,,,,
+Kale,1,I,6,Leaf 3 height,,,,,26,,,30,,,28,,,,,,,
+Kale,1,I,6,Leaf 4 height,,,,,28,,,34,,,26,,,,,,,
+Kale,1,I,6,Leaf 5 height,,,,,30,,,39,,,,,,,,,,
+Kale,1,I,6,Leaf 1 width,,,,,24,,,24,,,26,,,,,,,
+Kale,1,I,6,Leaf 2 width,,,,,23,,,25,,,28,,,,,,,
+Kale,1,I,6,Leaf 3 width,,,,,24,,,23,,,22,,,,,,,
+Kale,1,I,6,Leaf 4 width,,,,,25,,,30,,,21,,,,,,,
+Kale,1,I,6,Leaf 5 width,,,,,23,,,36,,,,,,,,,,
+Kale,1,I,6,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,I,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,I,6,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,7,Leaf harvest count,,,,,28,,,14,,,6,,,,,,,
+Kale,1,I,7,Leaf harvest mass,,,,,323,,,862,,,435,,,,,,,
+Kale,1,I,7,Leaf 1 height,,,,,22,,,31,,,31,,,,,,,
+Kale,1,I,7,Leaf 2 height,,,,,26,,,32,,,40,,,,,,,
+Kale,1,I,7,Leaf 3 height,,,,,27,,,33,,,36,,,,,,,
+Kale,1,I,7,Leaf 4 height,,,,,27,,,28,,,32,,,,,,,
+Kale,1,I,7,Leaf 5 height,,,,,24,,,37,,,,,,,,,,
+Kale,1,I,7,Leaf 1 width,,,,,16,,,26,,,24,,,,,,,
+Kale,1,I,7,Leaf 2 width,,,,,22,,,30,,,35,,,,,,,
+Kale,1,I,7,Leaf 3 width,,,,,24,,,24,,,28,,,,,,,
+Kale,1,I,7,Leaf 4 width,,,,,23,,,28,,,29,,,,,,,
+Kale,1,I,7,Leaf 5 width,,,,,21,,,26,,,,,,,,,,
+Kale,1,I,7,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,I,7,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,I,7,Flower weight,,,,,,,,,,,,,,,,,,
+Kale,1,I,8,Leaf harvest count,,,,,21,,,27,,,23,,,,,,,
+Kale,1,I,8,Leaf harvest mass,,,,,456,,,911,,,600,,,,,,,
+Kale,1,I,8,Leaf 1 height,,,,,27,,,32,,,32,,,,,,,
+Kale,1,I,8,Leaf 2 height,,,,,28,,,39,,,34,,,,,,,
+Kale,1,I,8,Leaf 3 height,,,,,29,,,37,,,36,,,,,,,
+Kale,1,I,8,Leaf 4 height,,,,,31,,,34,,,26,,,,,,,
+Kale,1,I,8,Leaf 5 height,,,,,29,,,36,,,31,,,,,,,
+Kale,1,I,8,Leaf 1 width,,,,,23,,,25,,,29,,,,,,,
+Kale,1,I,8,Leaf 2 width,,,,,26,,,32,,,29,,,,,,,
+Kale,1,I,8,Leaf 3 width,,,,,24,,,34,,,29,,,,,,,
+Kale,1,I,8,Leaf 4 width,,,,,26,,,28,,,26,,,,,,,
+Kale,1,I,8,Leaf 5 width,,,,,26,,,34,,,34,,,,,,,
+Kale,1,I,8,Insect damage? ,,,,,,,,,,,,,,,3,,,
+Kale,1,I,8,Animal damage?,,,,,,,,,,,,,,,,,,
+Kale,1,I,8,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf harvest count,,,,,53,,,20,,,,32,,24,,,,
+Basil,1,B,1,Leaf harvest mass,,,,,45,,,16,,,,23,,16,,,,
+Basil,1,B,1,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,1,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,B,2,Leaf harvest count,,,,,52,,,24,,,,24,,49,,,,
+Basil,1,B,2,Leaf harvest mass,,,,,60,,,27,,,,16,,30,,,,
+Basil,1,B,2,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,2,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,B,3,Leaf harvest count,,,,,26,,,16,,,,28,,28,,,,
+Basil,1,B,3,Leaf harvest mass,,,,,37,,,19,,,,23,,28,,,,
+Basil,1,B,3,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,3,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,B,4,Leaf harvest count,,,,,39,,,27,,,,57,,67,,,,
+Basil,1,B,4,Leaf harvest mass,,,,,50,,,23,,,,52,,53,,,,
+Basil,1,B,4,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,4,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,B,5,Leaf harvest count,,,,,48,,,38,,,,24,,34,,,,
+Basil,1,B,5,Leaf harvest mass,,,,,47,,,31,,,,13,,20,,,,
+Basil,1,B,5,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,5,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,B,6,Leaf harvest count,,,,,37,,,20,,,,20,,58,,,,
+Basil,1,B,6,Leaf harvest mass,,,,,46,,,19,,,,14,,30,,,,
+Basil,1,B,6,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,6,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,B,7,Leaf harvest count,,,,,18,,,27,,,,18,,57,,,,
+Basil,1,B,7,Leaf harvest mass,,,,,29,,,27,,,,20,,52,,,,
+Basil,1,B,7,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,7,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,7,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,B,8,Leaf harvest count,,,,,15,,,13,,,,19,,87,,,,
+Basil,1,B,8,Leaf harvest mass,,,,,26,,,15,,,,26,,67,,,,
+Basil,1,B,8,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,B,8,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,B,8,Flower weight,,,,,,,,,26,,,2,,,,,,
+Basil,1,G,1,Leaf harvest count,,,,,9,,,16,,,,20,,27,25,22,30,26
+Basil,1,G,1,Leaf harvest mass,,,,,16,,,34,,,,31,,45,29,18,37,14
+Basil,1,G,1,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,G,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,1,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf harvest count,,,,,7,,,8,,,,23,,18,25,17,27,12
+Basil,1,G,2,Leaf harvest mass,,,,,14,,,11,,,,29,,29,32,19,25,9
+Basil,1,G,2,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,2,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf harvest count,,,,,5,,,4,,,,15,,11,14,2,12,10
+Basil,1,G,3,Leaf harvest mass,,,,,12,,,3,,,,18,,23,18,4,16,5
+Basil,1,G,3,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,3,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf harvest count,,,,,8,,,7,,,,15,,8,8,9,17,4
+Basil,1,G,4,Leaf harvest mass,,,,,12,,,10,,,,25,,13,10,11,13,2
+Basil,1,G,4,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,4,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf harvest count,,,,,6,,,5,,,,16,,9,13,6,12,13
+Basil,1,G,5,Leaf harvest mass,,,,,11,,,8,,,,23,,17,11,12,8,4
+Basil,1,G,5,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,5,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf harvest count,,,,,5,,,7,,,,17,,9,17,17,8,14
+Basil,1,G,6,Leaf harvest mass,,,,,10,,,14,,,,27,,15,21,20,7,9
+Basil,1,G,6,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,6,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf harvest count,,,,,4,,,7,,,,13,,10,11,6,12,8
+Basil,1,G,7,Leaf harvest mass,,,,,6,,,11,,,,15,,19,12,8,9,4
+Basil,1,G,7,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,7,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf harvest count,,,,,4,,,12,,,,11,,7,7,9,3,6
+Basil,1,G,8,Leaf harvest mass,,,,,6,,,16,,,,14,,11,7,10,2,3
+Basil,1,G,8,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,G,8,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,G,8,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf harvest count,,,,,12,,,37,,,,58,,43,37,36,51,64
+Basil,1,H,1,Leaf harvest mass,,,,,19,,,29,,,,48,,42,33,34,43,31
+Basil,1,H,1,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,1,Flower weight,,,,,,,,,,,,,,34,,21,6,
+Basil,1,H,2,Leaf harvest count,,,,,17,,,19,,,,39,,36,25,14,18,35
+Basil,1,H,2,Leaf harvest mass,,,,,35,,,23,,,,37,,34,27,12,15,18
+Basil,1,H,2,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,2,Flower weight,,,,,,,,,,,,,,58,,21,11,
+Basil,1,H,3,Leaf harvest count,,,,,13,,,25,,,,36,,19,15,11,10,50
+Basil,1,H,3,Leaf harvest mass,,,,,25,,,32,,,,38,,20,10,10,13,25
+Basil,1,H,3,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,3,Flower weight,,,,,,,,,,,,,,19,,39,10,
+Basil,1,H,4,Leaf harvest count,,,,,20,,,29,,,,58,,29,29,7,27,66
+Basil,1,H,4,Leaf harvest mass,,,,,52,,,35,,,,55,,32,28,6,24,38
+Basil,1,H,4,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,4,Flower weight,,,,,,,,,,,,,,14,,35,8,
+Basil,1,H,5,Leaf harvest count,,,,,22,,,23,,,,69,,64,22,29,39,47
+Basil,1,H,5,Leaf harvest mass,,,,,43,,,32,,,,63,,67,22,24,36,28
+Basil,1,H,5,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,H,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,5,Flower weight,,,,,,,,,,,,,,12,,16,4,
+Basil,1,H,6,Leaf harvest count,,,,,22,,,18,,,,48,,30,15,18,20,24
+Basil,1,H,6,Leaf harvest mass,,,,,36,,,25,,,,45,,32,13,14,28,27
+Basil,1,H,6,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,H,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,6,Flower weight,,,,,,,,,,,,,,10,,30,6,
+Basil,1,H,7,Leaf harvest count,,,,,18,,,34,,,,40,,50,32,31,25,44
+Basil,1,H,7,Leaf harvest mass,,,,,37,,,50,,,,52,,77,42,34,22,25
+Basil,1,H,7,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,7,Flower weight,,,,,,,,,,,,,,20,,29,13,
+Basil,1,H,8,Leaf harvest count,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf harvest mass,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,H,8,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,H,8,Flower weight,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf harvest count,,,,,17,,,25,,36,,60,,75,46,40,79,56
+Basil,1,I,1,Leaf harvest mass,,,,,36,,,34,,39,,57,,101,56,39,89,49
+Basil,1,I,1,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,I,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,I,1,Flower weight,,,,,,,,,11,,,,,,,94,15,
+Basil,1,I,2,Leaf harvest count,,,,,24,,,30,,36,,,,,,,,
+Basil,1,I,2,Leaf harvest mass,,,,,37,,,42,,39,,,,,,,,
+Basil,1,I,2,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,I,2,Flower weight,,,,,,,,,11,,,,,,,,,
+Basil,1,I,3,Leaf harvest count,,,,,18,,,34,,36,,55,,91,52,23,51,66
+Basil,1,I,3,Leaf harvest mass,,,,,37,,,69,,39,,54,,113,52,20,55,43
+Basil,1,I,3,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,I,3,Flower weight,,,,,,,,,11,,,,,13,,38,4,
+Basil,1,I,4,Leaf harvest count,,,,,16,,,26,,36,,47,,57,39,14,65,46
+Basil,1,I,4,Leaf harvest mass,,,,,39,,,33,,39,,71,,73,45,12,70,35
+Basil,1,I,4,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Insect damage? ,,,1,,,,,,,,,,,,,,,
+Basil,1,I,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,I,4,Flower weight,,,,,,,,,11,,,,,5,,7,1,
+Basil,1,I,5,Leaf harvest count,,,,,16,,,32,,36,,42,,58,17,24,44,35
+Basil,1,I,5,Leaf harvest mass,,,,,32,,,29,,39,,46,,60,15,20,34,24
+Basil,1,I,5,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,I,5,Flower weight,,,,,,,,,11,,,,,25,,13,21,
+Basil,1,I,6,Leaf harvest count,,,,,16,,,30,,36,,25,,26,19,16,36,46
+Basil,1,I,6,Leaf harvest mass,,,,,36,,,35,,39,,28,,23,19,17,35,33
+Basil,1,I,6,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,I,6,Flower weight,,,,,,,,,11,,,,,32,,4,11,
+Basil,1,I,7,Leaf harvest count,,,,,,,,,,36,,40,,53,27,21,67,50
+Basil,1,I,7,Leaf harvest mass,,,,,,,,,,39,,36,,83,38,27,67,27
+Basil,1,I,7,Leaf 1 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 2 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 3 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 4 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 5 height,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 1 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 2 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 3 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 4 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Leaf 5 width,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Animal damage?,,,,,,,,,,,,,,,,,,
+Basil,1,I,7,Flower weight,,,,,,,,,11,,,,,55,,33,13,
+Chard,1,B,1,Leaf harvest count,,,,10,,12,,,18,,,5,,,5,,,8
+Chard,1,B,1,Leaf harvest mass,,,,289,,590,,,631,,,170,,,100,,,124
+Chard,1,B,1,Leaf 1 height,,,,32,,36,,,40,,,23,,,27,,,20
+Chard,1,B,1,Leaf 2 height,,,,28,,37,,,37,,,27,,,24,,,16
+Chard,1,B,1,Leaf 3 height,,,,26,,38,,,40,,,31,,,20,,,22
+Chard,1,B,1,Leaf 4 height,,,,21,,34,,,38,,,33,,,,,,18
+Chard,1,B,1,Leaf 5 height,,,,26,,36,,,43,,,39,,,,,,3
+Chard,1,B,1,Leaf 1 width,,,,20,,29,,,23,,,14,,,17,,,30
+Chard,1,B,1,Leaf 2 width,,,,21,,26,,,27,,,16,,,15,,,13
+Chard,1,B,1,Leaf 3 width,,,,18,,26,,,25,,,15,,,12,,,14
+Chard,1,B,1,Leaf 4 width,,,,12,,23,,,24,,,17,,,,,,15
+Chard,1,B,1,Leaf 5 width,,,,16,,25,,,28,,,21,,,,,,5
+Chard,1,B,1,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,B,1,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,2,Leaf harvest count,,,,18,,7,,,9,,,5,,,7,,,7
+Chard,1,B,2,Leaf harvest mass,,,,306,,366,,,422,,,155,,,273,,,264
+Chard,1,B,2,Leaf 1 height,,,,30,,29,,,33,,,33,,,37,,,26
+Chard,1,B,2,Leaf 2 height,,,,30,,28,,,37,,,36,,,36,,,32
+Chard,1,B,2,Leaf 3 height,,,,27,,28,,,35,,,29,,,44,,,30
+Chard,1,B,2,Leaf 4 height,,,,25,,36,,,30,,,21,,,,,,40
+Chard,1,B,2,Leaf 5 height,,,,26,,32,,,28,,,,,,,,,27
+Chard,1,B,2,Leaf 1 width,,,,22,,22,,,28,,,16,,,18,,,13
+Chard,1,B,2,Leaf 2 width,,,,24,,22,,,14,,,20,,,17,,,18
+Chard,1,B,2,Leaf 3 width,,,,23,,27,,,18,,,15,,,16,,,14
+Chard,1,B,2,Leaf 4 width,,,,19,,25,,,18,,,11,,,,,,15
+Chard,1,B,2,Leaf 5 width,,,,19,,19,,,17,,,,,,,,,11
+Chard,1,B,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,2,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,2,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,3,Leaf harvest count,,,,6,,9,,,5,,,7,,,8,,,7
+Chard,1,B,3,Leaf harvest mass,,,,98,,294,,,283,,,222,,,222,,,162
+Chard,1,B,3,Leaf 1 height,,,,13,,24,,,25,,,22,,,24,,,19
+Chard,1,B,3,Leaf 2 height,,,,24,,26,,,27,,,29,,,33,,,21
+Chard,1,B,3,Leaf 3 height,,,,18,,27,,,27,,,22,,,26,,,29
+Chard,1,B,3,Leaf 4 height,,,,23,,26,,,29,,,23,,,,,,24
+Chard,1,B,3,Leaf 5 height,,,,23,,24,,,28,,,24,,,,,,19
+Chard,1,B,3,Leaf 1 width,,,,10,,19,,,23,,,14,,,16,,,13
+Chard,1,B,3,Leaf 2 width,,,,14,,19,,,18,,,18,,,17,,,17
+Chard,1,B,3,Leaf 3 width,,,,13,,18,,,25,,,15,,,17,,,15
+Chard,1,B,3,Leaf 4 width,,,,15,,18,,,22,,,15,,,,,,15
+Chard,1,B,3,Leaf 5 width,,,,15,,16,,,18,,,14,,,,,,14
+Chard,1,B,3,Insect damage? ,,1,,,,,,,,,,,,,,,,
+Chard,1,B,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,B,3,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,4,Leaf harvest count,,,,5,,6,,,4,,,6,,,6,,,3
+Chard,1,B,4,Leaf harvest mass,,,,169,,272,,,257,,,259,,,183,,,38
+Chard,1,B,4,Leaf 1 height,,,,28,,29,,,29,,,32,,,33,,,21
+Chard,1,B,4,Leaf 2 height,,,,26,,27,,,35,,,24,,,24,,,21
+Chard,1,B,4,Leaf 3 height,,,,26,,26,,,23,,,29,,,21,,,18
+Chard,1,B,4,Leaf 4 height,,,,28,,33,,,28,,,22,,,,,,
+Chard,1,B,4,Leaf 5 height,,,,19,,,,,,,,22,,,,,,
+Chard,1,B,4,Leaf 1 width,,,,23,,22,,,22,,,25,,,22,,,14
+Chard,1,B,4,Leaf 2 width,,,,19,,23,,,27,,,16,,,19,,,13
+Chard,1,B,4,Leaf 3 width,,,,18,,23,,,25,,,26,,,22,,,14
+Chard,1,B,4,Leaf 4 width,,,,21,,26,,,25,,,21,,,,,,
+Chard,1,B,4,Leaf 5 width,,,,13,,,,,,,,21,,,,,,
+Chard,1,B,4,Insect damage? ,,1,,,,,,,,,,,,,,,,
+Chard,1,B,4,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,B,4,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,5,Leaf harvest count,,,,9,,7,,,18,,,14,,,8,,,5
+Chard,1,B,5,Leaf harvest mass,,,,260,,597,,,807,,,576,,,476,,,241
+Chard,1,B,5,Leaf 1 height,,,,30,,34,,,37,,,37,,,46,,,43
+Chard,1,B,5,Leaf 2 height,,,,24,,37,,,39,,,51,,,37,,,35
+Chard,1,B,5,Leaf 3 height,,,,30,,34,,,40,,,32,,,43,,,30
+Chard,1,B,5,Leaf 4 height,,,,26,,39,,,39,,,47,,,,,,29
+Chard,1,B,5,Leaf 5 height,,,,28,,36,,,43,,,38,,,,,,
+Chard,1,B,5,Leaf 1 width,,,,23,,31,,,33,,,25,,,22,,,19
+Chard,1,B,5,Leaf 2 width,,,,19,,33,,,23,,,27,,,32,,,20
+Chard,1,B,5,Leaf 3 width,,,,22,,25,,,36,,,23,,,31,,,12
+Chard,1,B,5,Leaf 4 width,,,,16,,32,,,25,,,28,,,,,,18
+Chard,1,B,5,Leaf 5 width,,,,21,,29,,,35,,,23,,,,,,
+Chard,1,B,5,Insect damage? ,,1,,,,,,,,,,,,,,,,
+Chard,1,B,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,B,5,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,6,Leaf harvest count,,,,15,,7,,,6,,,5,,,5,,,4
+Chard,1,B,6,Leaf harvest mass,,,,422,,447,,,365,,,235,,,209,,,86
+Chard,1,B,6,Leaf 1 height,,,,35,,33,,,30,,,31,,,39,,,31
+Chard,1,B,6,Leaf 2 height,,,,32,,26,,,27,,,28,,,34,,,28
+Chard,1,B,6,Leaf 3 height,,,,18,,20,,,29,,,32,,,29,,,
+Chard,1,B,6,Leaf 4 height,,,,32,,21,,,27,,,32,,,,,,
+Chard,1,B,6,Leaf 5 height,,,,22,,26,,,34,,,27,,,,,,
+Chard,1,B,6,Leaf 1 width,,,,24,,23,,,24,,,16,,,15,,,12
+Chard,1,B,6,Leaf 2 width,,,,20,,11,,,22,,,14,,,19,,,12
+Chard,1,B,6,Leaf 3 width,,,,13,,14,,,20,,,19,,,16,,,
+Chard,1,B,6,Leaf 4 width,,,,23,,17,,,26,,,14,,,,,,
+Chard,1,B,6,Leaf 5 width,,,,17,,22,,,19,,,16,,,,,,
+Chard,1,B,6,Insect damage? ,,1,,,,,,,,,,,,,,,,
+Chard,1,B,6,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,B,6,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,7,Leaf harvest count,,,,14,,10,,,12,,,12,,,13,,,6
+Chard,1,B,7,Leaf harvest mass,,,,345,,494,,,373,,,366,,,466,,,183
+Chard,1,B,7,Leaf 1 height,,,,34,,39,,,34,,,33,,,44,,,32
+Chard,1,B,7,Leaf 2 height,,,,22,,35,,,37,,,33,,,41,,,29
+Chard,1,B,7,Leaf 3 height,,,,26,,33,,,34,,,35,,,44,,,41
+Chard,1,B,7,Leaf 4 height,,,,25,,41,,,38,,,36,,,,,,27
+Chard,1,B,7,Leaf 5 height,,,,29,,37,,,39,,,36,,,,,,
+Chard,1,B,7,Leaf 1 width,,,,19,,19,,,17,,,19,,,22,,,14
+Chard,1,B,7,Leaf 2 width,,,,14,,21,,,21,,,20,,,24,,,13
+Chard,1,B,7,Leaf 3 width,,,,18,,22,,,24,,,18,,,21,,,21
+Chard,1,B,7,Leaf 4 width,,,,20,,21,,,26,,,18,,,,,,13
+Chard,1,B,7,Leaf 5 width,,,,21,,25,,,23,,,21,,,,,,
+Chard,1,B,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,7,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,7,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,8,Leaf harvest count,,,,6,,6,,,7,,,11,,,8,,,10
+Chard,1,B,8,Leaf harvest mass,,,,404,,537,,,770,,,647,,,790,,,392
+Chard,1,B,8,Leaf 1 height,,,,35,,33,,,43,,,39,,,49,,,31
+Chard,1,B,8,Leaf 2 height,,,,31,,41,,,36,,,45,,,46,,,27
+Chard,1,B,8,Leaf 3 height,,,,33,,32,,,44,,,42,,,49,,,27
+Chard,1,B,8,Leaf 4 height,,,,30,,29,,,41,,,47,,,,,,
+Chard,1,B,8,Leaf 5 height,,,,24,,34,,,40,,,43,,,,,,
+Chard,1,B,8,Leaf 1 width,,,,21,,20,,,21,,,25,,,32,,,26
+Chard,1,B,8,Leaf 2 width,,,,22,,27,,,26,,,26,,,29,,,18
+Chard,1,B,8,Leaf 3 width,,,,20,,26,,,24,,,24,,,32,,,17
+Chard,1,B,8,Leaf 4 width,,,,23,,18,,,21,,,28,,,,,,
+Chard,1,B,8,Leaf 5 width,,,,20,,29,,,30,,,26,,,,,,
+Chard,1,B,8,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,8,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,8,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,9,Leaf harvest count,,,,19,,11,,,5,,,6,,,6,,,6
+Chard,1,B,9,Leaf harvest mass,,,,433,,370,,,563,,,382,,,275,,,260
+Chard,1,B,9,Leaf 1 height,,,,33,,38,,,37,,,40,,,36,,,23
+Chard,1,B,9,Leaf 2 height,,,,31,,34,,,31,,,28,,,32,,,22
+Chard,1,B,9,Leaf 3 height,,,,30,,42,,,36,,,32,,,32,,,22
+Chard,1,B,9,Leaf 4 height,,,,28,,33,,,37,,,34,,,,,,26
+Chard,1,B,9,Leaf 5 height,,,,36,,25,,,37,,,37,,,,,,31
+Chard,1,B,9,Leaf 1 width,,,,27,,30,,,34,,,23,,,23,,,17
+Chard,1,B,9,Leaf 2 width,,,,19,,29,,,24,,,22,,,21,,,13
+Chard,1,B,9,Leaf 3 width,,,,22,,32,,,28,,,20,,,20,,,17
+Chard,1,B,9,Leaf 4 width,,,,25,,30,,,31,,,23,,,,,,20
+Chard,1,B,9,Leaf 5 width,,,,24,,25,,,25,,,27,,,,,,20
+Chard,1,B,9,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,9,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,9,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,10,Leaf harvest count,,,,12,,6,,,6,,,7,,,4,,,9
+Chard,1,B,10,Leaf harvest mass,,,,288,,471,,,443,,,395,,,305,,,408
+Chard,1,B,10,Leaf 1 height,,,,27,,26,,,34,,,28,,,37,,,38
+Chard,1,B,10,Leaf 2 height,,,,33,,28,,,30,,,41,,,36,,,35
+Chard,1,B,10,Leaf 3 height,,,,30,,39,,,37,,,31,,,41,,,32
+Chard,1,B,10,Leaf 4 height,,,,18,,36,,,37,,,29,,,,,,32
+Chard,1,B,10,Leaf 5 height,,,,21,,35,,,,,,30,,,,,,
+Chard,1,B,10,Leaf 1 width,,,,22,,18,,,17,,,16,,,24,,,25
+Chard,1,B,10,Leaf 2 width,,,,28,,18,,,22,,,25,,,26,,,22
+Chard,1,B,10,Leaf 3 width,,,,24,,34,,,24,,,18,,,20,,,20
+Chard,1,B,10,Leaf 4 width,,,,13,,25,,,24,,,16,,,,,,19
+Chard,1,B,10,Leaf 5 width,,,,19,,27,,,,,,18,,,,,,
+Chard,1,B,10,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,10,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,10,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,11,Leaf harvest count,,,,10,,8,,,7,,,10,,,7,,,6
+Chard,1,B,11,Leaf harvest mass,,,,371,,505,,,735,,,549,,,544,,,365
+Chard,1,B,11,Leaf 1 height,,,,32,,32,,,35,,,41,,,48,,,32
+Chard,1,B,11,Leaf 2 height,,,,25,,36,,,35,,,41,,,40,,,31
+Chard,1,B,11,Leaf 3 height,,,,19,,30,,,40,,,43,,,47,,,39
+Chard,1,B,11,Leaf 4 height,,,,24,,28,,,37,,,39,,,,,,27
+Chard,1,B,11,Leaf 5 height,,,,28,,36,,,39,,,40,,,,,,29
+Chard,1,B,11,Leaf 1 width,,,,22.5,,23,,,30,,,21,,,31,,,18
+Chard,1,B,11,Leaf 2 width,,,,19,,27,,,28,,,20,,,26,,,18
+Chard,1,B,11,Leaf 3 width,,,,19,,23,,,23,,,23,,,26,,,26
+Chard,1,B,11,Leaf 4 width,,,,17,,23,,,24,,,22,,,,,,14
+Chard,1,B,11,Leaf 5 width,,,,22,,29,,,28,,,22,,,,,,19
+Chard,1,B,11,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,11,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,11,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,12,Leaf harvest count,,,,10,,6,,,5,,,4,,,5,,,4
+Chard,1,B,12,Leaf harvest mass,,,,303,,533,,,510,,,329,,,456,,,200
+Chard,1,B,12,Leaf 1 height,,,,29,,40,,,30,,,35,,,30,,,25
+Chard,1,B,12,Leaf 2 height,,,,25,,31,,,39,,,32,,,41,,,32
+Chard,1,B,12,Leaf 3 height,,,,27,,42,,,37,,,34,,,33,,,32
+Chard,1,B,12,Leaf 4 height,,,,32,,32,,,37,,,39,,,,,,28
+Chard,1,B,12,Leaf 5 height,,,,14,,33,,,33,,,,,,,,,
+Chard,1,B,12,Leaf 1 width,,,,23,,25,,,22,,,16,,,24,,,13
+Chard,1,B,12,Leaf 2 width,,,,16,,23,,,21,,,24,,,28,,,17
+Chard,1,B,12,Leaf 3 width,,,,20,,26,,,23,,,16,,,15,,,18
+Chard,1,B,12,Leaf 4 width,,,,21,,20,,,27,,,19,,,,,,14
+Chard,1,B,12,Leaf 5 width,,,,13,,24,,,20,,,,,,,,,
+Chard,1,B,12,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,12,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,12,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,13,Leaf harvest count,,,,6,,1,,,5,,,4,,,6,,,6
+Chard,1,B,13,Leaf harvest mass,,,,284,,11,,,91,,,69,,,160,,,105
+Chard,1,B,13,Leaf 1 height,,,,22,,19,,,21,,,20,,,21,,,19
+Chard,1,B,13,Leaf 2 height,,,,36,,,,,15,,,18,,,21,,,17
+Chard,1,B,13,Leaf 3 height,,,,28,,,,,18,,,18,,,23,,,16
+Chard,1,B,13,Leaf 4 height,,,,17,,,,,17,,,,,,,,,18
+Chard,1,B,13,Leaf 5 height,,,,34,,,,,22,,,,,,,,,
+Chard,1,B,13,Leaf 1 width,,,,19,,13,,,17,,,18,,,17,,,17
+Chard,1,B,13,Leaf 2 width,,,,27,,,,,14,,,14,,,17,,,15
+Chard,1,B,13,Leaf 3 width,,,,21,,,,,14,,,13,,,14,,,14
+Chard,1,B,13,Leaf 4 width,,,,17,,,,,11,,,,,,,,,14
+Chard,1,B,13,Leaf 5 width,,,,28,,,,,19,,,,,,,,,
+Chard,1,B,13,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,13,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,13,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,14,Leaf harvest count,,,,20,,6,,,6,,,5,,,7,,,5
+Chard,1,B,14,Leaf harvest mass,,,,274,,558,,,685,,,372,,,707,,,420
+Chard,1,B,14,Leaf 1 height,,,,33,,35,,,43,,,38,,,39,,,35
+Chard,1,B,14,Leaf 2 height,,,,26,,42,,,47,,,46,,,58,,,31
+Chard,1,B,14,Leaf 3 height,,,,20,,44,,,46,,,46,,,56,,,44
+Chard,1,B,14,Leaf 4 height,,,,21,,40,,,50,,,41,,,,,,46
+Chard,1,B,14,Leaf 5 height,,,,26,,38,,,,,,,,,,,,32
+Chard,1,B,14,Leaf 1 width,,,,23,,26,,,26,,,24,,,31,,,21
+Chard,1,B,14,Leaf 2 width,,,,11,,19,,,28,,,28,,,31,,,20
+Chard,1,B,14,Leaf 3 width,,,,14,,25,,,27,,,26,,,31,,,24
+Chard,1,B,14,Leaf 4 width,,,,17,,22,,,28,,,27,,,,,,27
+Chard,1,B,14,Leaf 5 width,,,,22,,19,,,,,,,,,,,,24
+Chard,1,B,14,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,14,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,14,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,15,Leaf harvest count,,,,15,,15,,,10,,,17,,,11,,,7
+Chard,1,B,15,Leaf harvest mass,,,,292,,661,,,567,,,610,,,597,,,377
+Chard,1,B,15,Leaf 1 height,,,,24,,40,,,40,,,32,,,40,,,29
+Chard,1,B,15,Leaf 2 height,,,,27,,38,,,34,,,38,,,39,,,39
+Chard,1,B,15,Leaf 3 height,,,,21,,40,,,40,,,44,,,34,,,22
+Chard,1,B,15,Leaf 4 height,,,,30,,39,,,33,,,36,,,,,,27
+Chard,1,B,15,Leaf 5 height,,,,16,,38,,,35,,,41,,,,,,28
+Chard,1,B,15,Leaf 1 width,,,,22,,31,,,25,,,23,,,26,,,18
+Chard,1,B,15,Leaf 2 width,,,,23,,29,,,18,,,23,,,28,,,22
+Chard,1,B,15,Leaf 3 width,,,,19,,28,,,31,,,24,,,30,,,18
+Chard,1,B,15,Leaf 4 width,,,,18,,29,,,28,,,26,,,,,,18
+Chard,1,B,15,Leaf 5 width,,,,15,,25,,,25,,,26,,,,,,18
+Chard,1,B,15,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,15,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,15,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,B,16,Leaf harvest count,,,,24,,18,,,8,,,29,,,22,,,7
+Chard,1,B,16,Leaf harvest mass,,,,492,,1042,,,723,,,646,,,623,,,143
+Chard,1,B,16,Leaf 1 height,,,,20,,35,,,41,,,47,,,36,,,21
+Chard,1,B,16,Leaf 2 height,,,,20,,41,,,40,,,34,,,33,,,24
+Chard,1,B,16,Leaf 3 height,,,,23,,41,,,35,,,39,,,32,,,23
+Chard,1,B,16,Leaf 4 height,,,,30,,46,,,43,,,39,,,,,,
+Chard,1,B,16,Leaf 5 height,,,,23,,44,,,,,,37,,,,,,
+Chard,1,B,16,Leaf 1 width,,,,16,,28,,,32,,,28,,,22,,,18
+Chard,1,B,16,Leaf 2 width,,,,18,,34,,,28,,,22,,,18,,,16
+Chard,1,B,16,Leaf 3 width,,,,15,,36,,,25,,,23,,,25,,,19
+Chard,1,B,16,Leaf 4 width,,,,26,,31,,,29,,,31,,,,,,
+Chard,1,B,16,Leaf 5 width,,,,22,,37,,,,,,23,,,,,,
+Chard,1,B,16,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,B,16,Animal damage?,,1,,,,,,,,,,,,,,,,
+Chard,1,B,16,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,1,Leaf harvest count,,,,6,,8,,,8,,,4,,,7,,,4
+Chard,1,G,1,Leaf harvest mass,,,,172,,530,,,504,,,224,,,360,,,117
+Chard,1,G,1,Leaf 1 height,,,,24,,28,,,33,,,26,,,33,,,29
+Chard,1,G,1,Leaf 2 height,,,,26,,33,,,33,,,36,,,32,,,27
+Chard,1,G,1,Leaf 3 height,,,,17,,33,,,29,,,32,,,29,,,15
+Chard,1,G,1,Leaf 4 height,,,,22,,25,,,25,,,30,,,31,,,29
+Chard,1,G,1,Leaf 5 height,,,,18,,32,,,37,,,,,,34,,,
+Chard,1,G,1,Leaf 1 width,,,,21,,24,,,21,,,15,,,26,,,18
+Chard,1,G,1,Leaf 2 width,,,,22,,28,,,28,,,26,,,22,,,17
+Chard,1,G,1,Leaf 3 width,,,,16,,24,,,28,,,22,,,21,,,14
+Chard,1,G,1,Leaf 4 width,,,,20,,26,,,29,,,24,,,21,,,17
+Chard,1,G,1,Leaf 5 width,,,,19,,24,,,25,,,,,,19,,,
+Chard,1,G,1,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,1,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,1,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,2,Leaf harvest count,,,,6,,6,,,7,,,3,,,6,,,5
+Chard,1,G,2,Leaf harvest mass,,,,97,,218,,,260,,,117,,,261,,,139
+Chard,1,G,2,Leaf 1 height,,,,14,,25,,,27,,,25,,,30,,,26
+Chard,1,G,2,Leaf 2 height,,,,20,,24,,,29,,,24,,,32,,,29
+Chard,1,G,2,Leaf 3 height,,,,21,,27,,,27,,,26,,,28,,,30
+Chard,1,G,2,Leaf 4 height,,,,18,,29,,,29,,,,,,27,,,21
+Chard,1,G,2,Leaf 5 height,,,,15,,28,,,29,,,,,,25,,,22
+Chard,1,G,2,Leaf 1 width,,,,12,,19,,,16,,,21,,,21,,,15
+Chard,1,G,2,Leaf 2 width,,,,18,,15,,,19,,,18,,,19,,,19
+Chard,1,G,2,Leaf 3 width,,,,15,,19,,,16,,,16,,,22,,,18
+Chard,1,G,2,Leaf 4 width,,,,14,,18,,,19,,,,,,17,,,15
+Chard,1,G,2,Leaf 5 width,,,,12,,18,,,22,,,,,,18,,,13
+Chard,1,G,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,2,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,2,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,3,Leaf harvest count,,,,6,,8,,,7,,,3,,,6,,,3
+Chard,1,G,3,Leaf harvest mass,,,,94,,475,,,500,,,269,,,467,,,159
+Chard,1,G,3,Leaf 1 height,,,,24,,36,,,39,,,45,,,26,,,39
+Chard,1,G,3,Leaf 2 height,,,,19,,37,,,34,,,44,,,41,,,34
+Chard,1,G,3,Leaf 3 height,,,,15,,30,,,37,,,35,,,44,,,33
+Chard,1,G,3,Leaf 4 height,,,,,,30,,,35,,,,,,42,,,
+Chard,1,G,3,Leaf 5 height,,,,,,34,,,43,,,,,,41,,,
+Chard,1,G,3,Leaf 1 width,,,,23,,28,,,23,,,28,,,21,,,25
+Chard,1,G,3,Leaf 2 width,,,,18,,23,,,23,,,27,,,22,,,18
+Chard,1,G,3,Leaf 3 width,,,,16,,20,,,26,,,22,,,27,,,20
+Chard,1,G,3,Leaf 4 width,,,,,,23,,,25,,,,,,28,,,
+Chard,1,G,3,Leaf 5 width,,,,,,24,,,34,,,,,,22,,,
+Chard,1,G,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,3,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,3,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,4,Leaf harvest count,,,,7,,8,,,9,,,4,,,7,,,4
+Chard,1,G,4,Leaf harvest mass,,,,173,,333,,,296,,,155,,,268,,,137
+Chard,1,G,4,Leaf 1 height,,,,22,,28,,,34,,,35,,,26,,,34
+Chard,1,G,4,Leaf 2 height,,,,25,,33,,,28,,,36,,,37,,,24
+Chard,1,G,4,Leaf 3 height,,,,20,,28,,,32,,,27,,,29,,,30
+Chard,1,G,4,Leaf 4 height,,,,23,,33,,,31,,,29,,,29,,,28
+Chard,1,G,4,Leaf 5 height,,,,19,,33,,,29,,,,,,37,,,
+Chard,1,G,4,Leaf 1 width,,,,15,,17,,,19,,,13,,,14,,,15
+Chard,1,G,4,Leaf 2 width,,,,17,,18,,,14,,,17,,,18,,,12
+Chard,1,G,4,Leaf 3 width,,,,13,,20,,,20,,,11,,,15,,,15
+Chard,1,G,4,Leaf 4 width,,,,16,,18,,,15,,,13,,,17,,,14
+Chard,1,G,4,Leaf 5 width,,,,14,,19,,,14,,,,,,12,,,
+Chard,1,G,4,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,4,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,4,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,5,Leaf harvest count,,,,8,,6,,,8,,,4,,,8,,,4
+Chard,1,G,5,Leaf harvest mass,,,,197,,200,,,315,,,144,,,231,,,150
+Chard,1,G,5,Leaf 1 height,,,,23,,27,,,27,,,31,,,26,,,31
+Chard,1,G,5,Leaf 2 height,,,,26,,29,,,26,,,30,,,29,,,25
+Chard,1,G,5,Leaf 3 height,,,,25,,19,,,26,,,26,,,30,,,27
+Chard,1,G,5,Leaf 4 height,,,,19,,24,,,31,,,29,,,28,,,20
+Chard,1,G,5,Leaf 5 height,,,,17,,22,,,28,,,,,,27,,,
+Chard,1,G,5,Leaf 1 width,,,,19,,20,,,18,,,15,,,13,,,16
+Chard,1,G,5,Leaf 2 width,,,,15,,18,,,18,,,16,,,16,,,12
+Chard,1,G,5,Leaf 3 width,,,,18,,12,,,18,,,13,,,17,,,15
+Chard,1,G,5,Leaf 4 width,,,,16,,17,,,21,,,15,,,12,,,12
+Chard,1,G,5,Leaf 5 width,,,,13,,14,,,16,,,,,,17,,,
+Chard,1,G,5,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,5,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,G,5,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,6,Leaf harvest count,,,,5,,6,,,9,,,3,,,6,,,5
+Chard,1,G,6,Leaf harvest mass,,,,238,,486,,,858,,,223,,,341,,,198
+Chard,1,G,6,Leaf 1 height,,,,30,,31,,,37,,,34,,,41,,,30
+Chard,1,G,6,Leaf 2 height,,,,29,,35,,,41,,,37,,,29,,,26
+Chard,1,G,6,Leaf 3 height,,,,28,,31,,,41,,,26,,,33,,,30
+Chard,1,G,6,Leaf 4 height,,,,15,,41,,,42,,,,,,27,,,21
+Chard,1,G,6,Leaf 5 height,,,,22,,35,,,41,,,,,,37,,,16
+Chard,1,G,6,Leaf 1 width,,,,22,,23,,,23,,,19,,,19,,,19
+Chard,1,G,6,Leaf 2 width,,,,21,,26,,,25,,,22,,,16,,,15
+Chard,1,G,6,Leaf 3 width,,,,22,,25,,,24,,,17,,,17,,,18
+Chard,1,G,6,Leaf 4 width,,,,16,,30,,,29,,,,,,20,,,13
+Chard,1,G,6,Leaf 5 width,,,,19,,30,,,26,,,,,,22,,,11
+Chard,1,G,6,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,6,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,6,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,7,Leaf harvest count,,,,8,,8,,,10,,,5,,,7,,,7
+Chard,1,G,7,Leaf harvest mass,,,,214,,570,,,654,,,256,,,388,,,290
+Chard,1,G,7,Leaf 1 height,,,,28,,34,,,31,,,34,,,35,,,35
+Chard,1,G,7,Leaf 2 height,,,,21,,38,,,35,,,26,,,34,,,33
+Chard,1,G,7,Leaf 3 height,,,,23,,34,,,35,,,31,,,28,,,31
+Chard,1,G,7,Leaf 4 height,,,,26,,31,,,31,,,30,,,39,,,27
+Chard,1,G,7,Leaf 5 height,,,,16,,30,,,36,,,38,,,32,,,23
+Chard,1,G,7,Leaf 1 width,,,,22,,25,,,28,,,23,,,23,,,20
+Chard,1,G,7,Leaf 2 width,,,,17,,24,,,26,,,14,,,23,,,21
+Chard,1,G,7,Leaf 3 width,,,,19,,25,,,28,,,21,,,17,,,22
+Chard,1,G,7,Leaf 4 width,,,,21,,23,,,20,,,16,,,22,,,18
+Chard,1,G,7,Leaf 5 width,,,,13,,24,,,29,,,23,,,20,,,16
+Chard,1,G,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,7,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,7,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,8,Leaf harvest count,,,,7,,9,,,10,,,5,,,9,,,7
+Chard,1,G,8,Leaf harvest mass,,,,114,,372,,,496,,,194,,,328,,,172
+Chard,1,G,8,Leaf 1 height,,,,20,,30,,,28,,,25,,,22,,,30
+Chard,1,G,8,Leaf 2 height,,,,21,,35,,,34,,,28,,,27,,,24
+Chard,1,G,8,Leaf 3 height,,,,19,,32,,,37,,,40,,,33,,,34
+Chard,1,G,8,Leaf 4 height,,,,20,,32,,,32,,,29,,,29,,,19
+Chard,1,G,8,Leaf 5 height,,,,22,,36,,,34,,,36,,,40,,,19
+Chard,1,G,8,Leaf 1 width,,,,14,,17,,,15,,,10,,,11,,,17
+Chard,1,G,8,Leaf 2 width,,,,15,,22,,,18,,,11,,,13,,,18
+Chard,1,G,8,Leaf 3 width,,,,13,,22,,,23,,,20,,,17,,,17
+Chard,1,G,8,Leaf 4 width,,,,14,,21,,,27,,,18,,,14,,,10
+Chard,1,G,8,Leaf 5 width,,,,13,,23,,,22,,,18,,,22,,,11
+Chard,1,G,8,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,8,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,8,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,9,Leaf harvest count,,,,9,,7,,,8,,,5,,,7,,,5
+Chard,1,G,9,Leaf harvest mass,,,,208,,483,,,383,,,209,,,366,,,195
+Chard,1,G,9,Leaf 1 height,,,,23,,31,,,38,,,31,,,35,,,35
+Chard,1,G,9,Leaf 2 height,,,,28,,30,,,26,,,27,,,33,,,28
+Chard,1,G,9,Leaf 3 height,,,,27,,29,,,32,,,27,,,33,,,29
+Chard,1,G,9,Leaf 4 height,,,,21,,30,,,29,,,35,,,36,,,22
+Chard,1,G,9,Leaf 5 height,,,,18,,28,,,41,,,33,,,30,,,30
+Chard,1,G,9,Leaf 1 width,,,,22,,16,,,22,,,19,,,19,,,22
+Chard,1,G,9,Leaf 2 width,,,,18,,23,,,11,,,15,,,21,,,19
+Chard,1,G,9,Leaf 3 width,,,,22,,18,,,16,,,17,,,22,,,10
+Chard,1,G,9,Leaf 4 width,,,,19,,21,,,14,,,20,,,25,,,15
+Chard,1,G,9,Leaf 5 width,,,,16,,20,,,24,,,19,,,21,,,17
+Chard,1,G,9,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,9,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,9,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,10,Leaf harvest count,,,,6,,7,,,7,,,7,,,5,,,4
+Chard,1,G,10,Leaf harvest mass,,,,105,,444,,,541,,,410,,,224,,,148
+Chard,1,G,10,Leaf 1 height,,,,27,,41,,,43,,,27,,,37,,,25
+Chard,1,G,10,Leaf 2 height,,,,25,,39,,,45,,,45,,,27,,,34
+Chard,1,G,10,Leaf 3 height,,,,19,,33,,,44,,,39,,,26,,,31
+Chard,1,G,10,Leaf 4 height,,,,16,,39,,,45,,,27,,,33,,,33
+Chard,1,G,10,Leaf 5 height,,,,,,36,,,42,,,35,,,32,,,25
+Chard,1,G,10,Leaf 1 width,,,,17,,24,,,23,,,20,,,24,,,12
+Chard,1,G,10,Leaf 2 width,,,,17,,24,,,24,,,28,,,14,,,17
+Chard,1,G,10,Leaf 3 width,,,,15,,23,,,28,,,26,,,17,,,16
+Chard,1,G,10,Leaf 4 width,,,,13,,24,,,35,,,22,,,18,,,14
+Chard,1,G,10,Leaf 5 width,,,,,,20,,,25,,,29,,,19,,,15
+Chard,1,G,10,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,10,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,10,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,11,Leaf harvest count,,,,5,,8,,,6,,,4,,,7,,,5
+Chard,1,G,11,Leaf harvest mass,,,,66,,583,,,523,,,313,,,289,,,169
+Chard,1,G,11,Leaf 1 height,,,,18,,28,,,24,,,29,,,32,,,29
+Chard,1,G,11,Leaf 2 height,,,,14,,33,,,36,,,25,,,22,,,23
+Chard,1,G,11,Leaf 3 height,,,,18,,30,,,29,,,27,,,27,,,21
+Chard,1,G,11,Leaf 4 height,,,,12,,30,,,31,,,29,,,22,,,11
+Chard,1,G,11,Leaf 5 height,,,,12,,29,,,23,,,,,,16,,,7
+Chard,1,G,11,Leaf 1 width,,,,14,,22,,,18,,,26,,,21,,,17
+Chard,1,G,11,Leaf 2 width,,,,12,,19,,,33,,,19,,,18,,,15
+Chard,1,G,11,Leaf 3 width,,,,13,,22,,,24,,,17,,,17,,,18
+Chard,1,G,11,Leaf 4 width,,,,8,,20,,,21,,,12,,,16,,,4
+Chard,1,G,11,Leaf 5 width,,,,9,,22,,,23,,,,,,10,,,3
+Chard,1,G,11,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,11,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,G,11,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,12,Leaf harvest count,,,,7,,7,,,7,,,5,,,6,,,3
+Chard,1,G,12,Leaf harvest mass,,,,219,,649,,,789,,,508,,,408,,,186
+Chard,1,G,12,Leaf 1 height,,,,28,,40,,,38,,,29,,,37,,,39
+Chard,1,G,12,Leaf 2 height,,,,29,,41,,,47,,,35,,,39,,,30
+Chard,1,G,12,Leaf 3 height,,,,26,,37,,,45,,,45,,,26,,,18
+Chard,1,G,12,Leaf 4 height,,,,22,,39,,,37,,,43,,,32,,,
+Chard,1,G,12,Leaf 5 height,,,,15,,35,,,40,,,36,,,20,,,
+Chard,1,G,12,Leaf 1 width,,,,20,,27,,,22,,,19,,,24,,,22
+Chard,1,G,12,Leaf 2 width,,,,22,,26,,,32,,,17,,,22,,,15
+Chard,1,G,12,Leaf 3 width,,,,20,,26,,,29,,,27,,,14,,,8
+Chard,1,G,12,Leaf 4 width,,,,19,,30,,,20,,,26,,,17,,,
+Chard,1,G,12,Leaf 5 width,,,,13,,22,,,23,,,24,,,17,,,
+Chard,1,G,12,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,12,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,12,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,13,Leaf harvest count,,,,11,,10,,,8,,,5,,,9,,,6
+Chard,1,G,13,Leaf harvest mass,,,,342,,957,,,901,,,504,,,238,,,152
+Chard,1,G,13,Leaf 1 height,,,,34,,44,,,40,,,36,,,21,,,21
+Chard,1,G,13,Leaf 2 height,,,,12,,36,,,38,,,23,,,29,,,17
+Chard,1,G,13,Leaf 3 height,,,,33,,45,,,45,,,38,,,25,,,12
+Chard,1,G,13,Leaf 4 height,,,,35,,32,,,44,,,33,,,23,,,26
+Chard,1,G,13,Leaf 5 height,,,,27,,31,,,37,,,39,,,23,,,24
+Chard,1,G,13,Leaf 1 width,,,,25,,25,,,20,,,15,,,13,,,14
+Chard,1,G,13,Leaf 2 width,,,,12,,22,,,21,,,15,,,15,,,10
+Chard,1,G,13,Leaf 3 width,,,,24,,24,,,28,,,24,,,12,,,7
+Chard,1,G,13,Leaf 4 width,,,,23,,24,,,25,,,19,,,15,,,18
+Chard,1,G,13,Leaf 5 width,,,,21,,20,,,21,,,20,,,10,,,13
+Chard,1,G,13,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,13,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,13,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,14,Leaf harvest count,,,,6,,9,,,7,,,5,,,5,,,7
+Chard,1,G,14,Leaf harvest mass,,,,180,,510,,,365,,,229,,,230,,,218
+Chard,1,G,14,Leaf 1 height,,,,19,,32,,,28,,,30,,,36,,,27
+Chard,1,G,14,Leaf 2 height,,,,28,,40,,,31,,,30,,,40,,,25
+Chard,1,G,14,Leaf 3 height,,,,25,,32,,,36,,,40,,,29,,,28
+Chard,1,G,14,Leaf 4 height,,,,30,,30,,,29,,,32,,,41,,,37
+Chard,1,G,14,Leaf 5 height,,,,12,,37,,,38,,,28,,,,,,35
+Chard,1,G,14,Leaf 1 width,,,,16,,19,,,17,,,20,,,17,,,16
+Chard,1,G,14,Leaf 2 width,,,,17,,27,,,21,,,13,,,19,,,13
+Chard,1,G,14,Leaf 3 width,,,,20,,22,,,23,,,22,,,15,,,15
+Chard,1,G,14,Leaf 4 width,,,,20,,19,,,18,,,19,,,21,,,19
+Chard,1,G,14,Leaf 5 width,,,,12,,24,,,22,,,16,,,,,,19
+Chard,1,G,14,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,14,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,14,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,15,Leaf harvest count,,,,11,,11,,,8,,,5,,,5,,,5
+Chard,1,G,15,Leaf harvest mass,,,,181,,733,,,777,,,426,,,181,,,155
+Chard,1,G,15,Leaf 1 height,,,,21,,32,,,39,,,38,,,31,,,26
+Chard,1,G,15,Leaf 2 height,,,,24,,30,,,38,,,30,,,21,,,28
+Chard,1,G,15,Leaf 3 height,,,,25,,37,,,40,,,39,,,29,,,26
+Chard,1,G,15,Leaf 4 height,,,,18,,39,,,38,,,40,,,36,,,29
+Chard,1,G,15,Leaf 5 height,,,,12,,35,,,37,,,41,,,31,,,19
+Chard,1,G,15,Leaf 1 width,,,,20,,25,,,24,,,23,,,18,,,16
+Chard,1,G,15,Leaf 2 width,,,,20,,23,,,29,,,16,,,11,,,15
+Chard,1,G,15,Leaf 3 width,,,,18,,22,,,36,,,25,,,9,,,15
+Chard,1,G,15,Leaf 4 width,,,,16,,26,,,27,,,29,,,18,,,14
+Chard,1,G,15,Leaf 5 width,,,,15,,27,,,37,,,25,,,15,,,13
+Chard,1,G,15,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,15,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,G,15,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,G,16,Leaf harvest count,,,,,,5,,,8,,,4,,,4,,,8
+Chard,1,G,16,Leaf harvest mass,,,,,,73,,,564,,,226,,,140,,,53
+Chard,1,G,16,Leaf 1 height,,,,,,20,,,35,,,47,,,23,,,14
+Chard,1,G,16,Leaf 2 height,,,,,,25,,,31,,,21,,,19,,,14
+Chard,1,G,16,Leaf 3 height,,,,,,13,,,41,,,,,,15,,,13
+Chard,1,G,16,Leaf 4 height,,,,,,24,,,34,,,,,,11,,,13
+Chard,1,G,16,Leaf 5 height,,,,,,19,,,38,,,,,,,,,15
+Chard,1,G,16,Leaf 1 width,,,,,,12,,,26,,,26,,,17,,,7
+Chard,1,G,16,Leaf 2 width,,,,,,15,,,22,,,14,,,13,,,9
+Chard,1,G,16,Leaf 3 width,,,,,,8,,,26,,,,,,8,,,10
+Chard,1,G,16,Leaf 4 width,,,,,,15,,,26,,,,,,7,,,7
+Chard,1,G,16,Leaf 5 width,,,,,,13,,,24,,,,,,,,,9
+Chard,1,G,16,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,G,16,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,G,16,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,1,Leaf harvest count,,,,6,,8,,,9,,,4,,,7,,,7
+Chard,1,H,1,Leaf harvest mass,,,,198,,437,,,714,,,279,,,628,,,469
+Chard,1,H,1,Leaf 1 height,,,,22,,36,,,38,,,34,,,47,,,32
+Chard,1,H,1,Leaf 2 height,,,,27,,30,,,40,,,33,,,45,,,45
+Chard,1,H,1,Leaf 3 height,,,,29,,30,,,42,,,43,,,43,,,38
+Chard,1,H,1,Leaf 4 height,,,,23,,34,,,40,,,42,,,,,,36
+Chard,1,H,1,Leaf 5 height,,,,28,,33,,,42,,,,,,,,,36
+Chard,1,H,1,Leaf 1 width,,,,17,,25,,,30,,,24,,,29,,,23
+Chard,1,H,1,Leaf 2 width,,,,23,,21,,,30,,,22,,,28,,,30
+Chard,1,H,1,Leaf 3 width,,,,23,,22,,,31,,,29,,,29,,,23
+Chard,1,H,1,Leaf 4 width,,,,20,,19,,,29,,,26,,,,,,25
+Chard,1,H,1,Leaf 5 width,,,,23,,22,,,24,,,,,,,,,23
+Chard,1,H,1,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,1,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,H,1,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,2,Leaf harvest count,,,,10,,15,,,12,,,6,,,7,,,6
+Chard,1,H,2,Leaf harvest mass,,,,274,,869,,,856,,,314,,,394,,,181
+Chard,1,H,2,Leaf 1 height,,,,29,,34,,,39,,,37,,,41,,,25
+Chard,1,H,2,Leaf 2 height,,,,33,,34,,,35,,,37,,,37,,,21
+Chard,1,H,2,Leaf 3 height,,,,32,,36,,,38,,,35,,,35,,,34
+Chard,1,H,2,Leaf 4 height,,,,31,,38,,,35,,,30,,,,,,13
+Chard,1,H,2,Leaf 5 height,,,,,,35,,,39,,,,,,,,,
+Chard,1,H,2,Leaf 1 width,,,,23,,27,,,32,,,22,,,19,,,13
+Chard,1,H,2,Leaf 2 width,,,,30,,30,,,26,,,27,,,23,,,15
+Chard,1,H,2,Leaf 3 width,,,,28,,28,,,29,,,26,,,22,,,19
+Chard,1,H,2,Leaf 4 width,,,,24,,23,,,17,,,19,,,,,,30
+Chard,1,H,2,Leaf 5 width,,,,,,31,,,27,,,,,,,,,
+Chard,1,H,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,2,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,H,2,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,3,Leaf harvest count,,,,3,,7,,,8,,,4,,,6,,,4
+Chard,1,H,3,Leaf harvest mass,,,,65,,471,,,1025,,,414,,,525,,,322
+Chard,1,H,3,Leaf 1 height,,,,27,,39,,,33,,,30,,,34,,,38
+Chard,1,H,3,Leaf 2 height,,,,18,,40,,,37,,,37,,,31,,,24
+Chard,1,H,3,Leaf 3 height,,,,13,,39,,,42,,,36,,,31,,,41
+Chard,1,H,3,Leaf 4 height,,,,,,36,,,37,,,34,,,,,,42
+Chard,1,H,3,Leaf 5 height,,,,,,33,,,45,,,,,,,,,
+Chard,1,H,3,Leaf 1 width,,,,19,,23,,,22,,,24,,,31,,,26
+Chard,1,H,3,Leaf 2 width,,,,12,,24,,,25,,,32,,,28,,,16
+Chard,1,H,3,Leaf 3 width,,,,10,,22,,,31,,,26,,,19,,,19
+Chard,1,H,3,Leaf 4 width,,,,,,20,,,30,,,33,,,,,,23
+Chard,1,H,3,Leaf 5 width,,,,,,20,,,35,,,,,,,,,
+Chard,1,H,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,3,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,H,3,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,4,Leaf harvest count,,,,8,,11,,,10,,,5,,,7,,,4
+Chard,1,H,4,Leaf harvest mass,,,,346,,907,,,622,,,274,,,375,,,213
+Chard,1,H,4,Leaf 1 height,,,,34,,42,,,42,,,37,,,37,,,42
+Chard,1,H,4,Leaf 2 height,,,,20,,42,,,43,,,39,,,41,,,16
+Chard,1,H,4,Leaf 3 height,,,,32,,37,,,36,,,32,,,46,,,18
+Chard,1,H,4,Leaf 4 height,,,,28,,32,,,40,,,29,,,,,,
+Chard,1,H,4,Leaf 5 height,,,,33,,35,,,43,,,39,,,,,,
+Chard,1,H,4,Leaf 1 width,,,,24,,25,,,28,,,20,,,19,,,16
+Chard,1,H,4,Leaf 2 width,,,,16,,28,,,23,,,17,,,18,,,18
+Chard,1,H,4,Leaf 3 width,,,,20,,25,,,18,,,15,,,20,,,13
+Chard,1,H,4,Leaf 4 width,,,,19,,21,,,26,,,12,,,,,,
+Chard,1,H,4,Leaf 5 width,,,,22,,25,,,18,,,13,,,,,,
+Chard,1,H,4,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,4,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,H,4,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,5,Leaf harvest count,,,,30,,24,,,25,,,5,,,24,,,13
+Chard,1,H,5,Leaf harvest mass,,,,219,,700,,,885,,,149,,,545,,,202
+Chard,1,H,5,Leaf 1 height,,,,25,,40,,,43,,,26,,,39,,,32
+Chard,1,H,5,Leaf 2 height,,,,24,,40,,,44,,,35,,,38,,,23
+Chard,1,H,5,Leaf 3 height,,,,22,,34,,,46,,,38,,,41,,,22
+Chard,1,H,5,Leaf 4 height,,,,31,,39,,,46,,,40,,,,,,19
+Chard,1,H,5,Leaf 5 height,,,,20,,31,,,41,,,,,,,,,36
+Chard,1,H,5,Leaf 1 width,,,,17,,24,,,24,,,10,,,17,,,15
+Chard,1,H,5,Leaf 2 width,,,,20,,20,,,27,,,16,,,15,,,11
+Chard,1,H,5,Leaf 3 width,,,,15,,23,,,25,,,14,,,17,,,10
+Chard,1,H,5,Leaf 4 width,,,,17,,24,,,22,,,17,,,,,,17
+Chard,1,H,5,Leaf 5 width,,,,12,,20,,,25,,,,,,,,,19
+Chard,1,H,5,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,5,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,H,5,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,6,Leaf harvest count,,,,8,,12,,,6,,,3,,,11,,,8
+Chard,1,H,6,Leaf harvest mass,,,,228,,659,,,617,,,154,,,245,,,49
+Chard,1,H,6,Leaf 1 height,,,,32,,35,,,45,,,36,,,33,,,11
+Chard,1,H,6,Leaf 2 height,,,,30,,38,,,45,,,27,,,26,,,19
+Chard,1,H,6,Leaf 3 height,,,,18,,36,,,45,,,28,,,31,,,10
+Chard,1,H,6,Leaf 4 height,,,,24,,34,,,40,,,,,,,,,19
+Chard,1,H,6,Leaf 5 height,,,,,,36,,,39,,,,,,,,,
+Chard,1,H,6,Leaf 1 width,,,,23,,24,,,34,,,20,,,18,,,7
+Chard,1,H,6,Leaf 2 width,,,,22,,26,,,27,,,21,,,22,,,13
+Chard,1,H,6,Leaf 3 width,,,,13,,30,,,24,,,18,,,18,,,5
+Chard,1,H,6,Leaf 4 width,,,,18,,29,,,21,,,,,,,,,12
+Chard,1,H,6,Leaf 5 width,,,,,,27,,,20,,,,,,,,,
+Chard,1,H,6,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,6,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,H,6,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,7,Leaf harvest count,,,,17,,11,,,8,,,,,,7,,,4
+Chard,1,H,7,Leaf harvest mass,,,,434,,757,,,561,,,,,,126,,,83
+Chard,1,H,7,Leaf 1 height,,,,23,,29,,,43,,,,,,19,,,15
+Chard,1,H,7,Leaf 2 height,,,,25,,39,,,39,,,,,,21,,,16
+Chard,1,H,7,Leaf 3 height,,,,27,,30,,,33,,,,,,18,,,11
+Chard,1,H,7,Leaf 4 height,,,,22,,32,,,32,,,,,,,,,15
+Chard,1,H,7,Leaf 5 height,,,,28,,40,,,40,,,,,,,,,
+Chard,1,H,7,Leaf 1 width,,,,18,,25,,,26,,,,,,13,,,15
+Chard,1,H,7,Leaf 2 width,,,,14,,23,,,25,,,,,,16,,,13
+Chard,1,H,7,Leaf 3 width,,,,22,,19,,,18,,,,,,14,,,7
+Chard,1,H,7,Leaf 4 width,,,,20,,19,,,18,,,,,,,,,12
+Chard,1,H,7,Leaf 5 width,,,,18,,27,,,21,,,,,,,,,
+Chard,1,H,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,7,Animal damage?,,,1,,,,,,,,,3,,,,,,
+Chard,1,H,7,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,8,Leaf harvest count,,,,10,,8,,,9,,,4,,,8,,,4
+Chard,1,H,8,Leaf harvest mass,,,,219,,520,,,361,,,196,,,459,,,226
+Chard,1,H,8,Leaf 1 height,,,,25,,29,,,23,,,35,,,34,,,30
+Chard,1,H,8,Leaf 2 height,,,,25,,29,,,27,,,21,,,32,,,29
+Chard,1,H,8,Leaf 3 height,,,,20,,34,,,26,,,36,,,46,,,29
+Chard,1,H,8,Leaf 4 height,,,,19,,23,,,32,,,,,,,,,38
+Chard,1,H,8,Leaf 5 height,,,,23,,30,,,24,,,,,,,,,
+Chard,1,H,8,Leaf 1 width,,,,18,,23,,,18,,,20,,,25,,,19
+Chard,1,H,8,Leaf 2 width,,,,20,,22,,,22,,,11,,,21,,,19
+Chard,1,H,8,Leaf 3 width,,,,15,,27,,,21,,,20,,,24,,,18
+Chard,1,H,8,Leaf 4 width,,,,15,,23,,,23,,,,,,,,,14
+Chard,1,H,8,Leaf 5 width,,,,17,,24,,,16,,,,,,,,,
+Chard,1,H,8,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,8,Animal damage?,,,2,,,,,,,,,,,,,,,
+Chard,1,H,8,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,9,Leaf harvest count,,,,23,,22,,,22,,,26,,,12,,,15
+Chard,1,H,9,Leaf harvest mass,,,,411,,1205,,,1306,,,777,,,748,,,443
+Chard,1,H,9,Leaf 1 height,,,,31,,35,,,56,,,37,,,38,,,40
+Chard,1,H,9,Leaf 2 height,,,,30,,40,,,57,,,30,,,44,,,26
+Chard,1,H,9,Leaf 3 height,,,,30,,34,,,47,,,40,,,55,,,30
+Chard,1,H,9,Leaf 4 height,,,,31,,39,,,47,,,43,,,49,,,41
+Chard,1,H,9,Leaf 5 height,,,,25,,40,,,50,,,49,,,,,,51
+Chard,1,H,9,Leaf 1 width,,,,19,,28,,,26,,,26,,,32,,,21
+Chard,1,H,9,Leaf 2 width,,,,18,,30,,,35,,,33,,,23,,,19
+Chard,1,H,9,Leaf 3 width,,,,20,,22,,,22,,,18,,,30,,,14
+Chard,1,H,9,Leaf 4 width,,,,21,,30,,,22,,,36,,,28,,,21
+Chard,1,H,9,Leaf 5 width,,,,18,,30,,,32,,,37,,,,,,25
+Chard,1,H,9,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,9,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,H,9,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,10,Leaf harvest count,,,,26,,30,,,10,,,13,,,16,,,3
+Chard,1,H,10,Leaf harvest mass,,,,593,,1086,,,926,,,347,,,244,,,117
+Chard,1,H,10,Leaf 1 height,,,,28,,37,,,37,,,25,,,24,,,33
+Chard,1,H,10,Leaf 2 height,,,,25,,45,,,31,,,28,,,21,,,11
+Chard,1,H,10,Leaf 3 height,,,,30,,37,,,37,,,18,,,27,,,21
+Chard,1,H,10,Leaf 4 height,,,,32,,36,,,39,,,32,,,26,,,
+Chard,1,H,10,Leaf 5 height,,,,33,,49,,,41,,,,,,26,,,
+Chard,1,H,10,Leaf 1 width,,,,20,,29,,,28,,,28,,,23,,,21
+Chard,1,H,10,Leaf 2 width,,,,19,,30,,,26,,,19,,,16,,,19
+Chard,1,H,10,Leaf 3 width,,,,24,,29,,,28,,,29,,,19,,,13
+Chard,1,H,10,Leaf 4 width,,,,27,,24,,,34,,,22,,,20,,,
+Chard,1,H,10,Leaf 5 width,,,,27,,28,,,33,,,,,,16,,,
+Chard,1,H,10,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,10,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,H,10,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,11,Leaf harvest count,,,,21,,17,,,11,,,3,,,11,,,15
+Chard,1,H,11,Leaf harvest mass,,,,427,,453,,,381,,,291,,,244,,,141
+Chard,1,H,11,Leaf 1 height,,,,19,,30,,,33,,,44,,,42,,,36
+Chard,1,H,11,Leaf 2 height,,,,23,,36,,,31,,,22,,,26,,,17
+Chard,1,H,11,Leaf 3 height,,,,28,,38,,,39,,,43,,,34,,,12
+Chard,1,H,11,Leaf 4 height,,,,30,,26,,,37,,,,,,,,,
+Chard,1,H,11,Leaf 5 height,,,,26,,29,,,47,,,,,,,,,
+Chard,1,H,11,Leaf 1 width,,,,20,,22,,,20,,,28,,,22,,,19
+Chard,1,H,11,Leaf 2 width,,,,17,,24,,,17,,,14,,,14,,,18
+Chard,1,H,11,Leaf 3 width,,,,20,,24,,,23,,,20,,,18,,,15
+Chard,1,H,11,Leaf 4 width,,,,23,,20,,,23,,,,,,,,,
+Chard,1,H,11,Leaf 5 width,,,,22,,22,,,30,,,,,,,,,
+Chard,1,H,11,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,11,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,H,11,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,12,Leaf harvest count,,,,24,,25,,,16,,,31,,,31,,,21
+Chard,1,H,12,Leaf harvest mass,,,,252,,1040,,,354,,,194,,,228,,,131
+Chard,1,H,12,Leaf 1 height,,,,26,,43,,,29,,,27,,,21,,,27
+Chard,1,H,12,Leaf 2 height,,,,25,,47,,,33,,,28,,,29,,,26
+Chard,1,H,12,Leaf 3 height,,,,31,,50,,,33,,,27,,,27,,,21
+Chard,1,H,12,Leaf 4 height,,,,30,,39,,,36,,,36,,,33,,,14
+Chard,1,H,12,Leaf 5 height,,,,31,,42,,,36,,,,,,30,,,13
+Chard,1,H,12,Leaf 1 width,,,,18,,25,,,14,,,14,,,11,,,12
+Chard,1,H,12,Leaf 2 width,,,,16,,26,,,15,,,11,,,12,,,11
+Chard,1,H,12,Leaf 3 width,,,,17,,30,,,17,,,12,,,10,,,9
+Chard,1,H,12,Leaf 4 width,,,,18,,30,,,23,,,17,,,14,,,7
+Chard,1,H,12,Leaf 5 width,,,,18,,28,,,25,,,,,,14,,,8
+Chard,1,H,12,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,12,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,H,12,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,13,Leaf harvest count,,,,12,,8,,,10,,,7,,,9,,,11
+Chard,1,H,13,Leaf harvest mass,,,,147,,463,,,1041,,,477,,,627,,,471
+Chard,1,H,13,Leaf 1 height,,,,18,,39,,,41,,,39,,,41,,,25
+Chard,1,H,13,Leaf 2 height,,,,27,,37,,,43,,,45,,,38,,,30
+Chard,1,H,13,Leaf 3 height,,,,21,,39,,,47,,,34,,,33,,,35
+Chard,1,H,13,Leaf 4 height,,,,24,,32,,,46,,,41,,,43,,,44
+Chard,1,H,13,Leaf 5 height,,,,29,,36,,,43,,,32,,,32,,,40
+Chard,1,H,13,Leaf 1 width,,,,13,,29,,,27,,,28,,,31,,,19
+Chard,1,H,13,Leaf 2 width,,,,18,,29,,,34,,,33,,,26,,,20
+Chard,1,H,13,Leaf 3 width,,,,16,,27,,,28,,,27,,,25,,,21
+Chard,1,H,13,Leaf 4 width,,,,17,,26,,,36,,,33,,,31,,,25
+Chard,1,H,13,Leaf 5 width,,,,18,,26,,,31,,,20,,,20,,,26
+Chard,1,H,13,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,13,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,H,13,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,14,Leaf harvest count,,,,11,,12,,,9,,,5,,,1,,,4
+Chard,1,H,14,Leaf harvest mass,,,,232,,626,,,616,,,230,,,32,,,70
+Chard,1,H,14,Leaf 1 height,,,,29,,23,,,33,,,31,,,19,,,26
+Chard,1,H,14,Leaf 2 height,,,,27,,33,,,30,,,29,,,,,,19
+Chard,1,H,14,Leaf 3 height,,,,27,,29,,,37,,,30,,,,,,22
+Chard,1,H,14,Leaf 4 height,,,,30,,36,,,41,,,33,,,,,,21
+Chard,1,H,14,Leaf 5 height,,,,26,,34,,,40,,,,,,,,,14
+Chard,1,H,14,Leaf 1 width,,,,21,,15,,,19,,,15,,,18,,,15
+Chard,1,H,14,Leaf 2 width,,,,21,,25,,,17,,,15,,,,,,10
+Chard,1,H,14,Leaf 3 width,,,,18,,23,,,26,,,29,,,,,,9
+Chard,1,H,14,Leaf 4 width,,,,23,,25,,,33,,,22,,,,,,
+Chard,1,H,14,Leaf 5 width,,,,20,,27,,,29,,,,,,,,,
+Chard,1,H,14,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,14,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,H,14,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,15,Leaf harvest count,,,,8,,7,,,8,,,4,,,5,,,2
+Chard,1,H,15,Leaf harvest mass,,,,212,,460,,,301,,,126,,,105,,,42
+Chard,1,H,15,Leaf 1 height,,,,26,,40,,,25,,,27,,,21,,,20
+Chard,1,H,15,Leaf 2 height,,,,28,,34,,,33,,,19,,,21,,,23
+Chard,1,H,15,Leaf 3 height,,,,30,,42,,,34,,,32,,,19,,,
+Chard,1,H,15,Leaf 4 height,,,,30,,35,,,42,,,,,,19,,,
+Chard,1,H,15,Leaf 5 height,,,,,,43,,,33,,,,,,21,,,
+Chard,1,H,15,Leaf 1 width,,,,13,,20,,,12,,,14,,,14,,,11
+Chard,1,H,15,Leaf 2 width,,,,19,,25,,,16,,,11,,,12,,,11
+Chard,1,H,15,Leaf 3 width,,,,16,,16,,,16,,,13,,,9,,,
+Chard,1,H,15,Leaf 4 width,,,,17,,24,,,19,,,,,,8,,,
+Chard,1,H,15,Leaf 5 width,,,,,,18,,,22,,,,,,10,,,
+Chard,1,H,15,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,15,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,H,15,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,H,16,Leaf harvest count,,,,5,,4,,,7,,,5,,,7,,,2
+Chard,1,H,16,Leaf harvest mass,,,,179,,336,,,540,,,300,,,384,,,117
+Chard,1,H,16,Leaf 1 height,,,,25,,29,,,24,,,30,,,30,,,29
+Chard,1,H,16,Leaf 2 height,,,,25,,25,,,28,,,30,,,25,,,28
+Chard,1,H,16,Leaf 3 height,,,,20,,29,,,29,,,28,,,30,,,
+Chard,1,H,16,Leaf 4 height,,,,19,,28,,,30,,,27,,,28,,,
+Chard,1,H,16,Leaf 5 height,,,,23,,,,,32,,,19,,,28,,,
+Chard,1,H,16,Leaf 1 width,,,,18,,27,,,24,,,21,,,19,,,15
+Chard,1,H,16,Leaf 2 width,,,,20,,23,,,21,,,19,,,17,,,18
+Chard,1,H,16,Leaf 3 width,,,,15,,20,,,26,,,24,,,23,,,
+Chard,1,H,16,Leaf 4 width,,,,15,,25,,,31,,,21,,,29,,,
+Chard,1,H,16,Leaf 5 width,,,,17,,,,,25,,,17,,,20,,,
+Chard,1,H,16,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,H,16,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,H,16,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,1,Leaf harvest count,,,,7,,9,,,11,,,6,,,9,,,8
+Chard,1,I,1,Leaf harvest mass,,,,167,,699,,,1021,,,546,,,720,,,288
+Chard,1,I,1,Leaf 1 height,,,,20,,41,,,41,,,43,,,46,,,24
+Chard,1,I,1,Leaf 2 height,,,,25,,47,,,47,,,41,,,45,,,28
+Chard,1,I,1,Leaf 3 height,,,,24,,43,,,43,,,39,,,54,,,16
+Chard,1,I,1,Leaf 4 height,,,,26,,42,,,42,,,39,,,,,,40
+Chard,1,I,1,Leaf 5 height,,,,17,,42,,,42,,,45,,,,,,27
+Chard,1,I,1,Leaf 1 width,,,,13,,32,,,32,,,22,,,23,,,13
+Chard,1,I,1,Leaf 2 width,,,,17,,31,,,31,,,27,,,29,,,17
+Chard,1,I,1,Leaf 3 width,,,,17,,28,,,28,,,20,,,29,,,14
+Chard,1,I,1,Leaf 4 width,,,,17,,30,,,30,,,27,,,,,,22
+Chard,1,I,1,Leaf 5 width,,,,16,,20,,,20,,,28,,,,,,19
+Chard,1,I,1,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,1,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,I,1,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,2,Leaf harvest count,,,,22,,18,,,17,,,,,,13,,,
+Chard,1,I,2,Leaf harvest mass,,,,373,,466,,,51,,,,,,42,,,
+Chard,1,I,2,Leaf 1 height,,,,22,,14,,,14,,,,,,11,,,
+Chard,1,I,2,Leaf 2 height,,,,29,,14,,,14,,,,,,8,,,
+Chard,1,I,2,Leaf 3 height,,,,26,,12,,,12,,,,,,11,,,
+Chard,1,I,2,Leaf 4 height,,,,29,,16,,,16,,,,,,,,,
+Chard,1,I,2,Leaf 5 height,,,,19,,14,,,14,,,,,,,,,
+Chard,1,I,2,Leaf 1 width,,,,17,,10,,,10,,,,,,6,,,
+Chard,1,I,2,Leaf 2 width,,,,23,,11,,,11,,,,,,4,,,
+Chard,1,I,2,Leaf 3 width,,,,20,,8,,,8,,,,,,6,,,
+Chard,1,I,2,Leaf 4 width,,,,23,,12,,,12,,,,,,,,,
+Chard,1,I,2,Leaf 5 width,,,,15,,11,,,11,,,,,,,,,
+Chard,1,I,2,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,2,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,2,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,3,Leaf harvest count,,,,16,,16,,,15,,,6,,,6,,,5
+Chard,1,I,3,Leaf harvest mass,,,,278,,1192,,,866,,,564,,,258,,,77
+Chard,1,I,3,Leaf 1 height,,,,21,,43,,,43,,,37,,,27,,,22
+Chard,1,I,3,Leaf 2 height,,,,34,,45,,,45,,,35,,,32,,,17
+Chard,1,I,3,Leaf 3 height,,,,34,,50,,,50,,,40,,,41,,,29
+Chard,1,I,3,Leaf 4 height,,,,26,,43,,,43,,,44,,,,,,24
+Chard,1,I,3,Leaf 5 height,,,,29,,43,,,43,,,47,,,,,,15
+Chard,1,I,3,Leaf 1 width,,,,10,,26,,,26,,,28,,,21,,,11
+Chard,1,I,3,Leaf 2 width,,,,22,,29,,,29,,,28,,,18,,,11
+Chard,1,I,3,Leaf 3 width,,,,21,,25,,,25,,,20,,,21,,,18
+Chard,1,I,3,Leaf 4 width,,,,19,,33,,,33,,,37,,,,,,15
+Chard,1,I,3,Leaf 5 width,,,,22,,26,,,26,,,29,,,,,,14
+Chard,1,I,3,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,3,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,I,3,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,4,Leaf harvest count,,,,16,,5,,,9,,,4,,,7,,,6
+Chard,1,I,4,Leaf harvest mass,,,,435,,513,,,698,,,94,,,137,,,109
+Chard,1,I,4,Leaf 1 height,,,,36,,38,,,38,,,31,,,31,,,21
+Chard,1,I,4,Leaf 2 height,,,,24,,45,,,45,,,36,,,23,,,30
+Chard,1,I,4,Leaf 3 height,,,,30,,43,,,43,,,21,,,31,,,23
+Chard,1,I,4,Leaf 4 height,,,,36,,55,,,55,,,32,,,,,,23
+Chard,1,I,4,Leaf 5 height,,,,31,,53,,,53,,,,,,,,,24
+Chard,1,I,4,Leaf 1 width,,,,23,,24,,,24,,,16,,,14,,,10
+Chard,1,I,4,Leaf 2 width,,,,23,,29,,,29,,,16,,,14,,,17
+Chard,1,I,4,Leaf 3 width,,,,24,,28,,,28,,,10,,,15,,,15
+Chard,1,I,4,Leaf 4 width,,,,23,,31,,,31,,,17,,,,,,12
+Chard,1,I,4,Leaf 5 width,,,,22,,30,,,30,,,,,,,,,11
+Chard,1,I,4,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,4,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,4,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,5,Leaf harvest count,,,,8,,8,,,10,,,2,,,6,,,3
+Chard,1,I,5,Leaf harvest mass,,,,220,,486,,,417,,,48,,,87,,,33
+Chard,1,I,5,Leaf 1 height,,,,31,,37,,,37,,,30,,,21,,,17
+Chard,1,I,5,Leaf 2 height,,,,28,,36,,,36,,,23,,,19,,,18
+Chard,1,I,5,Leaf 3 height,,,,29,,46,,,46,,,,,,20,,,16
+Chard,1,I,5,Leaf 4 height,,,,28,,42,,,42,,,,,,,,,
+Chard,1,I,5,Leaf 5 height,,,,,,19,,,19,,,,,,,,,
+Chard,1,I,5,Leaf 1 width,,,,22,,21,,,21,,,16,,,11,,,12
+Chard,1,I,5,Leaf 2 width,,,,18,,18,,,18,,,13,,,16,,,11
+Chard,1,I,5,Leaf 3 width,,,,20,,25,,,25,,,,,,12,,,11
+Chard,1,I,5,Leaf 4 width,,,,20,,27,,,27,,,,,,,,,
+Chard,1,I,5,Leaf 5 width,,,,,,10,,,10,,,,,,,,,
+Chard,1,I,5,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,5,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,5,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,6,Leaf harvest count,,,,32,,26,,,21,,,5,,,8,,,
+Chard,1,I,6,Leaf harvest mass,,,,460,,804,,,718,,,104,,,55,,,
+Chard,1,I,6,Leaf 1 height,,,,20,,42,,,42,,,33,,,24,,,
+Chard,1,I,6,Leaf 2 height,,,,25,,40,,,40,,,23,,,15,,,
+Chard,1,I,6,Leaf 3 height,,,,27,,33,,,33,,,24,,,13,,,
+Chard,1,I,6,Leaf 4 height,,,,21,,41,,,41,,,20,,,,,,
+Chard,1,I,6,Leaf 5 height,,,,29,,39,,,39,,,,,,,,,
+Chard,1,I,6,Leaf 1 width,,,,17,,24,,,24,,,16,,,13,,,
+Chard,1,I,6,Leaf 2 width,,,,22,,26,,,26,,,12,,,11,,,
+Chard,1,I,6,Leaf 3 width,,,,21,,29,,,29,,,12,,,10,,,
+Chard,1,I,6,Leaf 4 width,,,,13,,28,,,28,,,13,,,,,,
+Chard,1,I,6,Leaf 5 width,,,,22,,22,,,22,,,,,,,,,
+Chard,1,I,6,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,6,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,6,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,7,Leaf harvest count,,,,8,,9,,,7,,,4,,,6,,,4
+Chard,1,I,7,Leaf harvest mass,,,,232,,594,,,700,,,353,,,525,,,288
+Chard,1,I,7,Leaf 1 height,,,,32,,50,,,50,,,49,,,52,,,46
+Chard,1,I,7,Leaf 2 height,,,,30,,50,,,50,,,55,,,52,,,33
+Chard,1,I,7,Leaf 3 height,,,,26,,46,,,46,,,50,,,51,,,50
+Chard,1,I,7,Leaf 4 height,,,,30,,50,,,50,,,45,,,,,,27
+Chard,1,I,7,Leaf 5 height,,,,30,,51,,,51,,,,,,,,,
+Chard,1,I,7,Leaf 1 width,,,,2,,23,,,23,,,21,,,23,,,23
+Chard,1,I,7,Leaf 2 width,,,,22,,33,,,33,,,22,,,25,,,16
+Chard,1,I,7,Leaf 3 width,,,,13,,17,,,17,,,14,,,21,,,20
+Chard,1,I,7,Leaf 4 width,,,,20,,24,,,24,,,13,,,,,,14
+Chard,1,I,7,Leaf 5 width,,,,20,,29,,,29,,,,,,,,,
+Chard,1,I,7,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,7,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,7,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,8,Leaf harvest count,,,,11,,15,,,8,,,5,,,10,,,3
+Chard,1,I,8,Leaf harvest mass,,,,455,,710,,,874,,,296,,,448,,,161
+Chard,1,I,8,Leaf 1 height,,,,21,,44,,,44,,,38,,,32,,,27
+Chard,1,I,8,Leaf 2 height,,,,25,,39,,,39,,,38,,,34,,,18
+Chard,1,I,8,Leaf 3 height,,,,19,,40,,,40,,,33,,,38,,,40
+Chard,1,I,8,Leaf 4 height,,,,31,,43,,,43,,,,,,,,,
+Chard,1,I,8,Leaf 5 height,,,,33,,46,,,46,,,,,,,,,
+Chard,1,I,8,Leaf 1 width,,,,13,,26,,,26,,,24,,,19,,,28
+Chard,1,I,8,Leaf 2 width,,,,18,,30,,,30,,,27,,,24,,,16
+Chard,1,I,8,Leaf 3 width,,,,17,,31,,,31,,,19,,,22,,,16
+Chard,1,I,8,Leaf 4 width,,,,24,,33,,,33,,,,,,,,,
+Chard,1,I,8,Leaf 5 width,,,,24,,35,,,35,,,,,,,,,
+Chard,1,I,8,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,8,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,8,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,9,Leaf harvest count,,,,8,,8,,,10,,,5,,,9,,,5
+Chard,1,I,9,Leaf harvest mass,,,,168,,527,,,456,,,219,,,422,,,131
+Chard,1,I,9,Leaf 1 height,,,,22,,31,,,31,,,26,,,36,,,18
+Chard,1,I,9,Leaf 2 height,,,,22,,33,,,33,,,28,,,31,,,15
+Chard,1,I,9,Leaf 3 height,,,,20,,29,,,29,,,34,,,36,,,19
+Chard,1,I,9,Leaf 4 height,,,,15,,26,,,26,,,38,,,,,,25
+Chard,1,I,9,Leaf 5 height,,,,29,,27,,,27,,,33,,,,,,
+Chard,1,I,9,Leaf 1 width,,,,17,,23,,,23,,,12,,,20,,,19
+Chard,1,I,9,Leaf 2 width,,,,19,,24,,,24,,,15,,,21,,,16
+Chard,1,I,9,Leaf 3 width,,,,16,,18,,,18,,,19,,,20,,,13
+Chard,1,I,9,Leaf 4 width,,,,14,,22,,,22,,,17,,,,,,16
+Chard,1,I,9,Leaf 5 width,,,,22,,22,,,22,,,19,,,,,,
+Chard,1,I,9,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,9,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,9,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,10,Leaf harvest count,,,,8,,9,,,7,,,5,,,7,,,5
+Chard,1,I,10,Leaf harvest mass,,,,241,,366,,,458,,,321,,,210,,,94
+Chard,1,I,10,Leaf 1 height,,,,30,,39,,,39,,,43,,,40,,,25
+Chard,1,I,10,Leaf 2 height,,,,30,,38,,,38,,,49,,,30,,,23
+Chard,1,I,10,Leaf 3 height,,,,27,,36,,,36,,,35,,,35,,,22
+Chard,1,I,10,Leaf 4 height,,,,29,,48,,,48,,,54,,,,,,11
+Chard,1,I,10,Leaf 5 height,,,,28,,46,,,46,,,43,,,,,,21
+Chard,1,I,10,Leaf 1 width,,,,20,,18,,,18,,,21,,,27,,,12
+Chard,1,I,10,Leaf 2 width,,,,16,,17,,,17,,,25,,,29,,,14
+Chard,1,I,10,Leaf 3 width,,,,20,,18,,,18,,,26,,,15,,,13
+Chard,1,I,10,Leaf 4 width,,,,19,,22,,,22,,,24,,,,,,13
+Chard,1,I,10,Leaf 5 width,,,,15,,19,,,19,,,21,,,,,,12
+Chard,1,I,10,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,10,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,I,10,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,11,Leaf harvest count,,,,6,,6,,,5,,,3,,,5,,,5
+Chard,1,I,11,Leaf harvest mass,,,,352,,417,,,579,,,338,,,382,,,89
+Chard,1,I,11,Leaf 1 height,,,,33,,40,,,40,,,43,,,39,,,28
+Chard,1,I,11,Leaf 2 height,,,,26,,32,,,32,,,28,,,39,,,
+Chard,1,I,11,Leaf 3 height,,,,30,,45,,,45,,,46,,,43,,,
+Chard,1,I,11,Leaf 4 height,,,,36,,35,,,35,,,,,,,,,
+Chard,1,I,11,Leaf 5 height,,,,20,,30,,,38,,,,,,,,,
+Chard,1,I,11,Leaf 1 width,,,,23,,27,,,27,,,22,,,23,,,18
+Chard,1,I,11,Leaf 2 width,,,,23,,25,,,25,,,24,,,26,,,
+Chard,1,I,11,Leaf 3 width,,,,25,,29,,,29,,,18,,,26,,,
+Chard,1,I,11,Leaf 4 width,,,,24,,23,,,23,,,,,,,,,
+Chard,1,I,11,Leaf 5 width,,,,19,,20,,,20,,,,,,,,,
+Chard,1,I,11,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,11,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,I,11,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,12,Leaf harvest count,,,,6,,8,,,8,,,4,,,13,,,14
+Chard,1,I,12,Leaf harvest mass,,,,123,,446,,,658,,,335,,,445,,,195
+Chard,1,I,12,Leaf 1 height,,,,21,,42,,,42,,,38,,,36,,,25
+Chard,1,I,12,Leaf 2 height,,,,20,,35,,,33,,,33,,,30,,,17
+Chard,1,I,12,Leaf 3 height,,,,21,,38,,,38,,,33,,,39,,,19
+Chard,1,I,12,Leaf 4 height,,,,19,,37,,,37,,,26,,,,,,22
+Chard,1,I,12,Leaf 5 height,,,,14,,36,,,36,,,,,,,,,18
+Chard,1,I,12,Leaf 1 width,,,,16,,23,,,23,,,25,,,20,,,15
+Chard,1,I,12,Leaf 2 width,,,,15,,20,,,20,,,20,,,22,,,17
+Chard,1,I,12,Leaf 3 width,,,,17,,25,,,25,,,23,,,23,,,12
+Chard,1,I,12,Leaf 4 width,,,,15,,28,,,28,,,18,,,,,,11
+Chard,1,I,12,Leaf 5 width,,,,12,,26,,,26,,,,,,,,,13
+Chard,1,I,12,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,12,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,12,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,13,Leaf harvest count,,,,9,,28,,,11,,,8,,,4,,,3
+Chard,1,I,13,Leaf harvest mass,,,,167,,449,,,368,,,467,,,365,,,206
+Chard,1,I,13,Leaf 1 height,,,,23,,30,,,30,,,37,,,45,,,31
+Chard,1,I,13,Leaf 2 height,,,,29,,31,,,31,,,38,,,36,,,19
+Chard,1,I,13,Leaf 3 height,,,,30,,35,,,35,,,34,,,39,,,38
+Chard,1,I,13,Leaf 4 height,,,,24,,34,,,34,,,42,,,,,,
+Chard,1,I,13,Leaf 5 height,,,,28,,34,,,34,,,39,,,,,,
+Chard,1,I,13,Leaf 1 width,,,,15,,33,,,33,,,21,,,32,,,26
+Chard,1,I,13,Leaf 2 width,,,,24,,30,,,30,,,25,,,25,,,21
+Chard,1,I,13,Leaf 3 width,,,,18,,27,,,27,,,24,,,27,,,29
+Chard,1,I,13,Leaf 4 width,,,,21,,22,,,22,,,31,,,,,,
+Chard,1,I,13,Leaf 5 width,,,,24,,26,,,26,,,26,,,,,,
+Chard,1,I,13,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,13,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,13,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,14,Leaf harvest count,,,,15,,16,,,12,,,6,,,6,,,6
+Chard,1,I,14,Leaf harvest mass,,,,330,,843,,,1188,,,536,,,600,,,398
+Chard,1,I,14,Leaf 1 height,,,,24,,48,,,48,,,45,,,34,,,33
+Chard,1,I,14,Leaf 2 height,,,,27,,45,,,45,,,33,,,38,,,36
+Chard,1,I,14,Leaf 3 height,,,,33,,44,,,44,,,33,,,44,,,28
+Chard,1,I,14,Leaf 4 height,,,,30,,46,,,46,,,38,,,,,,38
+Chard,1,I,14,Leaf 5 height,,,,20,,45,,,45,,,,,,,,,
+Chard,1,I,14,Leaf 1 width,,,,20,,30,,,30,,,27,,,22,,,25
+Chard,1,I,14,Leaf 2 width,,,,22,,26,,,26,,,20,,,31,,,27
+Chard,1,I,14,Leaf 3 width,,,,23,,33,,,33,,,29,,,30,,,16
+Chard,1,I,14,Leaf 4 width,,,,21,,34,,,34,,,25,,,,,,32
+Chard,1,I,14,Leaf 5 width,,,,18,,28,,,28,,,,,,,,,
+Chard,1,I,14,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,14,Animal damage?,,,,,,,,,,,,,,,,,,
+Chard,1,I,14,Flower weight,,,,,,,,,,,,,,,,,,
+Chard,1,I,15,Leaf harvest count,,,,12,,17,,,11,,,5,,,4,,,6
+Chard,1,I,15,Leaf harvest mass,,,,200,,301,,,651,,,245,,,203,,,43
+Chard,1,I,15,Leaf 1 height,,,,27,,35,,,35,,,33,,,35,,,26
+Chard,1,I,15,Leaf 2 height,,,,26,,32,,,32,,,36,,,32,,,10
+Chard,1,I,15,Leaf 3 height,,,,22,,32,,,32,,,32,,,29,,,
+Chard,1,I,15,Leaf 4 height,,,,24,,31,,,31,,,31,,,,,,
+Chard,1,I,15,Leaf 5 height,,,,27,,36,,,36,,,29,,,,,,
+Chard,1,I,15,Leaf 1 width,,,,17,,22,,,22,,,19,,,21,,,13
+Chard,1,I,15,Leaf 2 width,,,,17,,30,,,30,,,16,,,19,,,6
+Chard,1,I,15,Leaf 3 width,,,,17,,24,,,24,,,23,,,20,,,
+Chard,1,I,15,Leaf 4 width,,,,15,,28,,,28,,,14,,,,,,
+Chard,1,I,15,Leaf 5 width,,,,19,,26,,,26,,,20,,,,,,
+Chard,1,I,15,Insect damage? ,,,,,,,,,,,,,,,,,,
+Chard,1,I,15,Animal damage?,,,1,,,,,,,,,,,,,,,
+Chard,1,I,15,Flower weight,,,,,,,,,,,,,,,,,,
