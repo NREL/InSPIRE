@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import xarray as xr
+
 
 DISTANCES = {
     "01": (
@@ -283,3 +285,49 @@ def testbeds_irradiance(conf: str, irradiance_df: pd.DataFrame) -> pd.DataFrame:
         raise ValueError("configuration not implemented yet")
 
     return postprocess_df
+
+
+def output_template(pysam_preprocess_ds: xr.Dataset) -> xr.Dataset:
+    # Define the coordinates
+    coords = {
+        'latitude': pysam_preprocess_ds.latitude.values,
+        'longitude': pysam_preprocess_ds.longitude.values,
+        'distance_index': np.arange(10),  # Example 10 distance indices
+        'time': pysam_preprocess_ds.time.values,
+    }
+    
+    # Define the shape of each dimension
+    dims = {
+        'latitude': len(coords['latitude']),
+        'longitude': len(coords['longitude']),
+        'distance_index': len(coords['distance_index']),
+        'time': len(coords['time']),
+    }
+    
+    # Define the data variables with appropriate shapes
+    data_vars = {
+        'temp_air': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'dew_point': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'dhi': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'dni': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'ghi': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'albedo': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'pressure': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'wind_direction': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'wind_speed': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'relative_humidity': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        
+        'ground_irradiance': (
+            ['time', 'distance_index', 'latitude', 'longitude'],
+            np.empty((dims['time'], dims['distance_index'], dims['latitude'], dims['longitude']))
+        ),
+        
+        'underpanel': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'edgetoedge': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'bedA': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'bedB': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'bedC': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+    }
+    
+    # Return the dataset
+    return xr.Dataset(data_vars=data_vars, coords=coords)
