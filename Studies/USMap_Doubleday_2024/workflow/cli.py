@@ -82,7 +82,9 @@ def main():
         )
 
         client = Client(cluster)
-        print(client.dashboard_link)
+
+        import webbrowser
+        webbrowser.open(client.dashboard_link)
 
     elif (not args.local_weather and args.local_meta) or (
         args.local_weather and not args.local_meta
@@ -113,6 +115,8 @@ def main():
         local_test_paths=local_test_paths,
     )
 
+
+    client.close()
 
 if __name__ == "__main__":
     main()
