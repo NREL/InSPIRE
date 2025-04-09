@@ -113,6 +113,7 @@ def main():
         conf_dir=Path(args.conf_dir),
         confs=args.confs,
         local_test_paths=local_test_paths,
+        dask_client=client,
     )
 
 
