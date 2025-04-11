@@ -1,0 +1,10 @@
+NREL-PySAM
+bifacial_radiance
+bifacialvf
+configparser
+matplotlib
+numpy
+pandas
+python-dateutil
+requests
+future
