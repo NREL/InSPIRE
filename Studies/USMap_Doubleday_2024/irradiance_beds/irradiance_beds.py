@@ -126,13 +126,7 @@ DISTANCES = {
     ),
 }
 
-# in sam config, subarray1_track mode
-# 0: Fixed tilt (no tracking).
-# 1: Single-axis tracking.
-# 2: Two-axis tracking.
-
-# ONLY CARE ABOUT FIRST 3 FOR NOW
-# ASK SILVANA ABOUT HOW TO DEAL WITH THESE AND PROGRAMATICALLY EXTRACT FROM SAM CONFIG FILE, ALSO WANT TO SET 
+# these were taken from debug martin method
 configs = {
     # single axis tracking
     "01": {
@@ -160,77 +154,82 @@ configs = {
         "bedsWanted": 3,
         "fixed_tilt_angle": None,
     },
-    # "04": {
-    #     "hub_height": 1.5,
-    #     "pitch": 8,
-    #     "sazm": 180,
-    #     "modulename": "PVmodule",
-    #     "bedsWanted": 6,
-    #     "fixed_tilt_angle": None,
-    # },
-    # "05": {
-    #     "hub_height": 1.5,
-    #     "pitch": 11,
-    #     "sazm": 180,
-    #     "modulename": "PVmodule",
-    #     "bedsWanted": 9,
-    #     "fixed_tilt_angle": None,
-    # },
-    # "06": {
-    #     "hub_height": 1.5,
-    #     "tilt": None,  # fixed,
-    #     "sazm": 180,
-    #     "pitchfactor": 1,
-    #     "modulename": "PVmodule",
-    #     "pitch": pitch_temp * pitchfactor,
-    #     "bedsWanted": 3,
-    #     "fixed_tilt_angle": tilt,
-    # },
-    # "07": {
-    #     "hub_height": 2.4,
-    #     "sazm": 180,
-    #     "pitchfactor": 1,
-    #     "pitch": pitch_temp * pitchfactor,
-    #     "modulename": "PVmodule",
-    #     "bedsWanted": 3,
-    #     "fixed_tilt_angle": tilt,
-    # },
-    # "08": {
-    #     "hub_height": 2.4,
-    #     "sazm": 180,
-    #     "pitchfactor": 1,
-    #     "pitch": pitch_temp * pitchfactor,
-    #     "modulename": "PVmodule_1mxgap",
-    #     "bedsWanted": 3,
-    #     "fixed_tilt_angle": tilt,
-    # },
-    # "09": {
-    #     "hub_height": 1.5,
-    #     "sazm": 180,
-    #     "pitchfactor": 2,
-    #     "pitch": pitch_temp * pitchfactor,
-    #     "modulename": "PVmodule",
-    #     "bedsWanted": 6,
-    #     "fixed_tilt_angle": tilt,
-    # },
-    # "10": {
+    "04": {
+        "hub_height": 1.5,
+        "pitch": 8,
+        "sazm": 180,
+        "modulename": "PVmodule",
+        "bedsWanted": 6,
+        "fixed_tilt_angle": None,
+    },
+    "05": {
+        "hub_height": 1.5,
+        "pitch": 11,
+        "sazm": 180,
+        "modulename": "PVmodule",
+        "bedsWanted": 9,
+        "fixed_tilt_angle": None,
+    },
+    "06": {
+        "hub_height": 1.5,
+        "tilt": None,  # fixed,
+        "sazm": 180,
+        "pitchfactor": 1,
+        "modulename": "PVmodule",
+        "pitch": pitch_temp * pitchfactor,
+        "bedsWanted": 3,
+        "fixed_tilt_angle": tilt,
+    },
+    "07": {
+        "hub_height": 2.4,
+        "sazm": 180,
+        "pitchfactor": 1,
+        "pitch": pitch_temp * pitchfactor,
+        "modulename": "PVmodule",
+        "bedsWanted": 3,
+        "fixed_tilt_angle": tilt,
+    },
+    "08": {
+        "hub_height": 2.4,
+        "sazm": 180,
+        "pitchfactor": 1,
+        "pitch": pitch_temp * pitchfactor,
+        "modulename": "PVmodule_1mxgap",
+        "bedsWanted": 3,
+        "fixed_tilt_angle": tilt,
+    },
+    "09": {
+        "hub_height": 1.5,
+        "sazm": 180,
+        "pitchfactor": 2,
+        "pitch": pitch_temp * pitchfactor,
+        "modulename": "PVmodule",
+        "bedsWanted": 6,
+        "fixed_tilt_angle": tilt,
+    },
+    # "10": { # does this want 6 or 7 beds
     #     "hub_height": 2,
     #     "sazm": 90,
     #     "pitch": 8.6,
     #     "modulename": "PVmodule",
-    #     "bedsWanted": 7,
+    #     "bedsWanted": 6,
     #     "xp": 8,
     #     "fixed_tilt_angle": 90,
     # },
 }
 
-def tracking_tilt_3_beds(
+def tracking_3_beds(
     irradiance_df: pd.DataFrame,
-
     underpanel_left_end: float,
     cw: float,
-    pitch: float
+    pitch: float,
+    **kwarg,
 ) -> pd.DataFrame:
+    """
+    single axis tracking system with 3 beds.
+
+    # SCENARIO 1, 2, 3 #
+    """
     # Tracking TILT, 3 beds
     xp = cw/2 # Projection of panel on P.
     u = int(np.ceil(10*underpanel_left_end/pitch)) # underpanel limit integer box
@@ -255,8 +254,233 @@ def tracking_tilt_3_beds(
         "bedC":bedC,
     })
 
+def tracking_6_beds(
+    irradiance_df: pd.DataFrame,
+    underpanel_left_end: float,
+    cw: float,
+    pitch: float,
+    **kwarg,
+) -> pd.DataFrame:
+    """
+    single axis tracking system with 6 beds
 
-def testbeds_irradiance(conf: str, irradiance_df: pd.DataFrame) -> pd.DataFrame:
+    # SCENARIO 4 #
+    """
+
+    xp = cw/2 # Projection of panel on P.
+    u = int(np.ceil(10*underpanel_left_end/pitch)) # underpanel limit integer box
+    b = 10-u
+    # Six testbeds:
+    e2e = b-u # dimensions of edge to edge
+    bA = int(np.ceil(e2e/6.0))
+    bB = int(bA)
+    bC = int(bA)
+    bE = int(bA)
+    bF = int(bA)
+    bD = int(e2e-bA-bB-bC-bE-bF)
+
+    underpanel = df.iloc[:,0:u].join(df.iloc[:,b:10]).mean(axis=1)
+    edgetoedge = df.iloc[u:b].mean(axis=1)
+    bedA = df.iloc[:,u:u+bA].mean(axis=1)
+    bedB = df.iloc[:,u+bA:u+bA+bB].mean(axis=1)
+    bedC = df.iloc[:,u+bA+bB:u+bA+bB+bC].mean(axis=1)
+    bedD = df.iloc[:,u+bA+bB+bC:u+bA+bB+bC+bD].mean(axis=1)
+    bedE = df.iloc[:,u+bA+bB+bC+bD:u+bA+bB+bC+bD+bE].mean(axis=1)
+    bedF = df.iloc[:,u+bA+bB+bC+bD+bE:b].mean(axis=1)
+
+    return pd.DataFrame({
+        "underpanel":underpanel,
+        "edgetoedge":edgetoedge,
+        "bedA":bedA,
+        "bedB":bedB,
+        "bedC":bedC,
+        "bedD":bedD,
+        "bedE":bedE,
+        "bedF":bedF,
+    })
+
+
+def tracking_9_beds(
+    irradiance_df: pd.DataFrame,
+    underpanel_left_end: float,
+    cw: float,
+    pitch: float,
+    **kwarg,
+) -> pd.DataFrame:
+    """
+    single axis tracking system with 9 beds
+
+    # SCENARIO 5 #
+    """
+
+    # Tracking, 9 beds
+    pitch = 11
+    xp = cw/2 # Projection of panel on P.
+    u = int(np.ceil(10*underpanel_left_end/pitch)) # underpanel limit integer box
+    b = 10-u
+    # Six testbeds:
+    e2e = b-u # dimensions of edge to edge
+    b1 = int(np.floor(e2e/8.0))
+    b5 = int(e2e-b1*7)
+
+    underpanel = df.iloc[:,0:u].join(df.iloc[:,b:10]).mean(axis=1)
+    edgetoedge = df.iloc[u:b].mean(axis=1)
+    bedA = df.iloc[:,u:u+b1].mean(axis=1)
+    bedB = df.iloc[:,u+b1*1:u+b1*2].mean(axis=1)
+    bedC = df.iloc[:,u+b1*2:u+b1*3].mean(axis=1)
+    bedD = df.iloc[:,u+b1*3:u+b1*4].mean(axis=1)
+    bedE = df.iloc[:,u+b1*4:u+b1*4+b5].mean(axis=1)
+    bedF = df.iloc[:,u+b1*4+b5:u+b1*5+b5].mean(axis=1)
+    bedG = df.iloc[:,u+b1*5+b5:u+b1*6+b5].mean(axis=1)
+    bedH = df.iloc[:,u+b1*6+b5:u+b1*7+b5].mean(axis=1)
+    bedI = df.iloc[:,u+b1*7+b5:u+b1*8+b5].mean(axis=1)
+
+    return pd.DataFrame({
+        "underpanel":underpanel,
+        "edgetoedge":edgetoedge,
+        "bedA":bedA,
+        "bedB":bedB,
+        "bedC":bedC,
+        "bedD":bedD,
+        "bedE":bedE,
+        "bedF":bedF,
+        "bedG":bedG,
+        "bedH":bedH,
+        "bedI":bedI,
+    })
+
+
+def fixed_tilt_3_beds(
+    irradiance_df: pd.DataFrame,
+    meta: dict,
+    underpanel_left_end: float,
+    cw: float,
+    pitch: float,
+    **kwarg
+) -> pd.DataFrame:
+    """
+    fixed tilt system (latitude tilt) with 3 beds
+
+    # SCENARIO 6, 7, 8 #
+    """
+
+    xp = cw*np.cos(np.radians(float(meta['latitude']))) # Projection of panel on P.
+    u = int(np.ceil(10*xp/pitch)) # underpanel limit integer box
+    e2e = 10-u
+    # Three testbeds:
+    bA = int(np.ceil(b/3.0))
+    bC = int(bA)
+    bB = int(e2e-bA-bC)
+
+    underpanel = df.iloc[:,0:u].mean(axis=1)
+    underpanel.append(ground[mask].iloc[:,0:u].mean(axis=1).mean())
+    edgetoedge = df.iloc[u:].mean(axis=1)
+    bedA = df.iloc[:,u:u+bA].mean(axis=1).mean()
+    bedB = df.iloc[:,u+bA:u+bA+bB].mean(axis=1).mean()
+    bedC = df.iloc[:,u+bA+bB:].mean(axis=1).mean()
+
+    return pd.DataFrame({
+        "underpanel":underpanel,
+        "edgetoedge":edgetoedge,
+        "bedA":bedA,
+        "bedB":bedB,
+        "bedC":bedC,
+    })
+
+def fixed_tilt_6_beds(
+    irradiance_df: pd.DataFrame,
+    meta: dict,
+    underpanel_left_end: float,
+    cw: float,
+    pitch: float,
+    **kwarg
+) -> pd.DataFrame:
+    """
+    fixed tilt system (latitude tilt) with 6 beds
+
+    # SCENARIO 9 #
+    """
+
+    xp = CW*np.cos(np.radians(float(meta['latitude']))) # Projection of panel on P.
+    u = int(np.ceil(10*xp/pitch)) # underpanel limit integer box
+    e2e = 10-u
+    b1 = int(np.ceil(b/6.0))
+    b2 = int(e2e-b1*5)
+
+    underpanel = df.iloc[:,0:u].join(df.iloc[:,b:10]).mean(axis=1)
+    edgetoedge = df.iloc[u:b].mean(axis=1)
+    bedA = df.iloc[:,u:u+b1*1].mean(axis=1)
+    bedB = df.iloc[:,u+b1*1:u+b1*3].mean(axis=1)
+    bedC = df.iloc[:,u+b1*2:u+b1*4].mean(axis=1)
+    bedD = df.iloc[:,u+b1*3:u+b1*4+b2].mean(axis=1)
+    bedE = df.iloc[:,u+b1*4+b2:u+b1*5+b2].mean(axis=1)
+    bedF = df.iloc[:,u+b1*5+b2:].mean(axis=1)
+
+    return pd.DataFrame({
+        "underpanel":underpanel,
+        "edgetoedge":edgetoedge,
+        "bedA":bedA,
+        "bedB":bedB,
+        "bedC":bedC,
+        "bedD":bedD,
+        "bedE":bedE,
+        "bedF":bedF,
+    })
+
+# does this want to be 6 or 7 beds
+def vertical_tilt_7_beds(
+    irradiance_df: pd.DataFrame,
+    underpanel_left_end: float,
+    cw: float,
+    pitch: float,
+    **kwarg
+) -> pd.DataFrame:
+    """
+    fixed tilt system (vertical tilt) with 7 beds
+
+    # SCENARIO 10 #
+    """
+    pitch = 8.6
+    xp = 0.6 #m Spacing from panels to not harvest and damage 
+    u = int(np.ceil(10*underpanel_left_end/pitch)) # underpanel limit integer box
+    b = 10-u
+    # Six testbeds:
+    e2e = b-u # dimensions of edge to edge
+    bA = int(np.ceil(e2e/6.0))
+    bB = int(bA)
+    bC = int(bA)
+    bE = int(bA)
+    bF = int(bA)
+    bD = int(e2e-bA-bB-bC-bE-bF)
+
+    underpanel = df.iloc[:,0:u].join(df.iloc[:,b:10]).mean(axis=1)
+    edgetoedge = df.iloc[u:b].mean(axis=1)
+    bedA = df.iloc[:,u:u+bA].mean(axis=1)
+    bedB = df.iloc[:,u+bA:u+bA+bB].mean(axis=1)
+    bedC = df.iloc[:,u+bA+bB:u+bA+bB+bC].mean(axis=1)
+    bedD = df.iloc[:,u+bA+bB+bC:u+bA+bB+bC+bD].mean(axis=1)
+    bedE = df.iloc[:,u+bA+bB+bC+bD:u+bA+bB+bC+bD+bE].mean(axis=1)
+    bedF = df.iloc[:,u+bA+bB+bC+bD+bE:b].mean(axis=1)
+
+    return pd.DataFrame({
+        "underpanel":underpanel,
+        "edgetoedge":edgetoedge,
+        "bedA":bedA,
+        "bedB":bedB,
+        "bedC":bedC,
+        "bedD":bedD,
+        "bedE":bedE,
+        "bedF":bedF,
+        "bedG":bedG,
+    })
+
+
+def testbeds_irradiance(conf: str, irradiance_df: pd.DataFrame, latitude: float) -> pd.DataFrame:
+    """
+    postprocessing function to calculate irradiance for inter-row testbeds from calculated irradiances.
+
+    Requires laittude because some configs are set to latitude tilt. 
+    """
 
     settings = configs[conf]
 
@@ -286,8 +510,38 @@ def testbeds_irradiance(conf: str, irradiance_df: pd.DataFrame) -> pd.DataFrame:
 
     return postprocess_df
 
+def output_beds(dims: dict, num_beds: int) -> dict:
+    """
+    construct output beds datavariable shapes to provide to a xr.Dataset constructor
 
-def output_template(pysam_preprocess_ds: xr.Dataset) -> xr.Dataset:
+    All outputs have an edgetoedge calculation and underpannel, with a varying number of beds.
+
+    Parameters
+    ----------
+    dims: dict
+        input dataset dimension sizes by dimsion name
+    num_beds: int
+        number of desired beds between rows
+    """
+
+    output_template_array = np.empty((dims['latitude'], dims['longitude'], dims['time']))
+    bednames = [f"bed{ chr(ord('A') + i) }" for i in range(num_beds)]
+
+    base = {
+        'underpanel': (['latitude', 'longitude', 'time'], output_template_array),
+        'edgetoedge': (['latitude', 'longitude', 'time'], output_template_array),
+    }
+
+    beds = {
+        bedname: (['latitude', 'longitude', 'time'], output_template_array)
+        for bedname in bednames
+    }
+
+    output_beds = base | beds
+    return output_beds
+
+
+def output_template(pysam_preprocess_ds: xr.Dataset, conf: str) -> xr.Dataset:
     # Define the coordinates
     coords = {
         'latitude': pysam_preprocess_ds.latitude.values,
@@ -303,31 +557,32 @@ def output_template(pysam_preprocess_ds: xr.Dataset) -> xr.Dataset:
         'distance_index': len(coords['distance_index']),
         'time': len(coords['time']),
     }
+
+    output_template_array = np.empty((dims['latitude'], dims['longitude'], dims['time']))
     
-    # Define the data variables with appropriate shapes
     data_vars = {
-        'temp_air': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'dew_point': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'dhi': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'dni': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'ghi': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'albedo': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'pressure': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'wind_direction': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'wind_speed': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'relative_humidity': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        'dhi': (['latitude', 'longitude', 'time'], output_template_array),
+        'dni': (['latitude', 'longitude', 'time'], output_template_array),
+        'ghi': (['latitude', 'longitude', 'time'], output_template_array),
+        'albedo': (['latitude', 'longitude', 'time'], output_template_array),
+        'pressure': (['latitude', 'longitude', 'time'], output_template_array),
+        'temp_air': (['latitude', 'longitude', 'time'], output_template_array),
+        'dew_point': (['latitude', 'longitude', 'time'], output_template_array),
+        'wind_speed': (['latitude', 'longitude', 'time'], output_template_array),
+        'wind_direction': (['latitude', 'longitude', 'time'], output_template_array),
+        'relative_humidity': (['latitude', 'longitude', 'time'], output_template_array),
         
         'ground_irradiance': (
             ['time', 'distance_index', 'latitude', 'longitude'],
             np.empty((dims['time'], dims['distance_index'], dims['latitude'], dims['longitude']))
         ),
         
-        'underpanel': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'edgetoedge': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'bedA': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'bedB': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-        'bedC': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
-    }
+        # 'underpanel': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        # 'edgetoedge': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        # 'bedA': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        # 'bedB': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+        # 'bedC': (['latitude', 'longitude', 'time'], np.empty((dims['latitude'], dims['longitude'], dims['time']))),
+    } | output_beds(dims=dims, conf=str)
     
     # Return the dataset
     return xr.Dataset(data_vars=data_vars, coords=coords)

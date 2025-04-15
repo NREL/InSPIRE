@@ -1,9 +1,11 @@
 import argparse
 from getpass import getuser
 from pathlib import Path
+from pvdeg.utilities import nrel_kestrel_check
 
+from inspire_agrivolt import logger
 
-def main():
+def ground_irradiance():
     log_directory = f"/tmp/{getuser()}/agrivoltaics-irradiance-logs"
 
     parser = argparse.ArgumentParser(
@@ -62,12 +64,14 @@ def main():
 
     args = parser.parse_args()
 
-    import irradiance_sam
+    from inspire_agrivolt import irradiance_sam
     from dask.distributed import LocalCluster, Client
     from dask_jobqueue import SLURMCluster
 
+
     # convert to dict if both paths are provided
     local_test_paths = None
+
     if args.local_weather and args.local_meta:
         print(
             "local files provided, skipping NSRDB, using dask with 8 workers, dask logs not saved"
@@ -76,6 +80,7 @@ def main():
 
         workers = 8
 
+        logger.info("starting localcluster on local machine")
         cluster = LocalCluster(
             n_workers=workers,
             processes=True,
@@ -92,19 +97,30 @@ def main():
         raise ValueError("must provide both local_weather and local_meta or neither")
 
     else:
+        nrel_kestrel_check() # will only pass if we are on kestrel
+        logger.info("starting slurmcluster on kestrel")
+
+        # threads is cores / processes according to documentation
+        # https://jobqueue.dask.org/en/latest/generated/dask_jobqueue.SLURMCluster.html
         cluster = SLURMCluster(
             queue=args.partition,
             account=args.account,
-            cores=6,
-            memory="80GB",
-            processes=True,
+            cores=args.workers,         # n cores per worker
+            processes=args.workers,     # n independent processes per worker
+            memory="120GB",
             log_directory=args.log_dir,
             walltime=args.walltime,
-            scheduler_options={"dashboard_address": f":{args.port}"},
+            scheduler_options={
+                "dashboard_address": f":{args.port}"
+            },
         )
         cluster.scale(args.workers)
         client = Client(cluster)
-        print(client.dashboard_link)
+        print(f"dask dashboard link (must port forward if on HPC): {client.dashboard_link}")
+
+
+    # logger.info(f"running ground irradiance calculation using SAM for {args.state}")
+    logger.info(f"RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
 
     # run function
     irradiance_sam.run_state(
@@ -114,10 +130,8 @@ def main():
         confs=args.confs,
         local_test_paths=local_test_paths,
         dask_client=client,
+        dask_nworkers=args.workers,
     )
 
 
     client.close()
-
-if __name__ == "__main__":
-    main()
