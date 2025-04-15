@@ -125,8 +125,9 @@ def process_slice(
 
     # force align index, this is not ideal because it could obscure timezone errors
     # both are in UTC and off by a multiple of years so this is fine
-    slice_template = slice_template.assign_coords({"time": slice_weather.time})
-
+    # slice_template = slice_template.assign_coords({"time": slice_weather.time})
+    slice_weather = slice_weather.assign_coords({"time": slice_template.time})
+    
     partial_res = pvdeg.geospatial.analysis(
         weather_ds=slice_weather,
         meta_df=slice_meta,
@@ -154,7 +155,7 @@ def process_slice(
     del slice_weather
     del slice_meta
     del partial_res
-    del template
+    del slice_template
     gc.collect()
 
 def run_state(
