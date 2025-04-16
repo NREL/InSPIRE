@@ -48,7 +48,7 @@ def get_local_weather(local_test_paths: dict):
     logger.info(f"{len(geo_meta)} location entries in local data")
 
     # could move this to the analysis
-    geo_weather['time'] = pd.date_range(start="2001-01-01 00:30:00", periods=8760, freq='1h')
+    # geo_weather['time'] = pd.date_range(start="2001-01-01 00:30:00", periods=8760, freq='1h')
     chunk_size = 10
 
     return geo_weather, geo_meta, chunk_size
@@ -97,35 +97,37 @@ def process_slice(
     sub_gids: np.ndarray,
     state:str,
     local_test_paths: dict=None,
-    # geo_weather: xr.Dataset,
-    # geo_meta: pd.DataFrame,
-    # front: int,
-    # back: int,
 ):
-    # we may want to force slice_weather.index to be the same as template.index
+    # we may want to force slice_weather.time to be the same as template.time
     # they are tmy and in the middle of the hour already but could have different years
     # tmy so year does not matter, it is just there as a placeholder
 
     geo_weather, geo_meta, chunk_size = load_weather(local_test_paths=local_test_paths, state=state)
 
-    slice_weather = geo_weather.sel(gid=sub_gids).chunk({"gid": chunk_size})
+    slice_weather = geo_weather.sel(gid=sub_gids).chunk({"gid": chunk_size}).load()
     slice_meta = geo_meta.loc[sub_gids]
+
+    del geo_weather
+    gc.collect()
 
     # update variable names to match convention
     slice_weather = pvdeg.weather.map_weather(slice_weather)
-
-    # slice_weather = geo_weather.isel(gid=slice(front, back))
-    # slice_meta = geo_meta.iloc[front:back]
 
     slice_template = pvdeg.geospatial.output_template(
         ds_gids=slice_weather,
         shapes=pvdeg.pysam.INSPIRE_GEOSPATIAL_TEMPLATE_SHAPES,
         add_dims={'distance':10}
     )
-
     # force align index, this is not ideal because it could obscure timezone errors
     # both are in UTC and off by a multiple of years so this is fine
-    slice_template = slice_template.assign_coords({"time": slice_weather.time})
+    # slice_template = slice_template.drop_vars("time", errors="ignore")
+    # slice_template = slice_template.assign_coords({"time": slice_weather.time})
+    tmy_time_index = pd.date_range("2001-01-01", periods=8760, freq='1h')
+
+    slice_weather["time"] = tmy_time_index
+    slice_template["time"] = tmy_time_index
+
+    # logger.info(f"post assignment times: weather {slice_weather.time!r}, template: {slice_template.time} ")
 
     partial_res = pvdeg.geospatial.analysis(
         weather_ds=slice_weather,
@@ -136,7 +138,6 @@ def process_slice(
             'pv' : f"{conf_dir}/{conf}/{conf}_pvsamv1.json"
         }
     )
-
 
     gid_start = sub_gids[0]
     gid_end = sub_gids[-1]
@@ -149,12 +150,11 @@ def process_slice(
     logger.info(f"saved to file | {fname.resolve()}")
 
     # make sure we get rid of references to lazy objects and files at the end of each task (helps gc)
-    del geo_weather
     del geo_meta
     del slice_weather
     del slice_meta
     del partial_res
-    del template
+    del slice_template
     gc.collect()
 
 def run_state(
@@ -214,21 +214,15 @@ def run_state(
                     sub_gids=sub_gids,
                     local_test_paths=local_test_paths,
                     state=state
-                    # geo_weather=geo_weather,
-                    # geo_meta=geo_meta,
-                    # front=front,
-                    # back=back,
                 )
             )
-
-    # 40 locations takes 13 GB
 
     writes = [combine_many_nc_to_zarr(conf=conf, target_dir=target_dir) for conf in confs]
 
     logger.info(f"PREVIEW: delayed compute chunks : #{len(results)} ")
-    logger.info(f"PREVIEW: delayed write tasks    : #{len(writes)} ")
+    logger.info(f"PREVIEW: delayed write tasks    : #{len(writes)} (should match # configs provided)")
 
-    batch_size = int(dask_nworkers / 4) # send one chunk to each dask worker at a time
+    batch_size = int(dask_nworkers / 4) # send one chunk to each dask worker at a time (keeps from blowing it up but i dont like this )
     for i in range(0, len(results), batch_size):
         batch = results[i:i+batch_size]
 

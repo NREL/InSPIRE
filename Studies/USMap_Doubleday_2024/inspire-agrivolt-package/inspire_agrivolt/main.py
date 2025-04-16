@@ -68,7 +68,6 @@ def ground_irradiance():
     from dask.distributed import LocalCluster, Client
     from dask_jobqueue import SLURMCluster
 
-
     # convert to dict if both paths are provided
     local_test_paths = None
 
@@ -114,7 +113,7 @@ def ground_irradiance():
                 "dashboard_address": f":{args.port}"
             },
         )
-        cluster.scale(args.workers)
+        cluster.scale(args.workers) # this may cause the job to hang while we are waiting for workers
         client = Client(cluster)
         print(f"dask dashboard link (must port forward if on HPC): {client.dashboard_link}")
 

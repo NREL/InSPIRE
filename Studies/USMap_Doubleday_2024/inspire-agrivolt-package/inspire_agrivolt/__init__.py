@@ -16,5 +16,6 @@ from . import main
 from . import irradiance_sam
 
 from .irradiance_sam import load_weather
+from .file_operations import pysam_output_netcdf_to_zarr
 
 __version__ = version("inspire_agrivolt")
