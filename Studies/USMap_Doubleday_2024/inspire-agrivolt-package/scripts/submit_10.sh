@@ -13,6 +13,6 @@
 module load anaconda3  # kestrel module name
 source activate /home/tford/.conda-envs/geospatial
 
-agrivolt_ground_irradiance Colorado /projects/inspire/PySAM-MAPS/Full-Outputs/Colorado /home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM --confs 08 --port 22118 --workers 8
+agrivolt_ground_irradiance Colorado /projects/inspire/PySAM-MAPS/Full-Outputs/Colorado /home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM --confs 10 --port 22118 --workers 8
 
 conda deactivate

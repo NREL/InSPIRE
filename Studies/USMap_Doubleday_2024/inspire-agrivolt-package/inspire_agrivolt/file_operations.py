@@ -6,7 +6,7 @@ import dask.array as da
 # files = glob.glob("/projects/inspire/PySAM-MAPS/Full-Outputs/Colorado/01/*.nc")
 # zarr_path = "/projects/inspire/PySAM-MAPS/Full-Outputs/Colorado/01/merged.zarr"
 
-def pysam_output_netcdf_to_zarr(files: list[str], zarr_path) -> None:
+def pysam_output_netcdf_to_zarr(files: list[str], zarr_path, engine="h5netcdf") -> None:
     """
     merge many netcdf (.nc) outputs from ``ground_irradiance`` to a single zarr store.
 
@@ -26,14 +26,14 @@ def pysam_output_netcdf_to_zarr(files: list[str], zarr_path) -> None:
 
     lat_set, lon_set = set(), set()
     for file in files:
-        with xr.open_dataset(file, engine="netcdf4", chunks={}) as ds:
+        with xr.open_dataset(file, engine=engine, chunks={}) as ds:
             lat_set.update(ds.latitude.values.tolist()) # add all elements in iterables to sets
             lon_set.update(ds.longitude.values.tolist())
             
     unique_lat = np.sort(np.fromiter(lat_set, dtype=float))
     unique_lon = np.sort(np.fromiter(lon_set, dtype=float))
 
-    example_ds = xr.open_dataset(files[0], engine="netcdf4")
+    example_ds = xr.open_dataset(files[0], engine=engine)
 
     chunks = {"latitude": 40, "longitude":10}
     sizes={"latitude":len(unique_lat), "longitude":len(unique_lon), "time":8760, "distance":10}
@@ -101,3 +101,101 @@ def pysam_output_netcdf_to_zarr(files: list[str], zarr_path) -> None:
         )
         
         patch.to_zarr(zarr_path, region=region, mode="r+")
+
+def merge_pysam_out_nc_to_zarr(files: list[str], zarr_path: str, engine="netcdf4") -> None:
+    """
+    new version of above function 
+    """
+
+# engine="netcdf4"
+# files=files["01"]
+# zarr_path="/projects/inspire/PySAM-MAPS/test-all-states/merged/01.zarr"
+
+    lat_set, lon_set = set(), set()
+    for file in files:
+        with xr.open_dataset(file, engine=engine, chunks={}) as ds:
+            lat_set.update(ds.latitude.values.tolist()) # add all elements in iterables to sets
+            lon_set.update(ds.longitude.values.tolist())
+            
+    unique_lat = np.sort(np.fromiter(lat_set, dtype=float))
+    unique_lon = np.sort(np.fromiter(lon_set, dtype=float))
+
+    example_ds = xr.open_dataset(files[0], engine=engine)
+
+    chunks = {
+        "latitude": 40, 
+        "longitude":10
+    }
+
+    sizes={
+        "latitude":len(unique_lat), 
+        "longitude":len(unique_lon), 
+        "time":8760, 
+        "distance":10
+    }
+
+    zarr_chunks = {
+        "time":     sizes["time"],      # 8760
+        "latitude": chunks["latitude"], # 40
+        "longitude":chunks["longitude"],# 10
+        "distance": sizes["distance"]  # 10
+    }    
+
+    data_vars = {}
+    for data_var in example_ds.data_vars:
+        
+        dims = example_ds[data_var].dims
+        
+        shape = tuple(sizes[d] for d in dims)
+        chunk_shape = tuple(chunks.get(d, sizes[d]) for d in dims)
+        dtype = example_ds[data_var].dtype
+
+        data_vars[data_var] = (dims, da.full(shape, np.nan, dtype=dtype, chunks=chunk_shape))
+        
+    template = xr.Dataset(
+        coords={
+            "latitude":unique_lat,
+            "longitude":unique_lon,
+            "time":example_ds.time,
+            "distance":np.arange(10)
+        },
+        data_vars=data_vars
+    )
+
+    template.to_zarr(zarr_path, mode='w')
+
+    merged = xr.open_zarr(zarr_path, consolidated=False)
+
+    for file in files:
+        ds = xr.open_dataset(file, chunks={}, engine="netcdf4") # dataset to insert into zarr store
+        
+        lat_inds = np.searchsorted(unique_lat, ds.latitude.values)
+        lon_inds = np.searchsorted(unique_lon, ds.longitude.values)
+
+        # zarr region to write
+        region = { 
+            "latitude": slice(lat_inds[0], lat_inds[-1] + 1),
+            "longitude": slice(lon_inds[0], lon_inds[-1] + 1),
+            "time":slice(0,8760),
+            "distance":slice(0,10)
+        }
+
+        # original values from region being written to
+        existing_block = merged.isel(
+            latitude=region["latitude"], 
+            longitude=region["longitude"]
+        )
+
+        patched = existing_block.combine_first(ds)
+
+        # realign dask chunks with zarr chunks
+        chunk_map = {dim: zarr_chunks[dim] for dim in patched.dims}
+
+        patched = patched.chunk(chunk_map)
+        
+        patched.to_zarr(
+            zarr_path, 
+            region=region, 
+            mode="r+"
+        )
+        

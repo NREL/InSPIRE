@@ -15,7 +15,7 @@ if not logger.hasHandlers():
 from . import main
 from . import irradiance_sam
 
-from .irradiance_sam import load_weather
-from .file_operations import pysam_output_netcdf_to_zarr
+from .file_operations import merge_pysam_out_nc_to_zarr
+from .verify import verify_dataset_gids
 
 __version__ = version("inspire_agrivolt")

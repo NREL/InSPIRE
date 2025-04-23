@@ -2,6 +2,7 @@ import argparse
 from getpass import getuser
 from pathlib import Path
 from pvdeg.utilities import nrel_kestrel_check
+import numpy as np
 
 from inspire_agrivolt import logger
 
@@ -49,7 +50,7 @@ def ground_irradiance():
         "--walltime",
         type=str,
         help="max length of job from start to finish",
-        default="02:00:00",
+        default="05:00:00",
     )
 
     parser.add_argument(
@@ -60,7 +61,15 @@ def ground_irradiance():
     parser.add_argument(
         "--local-weather", type=Path, help="Path to local weather NetCDF file"
     )
+
     parser.add_argument("--local-meta", type=Path, help="Path to local meta CSV file")
+
+    parser.add_argument(
+        "--gids",
+        nargs="+",
+        type=int,
+        help="List of gids to use for analysis (optional). Overrides state-based selection.",
+    )
 
     args = parser.parse_args()
 
@@ -104,8 +113,10 @@ def ground_irradiance():
         cluster = SLURMCluster(
             queue=args.partition,
             account=args.account,
-            cores=args.workers,         # n cores per worker
-            processes=args.workers,     # n independent processes per worker
+            cores=1,                        # 1 cpu per worker
+            processes=1,                    # 1 processes per worker
+            # cores=args.workers,         # n cores per worker
+            # processes=args.workers,     # n independent processes per worker
             memory="120GB",
             log_directory=args.log_dir,
             walltime=args.walltime,
@@ -118,7 +129,13 @@ def ground_irradiance():
         print(f"dask dashboard link (must port forward if on HPC): {client.dashboard_link}")
 
 
-    # logger.info(f"running ground irradiance calculation using SAM for {args.state}")
+
+    gids_array = np.array(args.gids) if args.gids else None
+
+    if gids_array:
+        logger.info(f"using provided gids: {gids.array}")
+
+
     logger.info(f"RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
 
     # run function
@@ -130,6 +147,7 @@ def ground_irradiance():
         local_test_paths=local_test_paths,
         dask_client=client,
         dask_nworkers=args.workers,
+        gids=gids_array,
     )
 
 

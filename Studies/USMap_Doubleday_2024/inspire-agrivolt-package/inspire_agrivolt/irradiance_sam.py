@@ -2,12 +2,12 @@ import pvdeg
 from pathlib import Path
 from dask.diagnostics import ProgressBar
 from dask import delayed, compute
-import os
 import gc
 import xarray as xr
 import pandas as pd
 import time
 import numpy as np
+import traceback
 
 from inspire_agrivolt import logger
 
@@ -19,15 +19,7 @@ WEATHER_ARG = {
     "attributes": pvdeg.pysam.INSPIRE_NSRDB_ATTRIBUTES,
 }
 
-@delayed
-def combine_many_nc_to_zarr(conf: str, target_dir:Path) -> None:
-    """combine files for a single config"""
-    logger.info(f"merging files for {conf}")
-    combined_ds = xr.open_mfdataset(f"{target_dir}/{conf}/*.nc")
-    combined_ds.to_zarr(f"{target_dir}/{conf}-pvdeg-pysam", consolidated=True)
-
-
-def get_local_weather(local_test_paths: dict):
+def get_local_weather(local_test_paths: dict) -> tuple[xr.Dataset, pd.DataFrame, int]:
     if "weather" not in local_test_paths:
         raise ValueError('"local_test_paths" must contain key weather with value as file path')
     if "meta" not in local_test_paths:
@@ -42,37 +34,42 @@ def get_local_weather(local_test_paths: dict):
         geo_weather = geo_weather.assign(wind_direction=geo_weather["temp_air"] * 0)
     
     if "albedo" not in geo_weather.data_vars:
-        logger.info("using placeholder wind direction, filling 0.2 for all timesteps")
+        logger.info("using placeholder albedo, filling 0.2 for all timesteps")
         geo_weather = geo_weather.assign(albedo=geo_weather["temp_air"] * 0 + 0.2) 
 
     logger.info(f"{len(geo_meta)} location entries in local data")
 
-    # could move this to the analysis
     # geo_weather['time'] = pd.date_range(start="2001-01-01 00:30:00", periods=8760, freq='1h')
     chunk_size = 10
 
     return geo_weather, geo_meta, chunk_size
 
-def load_weather(
+def _load_full_nsrdb_kestrel() -> tuple[xr.Dataset, pd.DataFrame]:
+    logger.info("LOADING: weather dataset from NSRDB on kestrel")
+    start = time.time()
+
+    geo_weather, geo_meta = pvdeg.weather.get(
+        WEATHER_DB, geospatial=True, **WEATHER_ARG
+    )
+
+    end = time.time()
+    logger.info(f"LOADED: dataset in: {end - start} s")
+
+    return geo_weather, geo_meta
+
+
+def load_weather_state(
     local_test_paths: dict, 
-    state: str 
-) -> tuple[xr.Dataset, pd.DataFrame]:
+    state: str,
+) -> tuple[xr.Dataset, pd.DataFrame, int]:
     if local_test_paths is not None:
         logger.info("LOADING: weather dataset from local files")
         geo_weather, geo_meta, chunk_size = get_local_weather(local_test_paths=local_test_paths)
 
     else:
-        logger.info("LOADING: weather dataset from NSRDB on kestrel")
-        start = time.time()
+        geo_weather, geo_meta = _load_full_nsrdb_kestrel()
 
-        geo_weather, geo_meta = pvdeg.weather.get(
-            WEATHER_DB, geospatial=True, **WEATHER_ARG
-        )
-
-        end = time.time()
-        logger.info(f"LOADED: dataset in: {end - start} s")
-
-        # downselect NSRDB
+        # downselect NSRDB to requested gids
         logger.info(f"DOWNSELECTING: keeping points where 'state'== '{state}'")
         start = time.time()
         geo_meta = geo_meta[geo_meta["country"] == "United States"]
@@ -82,11 +79,38 @@ def load_weather(
         
         chunk_size = 40
 
+        ############### force downsample for testing
+        geo_meta, gids_sub = pvdeg.utilities.gid_downsampling(meta=geo_meta, n=15)
+        ###############
+
     geo_weather = geo_weather.sel(gid=geo_meta.index).chunk({"gid": chunk_size})
 
     return geo_weather, geo_meta, chunk_size
 
 
+def load_weather_gids(
+    local_test_paths: dict, 
+    gids: np.ndarray,
+) -> tuple[xr.Dataset, pd.DataFrame, int]:
+    if local_test_paths is not None:
+        logger.info("LOADING: weather dataset from local files")
+        geo_weather, geo_meta, chunk_size = get_local_weather(local_test_paths=local_test_paths)
+
+    else:
+        geo_weather, geo_meta = _load_full_nsrdb_kestrel()
+
+    chunk_size = 40
+
+    logger.info(f"DOWNSELECTING: keeping points from provided #{len(gids)} gids")
+    start = time.time()
+
+    geo_weather = geo_weather.sel(gid=gids).chunk({"gid": chunk_size})
+    geo_meta = geo_meta.loc[gids]
+
+    end = time.time()
+    logger.info(f"DOWNSELECTING: took {end - start} seconds")
+
+    return geo_weather, geo_meta, chunk_size
 
 
 @delayed
@@ -95,20 +119,12 @@ def process_slice(
     conf_dir: str,
     target_dir: str,
     sub_gids: np.ndarray,
-    state:str,
     local_test_paths: dict=None,
-):
-    # we may want to force slice_weather.time to be the same as template.time
-    # they are tmy and in the middle of the hour already but could have different years
-    # tmy so year does not matter, it is just there as a placeholder
-
-    geo_weather, geo_meta, chunk_size = load_weather(local_test_paths=local_test_paths, state=state)
-
-    slice_weather = geo_weather.sel(gid=sub_gids).chunk({"gid": chunk_size}).load()
-    slice_meta = geo_meta.loc[sub_gids]
-
-    del geo_weather
-    gc.collect()
+) -> None:
+    slice_weather, slice_meta, chunk_size = load_weather_gids(
+        gids=sub_gids,                      # subset of gids from state, determined in run_state()
+        local_test_paths=local_test_paths,  # usually None
+    )
 
     # update variable names to match convention
     slice_weather = pvdeg.weather.map_weather(slice_weather)
@@ -118,16 +134,12 @@ def process_slice(
         shapes=pvdeg.pysam.INSPIRE_GEOSPATIAL_TEMPLATE_SHAPES,
         add_dims={'distance':10}
     )
+
     # force align index, this is not ideal because it could obscure timezone errors
     # both are in UTC and off by a multiple of years so this is fine
-    # slice_template = slice_template.drop_vars("time", errors="ignore")
-    # slice_template = slice_template.assign_coords({"time": slice_weather.time})
     tmy_time_index = pd.date_range("2001-01-01", periods=8760, freq='1h')
-
     slice_weather["time"] = tmy_time_index
     slice_template["time"] = tmy_time_index
-
-    # logger.info(f"post assignment times: weather {slice_weather.time!r}, template: {slice_template.time} ")
 
     partial_res = pvdeg.geospatial.analysis(
         weather_ds=slice_weather,
@@ -139,23 +151,33 @@ def process_slice(
         }
     )
 
+    # all gids in range between gid_start and gids_end ARE NOT GUARANTEED CONTAINED THE RESULT
     gid_start = sub_gids[0]
     gid_end = sub_gids[-1]
 
     # ideally we write everything to the same zarr store but need to determine chunking and dimensions
-    fname = Path(f"{target_dir}/{conf}/{gid_start}-{gid_end}.nc")
-    Path(fname).parent.mkdir(parents=True, exist_ok=True)
+    try:
+        fname = f"{target_dir}/{conf}/{gid_start}-{gid_end}.nc"
+        file_path = Path(fname)
+        file_path.parent.mkdir(parents=True, exist_ok=True)
 
-    partial_res.to_netcdf(fname)
-    logger.info(f"saved to file | {fname.resolve()}")
+        partial_res.to_netcdf(fname)
+        logger.info(f"saved to file | {file_path.resolve()}")
+    except Exception as e:
+        task_info = f"Saving partial result to NetCDF file: {fname}"
+        error_msg = f"Error during task: {task_info}\nOriginal error: {str(e)}"
+        logger.error(f"{error_msg}\n{traceback.format_exc()}")
+        raise Exception(error_msg) from e
 
     # make sure we get rid of references to lazy objects and files at the end of each task (helps gc)
-    del geo_meta
+    # we shouldn't have to do this but dask was struggling with memory blow up
     del slice_weather
     del slice_meta
     del partial_res
     del slice_template
     gc.collect()
+
+    return
 
 def run_state(
     state: str,
@@ -176,17 +198,26 @@ def run_state(
         "10",
     ],
     local_test_paths: dict = None,
+    gids: np.ndarray = None,
 ) -> None:
    
-    init_weather, init_meta, _chunk_size = load_weather(local_test_paths=local_test_paths, state=state)
-    gids = init_meta.index.values
+    # if gids are not provided then we gather them from the NSRDB to determine number of iterations
+    if gids is None: 
+        init_weather, init_meta, _chunk_size = load_weather_state(
+            local_test_paths=local_test_paths, 
+            state=state, 
+        )
 
-    logger.info(f"PREVIEW: \n{init_weather}\n")
-    logger.info(f"PREVIEW: \n{init_meta.iloc[0:5]}\n")
+        # get gids for designated state
+        gids = init_meta.index.values
 
-    del init_weather
-    del _chunk_size
-    gc.collect()
+        logger.info(f"PREVIEW: \n{init_weather}\n")
+        logger.info(f"PREVIEW: \n{init_meta.iloc[0:5]}\n")
+
+        del init_weather
+        del init_meta
+        del _chunk_size
+        gc.collect()
 
     results = [] # delayed objects list
 
@@ -196,14 +227,12 @@ def run_state(
     step_size = 320 # 8 workers, chunk size of 40
     for conf in confs:
 
-        # initialize full zarr store
-        # full_output.to_zarr(config_zarr_path, compute=False, mode='w')
-
         # create delayed objects for each slice
         for i in range(0, len(gids), step_size):
             front = i
-            back = min(i + step_size, len(init_meta) - 1)
+            back = min(i + step_size, len(gids))
 
+            # we can build a futures list if we scatter this outside of the array then pass the futures and iterate again
             sub_gids = gids[front:back]
 
             results.append(
@@ -211,28 +240,20 @@ def run_state(
                     conf=conf,
                     conf_dir=conf_dir,
                     target_dir=target_dir,
-                    sub_gids=sub_gids,
-                    local_test_paths=local_test_paths,
-                    state=state
+                    sub_gids=sub_gids,                      # only run simulation on these gids (provided, or determined at top of function)
+                    local_test_paths=local_test_paths,      # usually None
                 )
             )
 
-    writes = [combine_many_nc_to_zarr(conf=conf, target_dir=target_dir) for conf in confs]
-
     logger.info(f"PREVIEW: delayed compute chunks : #{len(results)} ")
-    logger.info(f"PREVIEW: delayed write tasks    : #{len(writes)} (should match # configs provided)")
 
-    batch_size = int(dask_nworkers / 4) # send one chunk to each dask worker at a time (keeps from blowing it up but i dont like this )
+    batch_size = max(1, dask_nworkers // 4) # send one chunk to each dask worker at a time (keeps from blowing it up but i dont like this )
     for i in range(0, len(results), batch_size):
         batch = results[i:i+batch_size]
 
         with ProgressBar():
             compute(*batch)
 
-        # force garbage collect on workers
         dask_client.run(gc.collect)
-
-    with ProgressBar():
-        compute(*writes)
     
     return
