@@ -46,7 +46,6 @@ pip install -r requirements.txt
 
     Wind Speed
 
-    Pressure is not needed.
     Set the time interval to 60 minutes.
 
 3. **Run `pystics_run.py`**
