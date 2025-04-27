@@ -1,73 +1,86 @@
 import pandas as pd
+import os
 
-# File paths
-weather_file = "PSM3_TMY.csv"
-irradiance_file = "daily_test_data.csv"
+here = os.getcwd()
+weather_file = os.path.join(here, "478473_39.77_-105.22_tdy-2023.csv") 
+irradiance_file = os.path.join(here, "TEMP", "daily_sensors.csv")
 
-# Detect the correct header row
-with open(weather_file, 'r') as f:
-    lines = f.readlines()
-    for i, line in enumerate(lines[:10]):  
-        if 'Year' in line and 'Month' in line and 'Day' in line:
-            header_row = i
-            break
-    else:
-        raise ValueError("Could not detect the header row in the weather file.")
-
-# Load weather data using detected header row
-weather_df = pd.read_csv(weather_file, skiprows=header_row)
-
-# Print actual column names for debugging
-print("Weather file columns:", weather_df.columns)
-
-# Load irradiance data
-dirrad_df = pd.read_csv(irradiance_file, header=None, skiprows=1)  
-
+weather_df = pd.read_csv(weather_file, skiprows=2)
+dirrad_df = pd.read_csv(irradiance_file, header=None, skiprows=1)
 
 date_columns = ['Year', 'Month', 'Day']
-temp_column = 'Tdry' 
-
+temp_column = 'Temperature'  
 if not all(col in weather_df.columns for col in date_columns):
-    raise ValueError("Could not find Year, Month, and Day columns in the weather file.")
-
+    raise ValueError("Missing Year, Month, or Day columns.")
 if temp_column not in weather_df.columns:
-    raise ValueError("Could not find the temperature column in the weather file.")
+    raise ValueError("Missing Temperature column.")
 
-# Aggregate to daily min/max temperatures
 daily_weather = weather_df.groupby(date_columns).agg(
-    Tmin=(temp_column, 'min'),  
-    Tmax=(temp_column, 'max')   
+    temp_min=(temp_column, 'min'),
+    temp_max=(temp_column, 'max')
 ).reset_index()
 
-# Function to get irradiance values from a specific row
 def get_daily_irradiance(row_index, day_of_year):
-    """ Extracts the correct irradiance value for a given day of the year from a specific row """
-    if 0 <= day_of_year < dirrad_df.shape[1]:
-        if row_index + 1 >= dirrad_df.shape[0]:
-            return None  
-    return float(dirrad_df.iloc[row_index + 1, day_of_year + 1])   
+    if 0 <= day_of_year < dirrad_df.shape[1] - 1 and row_index + 1 < dirrad_df.shape[0]:
+        return float(dirrad_df.iloc[row_index + 1, day_of_year + 1])
+    return -999.9
 
-
-# Function to process and save weather data with specific irradiance row
 def process_weather_with_irradiance(row_index, output_file):
     modified_weather_df = daily_weather.copy()
-    modified_weather_df['DNI'] = -999.9 
-    
-    for index, row in modified_weather_df.iterrows():
-        date = pd.Timestamp(year=int(row['Year']), month=int(row['Month']), day=int(row['Day']))
-        day_of_year = date.timetuple().tm_yday - 1  
-        irradiance_value = get_daily_irradiance(row_index, day_of_year)
-        if irradiance_value is not None:
-            modified_weather_df.at[index, 'DNI'] = irradiance_value  
-    
-    # Replace 0 values with -999
-    modified_weather_df.replace(0, -999.9, inplace=True)
-    
-    # Save the processed file
-    modified_weather_df.to_csv(output_file, index=False)
-    print("Processed file saved as", output_file)
+    modified_weather_df['Year'] = 2023
+    modified_weather_df['doy'] = -1
+    modified_weather_df['radiation'] = -999.9
 
-# Process and save three weather files with different irradiance sources
-process_weather_with_irradiance(0, "weather_with_irradiance_1.csv")  
-process_weather_with_irradiance(50, "weather_with_irradiance_2.csv")  
-process_weather_with_irradiance(98, "weather_with_irradiance_3.csv")  
+    for idx, row in modified_weather_df.iterrows():
+        date = pd.Timestamp(year=int(row['Year']), month=int(row['Month']), day=int(row['Day']))
+        doy = date.timetuple().tm_yday
+        modified_weather_df.at[idx, 'doy'] = doy
+        modified_weather_df.at[idx, 'radiation'] = get_daily_irradiance(row_index, doy - 1)
+
+    additional_cols = {
+        'etp': -999.9,
+        'rain': -999.9,
+        'wind': -999.9,
+        'tpm': -999.9,
+        'co2': -999.99
+    }
+
+    for col, default_val in additional_cols.items():
+        if col == 'wind' and 'Wind Speed' in weather_df.columns:
+            col_df = weather_df.groupby(date_columns).agg({'Wind Speed': 'mean'}).reset_index()
+            col_df.rename(columns={'Wind Speed': 'wind'}, inplace=True)
+            modified_weather_df = pd.merge(modified_weather_df, col_df, on=date_columns, how='left')
+            modified_weather_df['wind'] = modified_weather_df['wind'].fillna(default_val)
+        elif col == 'tpm' and 'Temperature' in weather_df.columns:
+            col_df = weather_df.groupby(date_columns).agg({'Temperature': 'mean'}).reset_index()
+            col_df.rename(columns={'Temperature': 'tpm'}, inplace=True)
+            modified_weather_df = pd.merge(modified_weather_df, col_df, on=date_columns, how='left')
+            modified_weather_df['tpm'] = modified_weather_df['tpm'].fillna(default_val)
+        else:
+            modified_weather_df[col] = default_val
+
+    modified_weather_df.insert(0, 'file', 'weather')
+    modified_weather_df['year'] = modified_weather_df.pop('Year')
+    modified_weather_df['month'] = modified_weather_df.pop('Month')
+    modified_weather_df['day'] = modified_weather_df.pop('Day')
+
+    modified_weather_df = modified_weather_df[[ 
+        'file', 'year', 'month', 'day', 'doy', 'temp_min', 'temp_max',
+        'radiation', 'etp', 'rain', 'wind', 'tpm', 'co2'
+    ]]
+
+    cols_to_clean = ['radiation', 'etp', 'tpm', 'co2', 'temp_min', 'temp_max']
+    modified_weather_df[cols_to_clean] = modified_weather_df[cols_to_clean].replace(0, -999.9)
+
+    modified_weather_df = modified_weather_df.astype({
+        'year': int, 'month': int, 'day': int, 'doy': int,
+        'temp_min': float, 'temp_max': float, 'radiation': float,
+        'etp': float, 'rain': float, 'wind': float, 'tpm': float, 'co2': float
+    })
+
+    modified_weather_df.to_csv(output_file, index=False, header=False, sep=' ')
+    print(f"Saved: {output_file}")
+
+process_weather_with_irradiance(43, "row_43_irradiance.txt")
+process_weather_with_irradiance(61, "row_61_irradiance.txt")
+process_weather_with_irradiance(79, "row_79_irradiance.txt")
