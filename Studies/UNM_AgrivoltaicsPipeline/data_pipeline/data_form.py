@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 here = os.getcwd()
-weather_file = os.path.join(here, "478473_39.77_-105.22_tdy-2023.csv")
+weather_file = os.path.join(here, "489708_40.69_-104.78_tdy-2023.csv")
 irradiance_file = os.path.join(here, "TEMP", "daily_sensors.csv")
 ghi_file = os.path.join(here, "TEMP", "daily_ghi.csv")
 

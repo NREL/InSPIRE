@@ -28,8 +28,12 @@ plt.rcParams['figure.figsize'] = (12, 5)
 
 # Simulation parameters
 writefiletitle = os.path.join(testfolder, 'Results_bifacialVF.csv')
-lat = 39.7555
-lon = -105.2211
+# lat = 39.7555 ##golden
+# lon = -105.2211
+
+##nunn colorado
+lat = 40.8686
+lon = -104.7786
 tilt = 30
 sazm = 180
 albedo = None
