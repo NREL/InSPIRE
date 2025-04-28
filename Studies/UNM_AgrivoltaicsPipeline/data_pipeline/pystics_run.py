@@ -4,8 +4,8 @@ from pystics.params import CropParams, SoilParams, ManageParams, InitialParams, 
 from pystics.params import parametrization_from_stics_example_files
 from pystics.simulation import run_pystics_simulation
 
-mocked_weather_path = "row_61_irradiance.txt"
-mocked_weather_path_year2 = "row_61_irradiance.txt"
+mocked_weather_path = "row_79_irradiance.txt"
+mocked_weather_path_year2 = mocked_weather_path
 species = "common_wheat"
 variety = "Talent"
 
@@ -49,4 +49,4 @@ pystics_df, pystics_mat_list = run_pystics_simulation(
 print(pystics_df.loc[0, ['tmoy', 'lev', 'temp_max', 'temp_min', 'et', 'z0', 'tpm', 'wind', 'lai', 'ratm', 'tcultmin', 'tcultmax']])
 print(pystics_df.mafruit_rec.max())
 
-pystics_df.to_csv('stics_run.csv', index=False)
+pystics_df.to_csv('stics_run_row_79.csv', index=False)

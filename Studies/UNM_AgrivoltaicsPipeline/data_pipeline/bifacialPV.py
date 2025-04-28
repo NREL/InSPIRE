@@ -74,6 +74,18 @@ df = groundIrrads.groupby(pd.Grouper(freq='D')).sum().T
 # Convert from Wh/m² to MJ/m²
 df *= 0.0036
 
-# Save final CSV
-df.to_csv('daily_sensors.csv', index=True)
-print("Saved: daily_sensors.csv")
+##for ghi
+data_full = pd.read_csv(writefiletitle, skiprows=2)
+
+# Parse dates
+data_full['date'] = pd.to_datetime(data_full['date'])
+
+# Group by day and sum GHI
+daily_ghi = data_full.groupby(data_full['date'].dt.date)['ghi'].sum()
+
+# Convert to MJ/m² (same 0.0036 factor)
+daily_ghi *= 0.0036
+
+# Save GHI separately
+daily_ghi.to_csv('daily_ghi.csv', header=['daily_ghi'])
+print("Saved: daily_ghi.csv")
