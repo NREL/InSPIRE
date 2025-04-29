@@ -3,4 +3,4 @@ matplotlib==3.9.2
 pandas==2.2.3
 numpy==2.1.1
 pvlib==0.11.1
-pystics
+git+https://github.com/jai-self/pySTICS.git

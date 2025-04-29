@@ -52,3 +52,13 @@ pip install -r requirements.txt
 
    This script uses pySTICS to run a crop simulation model using the updated weather file.  
    - pySTICS simulates crop growth based on the new weather conditions that account for the impact of solar panels.
+
+4. **(Optional) Switch to Standard GHI Mode**
+
+   To run a standard GHI-based simulation instead of using panel-adjusted irradiance:
+   
+   - In your environment’s `site-packages`, open `pySTICS/modules/weather_variables.py`.
+   - Locate the `compute_weather_variables()` function.
+   - Set `force_fracinsol_1=False`.
+
+   By default, `force_fracinsol_1=True` assumes the weather file has been adjusted for the effects of solar panels. Setting it to `False` reverts to standard GHI behavior.
