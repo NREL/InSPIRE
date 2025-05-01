@@ -6,7 +6,7 @@
 #       extension: .R
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.15.2
+#       jupytext_version: 1.16.1
 #   kernelspec:
 #     display_name: R
 #     language: R
@@ -17,7 +17,7 @@
 #
 # Author: Kate Doubleday
 #
-# Last updated: August 22, 2024
+# Last updated: April 21, 2025
 
 # Based on assumptions explored and decisions made in stats_exploration
 
@@ -35,6 +35,7 @@ library(broom)
 library(emmeans)
 library(ggpubr)
 library(grid)
+library(cowplot)
 
 # # Data prep
 
@@ -51,6 +52,7 @@ gap_order <- c("2", "3", "4", "5", "Control")
 yrs <- c("2016", "2017", "2018")
 fill_col <- "#0079C2" # NREL blue
 nrel_cols <- c("#0079C2", "#F7A11A", "#5D9732", "#5E6A71", "#933C06")
+alt_cols <- c("#933C06",  "#5D9732", "#5E6A71", "#420039")
 location_order <- c("Under PV Array", "Control")
 
 source("custom contrasts.R")
@@ -77,11 +79,13 @@ t_dist <- FALSE
 # -
 
 # Select dependent variable column
-dep_var <- "head_fw_per_plant"
+# renamed to differentiate from Second dependent variable, so that all four subplots 
+# show up correctly together, without changes to the dependent variable changing the plots
+dep_var1 <- "head_fw_per_plant"
 
-dep_var <- rlang::ensym(dep_var)
+dep_var1 <- rlang::ensym(dep_var1)
 
-res_aov <- anova_test(get({{dep_var}}) ~ gap_ft  * year,
+res_aov <- anova_test(get({{dep_var1}}) ~ gap_ft  * year,
   data = df,
     type = 3, 
     observed = c("year"), # This changes the generalized eta effect size
@@ -95,6 +99,11 @@ write.table(get_anova_table(res_aov, correction = "GG"),
 
 #  no follow up test on year as needed. With only two levels, 2018 is significantly higher.
 
+# ## Test Normality
+# - On residuals, after fitting the model. Cell-by-cell tests are available in the stats exploration files
+
+shapiro.test(residuals)
+
 # ## Interaction plots
 
 # +
@@ -103,7 +112,7 @@ write.table(get_anova_table(res_aov, correction = "GG"),
 means <- 
   df %>% 
   group_by(year, gap_ft) %>% # <- remember to group by *both* factors
-  summarise(Means = mean({{dep_var}}, na.rm=TRUE))
+  summarise(Means = mean({{dep_var1}}, na.rm=TRUE))
 
 ggplot(means, 
        aes(x = year, y = Means, colour = gap_ft, group = gap_ft)) +
@@ -121,7 +130,7 @@ ggplot(means,
 # Given that both treament and year are significant, compare: 
 # - The average of means from the agPV groups to the mean of the control group, for each year
 
-model <- lm(get({{dep_var}}) ~ gap_ft  * year, data = df)
+model <- lm(get({{dep_var1}}) ~ gap_ft  * year, data = df)
 #  estimated marginal means
 emm <- emmeans(model, c("gap_ft", "year"))
 
@@ -145,9 +154,9 @@ comp_df %<>% mutate(y.position = ypos,
                   xmax = c(1 + dodge/4, 2 + dodge/4))
 # -
 
-summary_stats <- get_treatment_year_error_bar_data(df, t_dist)
+summary_stats <- get_treatment_year_error_bar_data(df, t_dist, dep_var1)
 
-fig <- ggplot(df, aes(x = year, y = get(dep_var))) +
+fig <- ggplot(df, aes(x = year, y = get(dep_var1))) +
 geom_point(data = summary_stats, inherit.aes = FALSE, 
            mapping = aes(x = year, y = means, color = treatment, fill = treatment),
            position = pd, size = 2) + 
@@ -177,6 +186,18 @@ fig
 
 ggsave(file=file.path(stats_dir, "broccoli_head_fresh_weight__ctrl_v_treatment.jpg"), width=4, height=3)
 
+fig_a <- fig
+
+# ## Side-note: Within-year pairwise comparisons
+
+summary(contrast(emm, "per_year_pairwise_comp", years = 2, combine = TRUE, adjust = "holm")) %>% add_significance(
+  p.col = "p.value",
+ cutpoints = c(0, 0.001, 0.01, 0.05, 1),
+  symbols = c("***", "**", "*", "ns")
+)
+
+# Takeaways: Single significant value: Control vs. 3 ft in 2018. Looks like that's maybe due to a marginally tighter distribution on 3 ft. 
+
 # ## Inter-panel gap trend analysis
 
 # "the estimated linear contrast is not the slope of a line fitted to the data. It is simply a contrast having coefficients that increase linearly. It does test the linear trend, however."
@@ -189,18 +210,37 @@ poly_cont
 emm
 
 if (t_dist) {
-    fig <- plot_inter_panel_gap_trends__t(df, pd, "Head Fresh Weight (g)")
+    fig <- plot_inter_panel_gap_trends__t(df, pd, dep_var1, "Head Fresh Weight (g)")
     } else {
-    fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, "Head Fresh Weight (g)")
+    fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, dep_var1, "Head Fresh Weight (g)")
     }
 
 fig
 
 ggsave(file=file.path(stats_dir, "broccoli_head_weight__poly_contrasts.jpg"), width=4, height=3)
 
+fig_b <- fig
+
+# ## Combine Pairwise and trend graphs
+
+# +
+yax <- scale_y_continuous(limits = c(0, 600), expand = expansion(mult = c(0, 0.05)),
+                  breaks = seq(0, 600, by = 100))
+
+fig_a <- fig_a + yax + 
+    theme(legend.position="top", legend.margin=margin(t=0)) + 
+    coord_cartesian(ylim = c(0, NA))
+
+fig_b <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, dep_var1, "Head Fresh Weight (g)", ymax = 600, breaks = seq(0, 600, by = 100))
+
+plot_grid(fig_a, fig_b, labels = c("(a)", "(b)"), align = 'h', axis = "bt")
+# -
+
+ggsave(file=file.path(stats_dir, "broccoli_head_fresh_weight__subplots.jpg"), width=8, height=3)
+
 # ## Area comparisons
 
-res_aov <- anova_test(get({{dep_var}}) ~ area * year,
+res_aov <- anova_test(get({{dep_var1}}) ~ area * year,
   data = df,
     type = 3, 
     observed = c("year"), # This changes the generalized eta effect size
@@ -227,6 +267,11 @@ get_anova_table(res_aov, correction = "GG")
 
 write.table(get_anova_table(res_aov, correction = "GG"), 
             file = file.path(anova_dir, "broccoli_stem_fw.csv"), sep=",", row.names=FALSE)
+
+# ## Test Normality
+# - On residuals, after fitting the model. Cell-by-cell tests are available in the stats exploration files
+
+shapiro.test(residuals)
 
 # ## Interaction plots
 
@@ -263,7 +308,7 @@ comp_df %<>% mutate(y.position = c(NA, 950, 870, 910),
                   xmin = c(NA, 2 - dodge/4, 1 - dodge/4, 1 + dodge/4),
                   xmax = c(NA, 2 + dodge/4, 2 - dodge/4, 2 + dodge/4))
 
-summary_stats <- get_treatment_year_error_bar_data(df, t_dist)
+summary_stats <- get_treatment_year_error_bar_data(df, t_dist, dep_var)
 
 fig <- ggplot(df, aes(x = year, y = get(dep_var))) +
 geom_point(data = summary_stats, inherit.aes = FALSE, 
@@ -296,6 +341,20 @@ fig
 
 ggsave(file=file.path(stats_dir, "broccoli_stem_fresh_weight__ctrl_v_treatment.jpg"), width=4, height=3)
 
+fig_c <- fig
+
+# ## Side-note: Within-year pairwise comparisons
+
+summary(contrast(emm, "per_year_pairwise_comp", years = 2, combine = TRUE, adjust = "holm")) %>% add_significance(
+  p.col = "p.value",
+ cutpoints = c(0, 0.001, 0.01, 0.05, 1),
+  symbols = c("***", "**", "*", "ns")
+)
+
+# + slideshow={"slide_type": "slide"} active=""
+# Takeaways: Semi-interesting value -- significantly higher stem fresh weight in 5 ft spacing than control in 2018. Since this is non-salable, it's really just a reiteration of the overal take-away of agrivoltaics vs. control. 
+# -
+
 # ## Inter-panel gap trend analysis
 
 # "the estimated linear contrast is not the slope of a line fitted to the data. It is simply a contrast having coefficients that increase linearly. It does test the linear trend, however."
@@ -306,14 +365,32 @@ poly_cont <- contrast(emm, "poly_excl_cont", exclude = "Control", by = "year", a
 poly_cont
 
 if (t_dist) {
-    fig <- plot_inter_panel_gap_trends__t(df, pd, "Stem Fresh Weight (g)")
+    fig <- plot_inter_panel_gap_trends__t(df, pd, dep_var, "Stem Fresh Weight (g)")
     } else {
-    fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, "Stem Fresh Weight (g)")
+    fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, dep_var, "Stem Fresh Weight (g)")
     }
 
 fig
 
 ggsave(file=file.path(stats_dir, "broccoli_stem_weight__poly_contrasts.jpg"), width=4, height=3)
+
+fig_d = fig
+
+# ## Combine Pairwise and trend graphs
+
+# +
+yax2 <- scale_y_continuous(limits = c(0, 1000), expand = expansion(mult = c(0, 0)),
+                  breaks = seq(0, 1000, by = 200))
+
+fig_c <- fig_c + yax2 + 
+    theme(legend.position="top", legend.margin=margin(t=0))
+
+fig_d <- fig_d + yax2
+
+plot_grid(fig_c, fig_d, labels = c("(a)", "(b)"), align = 'h', axis = "bt")
+# -
+
+ggsave(file=file.path(stats_dir, "broccoli_stem_weight__subplots.jpg"), width=8, height=3)
 
 # ## Area comparisons
 
@@ -325,5 +402,11 @@ res_aov <- anova_test(get({{dep_var}}) ~ area * year,
 )
 residuals <- attributes(res_aov)$args$model$residuals
 get_anova_table(res_aov, correction = "GG")
+
+# ## Combine all 4 subplots
+
+plot_grid(fig_a, fig_b, fig_c, fig_d, labels = c("(a)", "(b)", "(c)", "(d)"), align = 'hv', ncol = 2, axis = "bt")
+
+ggsave(file=file.path(stats_dir, "broccoli_all_4_subplots.jpg"), width=8, height=6)
 
 

@@ -6,7 +6,7 @@
 #       extension: .R
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.14.5
+#       jupytext_version: 1.16.1
 #   kernelspec:
 #     display_name: R
 #     language: R
@@ -14,6 +14,10 @@
 # ---
 
 # ## Contrast functions
+
+# For making new contrasts: 
+# - Print one of the M matrices in one of these existing functions to see the level names -- they are crossed when there is more than 1 level
+# - Each set of contrast coefficients is a column
 
 # Contrasts to compare pooled AgPV - control comparison per year, only
 within_year_pooled_comp.emmc <- function(levels, years, reverse = FALSE) {
@@ -65,10 +69,32 @@ all_pooled_comp.emmc <- function(levels, years, reverse = FALSE) {
             
             # Between year control comparisons
             M[i * length(levels)/years, i + j - 2 + years + years*(years-1)/2] <- 1
-            M[j * length(levels)/years, i + j - 2 + years + years*(years-1)/2] <- -1
+            M[j * length(levels)/years, i + j - 2 + years + years*(years-1)/2] <- -1 
             names(M)[i + j - 2 + years + years*(years-1)/2] <- 
                 paste(paste('control', unlist(strsplit(levels[[i * length(levels)/years]], split = " "))[2]),
                       unlist(strsplit(levels[[j * length(levels)/years]], split = " "))[2], sep = " - ")
+        }
+    }
+    M
+}
+
+# Contrasts to compare all pairwise groups per year, only
+per_year_pairwise_comp.emmc <- function(levels, years, reverse = FALSE) {
+    M <- data.frame(matrix(0, length(levels), years * ((length(levels)/years - 1)^2 + length(levels)/years - 1)/2))
+    row.names(M) <- levels
+
+    col_num <- 1
+    for (i in seq_len(years)){
+        for (j in seq_len(length(levels)/years-1)) {
+            for (k in seq(1, length(levels)/years - j)) {
+                # col_num <- k +  (i - 1) * ((length(levels)/years - 1)^2 + length(levels)/years - 1)/2
+                M[j + (i - 1)*length(levels)/years, col_num] <- -1
+                M[j + k + (i - 1)*length(levels)/years, col_num] <- 1
+                
+                names(M)[col_num] <- paste(levels[j + k + (i - 1)*length(levels)/years],
+                                           levels[j + (i - 1)*length(levels)/years], sep = " - ")
+                col_num <- col_num + 1
+            }
         }
     }
     M

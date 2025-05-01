@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.16.1
+#       jupytext_version: 1.15.2
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -177,7 +177,7 @@ y_proj = numpanels * y * math.cos(math.radians(tilt))
 bed_y_limits = {'ymin': 0, # Start at the post, to also exclude the pile from calculations
                'ymax': y_proj/2}
 
-year = "2018"
+year = "2017"
 
 
 def make_radobj_by_timeperiod(year, month = "season"):
@@ -529,7 +529,7 @@ axes = g.axes.flatten()
 # Very overcast (max 200):
 # - 7-24
 
-analysis_date ='2021-07-24'
+analysis_date ='2021-07-26'
 
 # prep Data frame to hold results
 day_idx = [i for i in range(len(metData.datetime)) if metData.datetime[i].date() == pd.to_datetime(analysis_date).date()]
@@ -606,14 +606,17 @@ date_form = mdates.DateFormatter("%H")
 
 for spacing, ax in zip([2, 3, "Control", 4, 5], axes.ravel()):
     # chart formatting
-    ax.set_title(str(spacing) + (" ft" if type(spacing) == int else ""), fontweight="bold")
+    # ax.set_title(str(spacing) + (" ft" if type(spacing) == int else ""), fontweight="bold")
+    ax.text(x=test.loc[spacing, "Time of Day"].iloc[0], y=910,
+            s=str(spacing) + (" ft" if type(spacing) == int else ""),
+            weight="bold", fontsize=13, bbox = dict(boxstyle='square,pad=0.15', facecolor='white', alpha=0.72))
     ax.get_legend().remove()
     ax.xaxis.set_major_formatter(date_form)
-    ax.set_xlabel("")
+    # ax.set_xlabel("")
     ax.set_ylabel("")
     ax.set_ylim([0, 1000])
     
-fig.text(0.5, 0.0, 'Hour of Day', ha='center')
+# fig.text(0.5, 0.0, 'Hour of Day', ha='center')
 fig.text(-0.02, 0.5, "Average Hourly Irradiance ($W/m^2$)", va='center', rotation='vertical')    
 fig.delaxes(axes[1,2])
 fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(0.68, 0.48),
