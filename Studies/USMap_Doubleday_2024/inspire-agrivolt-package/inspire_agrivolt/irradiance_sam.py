@@ -17,6 +17,7 @@ WEATHER_ARG = {
     "names": "TMY",
     "NREL_HPC": True,
     "attributes": pvdeg.pysam.INSPIRE_NSRDB_ATTRIBUTES,
+    
 }
 
 def get_local_weather(local_test_paths: dict) -> tuple[xr.Dataset, pd.DataFrame, int]:
@@ -79,10 +80,6 @@ def load_weather_state(
         
         chunk_size = 40
 
-        ############### force downsample for testing
-        geo_meta, gids_sub = pvdeg.utilities.gid_downsampling(meta=geo_meta, n=15)
-        ###############
-
     geo_weather = geo_weather.sel(gid=geo_meta.index).chunk({"gid": chunk_size})
 
     return geo_weather, geo_meta, chunk_size
@@ -141,6 +138,8 @@ def process_slice(
     slice_weather["time"] = tmy_time_index
     slice_template["time"] = tmy_time_index
 
+    logger.info(f"STATUS: starting analysis for gids block: {sub_gids}")
+
     partial_res = pvdeg.geospatial.analysis(
         weather_ds=slice_weather,
         meta_df=slice_meta,
@@ -148,36 +147,43 @@ def process_slice(
         template=slice_template,
         config_files={
             'pv' : f"{conf_dir}/{conf}/{conf}_pvsamv1.json"
-        }
+        },
+        preserve_gid_dim=True, # keep in gids, this makes it much easier to combine all of the results
     )
 
-    # all gids in range between gid_start and gids_end ARE NOT GUARANTEED CONTAINED THE RESULT
-    gid_start = sub_gids[0]
-    gid_end = sub_gids[-1]
+    logger.info(f"STATUS: gids block finished: {sub_gids}")
+
+    # Warning: partial_res may not contain every GID in the range [gid_min, gid_max]
+    gid_min = np.min(sub_gids)
+    gid_max = np.max(sub_gids)
 
     # ideally we write everything to the same zarr store but need to determine chunking and dimensions
     try:
-        fname = f"{target_dir}/{conf}/{gid_start}-{gid_end}.nc"
+        fname = f"{target_dir}/{conf}/{gid_min}-{gid_max}.nc"
+        fname_meta = f"{target_dir}/{conf}/{gid_min}-{gid_max}.csv"
         file_path = Path(fname)
         file_path.parent.mkdir(parents=True, exist_ok=True)
 
-        partial_res.to_netcdf(fname)
-        logger.info(f"saved to file | {file_path.resolve()}")
+        logger.info(f"STATUS: writing gids block to h5 at: {fname}")
+
+        partial_res.to_netcdf(fname)  # model outputs
+        slice_meta.to_csv(fname_meta) # metadata
+
+        logger.info(f"STATUS: saved to file | {file_path.resolve()}")
     except Exception as e:
         task_info = f"Saving partial result to NetCDF file: {fname}"
         error_msg = f"Error during task: {task_info}\nOriginal error: {str(e)}"
         logger.error(f"{error_msg}\n{traceback.format_exc()}")
         raise Exception(error_msg) from e
-
-    # make sure we get rid of references to lazy objects and files at the end of each task (helps gc)
-    # we shouldn't have to do this but dask was struggling with memory blow up
-    del slice_weather
-    del slice_meta
-    del partial_res
-    del slice_template
-    gc.collect()
-
-    return
+    finally:
+        # make sure we get rid of references to lazy objects and files at the end of each task (helps gc)
+        # we shouldn't have to do this but dask was struggling with memory blow up
+        del slice_weather
+        del slice_meta
+        del partial_res
+        del slice_template
+        gc.collect()
+        return
 
 def run_state(
     state: str,
@@ -199,6 +205,7 @@ def run_state(
     ],
     local_test_paths: dict = None,
     gids: np.ndarray = None,
+    downsample: int = None,
 ) -> None:
    
     # if gids are not provided then we gather them from the NSRDB to determine number of iterations
@@ -207,6 +214,11 @@ def run_state(
             local_test_paths=local_test_paths, 
             state=state, 
         )
+
+        if downsample is not None: # optional
+            logger.info(f"performing gid_downsampling() {downsample} times. ")
+            init_meta, sub_gids = pvdeg.utilities.gid_downsampling(meta=init_meta, n=downsample)
+            logger.info(f"after      gid_downsampling() {len(init_meta)} locations remain.")
 
         # get gids for designated state
         gids = init_meta.index.values
@@ -218,6 +230,8 @@ def run_state(
         del init_meta
         del _chunk_size
         gc.collect()
+
+    logger.info(f"BUILDING: simulation on {len(gids)} unqiue locations")
 
     results = [] # delayed objects list
 
@@ -245,9 +259,11 @@ def run_state(
                 )
             )
 
-    logger.info(f"PREVIEW: delayed compute chunks : #{len(results)} ")
+    logger.info(f"STATUS: delayed compute futures : #{len(results)} ")
+    logger.info(f"STATUS: dispatching dask futures...")
 
-    batch_size = max(1, dask_nworkers // 4) # send one chunk to each dask worker at a time (keeps from blowing it up but i dont like this )
+    #### this used to be 4 to prevent blowup
+    batch_size = max(1, dask_nworkers // 3) # send one chunk to each dask worker at a time (keeps from blowing it up but i dont like this )
     for i in range(0, len(results), batch_size):
         batch = results[i:i+batch_size]
 
@@ -255,5 +271,7 @@ def run_state(
             compute(*batch)
 
         dask_client.run(gc.collect)
+
+    logger.info(f"STATUS: all dask futures complete")
     
     return

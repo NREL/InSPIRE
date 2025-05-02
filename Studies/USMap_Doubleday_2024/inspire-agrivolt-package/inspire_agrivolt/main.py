@@ -1,10 +1,16 @@
 import argparse
 from getpass import getuser
 from pathlib import Path
-from pvdeg.utilities import nrel_kestrel_check
 import numpy as np
 
 from inspire_agrivolt import logger
+
+def log_banner(message: str):
+    from shutil import get_terminal_size
+
+    width = get_terminal_size(fallback=(80, 20)).columns
+    line = "#" * width
+    logger.info(f"\n{line}\n{message.center(width)}\n{line}")
 
 def ground_irradiance():
     log_directory = f"/tmp/{getuser()}/agrivoltaics-irradiance-logs"
@@ -25,7 +31,7 @@ def ground_irradiance():
         "--confs",
         nargs="+",
         default=["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
-        help="List of config names (default: 01 through 10)",
+        help="List of config names (default: 01 through 10), STRONGLY RECOMENDED: only run one config at a time, submit multiple sbatch jobs to run multiple configs at once",
     )
 
     parser.add_argument(
@@ -71,6 +77,12 @@ def ground_irradiance():
         help="List of gids to use for analysis (optional). Overrides state-based selection.",
     )
 
+    parser.add_argument(
+        "--downsample",
+        type=int,
+        help="Downsample factor, from pvdeg.utiltiies.gid_downsampling(). removes half of the points on latitude and longitude axis for each n",
+    )
+
     args = parser.parse_args()
 
     from inspire_agrivolt import irradiance_sam
@@ -105,40 +117,49 @@ def ground_irradiance():
         raise ValueError("must provide both local_weather and local_meta or neither")
 
     else:
-        nrel_kestrel_check() # will only pass if we are on kestrel
-        logger.info("starting slurmcluster on kestrel")
+        from pvdeg.utilities import nrel_kestrel_check
+
+        # nrel_kestrel_check() # will only pass if we are on kestrel
+        logger.info("starting localcluster on kestrel")
 
         # threads is cores / processes according to documentation
         # https://jobqueue.dask.org/en/latest/generated/dask_jobqueue.SLURMCluster.html
-        cluster = SLURMCluster(
-            queue=args.partition,
-            account=args.account,
-            cores=1,                        # 1 cpu per worker
-            processes=1,                    # 1 processes per worker
-            # cores=args.workers,         # n cores per worker
-            # processes=args.workers,     # n independent processes per worker
-            memory="120GB",
-            log_directory=args.log_dir,
-            walltime=args.walltime,
-            scheduler_options={
-                "dashboard_address": f":{args.port}"
-            },
+        # cluster = SLURMCluster(
+        #     queue=args.partition,
+        #     account=args.account,
+        #     # cores=1,                        # 1 cpu per worker
+        #     # processes=1,                    # 1 processes per worker
+        #     cores=args.workers,         # n cores per worker
+        #     processes=args.workers,     # n independent processes per worker
+        #     memory="120GB",
+        #     log_directory=args.log_dir,
+        #     walltime=args.walltime,
+        #     scheduler_options={
+        #         "dashboard_address": f":{args.port}"
+        #     },
+        #     job_extra_directives=[       # SET SLURM JOB NAME FOR DASK CLIENT
+        #         f"--job-name=dask-{args.state}-{''.join(args.confs)}"
+        #     ]
+        # )
+        cluster = LocalCluster(
+            n_workers=args.workers,
+            processes=True,
+            # threads_per_worker=2 # parallelism within each worker
         )
+
+        # we only need one node with n proc (workers)
         cluster.scale(args.workers) # this may cause the job to hang while we are waiting for workers
         client = Client(cluster)
         print(f"dask dashboard link (must port forward if on HPC): {client.dashboard_link}")
 
-
-
     gids_array = np.array(args.gids) if args.gids else None
 
     if gids_array:
-        logger.info(f"using provided gids: {gids.array}")
+        logger.info(f"using provided gids: {gids_array}")
 
+    log_banner(f"RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
 
-    logger.info(f"RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
-
-    # run function
+    # entry point
     irradiance_sam.run_state(
         state=args.state.title(),
         target_dir=Path(args.target_dir),
@@ -148,7 +169,9 @@ def ground_irradiance():
         dask_client=client,
         dask_nworkers=args.workers,
         gids=gids_array,
+        downsample=args.downsample, # optional downsampling
     )
 
-
     client.close()
+
+    log_banner(f"SUCCESS: RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
