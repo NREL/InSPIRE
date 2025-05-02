@@ -6,7 +6,7 @@
 #       extension: .R
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.15.2
+#       jupytext_version: 1.16.1
 #   kernelspec:
 #     display_name: R
 #     language: R
@@ -17,7 +17,7 @@
 #
 # Author: Kate Doubleday
 #
-# Last updated: August 22, 2024
+# Last updated: April 21, 2025
 
 # Based on assumptions explored and decisions made in stats_exploration
 
@@ -35,6 +35,7 @@ library(broom)
 library(emmeans)
 library(ggpubr)
 library(grid)
+library(cowplot)
 
 # # Data prep
 
@@ -51,6 +52,7 @@ gap_order <- c("2", "3", "4", "5", "Control")
 yrs <- c("2016", "2017", "2018")
 fill_col <- "#0079C2" # NREL blue
 nrel_cols <- c("#0079C2", "#F7A11A", "#5D9732", "#5E6A71", "#933C06")
+alt_cols <- c("#933C06",  "#5D9732", "#5E6A71", "#420039")
 location_order <- c("Under PV Array", "Control")
 
 source("custom contrasts.R")
@@ -77,11 +79,11 @@ t_dist <- FALSE
 # -
 
 # Select dependent variable column
-dep_var <- "fw_per_leaf"
+dep_var1 <- "fw_per_leaf"
 
-dep_var <- rlang::ensym(dep_var)
+dep_var1 <- rlang::ensym(dep_var1)
 
-res_aov <- anova_test(get({{dep_var}}) ~ gap_ft  * year,
+res_aov <- anova_test(get({{dep_var1}}) ~ gap_ft  * year,
   data = df,
     type = 3, 
     observed = c("year"), # This changes the generalized eta effect size
@@ -93,6 +95,11 @@ get_anova_table(res_aov, correction = "GG")
 write.table(get_anova_table(res_aov, correction = "GG"), 
             file = file.path(anova_dir, "swiss_chard_fw_per_leaf.csv"), sep=",", row.names=FALSE)
 
+# ## Test Normality
+# - On residuals, after fitting the model. Cell-by-cell tests are available in the stats exploration files
+
+shapiro.test(residuals)
+
 # ## Interaction plots
 
 # +
@@ -101,7 +108,7 @@ write.table(get_anova_table(res_aov, correction = "GG"),
 means <- 
   df %>% 
   group_by(year, gap_ft) %>% # <- remember to group by *both* factors
-  summarise(Means = mean({{dep_var}}, na.rm=TRUE))
+  summarise(Means = mean({{dep_var1}}, na.rm=TRUE))
 
 ggplot(means, 
        aes(x = year, y = Means, colour = gap_ft, group = gap_ft)) +
@@ -117,7 +124,7 @@ ggplot(means,
 # Given that treatment and its interaction with year are significant, compare: 
 # - The average of means from the agPV groups to the mean of the control group, for each year
 
-model <- lm(get({{dep_var}}) ~ gap_ft  * year, data = df)
+model <- lm(get({{dep_var1}}) ~ gap_ft  * year, data = df)
 #  estimated marginal means
 emm <- emmeans(model, c("gap_ft", "year"))
 
@@ -134,9 +141,9 @@ comp_df %<>% mutate(y.position = c(NA, NA, 42),
                   xmin = c(NA, NA, 3 - dodge/4),
                   xmax = c(NA, NA, 3 + dodge/4))
 
-summary_stats <- get_treatment_year_error_bar_data(df, t_dist)
+summary_stats <- get_treatment_year_error_bar_data(df, t_dist, dep_var1)
 
-fig <- ggplot(df, aes(x = year, y = get(dep_var))) +
+fig <- ggplot(df, aes(x = year, y = get(dep_var1))) +
 geom_point(data = summary_stats, inherit.aes = FALSE, 
            mapping = aes(x = year, y = means, color = treatment, fill = treatment),
            position = pd, size = 2) + 
@@ -162,6 +169,18 @@ fig
 
 ggsave(file=file.path(stats_dir, "swiss_chard_fresh_weight_per_leaf__ctrl_v_treatment.jpg"), width=4, height=3)
 
+fig_a = fig
+
+# ## Side-note: Within-year pairwise comparisons
+
+summary(contrast(emm, "per_year_pairwise_comp", years = 3, combine = TRUE, adjust = "holm")) %>% add_significance(
+  p.col = "p.value",
+ cutpoints = c(0, 0.001, 0.01, 0.05, 1),
+  symbols = c("***", "**", "*", "ns")
+)
+
+# Takeaways: No new information
+
 # ## Inter-panel gap trend analysis
 
 # "the estimated linear contrast is not the slope of a line fitted to the data. It is simply a contrast having coefficients that increase linearly. It does test the linear trend, however."
@@ -172,9 +191,9 @@ poly_cont <- contrast(emm, "poly_excl_cont", exclude = "Control", by = "year", a
 poly_cont
 
 if (t_dist) {
-        fig <- plot_inter_panel_gap_trends__t(df, pd, "Fresh Weight per Leaf (g)")
+        fig <- plot_inter_panel_gap_trends__t(df, pd, dep_var1, "Fresh Weight per Leaf (g)")
     } else {
-        fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, "Fresh Weight per Leaf (g)")
+        fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, dep_var1, "Fresh Weight per Leaf (g)")
     }
 
 ann_text <- data.frame(gap_ft = factor(3), fw_per_leaf = 37,
@@ -184,9 +203,34 @@ fig + geom_text(data = ann_text, label = expression(paste("Quadratic ", italic("
 
 ggsave(file=file.path(stats_dir, "swiss_chard_fw_per_leaf__poly_contrasts.jpg"), width=4, height=3)
 
+fig_b = fig
+
+# ## Combine Pairwise and trend graphs
+
+# +
+yax <- scale_y_continuous(limits = c(0, 45), expand = expansion(mult = c(0, 0)),
+                  breaks = seq(0, 43, by = 10))
+
+fig_a <- fig_a + yax + 
+    theme(legend.position="top", legend.margin=margin(t=0))
+
+# Move annotation up
+ann_text1 <- data.frame(gap_ft = factor(3), fw_per_leaf = 42,
+                       year = factor(2018, levels = c(2016, 2017, 2018)))
+ann_text2 <- data.frame(gap_ft = factor(3), fw_per_leaf = 40,
+                       year = factor(2018, levels = c(2016, 2017, 2018)))
+fig_b <- fig_b + yax + geom_text(data = ann_text1, label = expression(paste("Quadratic")),
+               size = 2.25) + geom_text(data = ann_text2, label = expression(paste(italic("p"), " = 0.049")),
+               size = 2.25)
+
+plot_grid(fig_a, fig_b, labels = c("(a)", "(b)"), align = 'h', axis = "bt")
+# -
+
+ggsave(file=file.path(stats_dir, "swiss_chard_fw_per_leaf__subplots.jpg"), width=8, height=3)
+
 # ## Area comparisons
 
-res_aov <- anova_test(get({{dep_var}}) ~ area * year,
+res_aov <- anova_test(get({{dep_var1}}) ~ area * year,
   data = df,
     type = 3, 
     observed = c("year"), # This changes the generalized eta effect size
@@ -218,6 +262,11 @@ get_anova_table(res_aov, correction = "GG")
 
 write.table(get_anova_table(res_aov, correction = "GG"), 
             file = file.path(anova_dir, "swiss_chard_leaves_per_plant.csv"), sep=",", row.names=FALSE)
+
+# ## Test Normality
+# - On residuals, after fitting the model. Cell-by-cell tests are available in the stats exploration files
+
+shapiro.test(residuals)
 
 # ## Interaction plots
 
@@ -263,7 +312,7 @@ comp_df %<>% mutate(y.position = ypos,
                   xmax = c(NA, NA, 3 + dodge/4))
 # -
 
-summary_stats <- get_treatment_year_error_bar_data(df, t_dist)
+summary_stats <- get_treatment_year_error_bar_data(df, t_dist, dep_var)
 
 fig <- ggplot(df, aes(x = year, y = get(dep_var))) +
 geom_point(data = summary_stats, inherit.aes = FALSE, 
@@ -292,6 +341,40 @@ fig
 
 ggsave(file=file.path(stats_dir, "swiss_chard_leaves_per_plant__ctrl_v_treatment.jpg"), width=4, height=3)
 
+fig_c = fig
+
+# ## Graphical abstract
+
+fig <- ggplot(df, aes(x = year, y = get(dep_var))) +
+geom_bar(data = summary_stats, inherit.aes = FALSE, 
+           mapping = aes(x = year, y = means, fill = treatment), stat = "identity", position='dodge') + 
+scale_color_manual(values=nrel_cols) +
+scale_fill_manual(values=nrel_cols) +
+labs(x="", y = "Swiss Chard Yield", fill = "") +
+scale_y_continuous(limits = c(0, NA), expand = expansion(mult = c(0, .05)),
+                  breaks = c()) +
+scale_x_discrete(labels = c("Hot, Dry Year", "Cold, Wet Year", "Warm, Wet Year"), guide = guide_axis(angle = 30)) + 
+theme_classic()+
+theme(panel.grid.major.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+      legend.position="top", legend.margin=margin(t=-10),
+     legend.title = element_text(size=10),
+     legend.text = element_text(size=8))
+
+fig
+
+ggsave(file=file.path(stats_dir, "swiss_chard_fw_per_leaf__graph_abst.jpg"), width=2.5, height=2.5)
+
+# ## Side-note: Within-year pairwise comparisons
+
+summary(contrast(emm, "per_year_pairwise_comp", years = 3, combine = TRUE, adjust = "holm")) %>% add_significance(
+  p.col = "p.value",
+ cutpoints = c(0, 0.001, 0.01, 0.05, 1),
+  symbols = c("***", "**", "*", "ns")
+)
+
+# Takeaways: No new information
+
 # ## Inter-panel gap trend analysis
 
 # "the estimated linear contrast is not the slope of a line fitted to the data. It is simply a contrast having coefficients that increase linearly. It does test the linear trend, however."
@@ -300,17 +383,36 @@ poly_cont <- contrast(emm, "poly_excl_cont", exclude = "Control", by = "year", a
 poly_cont
 
 if (t_dist) {
-        fig <- plot_inter_panel_gap_trends__t(df, pd, "Leaves per Plant")
+        fig <- plot_inter_panel_gap_trends__t(df, pd, dep_var, "Leaves per Plant")
     } else {
-        fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, "Leaves per Plant")
+        fig <- plot_inter_panel_gap_trends__emmeans(df, emm, pd, dep_var, "Leaves per Plant")
     }
 
 fig
 
 ggsave(file=file.path(stats_dir, "swiss_chard_leaves_per_plant__poly_contrasts.jpg"), width=4, height=3)
 
+fig_d = fig
+
+# ## Combine Pairwise and trend graphs
+
+# +
+yax <- scale_y_continuous(limits = c(0, 43), expand = expansion(mult = c(0, 0)),
+                  breaks = seq(0, 40, by = 10))
+
+fig_c <- fig_c + yax + 
+    theme(legend.position="top", legend.margin=margin(t=0))
+
+fig_d <- fig_d + yax
+
+plot_grid(fig_c, fig_d, labels = c("(a)", "(b)"), align = 'h', axis = "bt")
+# -
+
+ggsave(file=file.path(stats_dir, "swiss_chard_leaves_per_plant__subplots.jpg"), width=8, height=3)
+
 # ## Area comparisons
 
+# + jupyter={"source_hidden": true}
 res_aov <- anova_test(get({{dep_var}}) ~ area * year,
   data = df,
     type = 3, 
@@ -319,3 +421,12 @@ res_aov <- anova_test(get({{dep_var}}) ~ area * year,
 )
 residuals <- attributes(res_aov)$args$model$residuals
 get_anova_table(res_aov, correction = "GG")
+# -
+
+# ## Combine all 4 subplots
+
+plot_grid(fig_c, fig_d, fig_a, fig_b, labels = c("(a)", "(b)", "(c)", "(d)"), align = 'hv', ncol = 2, axis = "bt")
+
+ggsave(file=file.path(stats_dir, "swiss_chard_all_4_subplots.jpg"), width=8, height=6)
+
+
