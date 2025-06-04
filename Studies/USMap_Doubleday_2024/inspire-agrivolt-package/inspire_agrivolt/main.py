@@ -154,7 +154,7 @@ def ground_irradiance():
 
     gids_array = np.array(args.gids) if args.gids else None
 
-    if gids_array:
+    if gids_array is not None and len(gids_array) > 0:
         logger.info(f"using provided gids: {gids_array}")
 
     log_banner(f"RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")

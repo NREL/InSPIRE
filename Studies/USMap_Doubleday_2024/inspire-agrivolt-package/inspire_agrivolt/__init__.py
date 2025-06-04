@@ -3,7 +3,6 @@ import sys
 import logging
 
 logger = logging.getLogger("inspire_agrivolt")
-#logger.addHandler(logging.NullHandler())
 logger.setLevel(logging.INFO)
 
 if not logger.hasHandlers():
@@ -14,8 +13,10 @@ if not logger.hasHandlers():
 
 from . import main
 from . import irradiance_sam
+from . import beds_postprocessing
 
-from .file_operations import merge_pysam_out_nc_to_zarr
+from .file_operations import merge_pysam_out_nc_to_zarr, check_completeness, generate_missing_gids_file, merge_original_fill_data_to_zarr
 from .verify import verify_dataset_gids
+from .utils import visualize_empty_data
 
 __version__ = version("inspire_agrivolt")

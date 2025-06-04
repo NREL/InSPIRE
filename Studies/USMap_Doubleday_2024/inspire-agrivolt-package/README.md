@@ -132,6 +132,8 @@ conf_dir can be tricky but should look like the following from the sam outputs. 
 
 #### Example kestrel run
 
+**There are many scripts in the scripts/ folder which can dispatch many slurm jobs at the same time for various state and configuration combinations.**
+
 ``$ agrivolt_ground_irradiance Colorado ~/dev/InSPIRE/Studies/USMap_Doubleday_2024/Full-Outputs/Colorado/ ~/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM --confs 01 --port 22118``
 
     - calculates ground irradiance for full resolution colorado NSRDB TMY dataset
@@ -139,3 +141,11 @@ conf_dir can be tricky but should look like the following from the sam outputs. 
     - conf_dir: ~/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM 
     - confs: only run conf 01
     - port: expose dask dashboard on port 22118
+
+### Continuing the pipeline
+
+Kestrel jobs may run out of time, If this is the case, use completeness.ipynb to determine which gids are missing then echo the gids files back into an agrivolt irradiance job. Information on how to do this coming soon...  
+
+After running fill-in calculations we need to combine them with the original model outputs before continuing with postprocessing. Use merge-fill.ipynb to do this. If your fills are not complete they will have to be re-run at some point. merge-fill.ipynb will allow you to silently continue with missing data...
+
+Finally, we will run the beds postprocessing....

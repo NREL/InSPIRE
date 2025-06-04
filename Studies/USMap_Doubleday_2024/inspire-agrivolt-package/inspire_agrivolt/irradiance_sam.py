@@ -126,6 +126,9 @@ def process_slice(
     # update variable names to match convention
     slice_weather = pvdeg.weather.map_weather(slice_weather)
 
+    slice_weather = slice_weather.sortby("gid")
+    slice_meta = slice_meta.sort_index()
+
     slice_template = pvdeg.geospatial.output_template(
         ds_gids=slice_weather,
         shapes=pvdeg.pysam.INSPIRE_GEOSPATIAL_TEMPLATE_SHAPES,
