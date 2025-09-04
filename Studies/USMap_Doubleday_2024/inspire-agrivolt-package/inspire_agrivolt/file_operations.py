@@ -339,6 +339,12 @@ def generate_missing_gids_file(completeness: dict, output_path: str = None, file
     return file_path
 
 def _validate_netcdf_files(nc_files):
+    """
+    Check if netcdf files can be opened. 
+    
+    Sometimes they get corrupted or written wrong. Function checks for this 
+    to avoid opening or converting bad NC files into Zarr.
+    """
     good = []
     bad = []
     for f in nc_files:
@@ -380,9 +386,15 @@ def merge_original_fill_data_to_zarr(state: str, conf: str, full_outputs_dir: Pa
 
     original_files = list(full_outputs_dir.glob(f"{state}/{conf}/*.nc"))
     original_files, bad_original_files = _validate_netcdf_files(original_files)
+
+    if bad_original_files:
+        print("skipping bad original nc files:", bad_original_files)
     
     fill_files = list(full_outputs_dir.glob(f"{state}-fill/{conf}/*.nc"))
     fill_files, bad_fill_files = _validate_netcdf_files(fill_files)
+
+    if bad_fill_files:
+        print("skipping bad fill nc files:", bad_fill_files)
 
     # load good files, combine into single dataset
     datasets = [xr.open_dataset(f).sortby('gid') for f in sorted(fill_files)]

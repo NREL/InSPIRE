@@ -15,7 +15,12 @@ from . import main
 from . import irradiance_sam
 from . import beds_postprocessing
 
-from .file_operations import merge_pysam_out_nc_to_zarr, check_completeness, generate_missing_gids_file, merge_original_fill_data_to_zarr
+from .file_operations import (
+    merge_pysam_out_nc_to_zarr, 
+    check_completeness, # check for outputs at all gids in a state, dict output
+    generate_missing_gids_file, 
+    merge_original_fill_data_to_zarr # merge original and fill data into a single zarr store
+)
 from .verify import verify_dataset_gids
 from .utils import visualize_empty_data
 
