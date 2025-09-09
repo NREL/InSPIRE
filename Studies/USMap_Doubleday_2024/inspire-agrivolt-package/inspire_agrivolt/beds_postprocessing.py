@@ -8,129 +8,130 @@ from collections.abc import Callable
 from pathlib import Path
 
 
+# TODO, calculate distances dynamically
 # THESE WILL BECOME OUTDATED WHEN WE UPDATE THE CONFIGS (calculate dynamically)
-DISTANCES = {
-    "01": (
-        0.2502810919746036,
-        0.7508432759238107,
-        1.251405459873018,
-        1.751967643822225,
-        2.2525298277714323,
-        2.753092011720639,
-        3.2536541956698466,
-        3.7542163796190535,
-        4.2547785635682605,
-        4.755340747517468,
-    ),
-    "02": (
-        0.2502810919746036,
-        0.7508432759238107,
-        1.251405459873018,
-        1.751967643822225,
-        2.2525298277714323,
-        2.753092011720639,
-        3.2536541956698466,
-        3.7542163796190535,
-        4.2547785635682605,
-        4.755340747517468,
-    ),
-    "03": (
-        0.2502810919746036,
-        0.7508432759238107,
-        1.251405459873018,
-        1.751967643822225,
-        2.2525298277714323,
-        2.753092011720639,
-        3.2536541956698466,
-        3.7542163796190535,
-        4.2547785635682605,
-        4.755340747517468,
-    ),
-    "04": (
-        0.4004497471593658,
-        1.2013492414780975,
-        2.002248735796829,
-        2.8031482301155606,
-        3.6040477244342926,
-        4.404947218753024,
-        5.205846713071756,
-        6.006746207390488,
-        6.807645701709219,
-        7.608545196027951,
-    ),
-    "05": (
-        0.5561802043880081,
-        1.6685406131640241,
-        2.7809010219400405,
-        3.8932614307160565,
-        5.005621839492073,
-        6.117982248268089,
-        7.230342657044105,
-        8.342703065820121,
-        9.455063474596137,
-        10.567423883372154,
-    ),
-    "06": (
-        0.33370812263280486,
-        1.0011243678984145,
-        1.6685406131640244,
-        2.335956858429634,
-        3.003373103695244,
-        3.6707893489608536,
-        4.338205594226463,
-        5.005621839492073,
-        5.673038084757683,
-        6.3404543300232925,
-    ),
-    "07": (
-        0.33370812263280486,
-        1.0011243678984145,
-        1.6685406131640244,
-        2.335956858429634,
-        3.003373103695244,
-        3.6707893489608536,
-        4.338205594226463,
-        5.005621839492073,
-        5.673038084757683,
-        6.3404543300232925,
-    ),
-    "08": (
-        0.33370812263280486,
-        1.0011243678984145,
-        1.6685406131640244,
-        2.335956858429634,
-        3.003373103695244,
-        3.6707893489608536,
-        4.338205594226463,
-        5.005621839492073,
-        5.673038084757683,
-        6.3404543300232925,
-    ),
-    "09": (
-        0.5506734696910971,
-        1.6520204090732913,
-        2.7533673484554857,
-        3.8547142878376794,
-        4.956061227219874,
-        6.057408166602068,
-        7.1587551059842625,
-        8.260102045366457,
-        9.36144898474865,
-        10.462795924130845,
-    ),
-    "10": (
-        0.4352714643036585,
-        1.3058143929109756,
-        2.1763573215182923,
-        3.0469002501256095,
-        3.9174431787329262,
-        4.787986107340243,
-        5.65852903594756,
-        6.529071964554877,
-        7.399614893162195,
-        8.27015782176951,
-    ),
-}
+# DISTANCES = {
+#     "01": (
+#         0.2502810919746036,
+#         0.7508432759238107,
+#         1.251405459873018,
+#         1.751967643822225,
+#         2.2525298277714323,
+#         2.753092011720639,
+#         3.2536541956698466,
+#         3.7542163796190535,
+#         4.2547785635682605,
+#         4.755340747517468,
+#     ),
+#     "02": (
+#         0.2502810919746036,
+#         0.7508432759238107,
+#         1.251405459873018,
+#         1.751967643822225,
+#         2.2525298277714323,
+#         2.753092011720639,
+#         3.2536541956698466,
+#         3.7542163796190535,
+#         4.2547785635682605,
+#         4.755340747517468,
+#     ),
+#     "03": (
+#         0.2502810919746036,
+#         0.7508432759238107,
+#         1.251405459873018,
+#         1.751967643822225,
+#         2.2525298277714323,
+#         2.753092011720639,
+#         3.2536541956698466,
+#         3.7542163796190535,
+#         4.2547785635682605,
+#         4.755340747517468,
+#     ),
+#     "04": (
+#         0.4004497471593658,
+#         1.2013492414780975,
+#         2.002248735796829,
+#         2.8031482301155606,
+#         3.6040477244342926,
+#         4.404947218753024,
+#         5.205846713071756,
+#         6.006746207390488,
+#         6.807645701709219,
+#         7.608545196027951,
+#     ),
+#     "05": (
+#         0.5561802043880081,
+#         1.6685406131640241,
+#         2.7809010219400405,
+#         3.8932614307160565,
+#         5.005621839492073,
+#         6.117982248268089,
+#         7.230342657044105,
+#         8.342703065820121,
+#         9.455063474596137,
+#         10.567423883372154,
+#     ),
+#     "06": (
+#         0.33370812263280486,
+#         1.0011243678984145,
+#         1.6685406131640244,
+#         2.335956858429634,
+#         3.003373103695244,
+#         3.6707893489608536,
+#         4.338205594226463,
+#         5.005621839492073,
+#         5.673038084757683,
+#         6.3404543300232925,
+#     ),
+#     "07": (
+#         0.33370812263280486,
+#         1.0011243678984145,
+#         1.6685406131640244,
+#         2.335956858429634,
+#         3.003373103695244,
+#         3.6707893489608536,
+#         4.338205594226463,
+#         5.005621839492073,
+#         5.673038084757683,
+#         6.3404543300232925,
+#     ),
+#     "08": (
+#         0.33370812263280486,
+#         1.0011243678984145,
+#         1.6685406131640244,
+#         2.335956858429634,
+#         3.003373103695244,
+#         3.6707893489608536,
+#         4.338205594226463,
+#         5.005621839492073,
+#         5.673038084757683,
+#         6.3404543300232925,
+#     ),
+#     "09": (
+#         0.5506734696910971,
+#         1.6520204090732913,
+#         2.7533673484554857,
+#         3.8547142878376794,
+#         4.956061227219874,
+#         6.057408166602068,
+#         7.1587551059842625,
+#         8.260102045366457,
+#         9.36144898474865,
+#         10.462795924130845,
+#     ),
+#     "10": (
+#         0.4352714643036585,
+#         1.3058143929109756,
+#         2.1763573215182923,
+#         3.0469002501256095,
+#         3.9174431787329262,
+#         4.787986107340243,
+#         5.65852903594756,
+#         6.529071964554877,
+#         7.399614893162195,
+#         8.27015782176951,
+#     ),
+# }
 
 # placeholder, we never read these values from the configs
 # we should place some restrictions on these to make sure they are never referenced in their current form
@@ -325,6 +326,7 @@ def fixed_tilt_vertical_6_beds(
     )
 
 
+# TODO
 def fixed_tilt_3_beds(
     dataset: xr.Dataset,
 ) -> xr.Dataset:
@@ -379,87 +381,37 @@ def fixed_tilt_3_beds(
     return beds_ds
 
 
-# TODO: this has to be called weather df to be used in pvdeg geospatial analysis
-def testbeds_irradiance(weather_df: pd.DataFrame, meta: float, conf: str) -> pd.DataFrame:
-    """
-    postprocessing function to calculate irradiance for inter-row testbeds from calculated irradiances.
-
-    Requires laittude because some configs are set to latitude tilt. 
-    """
-
-    settings = configs[conf]
-
-    # this isnt fized, what should we be using?
-    cw = 2
-    pitch = settings["pitch"]
-
-    if meta is None:
-        raise ValueError("latitude not provided to testbeds_irradiance")
-    # meta = {"latitude": latitude} # hacky way to pass this into functions without changing function parameters
-
-    underpanel_left_start = 0
-    underpanel_left_end = cw / 2  # u
-    underpanel_right_start = pitch - cw / 2  # b
-    underpanel_right_end = pitch
-
-    # sam ground irradiance outputs have 10 distances
-    dx = pitch/10
-
-
-    if settings["fixed_tilt_angle"] is None and settings["bedsWanted"] == 3:
-        postprocess_df = tracking_3_beds(
-            irradiance_df=weather_df,
-            cw=cw,
-            underpanel_left_end=underpanel_left_end,
-            pitch=pitch
-        )
-    elif settings["fixed_tilt_angle"] is None and settings["bedsWanted"] == 6:
-        postprocess_df = tracking_6_beds(
-            irradiance_df=weather_df,
-            cw=cw,
-            underpanel_left_end=underpanel_left_end,
-            pitch=pitch
-        )
-    elif settings["fixed_tilt_angle"] is None and settings["bedsWanted"] == 9:
-        postprocess_df = tracking_9_beds(
-            irradiance_df=weather_df,
-            cw=cw,
-            underpanel_left_end=underpanel_left_end,
-            pitch=pitch
-        )
+def normalize_per_land_area_fixed_pitch(scenario: int):
+    GROUND_AREA_FACTORS = {
+        "01":0.261,
+        "02":0.261,
+        "03":0.522,
+        "04":0.417,
+        "05":0.579,
+        "10":0.453,
+    }
     
-    # this is reading the dummy value which is currently -999 which is truthy
-    elif settings["fixed_tilt_angle"] is not None and settings["bedsWanted"] == 3:
-        postprocess_df = fixed_tilt_3_beds(
-            irradiance_df=weather_df,
-            meta=meta,
-            cw=cw,
-            underpanel_left_end=underpanel_left_end,
-            pitch=pitch
-        )
-
-    elif settings["fixed_tilt_angle"] is not None and settings["bedsWanted"] == 6:
-        postprocess_df = fixed_tilt_6_beds(
-            irradiance_df=weather_df,
-            meta=meta,
-            cw=cw,
-            underpanel_left_end=underpanel_left_end,
-            pitch=pitch
-        )
+    if scenario not in GROUND_AREA_FACTORS:
+        raise ValueError(f"invalid scenarios provided, only 01, 02, 03, 04, 05, 10, you provided {scenario}")
     
-    elif settings["fixed_tilt_angle"] == 90 and settings["bedsWanted"] == 7:
-        postprocess_df = vertical_tilt_7_beds(
-            irradiance_df=weather_df,
-            cw=cw,
-            underpanel_left_end=underpanel_left_end,
-            pitch=pitch
-        )
-    
-    else:
-        raise ValueError("configuration not implemented yet")
+    # normalize
 
-    return postprocess_df
+def normalize_per_land_area_variable_pitch(scenario: int, dataset: xr.Dataset):
 
+    TOTAL_MODULE_AREA = 0.104 # acres
+    CW = 2 # meters
+
+    # total ground area occupied by array (acres)
+    ground_area = TOTAL_MODULE_AREA * dataset.pitch / CW
+
+    # normalize
+
+def normalize_per_kWdc_installed(scenario: int, dataset: xr.Dataset):
+
+    # same for all setups
+    INSTALLED_CAPACITY = 80.066 # kWdc
+
+    ### normalize
 
 def postprocessing(scenario: str, zarr_path: Path):
     """

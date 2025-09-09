@@ -211,7 +211,7 @@ def check_datasets_coords_dims(files: list[str]) -> None:
 
     for fp in files:
         try:
-            ds = xr.open_dataset(str(fp))
+            ds = xr.open_dataset(str(fp), engine="netcdf4", decode_cf=False, mask_and_scale=False)
             coords = set(ds.coords.keys())
             dims = set(ds.sizes.keys())
 
@@ -225,6 +225,7 @@ def check_datasets_coords_dims(files: list[str]) -> None:
 
         except Exception as e:
             raise ValueError(f"bad: {fp} | FAILED: {e}") from e
+
 
 
 def check_completeness(outputs_dir: str, state: str, conf: str) -> dict:
@@ -357,7 +358,7 @@ def _validate_netcdf_files(nc_files):
             bad.append(f)
     return good, bad
 
-def merge_original_fill_data_to_zarr(state: str, conf: str, full_outputs_dir: Path) -> None:
+def merge_original_fill_data_to_zarr(state: str, conf: str, full_outputs_dir: Path, fill_outputs_dir: Path) -> None:
     """
     Grabs state original output files, grab fill files, merge them and store to zarr.
 
@@ -390,16 +391,18 @@ def merge_original_fill_data_to_zarr(state: str, conf: str, full_outputs_dir: Pa
     if bad_original_files:
         print("skipping bad original nc files:", bad_original_files)
     
-    fill_files = list(full_outputs_dir.glob(f"{state}-fill/{conf}/*.nc"))
+    fill_files = list(fill_outputs_dir.glob(f"{state}/{conf}/*.nc"))
     fill_files, bad_fill_files = _validate_netcdf_files(fill_files)
 
     if bad_fill_files:
         print("skipping bad fill nc files:", bad_fill_files)
 
     # load good files, combine into single dataset
-    datasets = [xr.open_dataset(f).sortby('gid') for f in sorted(fill_files)]
-    fill_combined = xr.concat(datasets, dim='gid')
-    fill_combined = fill_combined.sortby('gid')
+    fill_datasets = [xr.open_dataset(f).sortby('gid') for f in sorted(fill_files)]
+
+    if fill_datasets:
+        fill_combined = xr.concat(fill_datasets, dim='gid')
+        fill_combined = fill_combined.sortby('gid')
     
     # load original incomplete dataset
     original_dataset = xr.open_mfdataset(original_files)
@@ -407,7 +410,10 @@ def merge_original_fill_data_to_zarr(state: str, conf: str, full_outputs_dir: Pa
     # fill missing values in original dataset
     # we should try merging or concatenating some other way
     # filled_dataset = original_dataset.combine_first(fill_combined)
-    merged = xr.concat([original_dataset, fill_combined], dim="gid").sortby("gid") # combine datasets (may have duplicates), sortby gid for grouping
+    if fill_datasets:
+        merged = xr.concat([original_dataset, fill_combined], dim="gid").sortby("gid") # combine datasets (may have duplicates), sortby gid for grouping
+    else:
+        merged=original_dataset.sortby("gid")
     _, unique_indices = np.unique(merged["gid"].values, return_index=True) # take first entry for each gid
     filled_dataset = merged.isel(gid=unique_indices)
 
