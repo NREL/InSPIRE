@@ -476,13 +476,13 @@ def fixed_tilt_3_beds(
         raise RuntimeError("dataset is unchunked when it should be chunked")
 
     chunks = dataset.chunks
-    dims = dataset.dims
+    sizes = dataset.sizes
 
     chunks_gid = chunks["gid"][0]
     chunks_time = chunks["time"][0]
 
-    size_gid = dims["gid"][0]
-    size_time = dims["time"][0]
+    size_gid = sizes["gid"]
+    size_time = sizes["time"]
 
     def _empty_like_chunks():
         return da.empty(
