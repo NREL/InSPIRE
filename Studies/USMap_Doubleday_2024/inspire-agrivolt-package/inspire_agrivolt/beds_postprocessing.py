@@ -1,11 +1,12 @@
-
-import pandas as pd
 import numpy as np
 import xarray as xr
 import dask.array as da
 
-from collections.abc import Callable
+from typing import Literal
+from collections.abc import Callable, Mapping
 from pathlib import Path
+
+from inspire_agrivolt import logger
 
 
 # TODO, calculate distances dynamically
@@ -135,7 +136,22 @@ from pathlib import Path
 
 # placeholder, we never read these values from the configs
 # we should place some restrictions on these to make sure they are never referenced in their current form
-pitch_temp, pitchfactor, tilt = -999, -999, -999 
+pitch_temp, pitchfactor, tilt = -999, -999, -999
+
+TRACKING_SCENARIOS = {"01", "02", "03", "04", "05"}
+TRACKING_3_BEDS_SCENARIOS = {"01", "02", "03", "04"}
+TRACKING_6_BEDS_SCENARIOS = {"05"}
+VARIABLE_PITCH_SCENARIOS = {"06", "07", "08", "09"}
+VERTICAL_SCENARIOS = {"10"}
+
+ALL_SCENARIOS = TRACKING_SCENARIOS | VARIABLE_PITCH_SCENARIOS | VERTICAL_SCENARIOS
+
+
+ENERGY_VARIABLES = [
+    "subarray1_dc_gross",  # kWh
+    "annual_energy",  # kWh
+]
+
 
 # these were taken from debug martin method
 configs = {
@@ -156,7 +172,7 @@ configs = {
         "modulename": "PVmodule",
         "bedsWanted": 3,
         "fixed_tilt_angle": None,
-    }, # single axis tracking
+    },  # single axis tracking
     "03": {
         "hub_height": 2.4,
         "pitch": 5,
@@ -218,7 +234,7 @@ configs = {
         "bedsWanted": 6,
         "fixed_tilt_angle": tilt,
     },
-    "10": { # does this want 6 or 7 beds
+    "10": {  # does this want 6 or 7 beds
         "hub_height": 2,
         "sazm": 90,
         "pitch": 8.6,
@@ -229,9 +245,8 @@ configs = {
     },
 }
 
-def tracking_3_beds(
-    dataset: xr.Dataset
-) -> xr.Dataset:
+
+def tracking_3_beds(dataset: xr.Dataset) -> xr.Dataset:
     """
     single axis tracking system with 3 beds.
 
@@ -242,26 +257,45 @@ def tracking_3_beds(
     left_underpannel_slice = slice(0, 3)
     right_underpannel_slice = slice(7, 10)
 
-    bedA_slice = slice(3,4)
-    bedB_slice = slice(4,6)
-    bedC_slice = slice(6,7)
-    edgetoedge_slice = slice(3,7)
+    bedA_slice = slice(3, 4)
+    bedB_slice = slice(4, 6)
+    bedC_slice = slice(6, 7)
+    edgetoedge_slice = slice(3, 7)
 
-    underpannel_left = dataset.ground_irradiance.isel({"distance":left_underpannel_slice}).mean("distance")
-    underpannel_right = dataset.ground_irradiance.isel({"distance":right_underpannel_slice}).mean("distance")
+    underpannel_left = dataset.ground_irradiance.isel(
+        {"distance": left_underpannel_slice}
+    ).mean("distance")
+    underpannel_right = dataset.ground_irradiance.isel(
+        {"distance": right_underpannel_slice}
+    ).mean("distance")
     underpannel = ((underpannel_left + underpannel_right) / 2).rename("underpannel")
 
-    bedA = dataset.ground_irradiance.isel({"distance":bedA_slice}).mean("distance").rename("bedA")
-    bedB = dataset.ground_irradiance.isel({"distance":bedB_slice}).mean("distance").rename("bedB")
-    bedC = dataset.ground_irradiance.isel({"distance":bedC_slice}).mean("distance").rename("bedC")
-
-    edgetoedge = dataset.ground_irradiance.isel({"distance":edgetoedge_slice}).mean("distance").rename("edgetoedge")
-
-    beds_ds = xr.merge(
-        [underpannel, edgetoedge, bedA, bedB, bedC]
+    bedA = (
+        dataset.ground_irradiance.isel({"distance": bedA_slice})
+        .mean("distance")
+        .rename("bedA")
+    )
+    bedB = (
+        dataset.ground_irradiance.isel({"distance": bedB_slice})
+        .mean("distance")
+        .rename("bedB")
+    )
+    bedC = (
+        dataset.ground_irradiance.isel({"distance": bedC_slice})
+        .mean("distance")
+        .rename("bedC")
     )
 
+    edgetoedge = (
+        dataset.ground_irradiance.isel({"distance": edgetoedge_slice})
+        .mean("distance")
+        .rename("edgetoedge")
+    )
+
+    beds_ds = xr.merge([underpannel, edgetoedge, bedA, bedB, bedC])
+
     return beds_ds
+
 
 def tracking_6_beds(
     dataset: xr.Dataset,
@@ -283,28 +317,57 @@ def tracking_6_beds(
     bedF_slice = slice(7, 8)
     edgetoedge_slice = slice(2, 8)
 
-    underpannel_left = dataset.ground_irradiance.isel({"distance":left_underpannel_slice}).mean("distance")
-    underpannel_right = dataset.ground_irradiance.isel({"distance":right_underpannel_slice}).mean("distance")
+    underpannel_left = dataset.ground_irradiance.isel(
+        {"distance": left_underpannel_slice}
+    ).mean("distance")
+    underpannel_right = dataset.ground_irradiance.isel(
+        {"distance": right_underpannel_slice}
+    ).mean("distance")
     underpannel = ((underpannel_left + underpannel_right) / 2).rename("underpannel")
 
-    bedA = dataset.ground_irradiance.isel({"distance":bedA_slice}).mean("distance").rename("bedA")
-    bedB = dataset.ground_irradiance.isel({"distance":bedB_slice}).mean("distance").rename("bedB")
-    bedC = dataset.ground_irradiance.isel({"distance":bedC_slice}).mean("distance").rename("bedC")
-    bedD = dataset.ground_irradiance.isel({"distance":bedD_slice}).mean("distance").rename("bedD")
-    bedE = dataset.ground_irradiance.isel({"distance":bedE_slice}).mean("distance").rename("bedE")
-    bedF = dataset.ground_irradiance.isel({"distance":bedF_slice}).mean("distance").rename("bedF")
-
-    edgetoedge = dataset.ground_irradiance.isel({"distance":edgetoedge_slice}).mean("distance").rename("edgetoedge")
-
-    beds_ds = xr.merge(
-        [underpannel, edgetoedge, bedA, bedB, bedC, bedD, bedE, bedF]
+    bedA = (
+        dataset.ground_irradiance.isel({"distance": bedA_slice})
+        .mean("distance")
+        .rename("bedA")
     )
+    bedB = (
+        dataset.ground_irradiance.isel({"distance": bedB_slice})
+        .mean("distance")
+        .rename("bedB")
+    )
+    bedC = (
+        dataset.ground_irradiance.isel({"distance": bedC_slice})
+        .mean("distance")
+        .rename("bedC")
+    )
+    bedD = (
+        dataset.ground_irradiance.isel({"distance": bedD_slice})
+        .mean("distance")
+        .rename("bedD")
+    )
+    bedE = (
+        dataset.ground_irradiance.isel({"distance": bedE_slice})
+        .mean("distance")
+        .rename("bedE")
+    )
+    bedF = (
+        dataset.ground_irradiance.isel({"distance": bedF_slice})
+        .mean("distance")
+        .rename("bedF")
+    )
+
+    edgetoedge = (
+        dataset.ground_irradiance.isel({"distance": edgetoedge_slice})
+        .mean("distance")
+        .rename("edgetoedge")
+    )
+
+    beds_ds = xr.merge([underpannel, edgetoedge, bedA, bedB, bedC, bedD, bedE, bedF])
 
     return beds_ds
 
-def fixed_tilt_vertical_6_beds(
-    dataset: xr.Dataset
-) -> xr.Dataset:
+
+def fixed_tilt_vertical_6_beds(dataset: xr.Dataset) -> xr.Dataset:
     """
     vertical fixed tilt system with 6 beds.
 
@@ -315,18 +378,79 @@ def fixed_tilt_vertical_6_beds(
     for tracking systems, measurement starts at the center of the collector and ends at the center of the collector.
     for fixed systems,    measurement starts at the left side of the left collector and ends on the left side of the next collector.
 
-    for vertical fixed tilt systems the left side of the collector is in the same location (projected on the ground) 
+    for vertical fixed tilt systems the left side of the collector is in the same location (projected on the ground)
     so we can reuse the math for the tracking system ONLY FOR THIS SCENARIO.
 
     Image to be included...
     """
-    
-    return tracking_6_beds(
-        dataset=dataset
+
+    return tracking_6_beds(dataset=dataset)
+
+
+def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
+    bins = np.array([3.8, 3.8492, 4.9491, 6.9355, 11.5465, 12.0001, np.inf])
+
+    distance_index = np.arange(0, 10)
+
+    slices = np.array(
+        [
+            [0, 5, 5, 7, 7, 8, 8, 10],  # 3.8, 3.8492
+            [0, 4, 4, 6, 6, 8, 8, 10],  # 3.8492,  4.9491
+            [0, 3, 3, 5, 5, 8, 8, 10],  # 4.9491, 6.9355
+            [0, 2, 2, 5, 5, 7, 7, 10],  # 6.9355, 11.5465
+            [0, 1, 1, 4, 4, 7, 7, 10],  # 11.5465, 12.0
+        ],
+        dtype=int,
     )
 
+    digitized = np.digitize(scenario_dataset.pitch, bins)
 
-# TODO
+    # if anything in the range
+    if np.any(digitized == 6):
+        raise ValueError("Invalid pitch value above 12 provided.")
+
+    slice_index = digitized - 1
+    selected_slices = slices[slice_index]
+
+    res = []
+    for i, gid in enumerate(scenario_dataset.gid):
+        # calculate mask
+        under_start = selected_slices[i, 0]
+        under_end = selected_slices[i, 1]
+        beda_start = selected_slices[i, 2]
+        beda_end = selected_slices[i, 3]
+        bedb_start = selected_slices[i, 4]
+        bedb_end = selected_slices[i, 5]
+        bedc_start = selected_slices[i, 6]
+        bedc_end = selected_slices[i, 7]
+
+        mask_under = (distance_index >= under_start) & (distance_index < under_end)
+        mask_beda = (distance_index >= beda_start) & (distance_index < beda_end)
+        mask_bedb = (distance_index >= bedb_start) & (distance_index < bedb_end)
+        mask_bedc = (distance_index >= bedc_start) & (distance_index < bedc_end)
+
+        single_loc_beds_ds = xr.merge(
+            [
+                scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_under)
+                .mean(dim="distance")
+                .rename("under_pannel"),
+                scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_beda)
+                .mean(dim="distance")
+                .rename("beda"),
+                scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_bedb)
+                .mean(dim="distance")
+                .rename("bedb"),
+                scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_bedc)
+                .mean(dim="distance")
+                .rename("bedc"),
+            ]
+        )
+
+        res.append(single_loc_beds_ds)
+
+    return xr.concat(res, dim="gid")
+
+
 def fixed_tilt_3_beds(
     dataset: xr.Dataset,
 ) -> xr.Dataset:
@@ -339,81 +463,127 @@ def fixed_tilt_3_beds(
     """
 
     if "pitch" not in dataset.data_vars:
-        raise ValueError("dataset not in pitch")
+        raise ValueError("pitch data variable missing from provided dataset")
 
-    # magic numbers but hardcoding this is much simpler
-    RANGES = [
-        ((3.8,     3.8492), (0, 5, 5, 7, 7, 8, 8, 10)),
-        ((3.8492,  4.9491), (0, 4, 4, 6, 6, 8, 8, 10)),
-        ((4.9491,  6.9355), (0, 3, 3, 5, 5, 8, 8, 10)),
-        ((6.9355, 11.5465), (0, 2, 2, 5, 5, 7, 7, 10)),
-        ((11.5465, 12.0   ), (0, 1, 1, 4, 4, 7, 7, 10)),
-    ]
+    BED_DIMS = ("gid", "time")
+    for d in BED_DIMS:
+        if d not in dataset.dims:
+            raise ValueError(
+                f"Missing required dim {d} in dataset, found {list(dataset.dims)}"
+            )
 
-    def get_indices(pitch: float):
-        for (lo, hi), indices in RANGES:
-            if lo <= pitch < hi or (hi == 12.0 and lo <= pitch <= hi):
-                return indices
-        raise ValueError("bad pitch provided, pitch must be in the range [3.8, 12] meters")
+    if dataset.chunks is None:
+        raise RuntimeError("dataset is unchunked when it should be chunked")
 
-    up_left_start_idx, up_left_end_idx, bedA_start_idx, bedA_end_idx, \
-    bedB_start_idx, bedB_end_idx, bedC_start_idx, bedC_end_idx = get_indices(pitch)
+    chunks = dataset.chunks
+    dims = dataset.dims
 
-    left_underpannel_slice = slice(up_left_start_idx, up_left_end_idx)
+    chunks_gid = chunks["gid"][0]
+    chunks_time = chunks["time"][0]
 
-    bedA_slice = slice(bedA_start_idx, bedA_end_idx)
-    bedB_slice = slice(bedB_start_idx, bedB_end_idx)
-    bedC_slice = slice(bedC_start_idx, bedC_end_idx)
-    edgetoedge_slice = slice(bedA_start_idx, bedC_end_idx)
+    size_gid = dims["gid"][0]
+    size_time = dims["time"][0]
 
-    underpannel = dataset.ground_irradiance.isel({"distance":left_underpannel_slice}).mean("distance").rename("underpannel")
+    def _empty_like_chunks():
+        return da.empty(
+            dtype=float, shape=(size_gid, size_time), chunks=(chunks_gid, chunks_time)
+        )
 
-    bedA = dataset.ground_irradiance.isel({"distance":bedA_slice}).mean("distance").rename("bedA")
-    bedB = dataset.ground_irradiance.isel({"distance":bedB_slice}).mean("distance").rename("bedB")
-    bedC = dataset.ground_irradiance.isel({"distance":bedC_slice}).mean("distance").rename("bedC")
-
-    edgetoedge = dataset.ground_irradiance.isel({"distance":edgetoedge_slice}).mean("distance").rename("edgetoedge")
-
-    beds_ds = xr.merge(
-        [underpannel, edgetoedge, bedA, bedB, bedC]
+    map_template = xr.Dataset(
+        data_vars={
+            "under_pannel": (BED_DIMS, _empty_like_chunks()),
+            "beda": (BED_DIMS, _empty_like_chunks()),
+            "bedb": (BED_DIMS, _empty_like_chunks()),
+            "bedc": (BED_DIMS, _empty_like_chunks()),
+        },
+        coords={
+            "gid": dataset.gid,
+            "time": dataset.time,
+        },
     )
 
+    beds_ds = dataset.map_blocks(func=iter_beds, template=map_template)
     return beds_ds
 
 
-def normalize_per_land_area_fixed_pitch(scenario: int):
-    GROUND_AREA_FACTORS = {
-        "01":0.261,
-        "02":0.261,
-        "03":0.522,
-        "04":0.417,
-        "05":0.579,
-        "10":0.453,
+def normalize_per_land_area_fixed_pitch(scenario: str, dataset: xr.Dataset):
+    GROUND_AREA_OCCUPIED_ACRES_MAP = {
+        "01": 0.261,
+        "02": 0.261,
+        "03": 0.522,
+        "04": 0.417,
+        "05": 0.579,
+        "10": 0.453,
     }
-    
-    if scenario not in GROUND_AREA_FACTORS:
-        raise ValueError(f"invalid scenarios provided, only 01, 02, 03, 04, 05, 10, you provided {scenario}")
-    
-    # normalize
 
-def normalize_per_land_area_variable_pitch(scenario: int, dataset: xr.Dataset):
+    if scenario not in GROUND_AREA_OCCUPIED_ACRES_MAP:
+        raise ValueError(
+            f"invalid scenarios provided, only 01, 02, 03, 04, 05, 10 allowed, you provided {scenario}"
+        )
 
-    TOTAL_MODULE_AREA = 0.104 # acres
-    CW = 2 # meters
+    ground_area_occupied_acres = GROUND_AREA_OCCUPIED_ACRES_MAP[scenario]
+
+    res = []
+    for var_name in ENERGY_VARIABLES:
+        res.append(
+            (dataset[var_name] / ground_area_occupied_acres).rename(
+                f"{var_name}_per_acre"
+            )
+        )
+
+    return xr.merge(res)
+
+
+def normalize_per_land_area_variable_pitch(dataset: xr.Dataset):
+    TOTAL_MODULE_AREA = 0.104  # acres
+    CW = 2  # meters
 
     # total ground area occupied by array (acres)
-    ground_area = TOTAL_MODULE_AREA * dataset.pitch / CW
+    ground_area_occupied_acres = TOTAL_MODULE_AREA * dataset.pitch / CW
 
-    # normalize
+    res = []
+    for var_name in ENERGY_VARIABLES:
+        res.append(
+            (dataset[var_name] / ground_area_occupied_acres).rename(
+                f"{var_name}_per_acre"
+            )
+        )
 
-def normalize_per_kWdc_installed(scenario: int, dataset: xr.Dataset):
+    return xr.merge(res)
 
+
+def normalize_per_kWdc_installed(dataset: xr.Dataset):
     # same for all setups
-    INSTALLED_CAPACITY = 80.066 # kWdc
+    INSTALLED_CAPACITY = 80.066  # kWdc
 
-    ### normalize
+    res = []
+    for var_name in ENERGY_VARIABLES:
+        res.append(
+            (dataset[var_name] / INSTALLED_CAPACITY).rename(
+                f"{var_name}_per_kWdc_installed"
+            )
+        )
 
-def postprocessing(scenario: str, zarr_path: Path):
+    return xr.merge(res)
+
+
+BED_PROCESSORS: Mapping[str, Callable[[xr.Dataset], xr.Dataset]] = {
+    **{s: tracking_3_beds for s in TRACKING_3_BEDS_SCENARIOS},
+    **{s: tracking_6_beds for s in TRACKING_6_BEDS_SCENARIOS},
+    **{s: fixed_tilt_vertical_6_beds for s in VERTICAL_SCENARIOS},
+    **{s: fixed_tilt_3_beds for s in VARIABLE_PITCH_SCENARIOS},
+}
+
+NormKind = Literal["fixed_pitch", "variable_pitch"]
+NORM_KIND: Mapping[str, NormKind] = {
+    **{s: "fixed_pitch" for s in (TRACKING_SCENARIOS | VERTICAL_SCENARIOS)},
+    **{s: "variable_pitch" for s in VARIABLE_PITCH_SCENARIOS},
+}
+
+
+def postprocessing(
+    scenario: str, input_zarr_path: Path, output_zarr_path: Path
+) -> None:
     """
     run postprocessing on model run output zarr stores.
 
@@ -421,38 +591,58 @@ def postprocessing(scenario: str, zarr_path: Path):
     -----------
     scenario: str
         scenario name 01-10
-    zarr_path:
-        path to zarr store
+    input_zarr_path:
+        path to zarr store containing model outputs
+    output_zarr_path:
+        path to write postprocessed zarr data to
     """
 
-    tracking_scenarios = ['01', '02', '03', '04', '05']
-    tracking_3_beds_scenarios = ['01', '02', '03', '04']
-    fixed_tilt_scenarios = ['06', '07', '08', '09', '10']
+    if not isinstance(scenario, str):
+        raise ValueError(
+            f"scenario must be a string, recived {type(scenario)}: {scenario}"
+        )
 
-    scenario_dataset = xr.open_zarr(zarr_path)
+    if scenario not in ALL_SCENARIOS:
+        raise ValueError(
+            f"Invalid scenario '{scenario}'. Must be one of: {sorted(ALL_SCENARIOS)}"
+        )
 
-    if scenario in tracking_scenarios:
+    if output_zarr_path.exists():
+        raise FileExistsError(
+            f"output_zarr_path: {output_zarr_path} already exists, must be empty."
+        )
 
-        if scenario in tracking_3_beds_scenarios:
-            beds_dataset = tracking_3_beds(scenario_dataset)
-        
-        if scenario == "05":
-            beds_dataset = tracking_6_beds(scenario_dataset)
+    scenario_dataset = xr.open_zarr(input_zarr_path)
 
-    
-    if scenario in fixed_tilt_scenarios:
+    bed_proc = BED_PROCESSORS.get(scenario)
+    if bed_proc is None:
+        raise RuntimeError(
+            f"No bed processor mapped for scenario '{scenario}' (internal config error)."
+        )
 
-        if scenario == "10":
-            # pitch should be in the dataset
-            # beds_dataset = fixed_tilt_3_beds(dataset=scenario_dataset, pitch=)
-            ...
+    logger.info(
+        f"Postprocessing scenario={scenario} using bed_proc={bed_proc.__name__}"
+    )
+    beds_dataset = bed_proc(scenario_dataset)
 
-        if scenario in fixed_tilt_scenarios and scenario != "10":
-            ...
-    
+    kind = NORM_KIND[scenario]
+    if kind == "fixed_pitch":
+        area_normalized_ds = normalize_per_land_area_fixed_pitch(
+            scenario, scenario_dataset
+        )
     else:
-        raise ValueError("invalid scenario must be one of 01 02 03 04 05 06 07 08 09 10")
+        area_normalized_ds = normalize_per_land_area_variable_pitch(scenario_dataset)
 
+    kWdc_installed_normalized_ds = normalize_per_kWdc_installed(scenario_dataset)
 
+    logger.debug("Merging outputs...")
+    postprocess_result_ds: xr.Dataset = xr.merge(
+        [beds_dataset, area_normalized_ds, kWdc_installed_normalized_ds],
+        compat="no_conflicts",
+    )
 
-
+    logger.info("Merging outputs...")
+    postprocess_result_ds.to_zarr(
+        store=output_zarr_path, consolidated=True, compute=True
+    )
+    logger.info("Postprocessing complete")

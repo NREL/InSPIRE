@@ -1,0 +1,4 @@
+# secondary gitignore 
+logs/
+
+.ipynb_checkpoints
