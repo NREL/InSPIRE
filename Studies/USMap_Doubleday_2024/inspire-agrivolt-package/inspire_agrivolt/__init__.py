@@ -21,7 +21,8 @@ from .file_operations import (
     merge_original_fill_data_to_zarr, # merge original and fill data into a single zarr store
     check_datasets_coords_dims, # fails if time decode fails
 )
-from .verify import verify_dataset_gids
-from .utils import visualize_empty_data
+# from .verify import verify_dataset_gids
+
+from . import verify
 
 __version__ = version("inspire_agrivolt")

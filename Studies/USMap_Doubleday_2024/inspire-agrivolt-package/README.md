@@ -146,10 +146,13 @@ conf_dir can be tricky but should look like the following from the sam outputs. 
 
 Kestrel jobs may run out of time, If this is the case, use ``completeness.ipynb`` to determine which gids are missing then echo the gids files back into an agrivolt irradiance job. Information on how to do this coming soon...  
 
-This is being done in `completeness.py` currently. The function `inspire_agrivolt.check_completeness` examines all possible gids in a state then checks the directory to see if they are present. If there are missing gids they will be outputted by the function, then we can use this list of gids to run the script again to produce the missing outputs. **Insert script name here.**
+This is being done in `completeness.py` currently. The function `inspire_agrivolt.check_completeness` examines all possible gids in a state then checks the directory to see if they are present. If there are missing gids they will be outputted by the function, then we can use this list of gids to run the script again to produce the missing outputs. 
 
-After running fill-in calculations we need to combine them with the original model outputs before continuing with postprocessing. Use ``merge-fill.ipynb`` to do this. If your fills are not complete they will have to be re-run at some point. ``merge-fill.ipynb`` will allow you to silently continue with missing data...
+./submit_fill.sh <statename> <config> "$(cat <gidsfile with space-seperated gids, no newlines>)"
+
+After running fill-in calculations we need to combine them with the original model outputs before continuing with postprocessing. Use ``merge-fill.ipynb`` to do this. If your fills are not complete they will have to be re-run at some point. ``merge-fill.ipynb`` will allow you to silently continue with missing data.
 
 At this point the data can be visually inspected to check for missing locations. Repeat the steps in the previous 3 paragraphs to fill in the data, if it is still missing.
 
-Finally, we will run the beds postprocessing....
+Finally, we will run the beds postprocessing using ``postprocessing.ipynb``. This will create a new zarr output for each input zarr. Depending on how you want the
+final format of your data, they may have to be merged or sharded later.
