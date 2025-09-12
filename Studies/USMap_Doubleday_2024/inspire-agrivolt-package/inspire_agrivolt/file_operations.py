@@ -143,7 +143,7 @@ def generate_missing_gids_file(completeness: dict, output_path: str = None, file
 
     return file_path
 
-def _validate_netcdf_files(nc_files):
+def _validate_netcdf_files(nc_files, check_dims={}):
     """
     Check if netcdf files can be opened. 
     
@@ -154,7 +154,12 @@ def _validate_netcdf_files(nc_files):
     bad = []
     for f in nc_files:
         try:
-            xr.open_dataset(f).close()
+            ds = xr.open_dataset(f, engine="h5netcdf")
+            if check_dims:
+                for dim in check_dims:
+                    if dim not in ds.dims:
+                        raise ValueError("bad dim")
+            ds.close()
             good.append(f)
         except Exception as e:
             print(f"BAD FILE: {f}")
@@ -162,65 +167,118 @@ def _validate_netcdf_files(nc_files):
             bad.append(f)
     return good, bad
 
-def merge_original_fill_data_to_zarr(state: str, conf: str, full_outputs_dir: Path, fill_outputs_dir: Path) -> None:
+def merge_original_fill_data_to_zarr(
+    MODEL_OUT_DIR_A: str,
+    MODEL_OUT_DIR_B: str,
+    state: str,
+    scenario: str,
+    OUTPUT_ZARR_PATH: str,
+) -> None:
     """
-    Grabs state original output files, grab fill files, merge them and store to zarr.
+    Merge original model outputs with fill data and write a cleaned dataset to Zarr.
+
+    This function:
+      1. Reads NetCDF output files from two directories:
+         - MODEL_OUT_DIR_A: original (possibly incomplete) outputs
+         - MODEL_OUT_DIR_B: fill outputs used to patch missing values
+      2. Validates and filters out corrupt or unreadable NetCDF files.
+      3. Loads, sorts, and merges datasets on the 'gid' dimension,
+         ensuring unique 'gid' values by keeping the first occurrence.
+      4. Fetches NSRDB metadata (via pvdeg) to filter out any gids that
+         do not belong to the specified state.
+      5. Stores the final, cleaned dataset as a Zarr store at OUTPUT_ZARR_PATH.
 
     Parameters
     ----------
-    state: str
-        state name, lowercase
-    conf: str
-        conf name with leading zeros, ex: 04, 08, 09
-    full_outputs_dir: pathlib.Path
-        path to full outputs directory with state subdirectories
+    MODEL_OUT_DIR_A : str
+        Path to directory containing original model NetCDF files.
+    MODEL_OUT_DIR_B : str
+        Path to directory containing fill NetCDF files.
+    state : str
+        Lowercase state name (e.g., "colorado").
+    scenario : str
+        Configuration identifier with leading zeros (e.g., "04", "08").
+    OUTPUT_ZARR_PATH : str
+        Path to the output Zarr store to be written. Must not already exist. Cannot be a cloud path.
 
-    example (assuming the following paths exist)
-    .../path/to/colorado/
-    .../path/to/colorado-fill/
-
-    run with the following to merge for config 04
-    >>> mix_state_from_original_filled "colorado" "04" .../path/to/
+    Raises
+    ------
+    FileExistsError
+        If OUTPUT_ZARR_PATH already exists.
+    ValueError
+        If required variables or dimensions are missing from the datasets.
     """
+
     import pvdeg
-    print(f"starting {state} {conf}")
+    print(f"starting {state} {scenario}")
 
-    zarr_path = full_outputs_dir / state / f"{conf}.zarr"
-    if zarr_path.exists():
-        raise Exception(f"Zarr path already exists at {zarr_path}")
+    # Validate basic types (optional)
+    if not isinstance(MODEL_OUT_DIR_A, str): raise ValueError("MODEL_OUT_DIR_A must be str or Path")
+    if not isinstance(MODEL_OUT_DIR_B, str): raise ValueError("MODEL_OUT_DIR_B must be str or Path")
+    if not isinstance(state, str):                    raise ValueError("state must be a string")
+    if not isinstance(scenario, str):                 raise ValueError("scenario must be a string")
+    if not isinstance(OUTPUT_ZARR_PATH, str): raise ValueError("OUTPUT_ZARR_PATH must be str or Path")
 
-    original_files = list(full_outputs_dir.glob(f"{state}/{conf}/*.nc"))
-    original_files, bad_original_files = _validate_netcdf_files(original_files)
+    if Path(OUTPUT_ZARR_PATH).exists():
+        raise FileExistsError(f"Something already exists at {OUTPUT_ZARR_PATH}")
 
-    if bad_original_files:
-        print("skipping bad original nc files:", bad_original_files)
-    
-    fill_files = list(fill_outputs_dir.glob(f"{state}/{conf}/*.nc"))
-    fill_files, bad_fill_files = _validate_netcdf_files(fill_files)
+    logger.info("Starting merge for state=%s scenario=%s", state, scenario)
 
-    if bad_fill_files:
-        print("skipping bad fill nc files:", bad_fill_files)
+    original_files = sorted(Path(MODEL_OUT_DIR_A).glob("*.nc"))
+    fill_files = sorted(Path(MODEL_OUT_DIR_B).glob("*.nc"))
 
-    # load good files, combine into single dataset
-    fill_datasets = [xr.open_dataset(f).sortby('gid') for f in sorted(fill_files)]
+    logger.info(f"validating files in {MODEL_OUT_DIR_A} and {MODEL_OUT_DIR_B}")
 
-    if fill_datasets:
-        fill_combined = xr.concat(fill_datasets, dim='gid')
-        fill_combined = fill_combined.sortby('gid')
-    
-    # load original incomplete dataset
-    original_dataset = xr.open_mfdataset(original_files)
+    required_dims = {"gid", "time", "distance"}
 
-    # fill missing values in original dataset
-    # we should try merging or concatenating some other way
-    # filled_dataset = original_dataset.combine_first(fill_combined)
-    if fill_datasets:
-        merged = xr.concat([original_dataset, fill_combined], dim="gid").sortby("gid") # combine datasets (may have duplicates), sortby gid for grouping
+    original_files, bad_A = _validate_netcdf_files(original_files, check_dims=required_dims)
+    fill_files, bad_B = _validate_netcdf_files(fill_files, check_dims=required_dims)
+
+    if bad_A: logger.warning("Skipping %d bad NC files in %s", len(bad_A), MODEL_OUT_DIR_A)
+    if bad_B: logger.warning("Skipping %d bad NC files in %s", len(bad_B), MODEL_OUT_DIR_B)
+    if not original_files:
+        raise ValueError(f"No valid original files found in {MODEL_OUT_DIR_A}")
+
+
+    logger.info(f"opening files in {MODEL_OUT_DIR_A}")
+
+    original_ds = xr.open_mfdataset(
+        original_files,
+        combine="by_coords",
+        chunks={}, # let engine decide
+        parallel=False,
+        engine="h5netcdf"
+    )
+
+    if "gid" not in original_ds.coords and "gid" not in original_ds.dims:
+        raise ValueError("Original dataset missing 'gid' coordinate/dimension.")
+
+    original_ds = original_ds.sortby("gid")
+
+    logger.info(f"interoggating {MODEL_OUT_DIR_B}")
+
+    fill_combined = None
+    if fill_files:
+        logger.info(f"opening fill files...")
+        fill_datasets = [xr.open_dataset(f, chunks="auto").sortby("gid") for f in sorted(fill_files)]
+        fill_combined = xr.concat(fill_datasets, dim="gid").sortby("gid")
+
+    if fill_combined is not None:
+        try:
+            filled = original_ds.combine_first(fill_combined)
+        except Exception as e:
+            logger.warning("combine_first failed (%s); falling back to concat+dedupe", e)
+            merged = xr.concat([original_ds, fill_combined], dim="gid", data_vars="all", coords="all").sortby("gid")
+            # Keep first occurrence per gid (original files listed first)
+            gids = merged["gid"].values
+            _, first_idx = np.unique(gids, return_index=True)
+            filled = merged.isel(gid=np.sort(first_idx))
     else:
-        merged=original_dataset.sortby("gid")
-    _, unique_indices = np.unique(merged["gid"].values, return_index=True) # take first entry for each gid
-    filled_dataset = merged.isel(gid=unique_indices)
+        logger.info(f"no fill files provided, continuing with only {MODEL_OUT_DIR_A}")
+        filled = original_ds
 
+
+    logger.info(f"loading data from NSRDB...")
     # load nsrdb metadata
     weather_db = "NSRDB"
     weather_arg = {
@@ -230,18 +288,28 @@ def merge_original_fill_data_to_zarr(state: str, conf: str, full_outputs_dir: Pa
         "attributes": pvdeg.pysam.INSPIRE_NSRDB_ATTRIBUTES,
     }
     
-    geo_weather, geo_meta = pvdeg.weather.get(
+    _, geo_meta = pvdeg.weather.get(
         weather_db, geospatial=True, **weather_arg)
 
-    # get state metadata
-    state_meta = geo_meta[geo_meta["state"] == f"{state.title()}"]
+    logger.info(f"loaded NSRDB metadata")
+
+    state_meta = geo_meta[geo_meta["state"] == state.title()]
+    if state_meta.empty:
+        logger.warning("No gids found in geo_meta for state=%s", state)
 
     # check if any gids are outside of the state, if so remove them, this seems to have been an issue in the past
     # while probably not required, we want to make sure that this is not a slient issue
-    valid_gids = state_meta.index.values
-    mask = np.isin(filled_dataset.gid.values, valid_gids) # mask values to keep
-    filtered_dataset = filled_dataset.isel(gid=mask).chunk({"gid":100})
+    state_valid_gids = state_meta.index.values
 
-    filtered_dataset.to_zarr(full_outputs_dir / state / f"{conf}.zarr")
+    # make sure that dataset gids is a subset of valid gids for the state
+    is_ds_valid_subset = len(np.setdiff1d(filled.gid.values, state_valid_gids, assume_unique=True)) == 0
+    if not is_ds_valid_subset:
+        logger.warning("gids from outside state found inside of input ncdf's")
 
-    print(f"ending {state} {conf}")
+    # this may not be required and might take a long time
+    filled = filled.chunk({"time":-1, "distance":-1, "gid":2000})
+
+    filled.to_zarr(str(OUTPUT_ZARR_PATH), compute=True, consolidated=True)
+
+    logger.info("Finished merge → %s", OUTPUT_ZARR_PATH)
+    print(f"ending {state} {scenario}")
