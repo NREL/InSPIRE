@@ -22,6 +22,6 @@ module load anaconda3
 source activate /home/tford/.conda-envs/geospatial
 
 #### do work ####
-agrivolt_ground_irradiance "$STATE" /projects/inspire/PySAM-MAPS/Full-Outputs/"$STATE" /home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM --confs "$CONF" --port 22118 --workers 16 --partition shared --walltime 10:00:00
+agrivolt_ground_irradiance "$STATE" /projects/inspire/PySAM-MAPS/Full-Outputs/"$STATE"-rerun-fixed-sat /home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM --confs "$CONF" --port 22118 --workers 16 --partition shared --walltime 10:00:00
 
 conda deactivate
