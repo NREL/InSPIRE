@@ -273,17 +273,17 @@ def tracking_3_beds(dataset: xr.Dataset) -> xr.Dataset:
     bedA = (
         dataset.ground_irradiance.isel({"distance": bedA_slice})
         .mean("distance")
-        .rename("bedA")
+        .rename("beda")
     )
     bedB = (
         dataset.ground_irradiance.isel({"distance": bedB_slice})
         .mean("distance")
-        .rename("bedB")
+        .rename("bedb")
     )
     bedC = (
         dataset.ground_irradiance.isel({"distance": bedC_slice})
         .mean("distance")
-        .rename("bedC")
+        .rename("bedc")
     )
 
     edgetoedge = (
@@ -328,32 +328,32 @@ def tracking_6_beds(
     bedA = (
         dataset.ground_irradiance.isel({"distance": bedA_slice})
         .mean("distance")
-        .rename("bedA")
+        .rename("beda")
     )
     bedB = (
         dataset.ground_irradiance.isel({"distance": bedB_slice})
         .mean("distance")
-        .rename("bedB")
+        .rename("bedb")
     )
     bedC = (
         dataset.ground_irradiance.isel({"distance": bedC_slice})
         .mean("distance")
-        .rename("bedC")
+        .rename("bedc")
     )
     bedD = (
         dataset.ground_irradiance.isel({"distance": bedD_slice})
         .mean("distance")
-        .rename("bedD")
+        .rename("bedd")
     )
     bedE = (
         dataset.ground_irradiance.isel({"distance": bedE_slice})
         .mean("distance")
-        .rename("bedE")
+        .rename("bede")
     )
     bedF = (
         dataset.ground_irradiance.isel({"distance": bedF_slice})
         .mean("distance")
-        .rename("bedF")
+        .rename("bedf")
     )
 
     edgetoedge = (
