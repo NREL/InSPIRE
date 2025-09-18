@@ -7,7 +7,7 @@ from pathlib import Path
 
 from inspire_agrivolt import logger
 
-def check_datasets_coords_dims(files: list[str]) -> None:
+def check_ncs_coords_dims(files: list[str]) -> None:
     from glob import glob
     import xarray as xr
 
@@ -30,6 +30,27 @@ def check_datasets_coords_dims(files: list[str]) -> None:
         except Exception as e:
             raise ValueError(f"bad: {fp} | FAILED: {e}") from e
 
+def check_zarr_coords_dims(zarr_path:str) -> None:
+    from glob import glob
+    import xarray as xr
+
+    allowed = {"time", "distance", "gid"}
+
+    try:
+        ds = xr.open_zarr(zarr_path)
+        coords = set(ds.coords.keys())
+        dims = set(ds.sizes.keys())
+
+        all_present = coords.union(dims)
+        extra = all_present - allowed
+
+        if extra:
+            raise ValueError(f"{zarr_path} contains unexpected dimensions or coordinates: {extra}")
+
+        logger.debug(f"good: {zarr_path} | coords: {sorted(coords)} | dims: {sorted(dims)}")
+
+    except Exception as e:
+        raise ValueError(f"bad: {zarr_path} | FAILED: {e}") from e
 
 
 def check_completeness(outputs_dir: str, state: str, conf: str) -> dict:
@@ -69,7 +90,7 @@ def check_completeness(outputs_dir: str, state: str, conf: str) -> dict:
     out_meta_df = pd.concat(meta_list)
 
     # check dims/coords before reading NetCDF
-    check_datasets_coords_dims(files=sorted(target_path.glob("*.nc")))
+    check_ncs_coords_dims(files=sorted(target_path.glob("*.nc")))
     out_model_ds = xr.open_mfdataset(str(target_path / "*.nc"))
 
     # Get weather meta for full expected set of GIDs

@@ -19,7 +19,7 @@ from .file_operations import (
     check_completeness, # check for outputs at all gids in a state, dict output
     generate_missing_gids_file, 
     merge_original_fill_data_to_zarr, # merge original and fill data into a single zarr store
-    check_datasets_coords_dims, # fails if time decode fails
+    check_ncs_coords_dims, # fails if time decode fails
 )
 # from .verify import verify_dataset_gids
 

@@ -34,30 +34,30 @@ def ground_irradiance():
         help="List of config names (default: 01 through 10), STRONGLY RECOMENDED: only run one config at a time, submit multiple sbatch jobs to run multiple configs at once",
     )
 
-    parser.add_argument(
-        "--partition",
-        type=str,
-        help="slurm partition to use when scheduling",
-        default="shared",
-    )
-    parser.add_argument(
-        "--account",
-        type=str,
-        help="nrel hpc account with allocation",
-        default="inspire",
-    )
+    # parser.add_argument(
+    #     "--partition",
+    #     type=str,
+    #     help="slurm partition to use when scheduling",
+    #     default="shared",
+    # )
+    # parser.add_argument(
+    #     "--account",
+    #     type=str,
+    #     help="nrel hpc account with allocation",
+    #     default="inspire",
+    # )
     parser.add_argument(
         "--workers",
         type=int,
         help="number of dask workers (max 64 on kestrel shared partition)",
         default=16,
     )
-    parser.add_argument(
-        "--walltime",
-        type=str,
-        help="max length of job from start to finish",
-        default="05:00:00",
-    )
+    # parser.add_argument(
+    #     "--walltime",
+    #     type=str,
+    #     help="max length of job from start to finish",
+    #     default="05:00:00",
+    # )
 
     parser.add_argument(
         "--log_dir", type=str, help="location of dask log files", default=log_directory
@@ -74,7 +74,7 @@ def ground_irradiance():
         "--gids",
         nargs="+",
         type=int,
-        help="List of gids to use for analysis (optional). Overrides state-based selection.",
+        help="List of gids to use for analysis (optional). Overrides state-based selection, disables downsampling.",
     )
 
     parser.add_argument(
@@ -117,34 +117,13 @@ def ground_irradiance():
         raise ValueError("must provide both local_weather and local_meta or neither")
 
     else:
-        from pvdeg.utilities import nrel_kestrel_check
-
-        # nrel_kestrel_check() # will only pass if we are on kestrel
         logger.info("starting localcluster on kestrel")
 
-        # threads is cores / processes according to documentation
-        # https://jobqueue.dask.org/en/latest/generated/dask_jobqueue.SLURMCluster.html
-        # cluster = SLURMCluster(
-        #     queue=args.partition,
-        #     account=args.account,
-        #     # cores=1,                        # 1 cpu per worker
-        #     # processes=1,                    # 1 processes per worker
-        #     cores=args.workers,         # n cores per worker
-        #     processes=args.workers,     # n independent processes per worker
-        #     memory="120GB",
-        #     log_directory=args.log_dir,
-        #     walltime=args.walltime,
-        #     scheduler_options={
-        #         "dashboard_address": f":{args.port}"
-        #     },
-        #     job_extra_directives=[       # SET SLURM JOB NAME FOR DASK CLIENT
-        #         f"--job-name=dask-{args.state}-{''.join(args.confs)}"
-        #     ]
-        # )
         cluster = LocalCluster(
             n_workers=args.workers,
             processes=True,
-            # threads_per_worker=2 # parallelism within each worker
+            memory_limit="12GB",
+            # 1 process per worker with 12GB of memory each
         )
 
         # we only need one node with n proc (workers)
@@ -157,21 +136,23 @@ def ground_irradiance():
     if gids_array is not None and len(gids_array) > 0:
         logger.info(f"using provided gids: {gids_array}")
 
-    log_banner(f"RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
+    try:
+        log_banner(f"RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
 
-    # entry point
-    irradiance_sam.run_state(
-        state=args.state.title(),
-        target_dir=Path(args.target_dir),
-        conf_dir=Path(args.conf_dir),
-        confs=args.confs,
-        local_test_paths=local_test_paths,
-        dask_client=client,
-        dask_nworkers=args.workers,
-        gids=gids_array,
-        downsample=args.downsample, # optional downsampling
-    )
+        # entry point
+        irradiance_sam.run_state(
+            state=args.state.title(),
+            target_dir=Path(args.target_dir),
+            conf_dir=Path(args.conf_dir),
+            confs=args.confs,
+            local_test_paths=local_test_paths,
+            dask_client=client,
+            dask_nworkers=args.workers,
+            gids=gids_array,
+            downsample=args.downsample, # optional downsampling
+        )
 
-    client.close()
-
-    log_banner(f"SUCCESS: RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
+        log_banner(f"SUCCESS: RUNNING GEOSPATIAL GROUND IRRADIANCE CALCULATION USING SAM AND PVDEG FOR: {args.state}")
+    
+    finally:
+        client.close()
