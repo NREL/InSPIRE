@@ -1,7 +1,7 @@
 import pvdeg
 from pathlib import Path
 from dask.diagnostics import ProgressBar
-from dask import delayed, compute, is_dask_collection
+from dask import delayed, compute, is_dask_collection, annotate
 from dask.delayed import Delayed
 from dask.distributed import as_completed, WorkerPlugin, worker
 import dask.array as da
@@ -227,84 +227,6 @@ class PandasNumpyPlugin(WorkerPlugin):
         setattr(worker, "_pandas_numpy_set", True)
 
 
-# @delayed
-# def process_slice(
-#     conf: str,
-#     conf_dir: str,
-#     target_dir: str,
-#     sub_gids: np.ndarray,
-#     local_test_paths: dict=None,
-# ) -> None:
-#     slice_weather, slice_meta, chunk_size = load_weather_gids(
-#         gids=sub_gids,                      # subset of gids from state, determined in run_state()
-#         local_test_paths=local_test_paths,  # usually None
-#     )
-
-#     # update variable names to match convention
-#     slice_weather = pvdeg.weather.map_weather(slice_weather)
-
-#     slice_weather = slice_weather.sortby("gid")
-#     slice_meta = slice_meta.sort_index()
-
-#     slice_template = pvdeg.geospatial.output_template(
-#         ds_gids=slice_weather,
-#         shapes=pvdeg.pysam.INSPIRE_GEOSPATIAL_TEMPLATE_SHAPES,
-#         add_dims={'distance':10}
-#     )
-
-#     # force align index, this is not ideal because it could obscure timezone errors
-#     # both are in UTC and off by a multiple of years so this is fine
-#     tmy_time_index = pd.date_range("2001-01-01", periods=8760, freq='1h')
-#     slice_weather["time"] = tmy_time_index
-#     slice_template["time"] = tmy_time_index
-
-#     logger.info(f"STATUS: starting analysis for gids block: {sub_gids}")
-
-#     partial_res = pvdeg.geospatial.analysis(
-#         weather_ds=slice_weather,
-#         meta_df=slice_meta,
-#         func=pvdeg.pysam.inspire_ground_irradiance,
-#         template=slice_template,
-#         config_files={
-#             'pv' : f"{conf_dir}/{conf}/{conf}_pvsamv1.json"
-#         },
-#         preserve_gid_dim=True, # keep in gids, this makes it much easier to combine all of the results
-#     )
-
-#     logger.info(f"STATUS: gids block finished: {sub_gids}")
-
-#     # Warning: partial_res may not contain every GID in the range [gid_min, gid_max]
-#     gid_min = np.min(sub_gids)
-#     gid_max = np.max(sub_gids)
-
-#     # ideally we write everything to the same zarr store but need to determine chunking and dimensions
-#     try:
-#         fname = f"{target_dir}/{conf}/{gid_min}-{gid_max}.nc"
-#         fname_meta = f"{target_dir}/{conf}/{gid_min}-{gid_max}.csv"
-#         file_path = Path(fname)
-#         file_path.parent.mkdir(parents=True, exist_ok=True)
-
-#         logger.info(f"STATUS: writing gids block to h5 at: {fname}")
-
-#         partial_res.to_netcdf(fname)  # model outputs
-#         slice_meta.to_csv(fname_meta) # metadata
-
-#         logger.info(f"STATUS: saved to file | {file_path.resolve()}")
-#     except Exception as e:
-#         task_info = f"Saving partial result to NetCDF file: {fname}"
-#         error_msg = f"Error during task: {task_info}\nOriginal error: {str(e)}"
-#         logger.error(f"{error_msg}\n{traceback.format_exc()}")
-#         raise Exception(error_msg) from e
-#     finally:
-#         # make sure we get rid of references to lazy objects and files at the end of each task (helps gc)
-#         # we shouldn't have to do this but dask was struggling with memory blow up
-#         del slice_weather
-#         del slice_meta
-#         del partial_res
-#         del slice_template
-#         gc.collect()
-#         return
-
 def _fail_if_nans(n):
     n = int(n)
     if n > 0:
@@ -386,7 +308,7 @@ def write_slice_zarr(
 
     return publish, str(final)
 
-def build_slice_tasks(
+def build_slice_task(
     conf: str,
     conf_dir: str,
     target_dir: str,
@@ -398,10 +320,10 @@ def build_slice_tasks(
     Return delayed taks: [nan_count, slice_task, final_path]
     """
 
-    logger.info("Building slice tasks...")
+    logger.debug("running slice task slice task...")
 
     # determine if this is actually lazy
-    logger.info("loading NSDRB to buld slice tasks...")
+    logger.debug("loading NSDRB to run slice tasks...")
     slice_weather, slice_meta, chunk_size = load_weather_gids(
         gids=sub_gids,
         local_test_paths=local_test_paths,
@@ -455,8 +377,6 @@ def build_slice_tasks(
     out_dir = Path(target_dir) / conf
     out_dir.mkdir(parents=True, exist_ok=True)
     stem = f"{gid_min}-{gid_max}"
-    # fname = out_dir / f"{gid_min}-{gid_max}.nc"
-    # tmp = out_dir / f"{gid_min}-{gid_max}.part.nc"
 
     nan_da = partial_res.to_array().isnull().sum()  # sum across all vars/dims
     nan_count = delayed(lambda x: int(x))(nan_da)
@@ -476,7 +396,7 @@ def build_slice_tasks(
         name="publish_task_qc_guarded"
     )(qc, publish_task)
 
-    del slice_weather, slice_template
+    del slice_weather, slice_template, partial_res
     return nan_count, publish_task_guarded, final_path
 
 def run_state(
@@ -523,7 +443,6 @@ def run_state(
         logger.info(f"PREVIEW: \n{init_meta.iloc[0:5]}\n")
 
         del init_weather, init_meta, _chunk_size
-        # gc.collect()
     else:
         logger.info(f"Using provided GIDS: {len(gids)}")
 
@@ -544,7 +463,7 @@ def run_state(
             sub_gids = gids[front:back]
 
             tasks.append(
-                build_slice_tasks(
+                build_slice_task(
                     conf=conf,
                     conf_dir=str(conf_dir),
                     target_dir=str(target_dir),
@@ -557,29 +476,34 @@ def run_state(
     logger.info(f"STATUS: delayed compute futures : #{len(tasks)} ")
     logger.info(f"STATUS: dispatching dask futures...")
 
-    slice_and_qc_futures = []
-    for (nan_count, slice_task, final_path) in tasks:
+    max_in_flight = max(1, dask_nworkers // 2)
+    ac = as_completed()
 
-        bundle = delayed(
-            lambda nan_delay, _slice_delay, path: (int(nan_delay), path),
-            name="execution-bundle",
-            pure=False
-        )(nan_count, slice_task, final_path)
+    # seed the window
+    for (nan_count, slice_task, final_path) in tasks[:max_in_flight]:
+        bundle = delayed(lambda n, _s, p: (int(n), p), pure=False)(nan_count, slice_task, final_path)
+        ac.add(dask_client.compute(bundle, retries=2))
 
-        fut = dask_client.compute(bundle, retries=2)
-        slice_and_qc_futures.append(fut)
-
+    submitted = max_in_flight
     bad = 0
-    for future in as_completed(slice_and_qc_futures):
+
+    for fut in ac:
         try:
-            nan_total, written_path = future.result()  # integer
+            nan_total, written_path = fut.result()
             if nan_total > 0:
                 bad += 1
-                logger.error(f"QC FAIL: slice wrote with {nan_total} NaNs to {written_path}")
+                logger.error(f"QC FAIL: {nan_total} NaNs -> {written_path}")
         except Exception as e:
             logger.error(f"Slice failed: {e}")
-            raise e
             bad += 1
-            raise SystemExit(f"{bad} slice(s) failed QC or write.")
+
+        if submitted < len(tasks):
+            nan_count, slice_task, final_path = tasks[submitted]
+            bundle = delayed(lambda n, _s, p: (int(n), p), pure=False)(nan_count, slice_task, final_path)
+            ac.add(dask_client.compute(bundle, retries=2))
+            submitted += 1
+
+    if bad:
+        raise SystemExit(f"{bad} slice(s) failed QC or write.")
 
     return

@@ -123,6 +123,7 @@ def ground_irradiance():
             n_workers=args.workers,
             processes=True,
             memory_limit="12GB",
+            # resources={"memheavy": 1},   # <- forwarded to each Worker
             # 1 process per worker with 12GB of memory each
         )
 
