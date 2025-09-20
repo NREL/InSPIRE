@@ -566,6 +566,34 @@ def normalize_per_kWdc_installed(dataset: xr.Dataset):
 
     return xr.merge(res)
 
+def farmable_land_percent(ds: xr.Dataset) -> xr.DataArray:
+    pitch = ds.pitch
+    CW = 2
+    tracking_check = (ds.tilt == -999).all().compute().item()
+    if tracking_check is True:
+        logger.info("tracking configuration used")
+        tilt = 0
+    else: 
+        logger.info("using fixed tilt configuration")
+        tilt = ds.tilt
+
+    vertical_check = (ds.tilt == 90).all().compute().item()
+    if vertical_check is True:
+        logger.info("using farming buffer of 0.5 m for vertical configuration")
+        buffer = 0.5 # 0.5 m
+    else:
+        logger.info("using farming buffer of 0.1524 m (0.5 ft) non-vertical configuration")
+        buffer = 0.1524 #[m] = 0.5 ft
+
+    xp = CW * np.cos(np.deg2rad(tilt))
+    e2e = pitch - xp
+    arable_land = e2e - (2 * buffer)
+
+    farmable_percentage = (arable_land / pitch) * 100
+
+    return farmable_percentage
+
+
 
 BED_PROCESSORS: Mapping[str, Callable[[xr.Dataset], xr.Dataset]] = {
     **{s: tracking_3_beds for s in TRACKING_3_BEDS_SCENARIOS},
@@ -634,10 +662,11 @@ def postprocessing(
         area_normalized_ds = normalize_per_land_area_variable_pitch(scenario_dataset)
 
     kWdc_installed_normalized_ds = normalize_per_kWdc_installed(scenario_dataset)
+    farmable_land_percent_ds = farmable_land_percent(scenario_dataset)
 
     logger.debug("Merging outputs...")
     postprocess_result_ds: xr.Dataset = xr.merge(
-        [beds_dataset, area_normalized_ds, kWdc_installed_normalized_ds],
+        [beds_dataset, area_normalized_ds, kWdc_installed_normalized_ds, farmable_land_percent_ds],
         compat="no_conflicts",
     )
 
