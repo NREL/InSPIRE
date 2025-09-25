@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=17 # we changed this was previously 1, and changed from slurmcluster to localcluster
-#SBATCH --mem=80G
+#SBATCH --mem=192G
 #SBATCH --account=inspire
 #SBATCH --mail-user=tobin.ford@nrel.gov
 #SBATCH --mail-type=ALL
@@ -23,7 +23,6 @@ module load anaconda3
 source activate /home/tford/.conda-envs/geospatial
 
 #### do work ####
-# agrivolt_ground_irradiance "$STATE" /projects/inspire/PySAM-MAPS/Full-Outputs/"$STATE" /home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM \
 agrivolt_ground_irradiance "$STATE" /projects/inspire/PySAM-MAPS/v0.5/"$STATE"-fill /home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM \
     --confs "$CONF" \
     --port 22118 \

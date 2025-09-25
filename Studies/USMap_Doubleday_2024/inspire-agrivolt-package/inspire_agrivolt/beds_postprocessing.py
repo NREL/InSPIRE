@@ -254,21 +254,21 @@ def tracking_3_beds(dataset: xr.Dataset) -> xr.Dataset:
 
     Hardcoded from information in "SETUP Description Complete.xlx" values calculated with cw = 2
     """
-    left_underpannel_slice = slice(0, 3)
-    right_underpannel_slice = slice(7, 10)
+    left_underpanel_slice = slice(0, 3)
+    right_underpanel_slice = slice(7, 10)
 
     bedA_slice = slice(3, 4)
     bedB_slice = slice(4, 6)
     bedC_slice = slice(6, 7)
     edgetoedge_slice = slice(3, 7)
 
-    underpannel_left = dataset.ground_irradiance.isel(
-        {"distance": left_underpannel_slice}
+    underpanel_left = dataset.ground_irradiance.isel(
+        {"distance": left_underpanel_slice}
     ).mean("distance")
-    underpannel_right = dataset.ground_irradiance.isel(
-        {"distance": right_underpannel_slice}
+    underpanel_right = dataset.ground_irradiance.isel(
+        {"distance": right_underpanel_slice}
     ).mean("distance")
-    underpannel = ((underpannel_left + underpannel_right) / 2).rename("underpannel")
+    underpanel = ((underpanel_left + underpanel_right) / 2).rename("underpanel")
 
     bedA = (
         dataset.ground_irradiance.isel({"distance": bedA_slice})
@@ -292,7 +292,7 @@ def tracking_3_beds(dataset: xr.Dataset) -> xr.Dataset:
         .rename("edgetoedge")
     )
 
-    beds_ds = xr.merge([underpannel, edgetoedge, bedA, bedB, bedC])
+    beds_ds = xr.merge([underpanel, edgetoedge, bedA, bedB, bedC])
 
     return beds_ds
 
@@ -306,8 +306,8 @@ def tracking_6_beds(
     # SCENARIO 5 #
     """
 
-    left_underpannel_slice = slice(0, 2)
-    right_underpannel_slice = slice(8, 10)
+    left_underpanel_slice = slice(0, 2)
+    right_underpanel_slice = slice(8, 10)
 
     bedA_slice = slice(2, 3)
     bedB_slice = slice(3, 4)
@@ -317,13 +317,13 @@ def tracking_6_beds(
     bedF_slice = slice(7, 8)
     edgetoedge_slice = slice(2, 8)
 
-    underpannel_left = dataset.ground_irradiance.isel(
-        {"distance": left_underpannel_slice}
+    underpanel_left = dataset.ground_irradiance.isel(
+        {"distance": left_underpanel_slice}
     ).mean("distance")
-    underpannel_right = dataset.ground_irradiance.isel(
-        {"distance": right_underpannel_slice}
+    underpanel_right = dataset.ground_irradiance.isel(
+        {"distance": right_underpanel_slice}
     ).mean("distance")
-    underpannel = ((underpannel_left + underpannel_right) / 2).rename("underpannel")
+    underpanel = ((underpanel_left + underpanel_right) / 2).rename("underpanel")
 
     bedA = (
         dataset.ground_irradiance.isel({"distance": bedA_slice})
@@ -362,7 +362,7 @@ def tracking_6_beds(
         .rename("edgetoedge")
     )
 
-    beds_ds = xr.merge([underpannel, edgetoedge, bedA, bedB, bedC, bedD, bedE, bedF])
+    beds_ds = xr.merge([underpanel, edgetoedge, bedA, bedB, bedC, bedD, bedE, bedF])
 
     return beds_ds
 
@@ -425,6 +425,7 @@ def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
         bedc_end = selected_slices[i, 7]
 
         mask_under = (distance_index >= under_start) & (distance_index < under_end)
+        mask_edgetoedge = (distance_index >= beda_start) & (distance_index < bedc_end)
         mask_beda = (distance_index >= beda_start) & (distance_index < beda_end)
         mask_bedb = (distance_index >= bedb_start) & (distance_index < bedb_end)
         mask_bedc = (distance_index >= bedc_start) & (distance_index < bedc_end)
@@ -433,7 +434,7 @@ def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
             [
                 scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_under)
                 .mean(dim="distance")
-                .rename("under_pannel"),
+                .rename("under_panel"),
                 scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_beda)
                 .mean(dim="distance")
                 .rename("beda"),
@@ -443,6 +444,9 @@ def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
                 scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_bedc)
                 .mean(dim="distance")
                 .rename("bedc"),
+                scenario_dataset.ground_irradiance.isel(gid=i, distance=mask_edgetoedge)
+                .mean(dim="distance")
+                .rename("edgetoedge"),
             ]
         )
 
@@ -478,29 +482,39 @@ def fixed_tilt_3_beds(
     chunks = dataset.chunks
     sizes = dataset.sizes
 
-    chunks_gid = chunks["gid"][0]
-    chunks_time = chunks["time"][0]
+    keys_to_take = ["gid", "time"]
+    template_chunks = {key: value for key, value in chunks.items() if key in keys_to_take}
+
+    # chunks_gid = chunks["gid"]
+    # chunks_time = chunks["time"]
+
 
     size_gid = sizes["gid"]
     size_time = sizes["time"]
 
     def _empty_like_chunks():
         return da.empty(
-            dtype=float, shape=(size_gid, size_time), chunks=(chunks_gid, chunks_time)
+            dtype=float, 
+            shape=(size_gid, size_time), 
+            # chunks=({
+            #     "gid":chunks_gid, 
+            #     "time":chunks_time
+            # })
         )
 
     map_template = xr.Dataset(
         data_vars={
-            "under_pannel": (BED_DIMS, _empty_like_chunks()),
+            "under_panel": (BED_DIMS, _empty_like_chunks()),
             "beda": (BED_DIMS, _empty_like_chunks()),
             "bedb": (BED_DIMS, _empty_like_chunks()),
             "bedc": (BED_DIMS, _empty_like_chunks()),
+            "edgetoedge": (BED_DIMS, _empty_like_chunks()),
         },
         coords={
             "gid": dataset.gid,
             "time": dataset.time,
         },
-    )
+    ).chunk(template_chunks)
 
     beds_ds = dataset.map_blocks(func=iter_beds, template=map_template)
     return beds_ds
@@ -591,8 +605,21 @@ def farmable_land_percent(ds: xr.Dataset) -> xr.DataArray:
 
     farmable_percentage = (arable_land / pitch) * 100
 
-    return farmable_percentage
+    return farmable_percentage.rename("farmable_land_percent")
 
+def photosynthetically_active_radiation(edge_to_edge_ds: xr.Dataset) -> xr.DataArray:
+    """
+    Calculate PAR (mol m^-1 s^-1) from ground irradiance (w/m^2).
+    """
+
+    if "edgetoedge" not in edge_to_edge_ds.data_vars:
+        print(edge_to_edge_ds.data_vars)
+        raise ValueError("'edgetoedge' must be a datavariable in the provided dataset")
+
+    edgetoedge_par = 2.45744*edge_to_edge_ds.edgetoedge + 22.4778
+    edgetoedge_par = edgetoedge_par.rename("edgetoedge_par")
+
+    return edgetoedge_par
 
 
 BED_PROCESSORS: Mapping[str, Callable[[xr.Dataset], xr.Dataset]] = {
@@ -610,7 +637,7 @@ NORM_KIND: Mapping[str, NormKind] = {
 
 
 def postprocessing(
-    scenario: str, input_zarr_path: Path, output_zarr_path: Path
+    scenario: str, input_zarr_paths: list[Path], output_zarr_path: Path
 ) -> None:
     """
     run postprocessing on model run output zarr stores.
@@ -619,7 +646,7 @@ def postprocessing(
     -----------
     scenario: str
         scenario name 01-10
-    input_zarr_path:
+    input_zarr_paths:
         path to zarr store containing model outputs
     output_zarr_path:
         path to write postprocessed zarr data to
@@ -640,7 +667,9 @@ def postprocessing(
             f"output_zarr_path: {output_zarr_path} already exists, must be empty."
         )
 
-    scenario_dataset = xr.open_zarr(input_zarr_path)
+    zarrs = [xr.open_zarr(str(path)) for path in input_zarr_paths]
+    scenario_dataset = xr.concat(zarrs, dim="gid").sortby("gid")
+    # scenario_dataset = xr.open_zarr(input_zarr_path)
 
     bed_proc = BED_PROCESSORS.get(scenario)
     if bed_proc is None:
@@ -662,13 +691,16 @@ def postprocessing(
         area_normalized_ds = normalize_per_land_area_variable_pitch(scenario_dataset)
 
     kWdc_installed_normalized_ds = normalize_per_kWdc_installed(scenario_dataset)
-    farmable_land_percent_ds = farmable_land_percent(scenario_dataset)
+    farmable_land_percent_da = farmable_land_percent(scenario_dataset)
+    edgetoedge_par_da = photosynthetically_active_radiation(beds_dataset)
 
     logger.debug("Merging outputs...")
     postprocess_result_ds: xr.Dataset = xr.merge(
-        [beds_dataset, area_normalized_ds, kWdc_installed_normalized_ds, farmable_land_percent_ds],
+        [beds_dataset, area_normalized_ds, kWdc_installed_normalized_ds, farmable_land_percent_da, edgetoedge_par_da],
         compat="no_conflicts",
     )
+
+    postprocess_result_ds = postprocess_result_ds.chunk({"gid":39, "time":-1})
 
     logger.info("Merging outputs...")
     postprocess_result_ds.to_zarr(

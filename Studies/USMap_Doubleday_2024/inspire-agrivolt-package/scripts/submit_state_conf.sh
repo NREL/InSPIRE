@@ -31,7 +31,9 @@ unset PANDAS_STRING_STORAGE
 STATE=$1
 CONF=$2
 
-OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1/"$STATE"
+STATE_SLUG=${STATE// /_}
+
+OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1/"$STATE_SLUG"
 CONF_DIR=/home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM
 
 LOGFILE=logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.log

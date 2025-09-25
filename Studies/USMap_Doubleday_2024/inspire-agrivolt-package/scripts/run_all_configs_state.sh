@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# we are skipping config 10 for now
-#configs=("01" "02" "03" "04" "05" "06" "07" "08" "09")
-configs=("10" "06")
+configs=("01" "02" "03" "04" "05" "06" "07" "08" "09" "10")
 
 STATE="$1"
 
@@ -11,8 +9,10 @@ if [[ $# -eq 0 ]] ; then
 	exit 1
 fi
 
+echo "using ${STATE}"
+STATE_SLUG=${STATE// /_}   # replace spaces with underscores for job name
+
 for conf in "${configs[@]}"
 do
-  sbatch --job-name=ag-irr-${STATE}${conf} submit_state_conf.sh "$STATE" "$conf"
-  #sbatch --job-name="ag-irr-${STATE// /}_${conf}" submit_state_conf.sh "$STATE" "$conf"
+  sbatch --job-name=ag-irr-${STATE_SLUG}${conf} submit_state_conf.sh "$STATE" "$conf"
 done

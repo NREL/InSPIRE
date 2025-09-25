@@ -271,6 +271,7 @@ def write_slice_zarr(
     # logger.info(f"STATUS: writing gids block to zarr at: {str(partial)}")
 
     ds = _force_numpy_everywhere(ds)
+    ds = ds.chunk({"gid":40, "time":-1, "distance":-1})
     assert_zarr_safe(ds)
 
     write = ds.to_zarr(str(partial), mode="w", compute=False)
