@@ -146,10 +146,10 @@ def load_weather_state(
         geo_weather, geo_meta = _load_full_nsrdb_kestrel()
 
        # downselect NSRDB to requested gids
-        logger.info(f"DOWNSELECTING: keeping points where 'state'== '{state}'")
+        logger.info(f"DOWNSELECTING: keeping points where 'State'== '{state}'")
         start = time.time()
-        geo_meta = geo_meta[geo_meta["country"] == "United States"]
-        geo_meta = geo_meta[geo_meta["state"] == state]
+        geo_meta = geo_meta[geo_meta["Country"] == "United States"]
+        geo_meta = geo_meta[geo_meta["State"] == state]
         end = time.time()
         logger.info(f"DOWNSELECTING: took {end - start} seconds")
         
