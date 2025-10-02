@@ -5,7 +5,6 @@ from dask import delayed, compute, is_dask_collection, annotate
 from dask.delayed import Delayed
 from dask.distributed import as_completed, WorkerPlugin, worker
 import dask.array as da
-import gc
 import uuid
 import xarray as xr
 import pandas as pd
@@ -14,6 +13,7 @@ import numpy as np
 from numpy.typing import ArrayLike
 from typing import Union
 import os
+import sys
 
 from inspire_agrivolt import logger
 from inspire_agrivolt.file_operations import check_zarr_coords_dims
@@ -110,14 +110,12 @@ def _log_running_worker_name(message: str) -> None:
 def _load_full_nsrdb_kestrel() -> tuple[xr.Dataset, pd.DataFrame]:
     global _CACHE_NSRDB
     if _CACHE_NSRDB is not None:
-        # _log_running_worker_name(f"LOADING: using previously cached NSRDB")
         logger.info(f"LOADING: using previously cached NSRDB")
         return _CACHE_NSRDB
 
     from pvdeg.utilities import nrel_kestrel_check
     nrel_kestrel_check()
 
-    # _log_running_worker_name("LOADING: weather dataset from NSRDB on kestrel")
     logger.info("LOADING: weather dataset from NSRDB on kestrel")
     start = time.time()
 
@@ -126,7 +124,6 @@ def _load_full_nsrdb_kestrel() -> tuple[xr.Dataset, pd.DataFrame]:
     )
 
     end = time.time()
-    # _log_running_worker_name(f"loaded: dataset in: {end - start} s")
     logger.info(f"loaded: dataset in: {end - start} s")
 
     _CACHE_NSRDB = (geo_weather, geo_meta) # assigns on the worker
@@ -251,6 +248,32 @@ def assert_zarr_safe(ds: xr.Dataset) -> None:
         raise TypeError(f"Zarr-unsafe variables/coords: {lines}")
 
 
+def _get_versions():
+    """
+    Get a dict of key package versions.
+    """
+    from importlib.metadata import version
+
+    packages = [
+        "dask", 
+        "dask_jobqueue", 
+        "numpy", 
+        "pandas", 
+        "pvdeg", 
+        "scipy", 
+        "xarray", 
+        "numcodecs", 
+        "zarr", 
+        "fsspec", 
+        "inspire_agrivolt"
+    ]
+
+    out = {"python" : sys.version}
+    for package in packages:
+        out[package] = version(package)
+
+    return out
+
 
 def write_slice_zarr(
     ds: xr.Dataset,
@@ -315,7 +338,6 @@ def build_slice_task(
     target_dir: str,
     sub_gids: ArrayLike,
     local_test_paths: Union[dict[str, str], None] = None,
-    # engine: str = "h5netcdf",
 ) -> tuple[Delayed, Delayed, str]:
     """
     Return delayed taks: [nan_count, slice_task, final_path]
@@ -361,10 +383,6 @@ def build_slice_task(
         compute=False, # DO NOT COMPUTE, build lazy object
     )
 
-    # for name in partial_res.data_vars:
-    #     print(name)
-    #     print(partial_res[name].dtype)
-
     partial_res = _force_numpy_everywhere(partial_res)
 
     assert_zarr_safe(partial_res)
@@ -384,6 +402,12 @@ def build_slice_task(
 
     # QC gate for model outputs, errors loudly
     qc = delayed(_fail_if_nans)(nan_count) # may raise
+
+    provenance = {
+        "software_versions": _get_versions(),
+        "kestrel_nsrdb_fnames":slice_weather.attrs.get("kestrel_nsrdb_fnames")
+    }
+    partial_res = partial_res.assign_attrs(provenance)
 
     publish_task, final_path = write_slice_zarr(
         ds=partial_res,
