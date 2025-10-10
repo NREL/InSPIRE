@@ -141,6 +141,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         modulename = 'PVmodule'
         bedsWanted = 3
         fixed_tilt_angle = None
+        clearance_height = None
     if setup == 2:
         hub_height = 2.4
         pitch = 5
@@ -148,6 +149,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         modulename = 'PVmodule'
         bedsWanted = 3
         fixed_tilt_angle = None
+        clearance_height = None
     if setup == 3:
         hub_height = 2.4
         pitch = 5
@@ -155,6 +157,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         modulename = 'PVmodule_1mxgap'
         bedsWanted = 3
         fixed_tilt_angle = None
+        clearance_height = None
     if setup == 4:
         hub_height = 1.5
         pitch = 8
@@ -162,6 +165,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         modulename = 'PVmodule'
         bedsWanted = 3
         fixed_tilt_angle = None
+        clearance_height = None
     if setup == 5:
         hub_height = 1.5
         pitch = 11
@@ -169,47 +173,52 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         modulename = 'PVmodule'
         bedsWanted = 6
         fixed_tilt_angle = None
+        clearance_height = None
     if setup == 6:
-        hub_height = 1.5
-        #tilt = None # fixed
+        hub_height = None
         sazm = 180
         pitchfactor = 1
         modulename = 'PVmodule'
         pitch = pitch_temp * pitchfactor
         bedsWanted = 3
         fixed_tilt_angle = tilt
+        clearance_height = 1.5   
     if setup == 7:
-        hub_height = 2.4 
+        hub_height = None
         sazm = 180
         pitchfactor = 1
         pitch = pitch_temp * pitchfactor
         modulename = 'PVmodule'
         bedsWanted = 3
         fixed_tilt_angle = tilt
+        clearance_height = 2.4
     if setup == 8:
-        hub_height = 2.4 
+        hub_height = None
         sazm = 180
         pitchfactor = 1
         pitch = pitch_temp * pitchfactor
         modulename = 'PVmodule_1mxgap'
         bedsWanted = 3
         fixed_tilt_angle = tilt
+        clearance_height = 2.4
     if setup == 9:
-        hub_height = 1.5 
+        hub_height = None
         sazm = 180
         pitchfactor = 2
         pitch = pitch_temp * pitchfactor
         modulename = 'PVmodule'
         bedsWanted = 3
         fixed_tilt_angle = tilt
+        clearance_height = 1.5
     if setup == 10:
-        hub_height = 1.6 # TODO This is 2 in the table
+        hub_height = None
         sazm = 90
         pitch = 8.6 
         modulename = 'PVmodule'
         bedsWanted = 6
         xp = 8
         fixed_tilt_angle = 90
+        clearance_height = 0.6
 
     # TILT & PITCH CALCULATION HERE
 
@@ -232,6 +241,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
 
     sceneDict = {'pitch':pitch, 
                  'hub_height': hub_height,
+                 'clearance_height': clearance_height,
                  'nMods': 19,
                  'nRows': 7,
                 'tilt': fixed_tilt_angle,  
@@ -410,8 +420,8 @@ if __name__ == "__main__":
                 981453,
                 763236,
                 1292659,
-                191212,
-                25109] 
+                191212]
+                # 25109] # Hawaii not in data set
     nsampling = 3 # What are these?
     setups = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     FullYear = False
