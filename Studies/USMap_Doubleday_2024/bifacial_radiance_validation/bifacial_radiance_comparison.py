@@ -82,7 +82,7 @@ def start_dask(hpc=None):
     return client
 
 
-# Run simulation using the given timestamp and wavelength
+# Run simulation using the given date, setup, and gid
 def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
              startdate=None, rootPath=None):
 
@@ -448,14 +448,14 @@ if __name__ == "__main__":
         'cores': 100, #This is the total number of threads in all workers
         'memory': '256GB',
         'account': 'inspire',
-        'queue': 'debug', #'standard'
+        'queue': 'standard', #'standard'
         'walltime': '1:00:00',  #'8:00:00'
         'processes': 25, #This is the number of workers (each thread has more CPUs with a 100 cores:25 thread ratio)
         # Can experiment with this ratio to see what works
         #'interface': 'lo'
         #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
         # This is useful if you get some sort of "could not connect to the Dask nanny" error
-        #'death_timeout': 600
+        'death_timeout': 600,
         # Use this if having memory issues
         # 'local_directory': '$TMPDIR',
         }
