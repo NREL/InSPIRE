@@ -15,4 +15,5 @@ STATE_SLUG=${STATE// /_}   # replace spaces with underscores for job name
 for conf in "${configs[@]}"
 do
   sbatch --job-name=ag-irr-${STATE_SLUG}${conf} submit_state_conf.sh "$STATE" "$conf"
+  echo "^^^ submitted for $STATE_SLUG $conf"
 done

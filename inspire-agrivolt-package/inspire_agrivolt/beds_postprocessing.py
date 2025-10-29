@@ -626,6 +626,23 @@ def photosynthetically_active_radiation(edge_to_edge_ds: xr.Dataset) -> xr.DataA
 
     return edgetoedge_par
 
+# TODO, make sure that this makes sense
+def ground_irradiance_distances(ds: xr.Dataset) -> xr.DataArray:
+    """
+    Calculate beds distances from pitch.
+    """
+    NUM_BEDS = 10
+    pitch = ds.pitch
+
+    frac = xr.DataArray(
+        (np.arange(NUM_BEDS) + 0.5) / NUM_BEDS,
+        dims=(NUM_BEDS,),
+        name=f"{NUM_BEDS}_fraction",
+    )
+
+    distances = (pitch * frac).rename("distances_m")
+    return distances
+
 
 BED_PROCESSORS: Mapping[str, Callable[[xr.Dataset], xr.Dataset]] = {
     **{s: tracking_3_beds for s in TRACKING_3_BEDS_SCENARIOS},
@@ -698,6 +715,7 @@ def postprocessing(
     kWdc_installed_normalized_ds = normalize_per_kWdc_installed(scenario_dataset)
     farmable_land_percent_da = farmable_land_percent(scenario_dataset)
     edgetoedge_par_da = photosynthetically_active_radiation(beds_dataset)
+    distances_m_da = ground_irradiance_distances(scenario_dataset)
 
     logger.debug("Merging outputs...")
     postprocess_result_ds: xr.Dataset = xr.merge(
@@ -707,6 +725,7 @@ def postprocessing(
             kWdc_installed_normalized_ds,
             farmable_land_percent_da,
             edgetoedge_par_da,
+            distances_m_da
         ],
         compat="no_conflicts",
     )

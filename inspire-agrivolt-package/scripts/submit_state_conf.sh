@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH --output=logs/agrivolt-irr-%x-%j.log
 #SBATCH --error=logs/agrivolt-irr-%x-%j.err
-#SBATCH --time=5:00:00
+#SBATCH --time=10:00:00
 #SBATCH --partition=standard
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=17 # we changed this was previously 1, and changed from slurmcluster to localcluster
-#SBATCH --mem=100G
+#SBATCH --mem=192G
 #SBATCH --account=inspire
 #SBATCH --mail-user=tobin.ford@nrel.gov
 #SBATCH --mail-type=ALL
@@ -33,7 +33,7 @@ CONF=$2
 
 STATE_SLUG=${STATE// /_}
 
-OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1/"$STATE_SLUG"
+OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1.1/"$STATE_SLUG"
 CONF_DIR=/home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM
 
 LOGFILE=logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.log
