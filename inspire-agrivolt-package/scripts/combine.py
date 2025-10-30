@@ -9,14 +9,6 @@ from inspire_agrivolt.beds_postprocessing import ground_irradiance_distances
 MODEL_OUTS_DIR = Path("/projects/inspire/PySAM-MAPS/v1.1/model-outs/")
 POSTPROCESS_OUTS_DIR = Path("/projects/inspire/PySAM-MAPS/v1.1/postprocess/")
 
-client = Client(
-    LocalCluster(
-        n_workers=32
-    )
-)
-
-print(client.dashboard_link)
-
 def load_model_outs_zarrs(confs: list[str]) -> dict[str, list[xr.Dataset]]: 
     """
     Find and load all model outputs results zarrs.
@@ -76,7 +68,15 @@ def load_postprocessing_zarrs(confs: list[str]) -> dict[str, list[xr.Dataset]]:
 
     return postprocess_all_conf_zarrs
 
-if __name__ == "__main__":
+def main():
+    client = Client(
+        LocalCluster(
+            n_workers=32
+        )
+    )
+
+    print(client.dashboard_link)
+
     # confs = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
     confs = ["02", "03", "04", "05", "06", "07", "08", "09", "10"]
 
@@ -133,3 +133,6 @@ if __name__ == "__main__":
                 consolidated=True,
                 encoding=encoding
             )
+
+if __name__ == "__main__":
+    main()
