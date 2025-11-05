@@ -69,16 +69,16 @@ def load_postprocessing_zarrs(confs: list[str]) -> dict[str, list[xr.Dataset]]:
     return postprocess_all_conf_zarrs
 
 def main():
+    print("running main")
     client = Client(
         LocalCluster(
-            n_workers=32
+            n_workers=31
         )
     )
 
     print(client.dashboard_link)
 
-    # confs = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
-    confs = ["02", "03", "04", "05", "06", "07", "08", "09", "10"]
+    confs = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
 
     model_outs_all_conf_zarrs = load_model_outs_zarrs(confs)
     postprocess_all_conf_zarrs = load_postprocessing_zarrs(confs)
@@ -110,7 +110,7 @@ def main():
         combined['distance'] = combined.distance.astype(np.int32)
         combined['gid'] = combined.gid.astype(np.int32)
 
-        store_path = Path("/projects/inspire/PySAM-MAPS/v1.1/final/01.zarr")
+        store_path = Path(f"/projects/inspire/PySAM-MAPS/v1.1/final/{conf}.zarr")
         if not store_path.exists():
             if 10 in combined.dims:
                 combined = combined.drop_dims([10])

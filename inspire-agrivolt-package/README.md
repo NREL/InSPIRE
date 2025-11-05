@@ -1,19 +1,70 @@
 # InSPIRE_Agrivolt
 
-``inspire_agrivolt`` contains CLI tools to assist in the creation of the 2025 Inspire Agrivoltaics Irradiance Dataset.
+``inspire_agrivolt`` is a collection of CLI tools and HPC scripts to assist in the creation of the 2025 InSPIRE Agrivoltaics Irradiance Dataset.
+
+## Workflow
+This section describes how to create dataset using the scripts in `scripts/`. It consists of three main steps.
+
+1. Model Runs  
+2. Postprocessing  
+3. Dataset Merging  
+4. Deployment (Optional)  
+
+### 1. Model Runs
+PySAM model runs as defined by the inspire_agrivolt cli.
+
+Generally, we take the approach of running one slurm job for each (state, config) pair. Each slurm job is allocated 1 node and parallelized with Dask.
+
+Use `scripts/run_all_configs_state.sh` to produce the model outputs. Or use  `scripts/submit_state_conf.sh` to submit a single pair at a time.
+
+**Configuration details**
+- Model run configrations are defined in `scripts/submit_state_conf.sh`.
+    - Slurm configuration options
+    - Dask scheduler options
+    - OUTPUT_DIR: model output directory, 
+    - CONF_DIF: SAM configuration directory with structure as described in (SAM Config Directories Structure)[SAM Config Directories Structure]
+
+These currently write state output directories to an output directory defined in `scripts/submit_state_conf.sh`. These should be moved to a `model-outs/` directory for maintainability.
+
+*Slurm sends emails based on job progress and error codes but these can fail to alert you if a job has failed at certain stages*. By defualt, the script will run chunks of ~200 GIDs from the NSRDB and output these to zarr files in the output directory. These outputs will be named `*.part.zarr` to indicate that these are paritally completed results. When Dask has finished handling a chunk, we will update the filename to `*.zarr`. If an output directory contains `*.part.zarr` outputs after the SLURM job has finished then something unexpected happened. This can occur due to timeout, job failure or CPU starvation. The easiest fix is as follows
+1. Delete the failed state-conf pair in the outputs directory
+2. (Optional) increase the amount of memory allocated to the job in `scripts/submit_state_conf.sh`
+3. Rerun the state-conf pair.
+
+This may be a useful command to see if the `*.part.zarr` files persist at the end of a job. 
+
+    find . -mindepth 3 -maxdepth 3 -type d -name '*.part.zarr' -printf '%P\n' | cut -d/ -f1-2 | sort -u
+
+Once the above command finds no partial zarrs in the output then we can move on to postprocessing.
+
+### 2. Postprocessing
+inspire_agrivolt implements postprocessing in the source `inspire_agrivolt/beds_postprocessing.py` and calls this functionality in `scripts/postprocess.py`. To kick off the slurm job to postprocess all state-config pairs, use `scripts/submit_postprocess.slurm`.
+
+We grab all model outputs per state and combine them to run aggregation and normalization based on InSPIRE decided factors and useful unit conversions.
+
+### 3. Dataset Merging
+Combining model runs and postprocessing results into a final result.
+
+To merge model runs and postprocessing use `scripts/submit_combine.slurm`. Then use `scripts/submit_check_combine.slurm` to check for data integrity. This only examines that we have no gids in the dataset.
+
+### 4. Deployment (Optional)
+Uploading the final result to OpenEI on S3.
+
+We want to deploy the final dataset versions to S3. AWS CLI is too slow so we will use `scripts/submit_upload_zarrs.slurm`. 
+
+## inspire-agrivolt CLI
+`inspire-agrivolt` defines a cli interface run the PySAM wrapper over SAM configs and postprocess them. These utilities are wrapped in scripts which allow for batch processing for dataset creation. Most users should not need to interact with the inspire_agrivolt python source to run the dataset.
+
+The following section describes the functions provided by the CLI at the level they are called in the scripts for context.
+
+The main driver for ground_irradiance calculations inside the package is the **ground_irradiance** function. `inspire-agrivolt` provides a thin wrapper to this functionn with the `agrivolt_ground_irradiance` command.
 
 
-### Motivation
 
-The CLI tools provided in this repo allow easy reproducibility of the dataset on NREL HPC resources (dataset produced on Kestrel).
+`agrivolt_ground_irradiance`: runs geospatial SAM simulation on NSRDB state using PySAM, PVDeg, and Dask.
 
-### Tools
-
-
-**ground_irradiance**: runs geospatial SAM simulation on NSRDB state using PySAM, and PVDeg.
-
-    usage: agrivolt_ground_irradiance [-h] [--confs CONFS [CONFS ...]] [--partition PARTITION] [--account ACCOUNT] [--workers WORKERS] [--walltime WALLTIME] [--log_dir LOG_DIR] [--port PORT]
-                                    [--local-weather LOCAL_WEATHER] [--local-meta LOCAL_META]
+    usage: agrivolt_ground_irradiance [-h] [--confs CONFS [CONFS ...]] [--workers WORKERS] [--log_dir LOG_DIR] [--port PORT] [--local-weather LOCAL_WEATHER] [--local-meta LOCAL_META]
+                                    [--gids GIDS [GIDS ...]] [--downsample DOWNSAMPLE]
                                     state target_dir conf_dir
 
     Run Agrivoltaics Irradiance PySAM simulation for a U.S. state
@@ -26,22 +77,23 @@ The CLI tools provided in this repo allow easy reproducibility of the dataset on
     optional arguments:
     -h, --help            show this help message and exit
     --confs CONFS [CONFS ...]
-                            List of config names (default: 01 through 10)
-    --partition PARTITION
-                            slurm partition to use when scheduling
-    --account ACCOUNT     nrel hpc account with allocation
+                            List of config names (default: 01 through 10), STRONGLY RECOMENDED: only run one config at a time, submit multiple sbatch jobs to run multiple configs at once
     --workers WORKERS     number of dask workers (max 64 on kestrel shared partition)
-    --walltime WALLTIME   max length of job from start to finish
     --log_dir LOG_DIR     location of dask log files
     --port PORT           dask dashboard port
     --local-weather LOCAL_WEATHER
                             Path to local weather NetCDF file
     --local-meta LOCAL_META
                             Path to local meta CSV file
+    --gids GIDS [GIDS ...]
+                            List of gids to use for analysis (optional). Overrides state-based selection, disables downsampling.
+    --downsample DOWNSAMPLE
+                            Downsample factor, from pvdeg.utiltiies.gid_downsampling(). removes half of the points on latitude and longitude axis for each n
 
-**beds_postprocess**: runs postprocessing to calculate planting beds irradiance.
 
-#### SAM
+<!-- **beds_postprocess**: runs postprocessing to calculate planting beds irradiance.
+ -->
+#### SAM Config Directories Structure
 
 conf_dir can be tricky but should look like the following from the sam outputs. The model only needs the subdirectories to contain the ``pvsamv1.json`` config file for the model to work.
 
@@ -142,17 +194,16 @@ conf_dir can be tricky but should look like the following from the sam outputs. 
     - confs: only run conf 01
     - port: expose dask dashboard on port 22118
 
-### Continuing the pipeline
-
+<!-- 
 Kestrel jobs may run out of time, If this is the case, use ``completeness.ipynb`` to determine which gids are missing then echo the gids files back into an agrivolt irradiance job. Information on how to do this coming soon...  
 
 This is being done in `completeness.py` currently. The function `inspire_agrivolt.check_completeness` examines all possible gids in a state then checks the directory to see if they are present. If there are missing gids they will be outputted by the function, then we can use this list of gids to run the script again to produce the missing outputs. 
-
-./submit_fill.sh <statename> <config> "$(cat <gidsfile with space-seperated gids, no newlines>)"
-
-After running fill-in calculations we need to combine them with the original model outputs before continuing with postprocessing. Use ``merge-fill.ipynb`` to do this. If your fills are not complete they will have to be re-run at some point. ``merge-fill.ipynb`` will allow you to silently continue with missing data.
+ -->
+<!-- ./submit_fill.sh <statename> <config> "$(cat <gidsfile with space-seperated gids, no newlines>)"
+ -->
+<!-- After running fill-in calculations we need to combine them with the original model outputs before continuing with postprocessing. Use ``merge-fill.ipynb`` to do this. If your fills are not complete they will have to be re-run at some point. ``merge-fill.ipynb`` will allow you to silently continue with missing data.
 
 At this point the data can be visually inspected to check for missing locations. Repeat the steps in the previous 3 paragraphs to fill in the data, if it is still missing.
 
 Finally, we will run the beds postprocessing using ``postprocessing.ipynb``. This will create a new zarr output for each input zarr. Depending on how you want the
-final format of your data, they may have to be merged or sharded later.
+final format of your data, they may have to be merged or sharded later. -->

@@ -13,5 +13,7 @@
 
 module load anaconda3
 source activate /home/tford/.conda-envs/geospatial
+echo "environment activated"
 
+echo "calling combine.py"
 srun python /home/tford/dev/InSPIRE/inspire-agrivolt-package/scripts/combine.py
