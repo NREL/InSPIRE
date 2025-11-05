@@ -2,6 +2,23 @@
 
 ``inspire_agrivolt`` is a collection of CLI tools and HPC scripts to assist in the creation of the 2025 InSPIRE Agrivoltaics Irradiance Dataset.
 
+## Installing
+
+The dataset was produced on Kestrel with the following [conda environment](https://github.com/tobin-ford/conda-envs/blob/main/working-geospatial.yml).
+
+Clone the repo with one of the following
+
+    git clone git@github.com:NREL/InSPIRE.git     # (SSH)
+    git clone https://github.com/NREL/InSPIRE.git # (HTTPS)
+
+Install the package from `InSPIRE/inspire-agrivolt-package/` with
+    pip install -e .
+
+Currently the package requires an editable `pvdeg` install on branch pysam.
+See directions [here](https://github.com/NREL/PVDegradationTools?tab=readme-ov-file#installation)
+
+
+
 ## Workflow
 This section describes how to create dataset using the scripts in `scripts/`. It consists of three main steps.
 
