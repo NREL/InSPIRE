@@ -32,3 +32,10 @@ agrivolt_ground_irradiance = "inspire_agrivolt.main:ground_irradiance"
 
 [tool.setuptools.packages.find]
 include = ["inspire_agrivolt"]
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+addopts = [
+    "-p no:warnings",
+    "--verbose",
+]
