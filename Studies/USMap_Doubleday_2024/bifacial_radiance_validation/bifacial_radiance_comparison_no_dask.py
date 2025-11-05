@@ -6,7 +6,6 @@ import math
 from itertools import chain
 from itertools import product
 import bifacial_radiance as br
-from dask.distributed import Client, LocalCluster, secede
 import math
 import datetime
 from timeit import default_timer as timer
@@ -17,9 +16,6 @@ import pickle
 import bifacialvf
 import shutil
 import pvdeg
-# import subprocess
-
-# rc = subprocess.call("/home/etonita/BasicSimulations/start_script.sh")
 
 def optimal_gcr_pitch(latitude: float, cw: float = 2) -> tuple[float, float]:
     """
@@ -126,67 +122,6 @@ def inspire_practical_pitch(latitude: float, cw: float) -> tuple[float, float, f
 
     return float(tilt_practical), float(pitch_practical), float(gcr_practical)
 
-def start_dask(hpc=None):
-    """
-    Starts a dask cluster for parallel processing.
-
-    Parameters
-    ----------
-    hpc : dict
-        Dictionary containing dask hpc settings (see examples below).
-
-    Examples
-    --------
-    Local cluster:
-
-    .. code-block:: python
-
-        hpc = {'manager': 'local',
-               'n_workers': 1,
-               'threads_per_worker': 8,
-               'memory_limit': '10GB'}
-
-    SLURM cluster:
-
-    .. code-block:: python
-
-        kestrel = {
-            'manager': 'slurm',
-            'n_jobs': 1,  # Max number of nodes used for parallel processing
-            'cores': 104,
-            'memory': '256GB',
-            'account': 'pvsoiling',
-            'walltime': '4:00:00',
-            'processes': 52,
-            'local_directory': '/tmp/scratch',
-            'job_extra_directives': ['-o ./logs/slurm-%j.out'],
-            'death_timeout': 600,}
-
-    Returns
-    -------
-    client : dask.distributed.Client
-        Dask client object.
-    """
-    if hpc is None:
-        cluster = LocalCluster()
-    else:
-        manager = hpc.pop('manager')
-
-        if manager == 'local':
-            cluster = LocalCluster(**hpc)
-        elif manager == 'slurm':
-            from dask_jobqueue import SLURMCluster
-            n_jobs = hpc.pop('n_jobs')
-            cluster = SLURMCluster(**hpc)
-            cluster.scale(jobs=n_jobs)
-
-    client = Client(cluster)
-    print('Dashboard:', client.dashboard_link)
-    client.wait_for_workers(n_workers=1)
-
-    return client
-
-
 # Run simulation using the given date, setup, and gid
 def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
              startdate=None, rootPath=None):
@@ -237,7 +172,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
 
     # Practical tilt and pitch using Tonitas Equation
     # collector width of 2m for the inspire scenarios
-    tilt, pitch_temp, gcr = pvdeg.inspire_practical_pitch(latitude=metData.latitude, cw=2)
+    tilt, pitch_temp, gcr = inspire_practical_pitch(latitude=metData.latitude, cw=2)
 
     if setup == 1:
         hub_height = 1.5
@@ -448,16 +383,8 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     return 1
 
 
-def run_simulations_dask(df_weather, meta, startdates, 
-                         setups, rootPath, hpc):
-    # Create client
-
-    client = start_dask(hpc)
-    
-    print("dask client started")
-
-    # Iterate over inputs
-    futures = []
+def run_simulations(df_weather, meta, startdates, 
+                         setups, rootPath):
 
     # Add Iterations HERE
         #loop through dataframe and perform computation
@@ -474,30 +401,21 @@ def run_simulations_dask(df_weather, meta, startdates,
                 df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2024)) 
                 df_tmy = df_tmy.sort_index()
 
-                debug = False
+                debug = True
                 if debug:
                     df_tmy.to_pickle('df_convert_'+str(gid)+'.pkl')
                     filesavepic = 'meta_convert_'+str(gid)+'.pkl'
                     with open(filesavepic, "wb") as ffp:   # pickling
                         pickle.dump(meta_dict,ffp)
                     print("Meta dict", meta_dict)
-                futures.append(client.submit(simulate_single, df_tmy=df_tmy, 
-                                             meta_dict=meta_dict, gid=gid,
-                                             setup=setup, 
-                                             startdate=startdate, 
-                                             rootPath=rootPath)) 
-
-
-
-    # Get results for all simulations
-    res = client.gather(futures)
-
-    # Close client
-    client.close()
+                simulate_single(df_tmy=df_tmy, 
+                                meta_dict=meta_dict, gid=gid,
+                                setup=setup, 
+                                startdate=startdate, 
+                                rootPath=rootPath)
 
     res = 'FINISHED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     return res
-
 
 if __name__ == "__main__":
 
@@ -506,23 +424,22 @@ if __name__ == "__main__":
     sim_start_time=datetime.datetime.now()
 
     # Define inputs
-    gids_sub = [886847,
-                243498,
-                481324,
-                852795,
-                1116296,
-                706260,
-                478464,
-                347412,
-                1132667,
-                138250,
-                128689,
-                981453,
-                763236,
-                1292659,
-                191212]
+    gids_sub = [886847]
+                # 243498,
+                # 481324,
+                # 852795,
+                # 1116296,
+                # 706260,
+                # 478464,
+                # 347412,
+                # 1132667,
+                # 138250,
+                # 128689,
+                # 981453,
+                # 763236,
+                # 1292659,
+                # 191212]
                 # 25109] # Hawaii not in data set
-    nsampling = 3 # What are these?
     setups = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     FullYear = False
 
@@ -537,28 +454,6 @@ if __name__ == "__main__":
     while start <= end:
         daylist.append(start)
         start += datetime.timedelta(days=1)
-
-    local = {'manager': 'local',
-        'n_workers': 32,
-        'threads_per_worker': 1, # Number of CPUs
-        }
-    kestrel = {
-        'manager': 'slurm',
-        'n_jobs': 1, # 4,  # Number of nodes used for parallel processing #1
-        'cores': 100, #This is the total number of threads in all workers
-        'memory': '256GB',
-        'account': 'inspire',
-        'queue': 'standard', #'standard'
-        'walltime': '1:00:00',  #'8:00:00'
-        'processes': 25, #This is the number of workers (each thread has more CPUs with a 100 cores:25 thread ratio)
-        # Can experiment with this ratio to see what works
-        #'interface': 'lo'
-        #'job_extra_directives': ['-o ./logs/slurm-%j.out'],
-        # This is useful if you get some sort of "could not connect to the Dask nanny" error
-        'death_timeout': 600,
-        # Use this if having memory issues
-        # 'local_directory': '$TMPDIR',
-        }
 
     now=datetime.datetime.now()
     results_path = "/scratch/kdoubled/test"+"_"+now.strftime('%Y-%m-%d_%Hh%M')
@@ -601,16 +496,13 @@ if __name__ == "__main__":
     df_weather = df_weather.swaplevel(axis=1).sort_index(axis=1)
 
     # Pass variables being looped on, and kwargs
-    run_simulations_dask(df_weather = df_weather, meta = meta_USA, 
+    run_simulations(df_weather = df_weather, meta = meta_USA, 
                             setups = setups, startdates = daylist, 
-                            rootPath = results_path, hpc=kestrel)
+                            rootPath = results_path)
 
     print("*********** DONE ************")
     stop = timer()
     runTime = round(stop-starttimer,2)
-
-
-    # client.shutdown()
 
     # =========== Perform Simulation Set ===========
     stop = timer()
@@ -621,7 +513,7 @@ if __name__ == "__main__":
     print(f'Simulation Run Time: {min:02}:{sec:02}')
     print('=======================================')
     
-    with open('TIMER_'+str(nsampling)+'_'+'ALL.pkl', "wb") as tfp:   # Unpickling
+    with open('TIMER_'+'ALL.pkl', "wb") as tfp:   # Unpickling
         pickle.dump(runTime,tfp)
     #compile(rootPath)
 
