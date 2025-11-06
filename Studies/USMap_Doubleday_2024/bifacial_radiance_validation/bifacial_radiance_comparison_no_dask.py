@@ -16,6 +16,7 @@ import pickle
 import bifacialvf
 import shutil
 import pvdeg
+import argparse
 
 def optimal_gcr_pitch(latitude: float, cw: float = 2) -> tuple[float, float]:
     """
@@ -434,29 +435,24 @@ def run_simulations(df_weather, meta, startdates,
 
 if __name__ == "__main__":
 
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='Run bifacial radiance comparison simulation')
+    parser.add_argument('--gid', type=int, required=True,
+                        help='GID value to process (single integer)')
+    parser.add_argument('--setup', type=int, required=True,
+                        help='Setup value to process (single integer)')
+    parser.add_argument('--full_year', action='store_true',
+                        help='Run full year simulation (default: False, runs 2 days)')
+    args = parser.parse_args()
+
     print(">>>>>>>>>>>>>>>>>> STARTING HERE !")
     print(datetime.datetime.now())
     sim_start_time=datetime.datetime.now()
 
     # Define inputs
-    gids_sub = [886847]
-                # 243498,
-                # 481324,
-                # 852795,
-                # 1116296,
-                # 706260,
-                # 478464,
-                # 347412,
-                # 1132667,
-                # 138250,
-                # 128689,
-                # 981453,
-                # 763236,
-                # 1292659,
-                # 191212]
-                # 25109] # Hawaii not in data set
-    setups = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    FullYear = False
+    gids = [args.gid]
+    setups = [args.setup]
+    FullYear = args.full_year
 
     if FullYear:
         start = datetime.datetime(2024, 1, 1, 0, 0)
@@ -495,17 +491,17 @@ if __name__ == "__main__":
     print("NSRDB accessed")
 
     meta_USA = meta[meta['country'] == 'United States']
-    meta_USA = meta_USA.loc[gids_sub]
+    meta_USA = meta_USA.loc[gids]
 
     data = []
     with NSRDBX(nsrdb_file, hsds=False) as f:
         for p in parameters:
-            data.append(f.get_gid_df(p, np.array(list(gids_sub)))) #.values 
+            data.append(f.get_gid_df(p, np.array(list(gids)))) #.values 
 
     print("GIDs appended")
 
     #Create multi-level dataframe
-    columns = pd.MultiIndex.from_product([parameters, np.array(list(gids_sub))], names=["par", "gid"])
+    columns = pd.MultiIndex.from_product([parameters, np.array(list(gids))], names=["par", "gid"])
     df_weather = pd.concat(data, axis=1)
     df_weather.columns = columns
     df_weather = df_weather.swaplevel(axis=1).sort_index(axis=1)
