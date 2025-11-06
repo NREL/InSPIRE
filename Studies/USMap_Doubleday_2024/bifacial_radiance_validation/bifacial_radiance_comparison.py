@@ -280,6 +280,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         fixed_tilt_angle = None
         clearance_height = None
     if setup == 6:
+        hub_height = None
         sazm = 180
         pitchfactor = 1
         modulename = 'PVmodule'
@@ -288,6 +289,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         fixed_tilt_angle = tilt
         clearance_height = 1.5   
     if setup == 7:
+        hub_height = None
         sazm = 180
         pitchfactor = 1
         pitch = pitch_temp * pitchfactor
@@ -296,6 +298,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         fixed_tilt_angle = tilt
         clearance_height = 2.4
     if setup == 8:
+        hub_height = None
         sazm = 180
         pitchfactor = 1
         pitch = pitch_temp * pitchfactor
@@ -304,6 +307,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         fixed_tilt_angle = tilt
         clearance_height = 2.4
     if setup == 9:
+        hub_height = None
         sazm = 180
         pitchfactor = 2
         pitch = pitch_temp * pitchfactor
@@ -312,6 +316,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         fixed_tilt_angle = tilt
         clearance_height = 1.5
     if setup == 10:
+        hub_height = None
         sazm = 90
         pitch = 8.6 
         modulename = 'PVmodule'
@@ -339,14 +344,23 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     # -- generate sky   
     trackerdict = radObj.gendaylit1axis()
 
-    sceneDict = {'pitch':pitch, 
-                 'hub_height': hub_height,
-                 'clearance_height': clearance_height,
-                 'nMods': 19,
-                 'nRows': 7,
-                'tilt': fixed_tilt_angle,  
-                'sazm': sazm
-                 }
+    if hub_height is not None:
+        sceneDict = {'pitch':pitch, 
+                    'hub_height': hub_height,
+                    'clearance_height': clearance_height,
+                    'nMods': 19,
+                    'nRows': 7,
+                    'tilt': fixed_tilt_angle,  
+                    'sazm': sazm
+                    }
+    else: # Need to skip hub_height for fixed tilt
+        sceneDict = {'pitch':pitch, 
+                    'clearance_height': clearance_height,
+                    'nMods': 19,
+                    'nRows': 7,
+                    'tilt': fixed_tilt_angle,  
+                    'sazm': sazm
+                    }
 
     modWanted = 10
     rowWanted = 4
