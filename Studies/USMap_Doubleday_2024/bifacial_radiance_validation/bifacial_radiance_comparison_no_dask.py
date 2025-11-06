@@ -417,7 +417,7 @@ def run_simulations(df_weather, meta, startdates,
                 df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2024)) 
                 df_tmy = df_tmy.sort_index()
 
-                debug = True
+                debug = False
                 if debug:
                     df_tmy.to_pickle('df_convert_'+str(gid)+'.pkl')
                     filesavepic = 'meta_convert_'+str(gid)+'.pkl'
