@@ -135,7 +135,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     if rootPath is None:
         path = os.path.join(str(setup),simpath)
     else:
-        path = os.path.join(rootPath,str(setup),simpath)
+        path = os.path.join(rootPath,str(setup),str(gid),simpath)
     results_path = os.path.join(path, 'results.pkl')
 
     #os.path.isfile(path)
@@ -148,8 +148,8 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
         
         return 1
 
-    if not os.path.exists(path):
-        os.makedirs(path, exist_ok=True)
+    # Create directory if it doesn't exist (exist_ok handles race conditions)
+    os.makedirs(path, exist_ok=True)
 
     alb = 0.2
     radObj = br.RadianceObj(simpath,path, hpc=True)
