@@ -443,6 +443,8 @@ if __name__ == "__main__":
                         help='Setup value to process (single integer)')
     parser.add_argument('--full_year', action='store_true',
                         help='Run full year simulation (default: False, runs 2 days)')
+    parser.add_argument('--results_path', type=str, required=True,
+                        help='Path to directory where results will be saved')
     args = parser.parse_args()
 
     print(">>>>>>>>>>>>>>>>>> STARTING HERE !")
@@ -467,9 +469,7 @@ if __name__ == "__main__":
         start += datetime.timedelta(days=1)
 
     now=datetime.datetime.now()
-    results_path = "/scratch/kdoubled/test"+"_"+now.strftime('%Y-%m-%d_%Hh%M')
-    if not os.path.exists(results_path):
-        os.makedirs(results_path)
+    results_path = args.results_path
 
     print("Bifacial_radiance version ", br.__version__)
     print("Pandas version ", pd.__version__)
