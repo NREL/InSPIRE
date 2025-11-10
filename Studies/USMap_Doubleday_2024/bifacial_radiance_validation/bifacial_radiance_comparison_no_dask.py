@@ -158,7 +158,7 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     enddate = startdate + datetime.timedelta(hours=23)
     print("Meta_dict into readWeatherData")
     metData = radObj.readWeatherData(metadata=meta_dict, metdata=df_tmy, starttime=startdate,
-                                      endtime=enddate, coerce_year=2024,
+                                      endtime=enddate, coerce_year=2023,
                                       label='center')
     
     # Tracker Projection of half the module into the ground, 
@@ -414,7 +414,7 @@ def run_simulations(df_weather, meta, startdates,
                 df_tmy = df_weather.loc[:, gid]
                 tz_convert_val = meta_dict['timezone']
                 df_tmy = df_tmy.tz_convert(pytz.FixedOffset(tz_convert_val*60))
-                df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2024)) 
+                df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2023)) 
                 df_tmy = df_tmy.sort_index()
 
                 debug = False
@@ -456,12 +456,13 @@ if __name__ == "__main__":
     setups = [args.setup]
     FullYear = args.full_year
 
+    # dates need to be coerced to 2023 to avoid leap day
     if FullYear:
-        start = datetime.datetime(2024, 1, 1, 0, 0)
-        end = datetime.datetime(2024, 12, 31, 0, 0)
+        start = datetime.datetime(2023, 1, 1, 0, 0)
+        end = datetime.datetime(2023, 12, 31, 0, 0)
     else:
-        start = datetime.datetime(2024, 12, 13, 0, 0)
-        end = datetime.datetime(2024, 12, 14, 0, 0)
+        start = datetime.datetime(2023, 2, 28, 0, 0)
+        end = datetime.datetime(2023, 3, 1, 0, 0)
 
     daylist = []
     while start <= end:
