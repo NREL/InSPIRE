@@ -414,7 +414,8 @@ def run_simulations(df_weather, meta, startdates,
                 df_tmy = df_weather.loc[:, gid]
                 tz_convert_val = meta_dict['timezone']
                 df_tmy = df_tmy.tz_convert(pytz.FixedOffset(tz_convert_val*60))
-                df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2023)) 
+                # Date needs to be 2024 to match the NREL TMY-2024 data
+                df_tmy.index =  df_tmy.index.map(lambda t: t.replace(year=2024))
                 df_tmy = df_tmy.sort_index()
 
                 debug = False
