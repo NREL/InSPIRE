@@ -352,7 +352,11 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     ResultGroundIrrad = []
     ResultTemp = []
     for key in keys:
-        ResultGroundIrrad.append(list(trackerdict[key]['AnalysisObj'][1].Wm2Front))
+        try:
+            ResultGroundIrrad.append(list(trackerdict[key]['AnalysisObj'][1].Wm2Front))
+        except Exception as e:
+            # Pad with NaN to match expected number of sensors, needed when sun altitude recalculation is nan
+            ResultGroundIrrad.append([np.nan] * numsensors)
         ResultTemp.append(trackerdict[key]['temp_air'])
 
     # Cleanup of Front files from the Ground simulation
@@ -457,13 +461,13 @@ if __name__ == "__main__":
     setups = [args.setup]
     FullYear = args.full_year
 
-    # dates need to be coerced to 2023 to avoid leap day
+    # dates need to be coerced to 2023 to avoid leap day in while loop
     if FullYear:
         start = datetime.datetime(2023, 1, 1, 0, 0)
         end = datetime.datetime(2023, 12, 31, 0, 0)
     else:
-        start = datetime.datetime(2023, 2, 28, 0, 0)
-        end = datetime.datetime(2023, 3, 1, 0, 0)
+        start = datetime.datetime(2023, 1, 1, 0, 0)
+        end = datetime.datetime(2023, 1, 2, 0, 0)
 
     daylist = []
     while start <= end:
