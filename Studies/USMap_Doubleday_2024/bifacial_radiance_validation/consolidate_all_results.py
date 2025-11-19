@@ -16,7 +16,7 @@ Usage as Python function:
 Usage from command line:
     python consolidate_all_results.py validation_results
     python consolidate_all_results.py validation_results --base-path "/path/to/folder"
-    python consolidate_all_results.py validation_results --output all_results.csv
+    python consolidate_all_results.py validation_results --output all_results.pkl
 """
 
 import pandas as pd
@@ -424,7 +424,7 @@ def main():
 Examples:
   python consolidate_all_results.py validation_results
   python consolidate_all_results.py validation_results --base-path /path/to/folder
-  python consolidate_all_results.py validation_results --output all_results.csv
+  python consolidate_all_results.py validation_results --output all_results.pkl
         """
     )
     
@@ -445,7 +445,7 @@ Examples:
         '--output',
         type=str,
         default=None,
-        help='Output CSV file name (defaults to "all_results.csv")'
+        help='Output pickle file name (defaults to "all_results.pkl")'
     )
     
     parser.add_argument(
@@ -458,7 +458,7 @@ Examples:
     args = parser.parse_args()
     
     # Set default output filename if not provided
-    output_file = args.output if args.output else 'all_results.csv'
+    output_file = args.output if args.output else 'all_results.pkl'
     
     print("Consolidating all results...")
     print(f"Validation results folder: {args.folder_name}")
@@ -473,9 +473,9 @@ Examples:
         s3_bucket_path=args.s3_path
     )
     
-    # Write to CSV
+    # Write to pickle
     print(f"\nWriting data to {output_file}...")
-    data.to_csv(output_file, index=False)
+    data.to_pickle(output_file)
     
     file_size = Path(output_file).stat().st_size
     print(f"Done! Data exported to {output_file}")

@@ -3,14 +3,14 @@ Plot Wm2Front vs Distance Comparison
 This script generates line plots comparing PySAM and bifacial radiance data
 for Wm2Front vs distance (x) for each of the 10 setups.
 
-The plot shows data from a combined CSV file (all_results.csv) with a data_source column
+The plot shows data from a combined pickle file (all_results.pkl) with a data_source column
 indicating whether data is from 'bifacial_radiance' or 'pysam'.
 
 Usage:
     python plot_wm2front_vs_distance.py --gid 886847 --hour 12
     python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --dayofyear 59
     python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --output comparison_plots.png
-    python plot_wm2front_vs_distance.py --data-file all_results.csv --gid 886847 --hour 12
+    python plot_wm2front_vs_distance.py --data-file all_results.pkl --gid 886847 --hour 12
 """
 
 import pandas as pd
@@ -22,7 +22,7 @@ import warnings
 
 
 def plot_wm2front_vs_distance(
-    data_file='all_results.csv',
+    data_file='all_results.pkl',
     gid=None,
     hour=12,
     dayofyear=None,
@@ -35,7 +35,7 @@ def plot_wm2front_vs_distance(
     Parameters
     ----------
     data_file : str
-        Path to combined results CSV file with data_source column
+        Path to combined results pickle file with data_source column
     gid : int
         GID to plot (if None, uses first GID found)
     hour : int, default 12
@@ -56,7 +56,7 @@ def plot_wm2front_vs_distance(
     print("Loading dataset...")
     
     # Load combined dataset
-    all_data = pd.read_csv(data_file)
+    all_data = pd.read_pickle(data_file)
     
     # Convert datetime columns
     all_data['datetime'] = pd.to_datetime(all_data['datetime'])
@@ -202,8 +202,8 @@ Examples:
     parser.add_argument(
         '--data-file',
         type=str,
-        default='all_results.csv',
-        help='Path to combined results CSV file with data_source column (default: all_results.csv)'
+        default='all_results.pkl',
+        help='Path to combined results pickle file with data_source column (default: all_results.pkl)'
     )
     
     parser.add_argument(

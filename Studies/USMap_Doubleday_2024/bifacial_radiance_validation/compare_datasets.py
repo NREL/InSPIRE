@@ -1,10 +1,10 @@
 """
 Compare Validation Results and PySAM Outputs
-This script compares two solar irradiance datasets from a combined CSV file:
+This script compares two solar irradiance datasets from a combined pickle file:
 - Bifacial Radiance validation data (half-hour timestamps)
 - PySAM model outputs from S3 zarr (hourly timestamps)
 
-The combined CSV file should have a 'data_source' column indicating 'bifacial_radiance' or 'pysam'.
+The combined pickle file should have a 'data_source' column indicating 'bifacial_radiance' or 'pysam'.
 
 The script:
 - Determines the most likely time alignment between datasets
@@ -14,7 +14,7 @@ The script:
 
 Usage:
     python compare_datasets.py
-    python compare_datasets.py --data-file all_results.csv
+    python compare_datasets.py --data-file all_results.pkl
     python compare_datasets.py --output comparison_results.csv
 """
 
@@ -302,14 +302,14 @@ def match_x_values(validation_x, pysam_x, validation_irr, pysam_irr):
     return np.array(matched_val_irr), np.array(matched_pysam_irr)
 
 
-def compare_datasets(data_file='all_results.csv', output_file=None):
+def compare_datasets(data_file='all_results.pkl', output_file=None):
     """
-    Compare bifacial radiance and pysam outputs from a combined CSV file.
+    Compare bifacial radiance and pysam outputs from a combined pickle file.
     
     Parameters
     ----------
     data_file : str
-        Path to combined results CSV file with data_source column
+        Path to combined results pickle file with data_source column
     output_file : str, optional
         Path to output CSV file for summary statistics
     
@@ -321,7 +321,7 @@ def compare_datasets(data_file='all_results.csv', output_file=None):
     print("Loading dataset...")
     
     # Load combined dataset
-    all_data = pd.read_csv(data_file)
+    all_data = pd.read_pickle(data_file)
     
     # Convert datetime columns
     all_data['datetime'] = pd.to_datetime(all_data['datetime'])
@@ -812,7 +812,7 @@ def main():
         epilog="""
 Examples:
   python compare_datasets.py
-  python compare_datasets.py --data-file all_results.csv
+  python compare_datasets.py --data-file all_results.pkl
   python compare_datasets.py --output comparison_results.csv
         """
     )
@@ -820,8 +820,8 @@ Examples:
     parser.add_argument(
         '--data-file',
         type=str,
-        default='all_results.csv',
-        help='Path to combined results CSV file with data_source column (default: all_results.csv)'
+        default='all_results.pkl',
+        help='Path to combined results pickle file with data_source column (default: all_results.pkl)'
     )
     
     parser.add_argument(
