@@ -37,5 +37,5 @@ if [ "$SLURM_ARRAY_TASK_ID" -eq 0 ]; then
 fi
 mkdir -p "$RESULTS_PATH"
 
-srun python bifacial_radiance_comparison_no_dask.py --gid $GID --setup $SETUP --full_year --results_path "$RESULTS_PATH"
+srun python bifacial_radiance_comparison.py --gid $GID --setup $SETUP --full_year --results_path "$RESULTS_PATH"
 
