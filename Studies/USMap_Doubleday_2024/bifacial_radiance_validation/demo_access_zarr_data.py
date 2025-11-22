@@ -1,8 +1,8 @@
 """
 Demo script for accessing agrivoltaics irradiance data from S3 zarr files.
 
-The demo can be run directly (python demo_access_zarr_data.py) to see all examples,
-or individual functions can be imported and used in other scripts
+The demo can be run directly (python demo_access_zarr_data.py) to see printed output
+of all examples, or individual functions can be imported and used in other scripts
 
 This script demonstrates three common use cases:
 1. Loading data for selected setups by GID
