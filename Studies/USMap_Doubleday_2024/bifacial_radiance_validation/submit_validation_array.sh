@@ -3,9 +3,9 @@
 #SBATCH --partition=standard
 #SBATCH --nodes=1
 #SBATCH --account=inspire
-#SBATCH --mail-user=kate.doubleday@nrel.gov
-#SBATCH --mail-type=ALL
-#SBATCH --array=0-149
+#SBATCH --array=49,74,92,110,112,114,118
+
+# 0-149
 
 module load anaconda3
 conda activate /home/kdoubled/.conda-envs/radianceEnv
@@ -30,7 +30,7 @@ echo "GID: $GID"
 echo "Setup: $SETUP"
 
 # Define results path and ensure it exists and is empty
-RESULTS_PATH="/scratch/kdoubled/validation_results"
+RESULTS_PATH="/scratch/kdoubled/validation_results_v1"
 # Only clear the directory on the first task to avoid race conditions
 if [ "$SLURM_ARRAY_TASK_ID" -eq 0 ]; then
     rm -rf "$RESULTS_PATH"
