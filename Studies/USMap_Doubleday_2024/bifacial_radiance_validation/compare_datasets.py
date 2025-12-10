@@ -582,7 +582,6 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     
     # Initialize results list
     results = []
-    distance_stats_data = []  # Store data for distance-based statistics
     all_matched_data = []  # Store all matched data for reuse
     
     # Process each (gid, setup) combination using itertuples (much faster than iterrows)
@@ -714,11 +713,6 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         
         print(f"  Matched {n_points} data points")
         print(f"  MBD: {mbd_pct:.2f}%, RMSE: {rmse_pct:.2f}%, MAD: {mad_pct:.2f}%")
-        
-        # Store matched data for distance-based analysis (no need to copy)
-        matched_df_filtered = matched_df[mask]
-        if len(matched_df_filtered) > 0:
-            distance_stats_data.append(matched_df_filtered)
     
     # Create summary DataFrame
     summary_df = pd.DataFrame(results)
@@ -732,19 +726,19 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     print("="*60)
     print(summary_df.to_string(index=False))
     
-    # Calculate distance-based statistics
+    # Calculate statistics by GID only (across all setups, distances, and hours)
     print("\n" + "="*60)
-    print("Calculating statistics by distance (x)...")
+    print("Calculating statistics by GID (across all setups, distances, and hours)...")
     print("="*60)
     
-    distance_results = []
+    gid_results = []
+    gid_summary_df = pd.DataFrame()  # Initialize as empty DataFrame
     
-    if len(distance_stats_data) > 0:
-        # Combine all matched data
-        all_matched_df = pd.concat(distance_stats_data, ignore_index=True)
+    if len(all_matched_data) > 0:
+        all_matched_df = pd.DataFrame(all_matched_data)
         
-        # Group by gid, setup, and x (distance)
-        for (gid, setup, x), group in all_matched_df.groupby(['gid', 'setup', 'x']):
+        # Group by GID only
+        for gid, group in all_matched_df.groupby('gid'):
             meas = group['validation_irr'].values
             model = group['pysam_irr'].values
             
@@ -770,10 +764,8 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             mean_model = model_filtered.mean()
             corr = np.corrcoef(meas_filtered, model_filtered)[0, 1] if len(meas_filtered) > 1 else np.nan
             
-            distance_results.append({
+            gid_results.append({
                 'gid': gid,
-                'setup': setup,
-                'x': x,
                 'n_points': n_points,
                 'mean_validation': mean_meas,
                 'mean_pysam': mean_model,
@@ -786,26 +778,26 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
                 'correlation': corr
             })
     
-    distance_summary_df = pd.DataFrame(distance_results)
+    gid_summary_df = pd.DataFrame(gid_results)
     
-    if len(distance_summary_df) > 0:
-        # Sort by gid, setup, and x
-        distance_summary_df = distance_summary_df.sort_values(['gid', 'setup', 'x']).reset_index(drop=True)
+    if len(gid_summary_df) > 0:
+        # Sort by gid
+        gid_summary_df = gid_summary_df.sort_values('gid').reset_index(drop=True)
         
         print("\n" + "="*60)
-        print("SUMMARY STATISTICS (by GID, Setup, and Distance)")
+        print("SUMMARY STATISTICS (by GID)")
         print("="*60)
-        print(distance_summary_df.to_string(index=False))
+        print(gid_summary_df.to_string(index=False))
     else:
-        print("No distance-based statistics calculated.")
+        print("No GID-based statistics calculated.")
     
     # Calculate matched time-points per GID
     print("\n" + "="*60)
     print("MATCHED TIME-POINTS PER GID")
     print("="*60)
     
-    if len(distance_stats_data) > 0:
-        all_matched_df = pd.concat(distance_stats_data, ignore_index=True)
+    if len(all_matched_data) > 0:
+        all_matched_df = pd.DataFrame(all_matched_data)
         
         # Count unique time-points (dayofyear + hour) per GID using vectorized operations
         timepoint_counts = []
@@ -847,10 +839,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     print("="*60)
     
     hour_results_overall = []
-    hour_results_by_gid_setup = []
+    hour_results_by_setup = []
     
-    if len(distance_stats_data) > 0:
-        all_matched_df = pd.concat(distance_stats_data, ignore_index=True)
+    if len(all_matched_data) > 0:
+        all_matched_df = pd.DataFrame(all_matched_data)
         
         # Overall statistics by hour (averaging across all GIDs, setups, distances)
         for hour in sorted(all_matched_df['hour'].unique()):
@@ -895,8 +887,8 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
                 'correlation': corr
             })
         
-        # Statistics by hour, GID, and setup (averaging over distance)
-        for (gid, setup, hour), group in all_matched_df.groupby(['gid', 'setup', 'hour']):
+        # Statistics by hour and setup (averaging over GID and distance)
+        for (setup, hour), group in all_matched_df.groupby(['setup', 'hour']):
             meas = group['validation_irr'].values
             model = group['pysam_irr'].values
             
@@ -922,8 +914,7 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             mean_model = model_filtered.mean()
             corr = np.corrcoef(meas_filtered, model_filtered)[0, 1] if len(meas_filtered) > 1 else np.nan
             
-            hour_results_by_gid_setup.append({
-                'gid': gid,
+            hour_results_by_setup.append({
                 'setup': setup,
                 'hour': hour,
                 'n_points': n_points,
@@ -940,7 +931,7 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         
         # Create DataFrames
         hour_summary_overall = pd.DataFrame(hour_results_overall).sort_values('hour')
-        hour_summary_by_gid_setup = pd.DataFrame(hour_results_by_gid_setup).sort_values(['gid', 'setup', 'hour'])
+        hour_summary_by_setup = pd.DataFrame(hour_results_by_setup).sort_values(['setup', 'hour'])
         
         # Print overall statistics by hour
         print("\n" + "="*60)
@@ -948,11 +939,11 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         print("="*60)
         print(hour_summary_overall.to_string(index=False))
         
-        # Print statistics by hour, GID, and setup
+        # Print statistics by hour and setup
         print("\n" + "="*60)
-        print("SUMMARY STATISTICS BY HOUR, GID, AND SETUP (Averaged over Distance)")
+        print("SUMMARY STATISTICS BY HOUR AND SETUP (Averaged over GID and Distance)")
         print("="*60)
-        print(hour_summary_by_gid_setup.to_string(index=False))
+        print(hour_summary_by_setup.to_string(index=False))
         
         # Save to files
         if output_file:
@@ -960,9 +951,9 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             hour_summary_overall.to_csv(hour_overall_output, index=False)
             print(f"\nHour statistics (overall) saved to: {hour_overall_output}")
             
-            hour_gid_setup_output = output_file.replace('.csv', '_by_hour_gid_setup.csv')
-            hour_summary_by_gid_setup.to_csv(hour_gid_setup_output, index=False)
-            print(f"Hour statistics (by GID and setup) saved to: {hour_gid_setup_output}")
+            hour_setup_output = output_file.replace('.csv', '_by_hour_setup.csv')
+            hour_summary_by_setup.to_csv(hour_setup_output, index=False)
+            print(f"Hour statistics (by hour and setup) saved to: {hour_setup_output}")
         
         # Generate plots for metrics vs hour
         print("\n" + "="*60)
@@ -1037,13 +1028,13 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         summary_df.to_csv(output_file, index=False)
         print(f"\nSummary statistics (by GID and Setup) saved to: {output_file}")
         
-        # Save distance-based statistics to a separate file
-        if len(distance_summary_df) > 0:
-            distance_output_file = output_file.replace('.csv', '_by_distance.csv')
-            distance_summary_df.to_csv(distance_output_file, index=False)
-            print(f"Summary statistics (by GID, Setup, and Distance) saved to: {distance_output_file}")
+        # Save GID-based statistics to a separate file
+        if len(gid_summary_df) > 0:
+            gid_output_file = output_file.replace('.csv', '_by_gid.csv')
+            gid_summary_df.to_csv(gid_output_file, index=False)
+            print(f"Summary statistics (by GID) saved to: {gid_output_file}")
     
-    return summary_df, distance_summary_df if len(distance_summary_df) > 0 else pd.DataFrame()
+    return summary_df, gid_summary_df
 
 
 def plot_from_csv(csv_file, output_file=None):
