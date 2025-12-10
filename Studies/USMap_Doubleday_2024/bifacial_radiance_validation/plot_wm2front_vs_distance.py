@@ -11,6 +11,7 @@ Usage:
     python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --dayofyear 59
     python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --output comparison_plots.png
     python plot_wm2front_vs_distance.py --data-file all_results.pkl --gid 886847 --hour 12
+    python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --dayofyear 172 --output June_21_comparison_plots.png
 """
 
 import pandas as pd

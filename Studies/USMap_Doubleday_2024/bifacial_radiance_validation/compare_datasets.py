@@ -23,6 +23,7 @@ import numpy as np
 import argparse
 from pathlib import Path
 import warnings
+import matplotlib.pyplot as plt
 
 
 def MBD(meas, model):
@@ -299,6 +300,100 @@ def MAD_abs(meas, model):
     out = (1/m) * np.sum(np.abs(model - meas))
     
     return out
+
+
+def plot_metrics_vs_hour(hour_summary_df, output_file=None):
+    """
+    Plot MBD_absolute and MAD_absolute vs hour of day.
+    
+    Creates a combined plot with two subplots side-by-side showing both metrics.
+    Uses consistent aesthetics with plot_wm2front_vs_distance.py.
+    
+    Parameters
+    ----------
+    hour_summary_df : pd.DataFrame
+        DataFrame with hour-based statistics including 'hour', 'MBD_absolute', and 'MAD_absolute' columns
+    output_file : str, optional
+        Base output file path (plot will be saved with _metrics_vs_hour.png suffix)
+    
+    Returns
+    -------
+    str or None
+        Path to saved plot file, or None if plotting failed
+    """
+    if len(hour_summary_df) == 0:
+        warnings.warn("No data available for plotting metrics vs hour")
+        return None
+    
+    # Ensure hour column exists and data is sorted
+    if 'hour' not in hour_summary_df.columns:
+        warnings.warn("'hour' column not found in hour_summary_df")
+        return None
+    
+    hour_summary_df = hour_summary_df.sort_values('hour').copy()
+    
+    # Create figure with two subplots side by side
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+    fig.suptitle('Error Metrics vs Hour of Day (Overall)', 
+                 fontsize=16, fontweight='bold')
+    
+    # Plot 1: MBD_absolute vs hour
+    if 'MBD_absolute' in hour_summary_df.columns:
+        ax1.plot(hour_summary_df['hour'], hour_summary_df['MBD_absolute'], 
+                'o-', linewidth=2, markersize=6, 
+                color="#0079C2", alpha=0.7, label='MBD (absolute)')
+        ax1.set_xlabel('Hour of Day', fontsize=10)
+        ax1.set_ylabel('Mean Bias Difference (W/m²)', fontsize=10)
+        ax1.set_title('MBD (Absolute) vs Hour of Day', fontweight='bold', fontsize=12)
+        ax1.grid(True, alpha=0.3)
+        ax1.legend(loc='best', fontsize=9)
+        ax1.set_xlim(-0.5, 23.5)
+        ax1.set_xticks(range(0, 24, 2))
+        
+        # Add zero line
+        ax1.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.5)
+    else:
+        ax1.text(0.5, 0.5, 'MBD_absolute data not available', 
+                ha='center', va='center', transform=ax1.transAxes)
+    
+    # Plot 2: MAD_absolute vs hour
+    if 'MAD_absolute' in hour_summary_df.columns:
+        ax2.plot(hour_summary_df['hour'], hour_summary_df['MAD_absolute'], 
+                's-', linewidth=2, markersize=6, 
+                color="#F7A11A", alpha=0.7, label='MAD (absolute)')
+        ax2.set_xlabel('Hour of Day', fontsize=10)
+        ax2.set_ylabel('Mean Absolute Difference (W/m²)', fontsize=10)
+        ax2.set_title('MAD (Absolute) vs Hour of Day', fontweight='bold', fontsize=12)
+        ax2.grid(True, alpha=0.3)
+        ax2.legend(loc='best', fontsize=9)
+        ax2.set_xlim(-0.5, 23.5)
+        ax2.set_xticks(range(0, 24, 2))
+    else:
+        ax2.text(0.5, 0.5, 'MAD_absolute data not available', 
+                ha='center', va='center', transform=ax2.transAxes)
+    
+    plt.tight_layout()
+    
+    # Save combined plot
+    if output_file is None:
+        plot_path = 'metrics_vs_hour.png'
+    else:
+        # Handle both .csv and .png extensions
+        if output_file.endswith('.png'):
+            plot_path = output_file
+        elif output_file.endswith('.csv'):
+            base_path = output_file.replace('.csv', '')
+            plot_path = f'{base_path}_metrics_vs_hour.png'
+        else:
+            # No extension or other extension - add .png
+            plot_path = f'{output_file}_metrics_vs_hour.png'
+    
+    plt.savefig(plot_path, dpi=300, bbox_inches='tight')
+    print(f"Metrics vs hour plot saved to: {plot_path}")
+    
+    plt.close()
+    
+    return plot_path
 
 
 def find_time_alignment(validation_times, pysam_times):
@@ -868,6 +963,12 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             hour_gid_setup_output = output_file.replace('.csv', '_by_hour_gid_setup.csv')
             hour_summary_by_gid_setup.to_csv(hour_gid_setup_output, index=False)
             print(f"Hour statistics (by GID and setup) saved to: {hour_gid_setup_output}")
+        
+        # Generate plots for metrics vs hour
+        print("\n" + "="*60)
+        print("Generating plots: Metrics vs Hour of Day")
+        print("="*60)
+        plot_metrics_vs_hour(hour_summary_overall, output_file=output_file)
     else:
         print("No matched data available for hour-based analysis.")
     
@@ -945,6 +1046,47 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     return summary_df, distance_summary_df if len(distance_summary_df) > 0 else pd.DataFrame()
 
 
+def plot_from_csv(csv_file, output_file=None):
+    """
+    Load hour-based statistics from CSV and generate plots.
+    
+    Parameters
+    ----------
+    csv_file : str
+        Path to CSV file with hour-based statistics (e.g., comparison_results_by_hour_overall.csv)
+    output_file : str, optional
+        Output file path for the plot (default: based on CSV filename)
+    
+    Returns
+    -------
+    str or None
+        Path to saved plot file, or None if plotting failed
+    """
+    print(f"Loading hour statistics from: {csv_file}")
+    
+    try:
+        hour_summary_df = pd.read_csv(csv_file)
+    except Exception as e:
+        warnings.warn(f"Failed to load CSV file {csv_file}: {e}")
+        return None
+    
+    if len(hour_summary_df) == 0:
+        warnings.warn(f"CSV file {csv_file} is empty")
+        return None
+    
+    # Determine output file path
+    if output_file is None:
+        # Generate output filename based on input CSV
+        csv_path = Path(csv_file)
+        output_file = csv_path.parent / f"{csv_path.stem}_metrics_vs_hour.png"
+        output_file = str(output_file)
+    
+    print(f"Generating plot: Metrics vs Hour of Day")
+    plot_path = plot_metrics_vs_hour(hour_summary_df, output_file=output_file)
+    
+    return plot_path
+
+
 def main():
     """Command-line interface for comparing datasets."""
     parser = argparse.ArgumentParser(
@@ -952,9 +1094,14 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
+  # Full comparison with plotting
   python compare_datasets.py
   python compare_datasets.py --data-file all_results.pkl
   python compare_datasets.py --output comparison_results.csv
+  
+  # Plot only from pre-calculated CSV
+  python compare_datasets.py --plot-only --hour-csv comparison_results_by_hour_overall.csv
+  python compare_datasets.py --plot-only --hour-csv comparison_results_by_hour_overall.csv --output my_plot.png
         """
     )
     
@@ -969,11 +1116,35 @@ Examples:
         '--output',
         type=str,
         default=None,
-        help='Output CSV file for summary statistics (default: comparison_summary.csv)'
+        help='Output CSV file for summary statistics (default: comparison_summary.csv). For plot-only mode, this is the plot output path.'
+    )
+    
+    parser.add_argument(
+        '--plot-only',
+        action='store_true',
+        help='Only generate plots from pre-calculated CSV file (requires --hour-csv)'
+    )
+    
+    parser.add_argument(
+        '--hour-csv',
+        type=str,
+        default=None,
+        help='Path to pre-calculated hour statistics CSV file (e.g., comparison_results_by_hour_overall.csv). Required for --plot-only mode.'
     )
     
     args = parser.parse_args()
     
+    # Handle plot-only mode
+    if args.plot_only:
+        if args.hour_csv is None:
+            parser.error("--plot-only requires --hour-csv to specify the CSV file path")
+        
+        plot_path = plot_from_csv(args.hour_csv, output_file=args.output)
+        if plot_path:
+            print(f"\nPlot generation complete! Saved to: {plot_path}")
+        return plot_path
+    
+    # Normal mode: full comparison
     # Set default output filename if not provided
     output_file = args.output if args.output else 'comparison_summary.csv'
     
