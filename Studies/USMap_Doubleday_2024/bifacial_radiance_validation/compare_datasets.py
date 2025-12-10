@@ -342,7 +342,7 @@ def plot_metrics_vs_hour(hour_summary_df, output_file=None):
     if 'MBD_absolute' in hour_summary_df.columns:
         ax1.plot(hour_summary_df['hour'], hour_summary_df['MBD_absolute'], 
                 'o-', linewidth=2, markersize=6, 
-                color="#0079C2", alpha=0.7, label='MBD (absolute)')
+                color="#0079C2", alpha=0.7, label='MBD')
         ax1.set_xlabel('Hour of Day', fontsize=10)
         ax1.set_ylabel('Mean Bias Difference (W/m²)', fontsize=10)
         ax1.set_title('MBD (Absolute) vs Hour of Day', fontweight='bold', fontsize=12)
@@ -361,7 +361,7 @@ def plot_metrics_vs_hour(hour_summary_df, output_file=None):
     if 'MAD_absolute' in hour_summary_df.columns:
         ax2.plot(hour_summary_df['hour'], hour_summary_df['MAD_absolute'], 
                 's-', linewidth=2, markersize=6, 
-                color="#F7A11A", alpha=0.7, label='MAD (absolute)')
+                color="#F7A11A", alpha=0.7, label='MAD')
         ax2.set_xlabel('Hour of Day', fontsize=10)
         ax2.set_ylabel('Mean Absolute Difference (W/m²)', fontsize=10)
         ax2.set_title('MAD (Absolute) vs Hour of Day', fontweight='bold', fontsize=12)
@@ -454,13 +454,13 @@ def plot_metrics_vs_hour_by_setup(hour_summary_by_setup_df, output_file=None):
         if 'MBD_absolute' in setup_data.columns:
             ax.plot(setup_data['hour'], setup_data['MBD_absolute'], 
                    'o-', linewidth=2, markersize=6, 
-                   color="#0079C2", alpha=0.7, label='MBD (absolute)')
+                   color="#0079C2", alpha=0.7, label='MBD')
         
         # Plot MAD_absolute vs hour
         if 'MAD_absolute' in setup_data.columns:
             ax.plot(setup_data['hour'], setup_data['MAD_absolute'], 
                    's-', linewidth=2, markersize=6, 
-                   color="#F7A11A", alpha=0.7, label='MAD (absolute)')
+                   color="#F7A11A", alpha=0.7, label='MAD')
         
         # Formatting
         ax.set_xlabel('Hour of Day', fontsize=10)
