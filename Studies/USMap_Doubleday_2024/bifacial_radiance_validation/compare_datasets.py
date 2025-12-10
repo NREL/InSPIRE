@@ -16,6 +16,7 @@ Usage:
     python compare_datasets.py
     python compare_datasets.py --data-file all_results.pkl
     python compare_datasets.py --output comparison_results.csv
+    python compare_datasets.py --plot-only --hour-csv comparison_results_by_hour_overall.csv --setup-csv comparison_results_by_hour_setup.csv
 """
 
 import pandas as pd
@@ -390,6 +391,122 @@ def plot_metrics_vs_hour(hour_summary_df, output_file=None):
     
     plt.savefig(plot_path, dpi=300, bbox_inches='tight')
     print(f"Metrics vs hour plot saved to: {plot_path}")
+    
+    plt.close()
+    
+    return plot_path
+
+
+def plot_metrics_vs_hour_by_setup(hour_summary_by_setup_df, output_file=None):
+    """
+    Plot MBD_absolute and MAD_absolute vs hour of day, tiled by setup.
+    
+    Creates a 2x5 grid of subplots (one for each setup 1-10) showing both metrics.
+    Uses consistent aesthetics with plot_wm2front_vs_distance.py.
+    
+    Parameters
+    ----------
+    hour_summary_by_setup_df : pd.DataFrame
+        DataFrame with hour-based statistics by setup including 'setup', 'hour', 
+        'MBD_absolute', and 'MAD_absolute' columns
+    output_file : str, optional
+        Base output file path (plot will be saved with _metrics_vs_hour_by_setup.png suffix)
+    
+    Returns
+    -------
+    str or None
+        Path to saved plot file, or None if plotting failed
+    """
+    if len(hour_summary_by_setup_df) == 0:
+        warnings.warn("No data available for plotting metrics vs hour by setup")
+        return None
+    
+    # Ensure required columns exist
+    required_cols = ['setup', 'hour', 'MBD_absolute', 'MAD_absolute']
+    missing_cols = [col for col in required_cols if col not in hour_summary_by_setup_df.columns]
+    if missing_cols:
+        warnings.warn(f"Missing required columns: {missing_cols}")
+        return None
+    
+    # Create figure with subplots for each setup (2 rows, 5 columns)
+    fig, axes = plt.subplots(2, 5, figsize=(20, 10))
+    fig.suptitle('Error Metrics vs Hour of Day by Setup', 
+                 fontsize=16, fontweight='bold')
+    
+    axes = axes.flatten()
+    
+    # Process each setup (1-10)
+    for setup in range(1, 11):
+        ax = axes[setup - 1]
+        
+        # Filter data for this setup
+        setup_data = hour_summary_by_setup_df[
+            hour_summary_by_setup_df['setup'] == setup
+        ].sort_values('hour')
+        
+        if len(setup_data) == 0:
+            ax.text(0.5, 0.5, f'Setup {setup}\nNo data', 
+                   ha='center', va='center', transform=ax.transAxes)
+            ax.set_title(f'Setup {setup}', fontweight='bold', fontsize=12)
+            continue
+        
+        # Plot MBD_absolute vs hour
+        if 'MBD_absolute' in setup_data.columns:
+            ax.plot(setup_data['hour'], setup_data['MBD_absolute'], 
+                   'o-', linewidth=2, markersize=6, 
+                   color="#0079C2", alpha=0.7, label='MBD (absolute)')
+        
+        # Plot MAD_absolute vs hour
+        if 'MAD_absolute' in setup_data.columns:
+            ax.plot(setup_data['hour'], setup_data['MAD_absolute'], 
+                   's-', linewidth=2, markersize=6, 
+                   color="#F7A11A", alpha=0.7, label='MAD (absolute)')
+        
+        # Formatting
+        ax.set_xlabel('Hour of Day', fontsize=10)
+        ax.set_ylabel('Error Metric (W/m²)', fontsize=10)
+        ax.set_title(f'Setup {setup}', fontweight='bold', fontsize=12)
+        ax.grid(True, alpha=0.3)
+        ax.legend(loc='best', fontsize=9)
+        ax.set_xlim(-0.5, 23.5)
+        ax.set_xticks(range(0, 24, 2))
+        
+        # Add zero line for reference
+        ax.axhline(y=0, color='gray', linestyle='--', linewidth=1, alpha=0.5)
+        
+        # Set reasonable y-axis limits
+        if len(setup_data) > 0:
+            all_y = []
+            if 'MBD_absolute' in setup_data.columns:
+                all_y.extend(setup_data['MBD_absolute'].dropna().values)
+            if 'MAD_absolute' in setup_data.columns:
+                all_y.extend(setup_data['MAD_absolute'].dropna().values)
+            
+            if len(all_y) > 0:
+                y_min, y_max = min(all_y), max(all_y)
+                y_range = y_max - y_min if y_max != y_min else abs(y_max) if y_max != 0 else 1
+                # Add some padding
+                ax.set_ylim(y_min - 0.1 * y_range, y_max + 0.1 * y_range)
+    
+    plt.tight_layout()
+    
+    # Save plot
+    if output_file is None:
+        plot_path = 'metrics_vs_hour_by_setup.png'
+    else:
+        # Handle both .csv and .png extensions
+        if output_file.endswith('.png'):
+            base_path = output_file.replace('.png', '')
+            plot_path = f'{base_path}_metrics_vs_hour_by_setup.png'
+        elif output_file.endswith('.csv'):
+            base_path = output_file.replace('.csv', '')
+            plot_path = f'{base_path}_metrics_vs_hour_by_setup.png'
+        else:
+            # No extension or other extension - add .png
+            plot_path = f'{output_file}_metrics_vs_hour_by_setup.png'
+    
+    plt.savefig(plot_path, dpi=300, bbox_inches='tight')
+    print(f"Metrics vs hour by setup plot saved to: {plot_path}")
     
     plt.close()
     
@@ -960,6 +1077,12 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         print("Generating plots: Metrics vs Hour of Day")
         print("="*60)
         plot_metrics_vs_hour(hour_summary_overall, output_file=output_file)
+        
+        # Generate plots for metrics vs hour by setup
+        print("\n" + "="*60)
+        print("Generating plots: Metrics vs Hour of Day by Setup")
+        print("="*60)
+        plot_metrics_vs_hour_by_setup(hour_summary_by_setup, output_file=output_file)
     else:
         print("No matched data available for hour-based analysis.")
     
@@ -1037,45 +1160,76 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     return summary_df, gid_summary_df
 
 
-def plot_from_csv(csv_file, output_file=None):
+def plot_from_csv(hour_overall_csv=None, hour_setup_csv=None, output_file=None):
     """
-    Load hour-based statistics from CSV and generate plots.
+    Load hour-based statistics from CSV files and generate plots.
     
     Parameters
     ----------
-    csv_file : str
-        Path to CSV file with hour-based statistics (e.g., comparison_results_by_hour_overall.csv)
+    hour_overall_csv : str, optional
+        Path to CSV file with overall hour-based statistics (e.g., comparison_results_by_hour_overall.csv)
+    hour_setup_csv : str, optional
+        Path to CSV file with hour-based statistics by setup (e.g., comparison_results_by_hour_setup.csv)
     output_file : str, optional
-        Output file path for the plot (default: based on CSV filename)
+        Base output file path for plots (default: based on CSV filenames)
     
     Returns
     -------
-    str or None
-        Path to saved plot file, or None if plotting failed
+    tuple
+        Tuple of (overall_plot_path, setup_plot_path), either may be None
     """
-    print(f"Loading hour statistics from: {csv_file}")
+    overall_plot_path = None
+    setup_plot_path = None
     
-    try:
-        hour_summary_df = pd.read_csv(csv_file)
-    except Exception as e:
-        warnings.warn(f"Failed to load CSV file {csv_file}: {e}")
-        return None
+    # Plot overall metrics vs hour
+    if hour_overall_csv:
+        print(f"Loading overall hour statistics from: {hour_overall_csv}")
+        
+        try:
+            hour_summary_df = pd.read_csv(hour_overall_csv)
+        except Exception as e:
+            warnings.warn(f"Failed to load CSV file {hour_overall_csv}: {e}")
+        else:
+            if len(hour_summary_df) == 0:
+                warnings.warn(f"CSV file {hour_overall_csv} is empty")
+            else:
+                # Determine output file path
+                if output_file is None:
+                    # Generate output filename based on input CSV
+                    csv_path = Path(hour_overall_csv)
+                    plot_output = csv_path.parent / f"{csv_path.stem}_metrics_vs_hour.png"
+                    plot_output = str(plot_output)
+                else:
+                    plot_output = output_file
+                
+                print(f"Generating plot: Metrics vs Hour of Day (Overall)")
+                overall_plot_path = plot_metrics_vs_hour(hour_summary_df, output_file=plot_output)
     
-    if len(hour_summary_df) == 0:
-        warnings.warn(f"CSV file {csv_file} is empty")
-        return None
+    # Plot metrics vs hour by setup
+    if hour_setup_csv:
+        print(f"Loading hour statistics by setup from: {hour_setup_csv}")
+        
+        try:
+            hour_setup_df = pd.read_csv(hour_setup_csv)
+        except Exception as e:
+            warnings.warn(f"Failed to load CSV file {hour_setup_csv}: {e}")
+        else:
+            if len(hour_setup_df) == 0:
+                warnings.warn(f"CSV file {hour_setup_csv} is empty")
+            else:
+                # Determine output file path
+                if output_file is None:
+                    # Generate output filename based on input CSV
+                    csv_path = Path(hour_setup_csv)
+                    plot_output = csv_path.parent / f"{csv_path.stem}_metrics_vs_hour_by_setup.png"
+                    plot_output = str(plot_output)
+                else:
+                    plot_output = output_file
+                
+                print(f"Generating plot: Metrics vs Hour of Day by Setup")
+                setup_plot_path = plot_metrics_vs_hour_by_setup(hour_setup_df, output_file=plot_output)
     
-    # Determine output file path
-    if output_file is None:
-        # Generate output filename based on input CSV
-        csv_path = Path(csv_file)
-        output_file = csv_path.parent / f"{csv_path.stem}_metrics_vs_hour.png"
-        output_file = str(output_file)
-    
-    print(f"Generating plot: Metrics vs Hour of Day")
-    plot_path = plot_metrics_vs_hour(hour_summary_df, output_file=output_file)
-    
-    return plot_path
+    return overall_plot_path, setup_plot_path
 
 
 def main():
@@ -1090,9 +1244,18 @@ Examples:
   python compare_datasets.py --data-file all_results.pkl
   python compare_datasets.py --output comparison_results.csv
   
-  # Plot only from pre-calculated CSV
+  # Plot only from pre-calculated CSV files
+  # Generate overall plot only
   python compare_datasets.py --plot-only --hour-csv comparison_results_by_hour_overall.csv
-  python compare_datasets.py --plot-only --hour-csv comparison_results_by_hour_overall.csv --output my_plot.png
+  
+  # Generate by-setup plot only
+  python compare_datasets.py --plot-only --setup-csv comparison_results_by_hour_setup.csv
+  
+  # Generate both plots (recommended)
+  python compare_datasets.py --plot-only --hour-csv comparison_results_by_hour_overall.csv --setup-csv comparison_results_by_hour_setup.csv
+  
+  # Generate both plots with custom output path
+  python compare_datasets.py --plot-only --hour-csv comparison_results_by_hour_overall.csv --setup-csv comparison_results_by_hour_setup.csv --output my_plots
         """
     )
     
@@ -1120,20 +1283,38 @@ Examples:
         '--hour-csv',
         type=str,
         default=None,
-        help='Path to pre-calculated hour statistics CSV file (e.g., comparison_results_by_hour_overall.csv). Required for --plot-only mode.'
+        help='Path to pre-calculated overall hour statistics CSV file (e.g., comparison_results_by_hour_overall.csv). Used for overall plot in --plot-only mode.'
+    )
+    
+    parser.add_argument(
+        '--setup-csv',
+        type=str,
+        default=None,
+        help='Path to pre-calculated hour statistics by setup CSV file (e.g., comparison_results_by_hour_setup.csv). Used for by-setup plot in --plot-only mode.'
     )
     
     args = parser.parse_args()
     
     # Handle plot-only mode
     if args.plot_only:
-        if args.hour_csv is None:
-            parser.error("--plot-only requires --hour-csv to specify the CSV file path")
+        if args.hour_csv is None and args.setup_csv is None:
+            parser.error("--plot-only requires at least one of --hour-csv or --setup-csv")
         
-        plot_path = plot_from_csv(args.hour_csv, output_file=args.output)
-        if plot_path:
-            print(f"\nPlot generation complete! Saved to: {plot_path}")
-        return plot_path
+        overall_path, setup_path = plot_from_csv(
+            hour_overall_csv=args.hour_csv,
+            hour_setup_csv=args.setup_csv,
+            output_file=args.output
+        )
+        
+        print("\n" + "="*60)
+        print("Plot generation complete!")
+        print("="*60)
+        if overall_path:
+            print(f"Overall plot saved to: {overall_path}")
+        if setup_path:
+            print(f"By-setup plot saved to: {setup_path}")
+        
+        return overall_path, setup_path
     
     # Normal mode: full comparison
     # Set default output filename if not provided
