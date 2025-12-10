@@ -10,7 +10,7 @@ The script:
 - Determines the most likely time alignment between datasets
 - Matches data by gid, setup, and x (distance) coordinates
 - Filters to only sun-up times (times present in bifacial_radiance data)
-- Calculates summary statistics: MBD, RMSE (both percentage and absolute)
+- Calculates summary statistics: MBD, RMSE, MAD (all in both percentage and absolute)
 
 Usage:
     python compare_datasets.py
@@ -42,25 +42,31 @@ def MBD(meas, model):
     float
         Mean Bias Difference as percentage
     """
-    df = pd.DataFrame({'model': model, 'meas': meas})
+    # Convert to numpy arrays for efficiency
+    meas = np.asarray(meas, dtype=np.float64)
+    model = np.asarray(model, dtype=np.float64)
     
-    # Remove NaN values
-    df = df.dropna()
+    # Remove NaN values using vectorized mask
+    mask = ~(np.isnan(meas) | np.isnan(model))
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
     # Filter: model must be greater than minimum measured irradiance
-    minirr = df['meas'].min()
-    df = df[df['model'] > minirr]
+    minirr = np.min(meas)
+    mask = model > minirr
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
-    m = len(df)
+    m = len(meas)
     
-    # Calculate MBD
-    out = 100 * ((1/m) * (df['model'] - df['meas']).sum()) / df['meas'].mean()
+    # Calculate MBD using vectorized operations
+    out = 100 * ((1/m) * np.sum(model - meas)) / np.mean(meas)
     
     return out
 
@@ -82,25 +88,31 @@ def RMSE(meas, model):
     float
         Root Mean Squared Error as percentage
     """
-    df = pd.DataFrame({'model': model, 'meas': meas})
+    # Convert to numpy arrays for efficiency
+    meas = np.asarray(meas, dtype=np.float64)
+    model = np.asarray(model, dtype=np.float64)
     
-    # Remove NaN values
-    df = df.dropna()
+    # Remove NaN values using vectorized mask
+    mask = ~(np.isnan(meas) | np.isnan(model))
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
     # Filter: model must be greater than minimum measured irradiance
-    minirr = df['meas'].min()
-    df = df[df['model'] > minirr]
+    minirr = np.min(meas)
+    mask = model > minirr
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
-    m = len(df)
+    m = len(meas)
     
-    # Calculate RMSE
-    out = 100 * np.sqrt((1/m) * ((df['model'] - df['meas'])**2).sum()) / df['meas'].mean()
+    # Calculate RMSE using vectorized operations
+    out = 100 * np.sqrt((1/m) * np.sum((model - meas)**2)) / np.mean(meas)
     
     return out
 
@@ -122,25 +134,31 @@ def MBD_abs(meas, model):
     float
         Mean Bias Difference (absolute)
     """
-    df = pd.DataFrame({'model': model, 'meas': meas})
+    # Convert to numpy arrays for efficiency
+    meas = np.asarray(meas, dtype=np.float64)
+    model = np.asarray(model, dtype=np.float64)
     
-    # Remove NaN values
-    df = df.dropna()
+    # Remove NaN values using vectorized mask
+    mask = ~(np.isnan(meas) | np.isnan(model))
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
     # Filter: model must be greater than minimum measured irradiance
-    minirr = df['meas'].min()
-    df = df[df['model'] > minirr]
+    minirr = np.min(meas)
+    mask = model > minirr
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
-    m = len(df)
+    m = len(meas)
     
-    # Calculate MBD (absolute)
-    out = (1/m) * (df['model'] - df['meas']).sum()
+    # Calculate MBD (absolute) using vectorized operations
+    out = (1/m) * np.sum(model - meas)
     
     return out
 
@@ -162,25 +180,123 @@ def RMSE_abs(meas, model):
     float
         Root Mean Squared Error (absolute)
     """
-    df = pd.DataFrame({'model': model, 'meas': meas})
+    # Convert to numpy arrays for efficiency
+    meas = np.asarray(meas, dtype=np.float64)
+    model = np.asarray(model, dtype=np.float64)
     
-    # Remove NaN values
-    df = df.dropna()
+    # Remove NaN values using vectorized mask
+    mask = ~(np.isnan(meas) | np.isnan(model))
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
     # Filter: model must be greater than minimum measured irradiance
-    minirr = df['meas'].min()
-    df = df[df['model'] > minirr]
+    minirr = np.min(meas)
+    mask = model > minirr
+    meas = meas[mask]
+    model = model[mask]
     
-    if len(df) == 0:
+    if len(meas) == 0:
         return np.nan
     
-    m = len(df)
+    m = len(meas)
     
-    # Calculate RMSE (absolute)
-    out = np.sqrt((1/m) * ((df['model'] - df['meas'])**2).sum())
+    # Calculate RMSE (absolute) using vectorized operations
+    out = np.sqrt((1/m) * np.sum((model - meas)**2))
+    
+    return out
+
+
+def MAD(meas, model):
+    """
+    Mean Absolute Difference (percentage)
+    MAD = 100 * [((1/m) * sum(|y_i - x_i|)) / mean(x_i)]
+    
+    Parameters
+    ----------
+    meas : array-like
+        Measured values (validation data)
+    model : array-like
+        Modeled values (pysam outputs)
+    
+    Returns
+    -------
+    float
+        Mean Absolute Difference as percentage
+    """
+    # Convert to numpy arrays for efficiency
+    meas = np.asarray(meas, dtype=np.float64)
+    model = np.asarray(model, dtype=np.float64)
+    
+    # Remove NaN values using vectorized mask
+    mask = ~(np.isnan(meas) | np.isnan(model))
+    meas = meas[mask]
+    model = model[mask]
+    
+    if len(meas) == 0:
+        return np.nan
+    
+    # Filter: model must be greater than minimum measured irradiance
+    minirr = np.min(meas)
+    mask = model > minirr
+    meas = meas[mask]
+    model = model[mask]
+    
+    if len(meas) == 0:
+        return np.nan
+    
+    m = len(meas)
+    
+    # Calculate MAD using vectorized operations
+    out = 100 * ((1/m) * np.sum(np.abs(model - meas))) / np.mean(meas)
+    
+    return out
+
+
+def MAD_abs(meas, model):
+    """
+    Mean Absolute Difference (absolute, not percentage)
+    MAD = (1/m) * sum(|y_i - x_i|)
+    
+    Parameters
+    ----------
+    meas : array-like
+        Measured values (validation data)
+    model : array-like
+        Modeled values (pysam outputs)
+    
+    Returns
+    -------
+    float
+        Mean Absolute Difference (absolute)
+    """
+    # Convert to numpy arrays for efficiency
+    meas = np.asarray(meas, dtype=np.float64)
+    model = np.asarray(model, dtype=np.float64)
+    
+    # Remove NaN values using vectorized mask
+    mask = ~(np.isnan(meas) | np.isnan(model))
+    meas = meas[mask]
+    model = model[mask]
+    
+    if len(meas) == 0:
+        return np.nan
+    
+    # Filter: model must be greater than minimum measured irradiance
+    minirr = np.min(meas)
+    mask = model > minirr
+    meas = meas[mask]
+    model = model[mask]
+    
+    if len(meas) == 0:
+        return np.nan
+    
+    m = len(meas)
+    
+    # Calculate MAD (absolute) using vectorized operations
+    out = (1/m) * np.sum(np.abs(model - meas))
     
     return out
 
@@ -213,12 +329,15 @@ def find_time_alignment(validation_times, pysam_times):
     pysam_times = pd.to_datetime(pysam_times)
     
     # Extract day of year and hour
-    val_doy = val_times.dt.dayofyear
-    val_hour = val_times.dt.hour
-    val_minute = val_times.dt.minute
+    val_doy = val_times.dt.dayofyear.values
+    val_hour = val_times.dt.hour.values
     
-    pysam_doy = pysam_times.dt.dayofyear
-    pysam_hour = pysam_times.dt.hour
+    pysam_doy = pysam_times.dt.dayofyear.values
+    pysam_hour = pysam_times.dt.hour.values
+    
+    # Create combined keys for efficient matching (doy * 24 + hour)
+    pysam_keys = pysam_doy * 24 + pysam_hour
+    pysam_keys_set = set(pysam_keys)  # Use set for O(1) lookup
     
     # Validation times are on :30, pysam on :00
     # Test two alignments: -0.5 hour (match to previous hour) or +0.5 hour (match to next hour)
@@ -231,19 +350,15 @@ def find_time_alignment(validation_times, pysam_times):
         # -0.5 means shift down by 1 hour (06:30 -> 06:00)
         # +0.5 means shift up by 1 hour (06:30 -> 07:00)
         if offset < 0:
-            shifted_val_hour = val_hour - 1
+            shifted_val_hour = (val_hour - 1) % 24
         else:
-            shifted_val_hour = val_hour + 1
-        # Handle wrap-around
-        shifted_val_hour = shifted_val_hour % 24
+            shifted_val_hour = (val_hour + 1) % 24
         
-        # Count how many validation times can be matched to pysam times
-        matches = 0
-        for i, (doy, hour) in enumerate(zip(val_doy, shifted_val_hour)):
-            # Find matching pysam times (same day of year and hour)
-            pysam_match = (pysam_doy == doy) & (pysam_hour == hour)
-            if pysam_match.sum() > 0:
-                matches += 1
+        # Create combined keys for validation times
+        val_keys = val_doy * 24 + shifted_val_hour
+        
+        # Vectorized matching using set membership
+        matches = np.sum(np.isin(val_keys, pysam_keys_set))
         
         score = matches / len(val_times)
         
@@ -327,8 +442,9 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     all_data['datetime'] = pd.to_datetime(all_data['datetime'])
     
     # Split into bifacial_radiance and pysam datasets
-    validation = all_data[all_data['data_source'] == 'bifacial_radiance'].copy()
-    pysam = all_data[all_data['data_source'] == 'pysam'].copy()
+    # Use views initially, only copy when modifying
+    validation = all_data[all_data['data_source'] == 'bifacial_radiance']
+    pysam = all_data[all_data['data_source'] == 'pysam']
     
     print(f"Bifacial Radiance data: {len(validation)} rows, {validation['datetime'].nunique()} unique times")
     print(f"PySAM data: {len(pysam)} rows, {pysam['datetime'].nunique()} unique times")
@@ -353,6 +469,7 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     print(f"Best time offset: {time_offset} hours")
     
     # Adjust validation hour by offset to match pysam times
+    # Need to copy here since we're adding a new column
     validation_adjusted = validation.copy()
     # Shift hour by the offset (validation is on :30, need to match to :00)
     # -0.5 means shift down by 1 hour (06:30 -> 06:00)
@@ -371,24 +488,25 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     # Initialize results list
     results = []
     distance_stats_data = []  # Store data for distance-based statistics
+    all_matched_data = []  # Store all matched data for reuse
     
-    # Process each (gid, setup) combination
-    for idx, row in gid_setup_combos.iterrows():
-        gid = row['gid']
-        setup = row['setup']
+    # Process each (gid, setup) combination using itertuples (much faster than iterrows)
+    for row in gid_setup_combos.itertuples(index=False):
+        gid = row.gid
+        setup = row.setup
         
         print(f"\nProcessing GID {gid}, Setup {setup}...")
         
-        # Filter data for this gid and setup
+        # Filter data for this gid and setup (no need to copy if not modifying)
         val_subset = validation_adjusted[
             (validation_adjusted['gid'] == gid) & 
             (validation_adjusted['setup'] == setup)
-        ].copy()
+        ]
         
         pysam_subset = pysam[
             (pysam['gid'] == gid) & 
             (pysam['setup'] == setup)
-        ].copy()
+        ]
         
         if len(val_subset) == 0 or len(pysam_subset) == 0:
             warnings.warn(f"No data for GID {gid}, Setup {setup}")
@@ -408,36 +526,54 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             if len(pysam_time_data) == 0:
                 continue
             
-            # Match x values
-            for _, val_row in val_group.iterrows():
-                val_x = val_row['x']
-                val_irr = val_row['Wm2Front']
-                
-                # Find closest pysam x value
-                pysam_x_values = pysam_time_data['x'].values
-                closest_x_idx = np.argmin(np.abs(pysam_x_values - val_x))
-                closest_x = pysam_x_values[closest_x_idx]
-                
-                # Get pysam irradiance at closest x
-                pysam_match = pysam_time_data[pysam_time_data['x'] == closest_x]
-                if len(pysam_match) > 0:
-                    pysam_irr = pysam_match['Wm2Front'].iloc[0]
-                    
-                    matched_data.append({
-                        'gid': gid,
-                        'setup': setup,
-                        'dayofyear': doy,
-                        'hour': hour_adj,
-                        'x': val_x,
-                        'validation_irr': val_irr,
-                        'pysam_irr': pysam_irr
-                    })
+            # Vectorized x-value matching using searchsorted
+            # Sort pysam data by x once per time group
+            pysam_sorted = pysam_time_data.sort_values('x')
+            pysam_x_sorted = pysam_sorted['x'].values
+            pysam_irr_sorted = pysam_sorted['Wm2Front'].values
+            
+            # Get validation x and irradiance values as arrays
+            val_x = val_group['x'].values
+            val_irr = val_group['Wm2Front'].values
+            
+            # Use searchsorted to find insertion points (nearest neighbor)
+            indices = np.searchsorted(pysam_x_sorted, val_x, side='left')
+            
+            # Handle edge cases: clamp indices to valid range
+            indices = np.clip(indices, 0, len(pysam_x_sorted) - 1)
+            
+            # For each validation point, check if left or right neighbor is closer
+            left_dist = np.abs(pysam_x_sorted[np.maximum(indices - 1, 0)] - val_x)
+            right_dist = np.abs(pysam_x_sorted[indices] - val_x)
+            
+            # Choose closer neighbor
+            use_left = (left_dist < right_dist) & (indices > 0)
+            final_indices = np.where(use_left, indices - 1, indices)
+            
+            # Get matched pysam irradiance values
+            matched_pysam_irr = pysam_irr_sorted[final_indices]
+            
+            # Create matched data entries using vectorized operations
+            n_matches = len(val_x)
+            matched_data.extend([
+                {
+                    'gid': gid,
+                    'setup': setup,
+                    'dayofyear': doy,
+                    'hour': hour_adj,
+                    'x': val_x[i],
+                    'validation_irr': val_irr[i],
+                    'pysam_irr': matched_pysam_irr[i]
+                }
+                for i in range(n_matches)
+            ])
         
         if len(matched_data) == 0:
             warnings.warn(f"No matched data for GID {gid}, Setup {setup}")
             continue
         
         matched_df = pd.DataFrame(matched_data)
+        all_matched_data.extend(matched_data)  # Store for reuse
         
         # Calculate statistics for this gid/setup combination
         meas = matched_df['validation_irr'].values
@@ -455,8 +591,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         # Calculate statistics
         mbd_pct = MBD(meas_filtered, model_filtered)
         rmse_pct = RMSE(meas_filtered, model_filtered)
+        mad_pct = MAD(meas_filtered, model_filtered)
         mbd_abs_val = MBD_abs(meas_filtered, model_filtered)
         rmse_abs_val = RMSE_abs(meas_filtered, model_filtered)
+        mad_abs_val = MAD_abs(meas_filtered, model_filtered)
         
         # Additional statistics
         n_points = len(meas_filtered)
@@ -472,16 +610,18 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             'mean_pysam': mean_model,
             'MBD_percent': mbd_pct,
             'RMSE_percent': rmse_pct,
+            'MAD_percent': mad_pct,
             'MBD_absolute': mbd_abs_val,
             'RMSE_absolute': rmse_abs_val,
+            'MAD_absolute': mad_abs_val,
             'correlation': corr
         })
         
         print(f"  Matched {n_points} data points")
-        print(f"  MBD: {mbd_pct:.2f}%, RMSE: {rmse_pct:.2f}%")
+        print(f"  MBD: {mbd_pct:.2f}%, RMSE: {rmse_pct:.2f}%, MAD: {mad_pct:.2f}%")
         
-        # Store matched data for distance-based analysis
-        matched_df_filtered = matched_df[mask].copy()
+        # Store matched data for distance-based analysis (no need to copy)
+        matched_df_filtered = matched_df[mask]
         if len(matched_df_filtered) > 0:
             distance_stats_data.append(matched_df_filtered)
     
@@ -524,8 +664,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             # Calculate statistics
             mbd_pct = MBD(meas_filtered, model_filtered)
             rmse_pct = RMSE(meas_filtered, model_filtered)
+            mad_pct = MAD(meas_filtered, model_filtered)
             mbd_abs_val = MBD_abs(meas_filtered, model_filtered)
             rmse_abs_val = RMSE_abs(meas_filtered, model_filtered)
+            mad_abs_val = MAD_abs(meas_filtered, model_filtered)
             
             # Additional statistics
             n_points = len(meas_filtered)
@@ -542,8 +684,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
                 'mean_pysam': mean_model,
                 'MBD_percent': mbd_pct,
                 'RMSE_percent': rmse_pct,
+                'MAD_percent': mad_pct,
                 'MBD_absolute': mbd_abs_val,
                 'RMSE_absolute': rmse_abs_val,
+                'MAD_absolute': mad_abs_val,
                 'correlation': corr
             })
     
@@ -568,17 +712,19 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     if len(distance_stats_data) > 0:
         all_matched_df = pd.concat(distance_stats_data, ignore_index=True)
         
-        # Count unique time-points (dayofyear + hour) per GID
+        # Count unique time-points (dayofyear + hour) per GID using vectorized operations
         timepoint_counts = []
         for gid in all_matched_df['gid'].unique():
-            gid_data = all_matched_df[all_matched_df['gid'] == gid]
-            # Count unique combinations of dayofyear and hour
+            gid_mask = all_matched_df['gid'] == gid
+            gid_data = all_matched_df[gid_mask]
+            
+            # Count unique combinations of dayofyear and hour using vectorized operations
             unique_timepoints = gid_data[['dayofyear', 'hour']].drop_duplicates()
             n_timepoints = len(unique_timepoints)
             
-            # Also get the range of times
-            unique_days = sorted(gid_data['dayofyear'].unique())
-            unique_hours = sorted(gid_data['hour'].unique())
+            # Also get the range of times using vectorized operations
+            unique_days = np.sort(gid_data['dayofyear'].unique())
+            unique_hours = np.sort(gid_data['hour'].unique())
             
             timepoint_counts.append({
                 'gid': gid,
@@ -629,8 +775,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             # Calculate statistics
             mbd_pct = MBD(meas_filtered, model_filtered)
             rmse_pct = RMSE(meas_filtered, model_filtered)
+            mad_pct = MAD(meas_filtered, model_filtered)
             mbd_abs_val = MBD_abs(meas_filtered, model_filtered)
             rmse_abs_val = RMSE_abs(meas_filtered, model_filtered)
+            mad_abs_val = MAD_abs(meas_filtered, model_filtered)
             
             # Additional statistics
             n_points = len(meas_filtered)
@@ -645,8 +793,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
                 'mean_pysam': mean_model,
                 'MBD_percent': mbd_pct,
                 'RMSE_percent': rmse_pct,
+                'MAD_percent': mad_pct,
                 'MBD_absolute': mbd_abs_val,
                 'RMSE_absolute': rmse_abs_val,
+                'MAD_absolute': mad_abs_val,
                 'correlation': corr
             })
         
@@ -666,8 +816,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             # Calculate statistics
             mbd_pct = MBD(meas_filtered, model_filtered)
             rmse_pct = RMSE(meas_filtered, model_filtered)
+            mad_pct = MAD(meas_filtered, model_filtered)
             mbd_abs_val = MBD_abs(meas_filtered, model_filtered)
             rmse_abs_val = RMSE_abs(meas_filtered, model_filtered)
+            mad_abs_val = MAD_abs(meas_filtered, model_filtered)
             
             # Additional statistics
             n_points = len(meas_filtered)
@@ -684,8 +836,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
                 'mean_pysam': mean_model,
                 'MBD_percent': mbd_pct,
                 'RMSE_percent': rmse_pct,
+                'MAD_percent': mad_pct,
                 'MBD_absolute': mbd_abs_val,
                 'RMSE_absolute': rmse_abs_val,
+                'MAD_absolute': mad_abs_val,
                 'correlation': corr
             })
         
@@ -718,42 +872,23 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         print("No matched data available for hour-based analysis.")
     
     # Calculate overall statistics across all gid/setup combinations
-    all_meas = []
-    all_model = []
-    for _, row in summary_df.iterrows():
-        gid = row['gid']
-        setup = row['setup']
+    # Reuse matched data instead of re-matching
+    if len(all_matched_data) > 0:
+        all_matched_df = pd.DataFrame(all_matched_data)
         
-        val_subset = validation_adjusted[
-            (validation_adjusted['gid'] == gid) & 
-            (validation_adjusted['setup'] == setup)
-        ]
-        pysam_subset = pysam[
-            (pysam['gid'] == gid) & 
-            (pysam['setup'] == setup)
-        ]
+        # Filter out zero or very small values
+        mask = (all_matched_df['validation_irr'] > 0.1) & (all_matched_df['pysam_irr'] > 0.1)
+        all_matched_filtered = all_matched_df[mask]
         
-        # Re-match for overall stats
-        for (doy, hour_adj), val_group in val_subset.groupby(['dayofyear', 'hour_adjusted']):
-            pysam_time_data = pysam_subset[
-                (pysam_subset['dayofyear'] == doy) & 
-                (pysam_subset['hour'] == hour_adj)
-            ]
-            
-            for _, val_row in val_group.iterrows():
-                val_x = val_row['x']
-                val_irr = val_row['Wm2Front']
-                
-                if val_irr > 0.1:
-                    pysam_x_values = pysam_time_data['x'].values
-                    closest_x_idx = np.argmin(np.abs(pysam_x_values - val_x))
-                    closest_x = pysam_x_values[closest_x_idx]
-                    pysam_match = pysam_time_data[pysam_time_data['x'] == closest_x]
-                    if len(pysam_match) > 0:
-                        pysam_irr = pysam_match['Wm2Front'].iloc[0]
-                        if pysam_irr > 0.1:
-                            all_meas.append(val_irr)
-                            all_model.append(pysam_irr)
+        if len(all_matched_filtered) > 0:
+            all_meas = all_matched_filtered['validation_irr'].values
+            all_model = all_matched_filtered['pysam_irr'].values
+        else:
+            all_meas = np.array([])
+            all_model = np.array([])
+    else:
+        all_meas = np.array([])
+        all_model = np.array([])
     
     if len(all_meas) > 0:
         all_meas = np.array(all_meas)
@@ -761,8 +896,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         
         overall_mbd_pct = MBD(all_meas, all_model)
         overall_rmse_pct = RMSE(all_meas, all_model)
+        overall_mad_pct = MAD(all_meas, all_model)
         overall_mbd_abs = MBD_abs(all_meas, all_model)
         overall_rmse_abs = RMSE_abs(all_meas, all_model)
+        overall_mad_abs = MAD_abs(all_meas, all_model)
         overall_corr = np.corrcoef(all_meas, all_model)[0, 1]
         
         overall_row = {
@@ -773,8 +910,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
             'mean_pysam': all_model.mean(),
             'MBD_percent': overall_mbd_pct,
             'RMSE_percent': overall_rmse_pct,
+            'MAD_percent': overall_mad_pct,
             'MBD_absolute': overall_mbd_abs,
             'RMSE_absolute': overall_rmse_abs,
+            'MAD_absolute': overall_mad_abs,
             'correlation': overall_corr
         }
         
@@ -786,8 +925,10 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         print(f"Total matched points: {len(all_meas)}")
         print(f"MBD: {overall_mbd_pct:.2f}%")
         print(f"RMSE: {overall_rmse_pct:.2f}%")
+        print(f"MAD: {overall_mad_pct:.2f}%")
         print(f"MBD (absolute): {overall_mbd_abs:.2f} W/m²")
         print(f"RMSE (absolute): {overall_rmse_abs:.2f} W/m²")
+        print(f"MAD (absolute): {overall_mad_abs:.2f} W/m²")
         print(f"Correlation: {overall_corr:.4f}")
     
     # Save to file if requested
