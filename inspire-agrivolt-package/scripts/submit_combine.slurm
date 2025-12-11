@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --output=logs/agrivolt-irr-combine-%x-%j.out
-#SBATCH --error=logs/agrivolt-irr-combine-%x-%j.err
+#SBATCH --output=scripts/logs/agrivolt-irr-combine-%x-%j.out
+#SBATCH --error=scripts/logs/agrivolt-irr-combine-%x-%j.err
 #SBATCH --time=15:00:00
 #SBATCH --partition=standard
 #SBATCH --nodes=1
@@ -11,9 +11,12 @@
 #SBATCH --mail-user=tobin.ford@nrel.gov
 #SBATCH --mail-type=ALL
 
+source scripts/_env_utils.sh
+ENV_NAME="$(get_inspire_agrivolt_conda_env)"
+
 module load anaconda3
-source activate /home/tford/.conda-envs/geospatial
+source activate "$ENV_NAME"
 echo "environment activated"
 
 echo "calling combine.py"
-srun python /home/tford/dev/InSPIRE/inspire-agrivolt-package/scripts/combine.py
+srun python scripts/combine.py

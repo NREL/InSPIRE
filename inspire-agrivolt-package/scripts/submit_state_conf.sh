@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --output=logs/agrivolt-irr-%x-%j.log
-#SBATCH --error=logs/agrivolt-irr-%x-%j.err
+#SBATCH --output=scripts/logs/agrivolt-irr-%x-%j.log
+#SBATCH --error=scripts/logs/agrivolt-irr-%x-%j.err
 #SBATCH --time=10:00:00
 #SBATCH --partition=standard
 #SBATCH --nodes=1
@@ -33,16 +33,19 @@ CONF=$2
 
 STATE_SLUG=${STATE// /_}
 
-OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1.1/"$STATE_SLUG"
-CONF_DIR=/home/tford/dev/InSPIRE/Studies/USMap_Doubleday_2024/SAM
+OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1.2/"$STATE_SLUG"
 
-LOGFILE=logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.log
-ERRFILE=logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.err
+LOGFILE=scripts/logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.log
+ERRFILE=scripts/logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.err
+
+source scripts/_env_utils.sh
+ENV_NAME="$(get_inspire_agrivolt_conda_env)"
+CONF_DIR="$(get_inspire_agrivolt_SAM_conf_dir)"
 
 module load anaconda3
-source activate /home/tford/.conda-envs/geospatial
+source activate "$ENV_NAME"
 
 #### RUN SIMULATION USING CLI ####
-agrivolt_ground_irradiance "$STATE" "$OUTPUT_DIR" "$CONF_DIR" --confs "$CONF" --port 22118 --workers 16 
+agrivolt_ground_irradiance "$STATE" "$OUTPUT_DIR" "$CONF_DIR" --confs "$CONF" --port 22118
 
 conda deactivate

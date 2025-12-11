@@ -2,6 +2,9 @@ import inspire_agrivolt
 from dask.distributed import LocalCluster
 from pathlib import Path
 
+CONFS = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+VERSION = "v1.1"
+
 STATES = [
     "alabama",
     "arizona",
@@ -54,8 +57,6 @@ STATES = [
     "wyoming",
 ]
 
-CONFS = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
-VERSION = "v1.1"
 
 def check_all_state_confs_exist():
     for state in STATES:

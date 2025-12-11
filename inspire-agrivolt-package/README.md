@@ -18,7 +18,6 @@ Currently the package requires an editable `pvdeg` install on branch pysam.
 See directions [here](https://github.com/NREL/PVDegradationTools?tab=readme-ov-file#installation)
 
 
-
 ## Workflow
 This section describes how to create dataset using the scripts in `scripts/`. It consists of three main steps.
 
@@ -26,6 +25,45 @@ This section describes how to create dataset using the scripts in `scripts/`. It
 2. Postprocessing  
 3. Dataset Merging  
 4. Deployment (Optional)  
+
+**To run the scripts for the workflows you must define**.
+
+1. INSPIRE_AGRIVOLT_CONDA_ENV  
+    ```
+    Set to the name or path of the conda/mamba environment, e.g.:
+
+    export INSPIRE_AGRIVOLT_CONDA_ENV=/projects/inspire/envs/inspire-agrivolt-geospatial
+    # or
+    export INSPIRE_AGRIVOLT_CONDA_ENV=geospatial
+    ```
+
+2. INSPIRE_AGRIVOLT_SAM_CONFIG_DIR
+    Set to the path of the SAM configuration directiory, e.g.:
+
+        export INSPIRE_AGRIVOLT_SAM_CONFIG_DIR=/path/to/InSPIRE/Studies/USMap_Doubleday_2024/SAM
+
+        The directory should have the following structure.
+        InSPIRE/Studies/USMap_Doubleday_2024/SAM
+        ├── 01
+        │   ├── 01_pvsamv1.json
+        ├── 02
+        │   ├── 02_pvsamv1.json
+        ├── 03
+        │   ├── 03_pvsamv1.json
+        ├── 04
+        │   ├── 04_pvsamv1.json
+        ├── 05
+        │   ├── 05_pvsamv1.json
+        ├── 06
+        │   ├── 06_pvsamv1.json
+        ├── 07
+        │   ├── 07_pvsamv1.json
+        ├── 08
+        │   ├── 08_pvsamv1.json
+        ├── 09
+        │   ├── 09_pvsamv1.json
+        ├── 10
+        │   ├── 10_pvsamv1.json
 
 ### 1. Model Runs
 PySAM model runs as defined by the inspire_agrivolt cli.
@@ -41,6 +79,8 @@ Use `scripts/run_all_configs_state.sh` to produce the model outputs. Or use  `sc
     - OUTPUT_DIR: model output directory, 
     - CONF_DIF: SAM configuration directory with structure as described in (SAM Config Directories Structure)[SAM Config Directories Structure]
 
+From working directory `inspire-agrivolt-package` run sbatch `scripts/submit_state_conf.sh`.
+
 These currently write state output directories to an output directory defined in `scripts/submit_state_conf.sh`. These should be moved to a `model-outs/` directory for maintainability.
 
 *Slurm sends emails based on job progress and error codes but these can fail to alert you if a job has failed at certain stages*. By defualt, the script will run chunks of ~200 GIDs from the NSRDB and output these to zarr files in the output directory. These outputs will be named `*.part.zarr` to indicate that these are paritally completed results. When Dask has finished handling a chunk, we will update the filename to `*.zarr`. If an output directory contains `*.part.zarr` outputs after the SLURM job has finished then something unexpected happened. This can occur due to timeout, job failure or CPU starvation. The easiest fix is as follows
@@ -55,14 +95,14 @@ This may be a useful command to see if the `*.part.zarr` files persist at the en
 Once the above command finds no partial zarrs in the output then we can move on to postprocessing.
 
 ### 2. Postprocessing
-inspire_agrivolt implements postprocessing in the source `inspire_agrivolt/beds_postprocessing.py` and calls this functionality in `scripts/postprocess.py`. To kick off the slurm job to postprocess all state-config pairs, use `scripts/submit_postprocess.slurm`.
+inspire_agrivolt implements postprocessing in the source `inspire_agrivolt/beds_postprocessing.py` and calls this functionality in `scripts/postprocess.py`. To kick off the slurm job to postprocess all state-config pairs, use `sbatch scripts/submit_postprocess.slurm` while in `inspire-agrivolt-package` as a working directory.
 
 We grab all model outputs per state and combine them to run aggregation and normalization based on InSPIRE decided factors and useful unit conversions.
 
 ### 3. Dataset Merging
 Combining model runs and postprocessing results into a final result.
 
-To merge model runs and postprocessing use `scripts/submit_combine.slurm`. Then use `scripts/submit_check_combine.slurm` to check for data integrity. This only examines that we have no gids in the dataset.
+To merge model runs and postprocessing use `sbatch scripts/submit_combine.slurm`. Then use `scripts/submit_check_combine.slurm` to check for data integrity. This only examines that we have no gids in the dataset.
 
 ### 4. Deployment (Optional)
 Uploading the final result to OpenEI on S3.

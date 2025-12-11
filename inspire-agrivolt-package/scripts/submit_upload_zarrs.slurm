@@ -17,7 +17,7 @@ module load anaconda3
 source activate /home/tford/.conda-envs/boto
 
 for item in "03.zarr" "04.zarr" "05.zarr" "06.zarr" "07.zarr" "08.zarr" "09.zarr" "10.zarr"; do
-    srun --exclusive -N1 -n1 python /home/tford/dev/InSPIRE/inspire-agrivolt-package/scripts/upload.py "$item" &
+    srun --exclusive -N1 -n1 python scripts/upload.py "$item" &
 done
 
 wait
