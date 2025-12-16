@@ -10,9 +10,9 @@ This script demonstrates three common use cases:
 3. Accessing data for a lat/lon range
 
 The data is stored in zarr format on S3 at:
-    s3://oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1/
+    s3://oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0/
 
-Each setup has its own zarr file named: preliminary_{setup:02d}.zarr
+Each setup has its own zarr file named: configuration_{setup:02d}.zarr
 """
 
 import pandas as pd
@@ -23,7 +23,7 @@ from scipy.spatial.distance import cdist
 
 
 # S3 bucket configuration
-S3_BUCKET_PATH = "oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1"
+S3_BUCKET_PATH = "oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0"
 LOOKUP_TABLE_PATH = f"s3://{S3_BUCKET_PATH}/gid-lat-lon.csv"
 
 
@@ -60,7 +60,7 @@ def open_zarr_dataset(setup_num, s3_bucket_path=S3_BUCKET_PATH):
     xr.Dataset
         Opened xarray dataset
     """
-    zarr_filename = f"preliminary_{setup_num:02d}.zarr"
+    zarr_filename = f"configuration_{setup_num:02d}.zarr"
     zarr_path = f"s3://{s3_bucket_path}/{zarr_filename}"
     
     # Create fsspec mapper for S3 (anonymous access)
@@ -428,7 +428,7 @@ def main():
     print(f"Requested GIDs: {example_gids}")
     
     for setup_num in setup_nums:
-        zarr_path = f"s3://{S3_BUCKET_PATH}/preliminary_{setup_num:02d}.zarr"
+        zarr_path = f"s3://{S3_BUCKET_PATH}/configuration_{setup_num:02d}.zarr"
         print(f"Opening zarr file: {zarr_path}")
     
     data_by_gid, matching_gids_dict = load_data_by_gid_multiple_setups(

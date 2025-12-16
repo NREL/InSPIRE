@@ -228,7 +228,7 @@ def create_distance_mapping(br_data):
     return distance_mapping
 
 
-def consolidate_s3_zarr_results(br_data, s3_bucket_path="oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1"):
+def consolidate_s3_zarr_results(br_data, s3_bucket_path="oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0"):
     """
     Consolidate agrivoltaics irradiance data from S3 zarr files.
     Uses GIDs from bifacial radiance data and maps distance indices to actual distances.
@@ -237,7 +237,7 @@ def consolidate_s3_zarr_results(br_data, s3_bucket_path="oedi-data-lake/inspire/
     ----------
     br_data : pd.DataFrame
         Bifacial radiance data (used to get GIDs and distance mappings)
-    s3_bucket_path : str, default "oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1"
+    s3_bucket_path : str, default "oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0"
         S3 path to the zarr files directory
     
     Returns
@@ -260,7 +260,7 @@ def consolidate_s3_zarr_results(br_data, s3_bucket_path="oedi-data-lake/inspire/
         print(f"\nProcessing setup {setup_num}...")
         
         # Construct zarr file path
-        zarr_filename = f"preliminary_{setup_num:02d}.zarr"
+        zarr_filename = f"configuration_{setup_num:02d}.zarr"
         zarr_path = f"s3://{s3_bucket_path}/{zarr_filename}"
         
         print(f"  Opening: {zarr_path}")
@@ -361,7 +361,7 @@ def consolidate_s3_zarr_results(br_data, s3_bucket_path="oedi-data-lake/inspire/
     return combined_data
 
 
-def consolidate_all_results(folder_name, base_path=".", s3_bucket_path="oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1"):
+def consolidate_all_results(folder_name, base_path=".", s3_bucket_path="oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0"):
     """
     Consolidate both bifacial radiance and S3 zarr results into a single DataFrame.
     
@@ -371,7 +371,7 @@ def consolidate_all_results(folder_name, base_path=".", s3_bucket_path="oedi-dat
         Name of the validation_results folder (e.g., "validation_results")
     base_path : str, default "."
         Base path to the validation_results folder. Defaults to current directory.
-    s3_bucket_path : str, default "oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1"
+    s3_bucket_path : str, default "oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0"
         S3 path to the zarr files directory
     
     Returns
@@ -451,8 +451,8 @@ Examples:
     parser.add_argument(
         '--s3-path',
         type=str,
-        default='oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1',
-        help='S3 path to zarr files directory (default: oedi-data-lake/inspire/agrivoltaics_irradiance/v1.1)'
+        default='oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0',
+        help='S3 path to zarr files directory (default: oedi-data-lake/inspire/agrivoltaics_irradiance/v1.0)'
     )
     
     args = parser.parse_args()
