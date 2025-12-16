@@ -1,13 +1,13 @@
 """
 Compare Validation Results and PySAM Outputs
 This script compares two solar irradiance datasets from a combined pickle file:
-- Bifacial Radiance validation data (half-hour timestamps)
-- PySAM model outputs from S3 zarr (hourly timestamps)
+- Bifacial Radiance validation data (half-hour timestamps, e.g., 7:30 am)
+- PySAM model outputs from S3 zarr (hourly timestamps, e.g., 7:00 am)
 
 The combined pickle file should have a 'data_source' column indicating 'bifacial_radiance' or 'pysam'.
 
 The script:
-- Determines the most likely time alignment between datasets
+- Hard-codes time alignment: bifacial_radiance (:30) maps to PySAM (:00) by shifting hour down by 1
 - Matches data by gid, setup, and x (distance) coordinates
 - Filters to only sun-up times (times present in bifacial_radiance data)
 - Calculates summary statistics: MBD, RMSE, MAD (all in both percentage and absolute)
@@ -513,72 +513,6 @@ def plot_metrics_vs_hour_by_setup(hour_summary_by_setup_df, output_file=None):
     return plot_path
 
 
-def find_time_alignment(validation_times, pysam_times):
-    """
-    Determine the most likely time alignment between validation (half-hour) 
-    and pysam (hourly) timestamps.
-    
-    The validation times are on the half-hour (e.g., 06:30, 07:30).
-    The pysam times are on the hour (e.g., 06:00, 07:00).
-    
-    We test different offsets to find the best alignment.
-    Since years are arbitrary, we match by day-of-year and hour.
-    
-    Parameters
-    ----------
-    validation_times : pd.Series
-        Validation datetime series
-    pysam_times : pd.Series
-        PySAM datetime series
-    
-    Returns
-    -------
-    float
-        Best offset in hours (-0.5 or +0.5, since validation is on :30)
-    """
-    # Convert to datetime if needed
-    val_times = pd.to_datetime(validation_times)
-    pysam_times = pd.to_datetime(pysam_times)
-    
-    # Extract day of year and hour
-    val_doy = val_times.dt.dayofyear.values
-    val_hour = val_times.dt.hour.values
-    
-    pysam_doy = pysam_times.dt.dayofyear.values
-    pysam_hour = pysam_times.dt.hour.values
-    
-    # Create combined keys for efficient matching (doy * 24 + hour)
-    pysam_keys = pysam_doy * 24 + pysam_hour
-    pysam_keys_set = set(pysam_keys)  # Use set for O(1) lookup
-    
-    # Validation times are on :30, pysam on :00
-    # Test two alignments: -0.5 hour (match to previous hour) or +0.5 hour (match to next hour)
-    offsets = [-0.5, 0.5]
-    best_offset = -0.5
-    best_score = -np.inf
-    
-    for offset in offsets:
-        # Shift validation hour by offset
-        # -0.5 means shift down by 1 hour (06:30 -> 06:00)
-        # +0.5 means shift up by 1 hour (06:30 -> 07:00)
-        if offset < 0:
-            shifted_val_hour = (val_hour - 1) % 24
-        else:
-            shifted_val_hour = (val_hour + 1) % 24
-        
-        # Create combined keys for validation times
-        val_keys = val_doy * 24 + shifted_val_hour
-        
-        # Vectorized matching using set membership
-        matches = np.sum(np.isin(val_keys, pysam_keys_set))
-        
-        score = matches / len(val_times)
-        
-        if score > best_score:
-            best_score = score
-            best_offset = offset
-    
-    return best_offset
 
 
 def match_x_values(validation_x, pysam_x, validation_irr, pysam_irr):
@@ -675,21 +609,16 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     print(f"Validation day of year range: {validation['dayofyear'].min()} to {validation['dayofyear'].max()}")
     print(f"Validation hours: {sorted(validation['hour'].unique())}")
     
-    # Determine time alignment
-    print("\nDetermining time alignment...")
-    time_offset = find_time_alignment(validation['datetime'], pysam['datetime'])
-    print(f"Best time offset: {time_offset} hours")
+    # Hard-coded time alignment: PySAM (Zarr) data is on the hour (7:00 am) 
+    # and bifacial_radiance is on the half-hour (7:30 am)
+    # Shift validation hour down by 1 to match PySAM times (7:30 -> 7:00)
+    print("\nApplying hard-coded time alignment: bifacial_radiance (:30) -> PySAM (:00)")
     
-    # Adjust validation hour by offset to match pysam times
+    # Adjust validation hour to match pysam times
     # Need to copy here since we're adding a new column
     validation_adjusted = validation.copy()
-    # Shift hour by the offset (validation is on :30, need to match to :00)
-    # -0.5 means shift down by 1 hour (06:30 -> 06:00)
-    # +0.5 means shift up by 1 hour (06:30 -> 07:00)
-    if time_offset < 0:
-        validation_adjusted['hour_adjusted'] = validation_adjusted['hour'] - 1
-    else:
-        validation_adjusted['hour_adjusted'] = validation_adjusted['hour'] + 1
+    # Shift hour down by 1 (06:30 -> 06:00, 07:30 -> 07:00, etc.)
+    validation_adjusted['hour_adjusted'] = validation_adjusted['hour'] - 1
     # Handle wrap-around
     validation_adjusted['hour_adjusted'] = validation_adjusted['hour_adjusted'] % 24
     
