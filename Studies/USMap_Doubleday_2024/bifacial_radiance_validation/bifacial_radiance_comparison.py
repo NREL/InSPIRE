@@ -119,7 +119,7 @@ def inspire_practical_pitch(latitude: float, cw: float) -> tuple[float, float, f
     tilt_practical = min(latitude, 40)
 
     # practical gcr from practical pitch
-    gcr_practical = cw / pitch_optimal
+    gcr_practical = cw / pitch_practical
 
     return float(tilt_practical), float(pitch_practical), float(gcr_practical)
 
@@ -333,6 +333,8 @@ def simulate_single(df_tmy = None, meta_dict = None, gid = None, setup = None,
     ResultWindSpeed = list(radObj.CompiledResults['Wind Speed'])
 
     # Modify modscanfront for Ground
+    # Absolute coordinate system (west left)
+    # West to East for single-axis tracker
     numsensors = 10
     resolutionGround = pitch / numsensors
     modscanfront = {'xstart': resolutionGround / 2, 
