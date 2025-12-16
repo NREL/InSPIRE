@@ -180,7 +180,7 @@ def create_distance_mapping(br_data):
     """
     Create a mapping from zarr distance indices (0-9) to actual distance values in meters.
     Uses the distance values from bifacial radiance data, which are monotonically increasing.
-    Maps index 0 to the smallest distance, index 1 to the next smallest, etc.
+    Maps index 9 to the smallest distance, index 8 to the next smallest, ..., index 0 to the largest.
     
     Parameters
     ----------
@@ -206,7 +206,7 @@ def create_distance_mapping(br_data):
             # Get unique distance values and sort them (monotonically increasing)
             unique_distances = sorted(gid_data['x'].unique())
             
-            # Map indices 0-9 to distance values
+            # Map indices 0-9 to distance values (reversed: index 9 maps to smallest distance)
             # If there are more than 10 unique distances, we need to select which ones to use
             # Strategy: if more than 10, evenly sample or use first 10
             # For now, use first 10 unique distances
@@ -218,8 +218,11 @@ def create_distance_mapping(br_data):
                 selected_distances = unique_distances
             
             gid_mapping = {}
-            for idx in range(len(selected_distances)):
-                gid_mapping[idx] = selected_distances[idx]
+            num_distances = len(selected_distances)
+            # Map in reverse: index 9 -> smallest distance, index 0 -> largest distance
+            for idx in range(num_distances):
+                zarr_index = (num_distances - 1) - idx  # Reverse mapping: 9, 8, 7, ..., 0
+                gid_mapping[zarr_index] = selected_distances[idx]
             
             distance_mapping[setup][gid] = gid_mapping
             
