@@ -1,13 +1,14 @@
 """
 Compare Validation Results and PySAM Outputs
 This script compares two solar irradiance datasets from a combined pickle file:
-- Bifacial Radiance validation data (half-hour timestamps, e.g., 7:30 am)
-- PySAM model outputs from S3 zarr (hourly timestamps, e.g., 7:00 am)
+- Bifacial Radiance validation data
+- PySAM model outputs from S3 zarr
 
 The combined pickle file should have a 'data_source' column indicating 'bifacial_radiance' or 'pysam'.
+Timestamps are already aligned in the consolidated data (bifacial_radiance timestamps are on the hour,
+and pysam timestamps are in year 2023).
 
 The script:
-- Hard-codes time alignment: bifacial_radiance (:30) maps to PySAM (:00) by shifting hour down by 1
 - Matches data by gid, setup, and x (distance) coordinates
 - Filters to only sun-up times (times present in bifacial_radiance data)
 - Calculates summary statistics: MBD, RMSE, MAD (all in both percentage and absolute)
@@ -609,19 +610,6 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
     print(f"Validation day of year range: {validation['dayofyear'].min()} to {validation['dayofyear'].max()}")
     print(f"Validation hours: {sorted(validation['hour'].unique())}")
     
-    # Hard-coded time alignment: PySAM (Zarr) data is on the hour (7:00 am) 
-    # and bifacial_radiance is on the half-hour (7:30 am)
-    # Shift validation hour down by 1 to match PySAM times (7:30 -> 7:00)
-    print("\nApplying hard-coded time alignment: bifacial_radiance (:30) -> PySAM (:00)")
-    
-    # Adjust validation hour to match pysam times
-    # Need to copy here since we're adding a new column
-    validation_adjusted = validation.copy()
-    # Shift hour down by 1 (06:30 -> 06:00, 07:30 -> 07:00, etc.)
-    validation_adjusted['hour_adjusted'] = validation_adjusted['hour'] - 1
-    # Handle wrap-around
-    validation_adjusted['hour_adjusted'] = validation_adjusted['hour_adjusted'] % 24
-    
     # Get unique combinations of gid, setup
     gid_setup_combos = validation[['gid', 'setup']].drop_duplicates()
     print(f"\nFound {len(gid_setup_combos)} unique (gid, setup) combinations")
@@ -638,9 +626,9 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         print(f"\nProcessing GID {gid}, Setup {setup}...")
         
         # Filter data for this gid and setup (no need to copy if not modifying)
-        val_subset = validation_adjusted[
-            (validation_adjusted['gid'] == gid) & 
-            (validation_adjusted['setup'] == setup)
+        val_subset = validation[
+            (validation['gid'] == gid) & 
+            (validation['setup'] == setup)
         ]
         
         pysam_subset = pysam[
@@ -655,12 +643,12 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
         # Match by day of year, hour, and x
         matched_data = []
         
-        # Get unique combinations of day of year and adjusted hour
-        for (doy, hour_adj), val_group in val_subset.groupby(['dayofyear', 'hour_adjusted']):
+        # Get unique combinations of day of year and hour
+        for (doy, hour), val_group in val_subset.groupby(['dayofyear', 'hour']):
             # Find corresponding pysam data (same day of year and hour)
             pysam_time_data = pysam_subset[
                 (pysam_subset['dayofyear'] == doy) & 
-                (pysam_subset['hour'] == hour_adj)
+                (pysam_subset['hour'] == hour)
             ]
             
             if len(pysam_time_data) == 0:
@@ -700,7 +688,7 @@ def compare_datasets(data_file='all_results.pkl', output_file=None):
                     'gid': gid,
                     'setup': setup,
                     'dayofyear': doy,
-                    'hour': hour_adj,
+                    'hour': hour,
                     'x': val_x[i],
                     'validation_irr': val_irr[i],
                     'pysam_irr': matched_pysam_irr[i]

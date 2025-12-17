@@ -7,11 +7,9 @@ The plot shows data from a combined pickle file (all_results.pkl) with a data_so
 indicating whether data is from 'bifacial_radiance' or 'pysam'.
 
 Usage:
-    python plot_wm2front_vs_distance.py --gid 886847 --hour 12
-    python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --dayofyear 59
-    python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --output comparison_plots.png
-    python plot_wm2front_vs_distance.py --data-file all_results.pkl --gid 886847 --hour 12
-    python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --dayofyear 172 --output June_21_comparison_plots.png
+    python plot_wm2front_vs_distance.py --gid 886847 --timestamp "2023-01-01 12:00:00"
+    python plot_wm2front_vs_distance.py --gid 886847 --timestamp "2023-06-21 12:00:00" --output June_21_comparison_plots.png
+    python plot_wm2front_vs_distance.py --data-file all_results.pkl --gid 886847 --timestamp "2023-01-01 12:00:00"
 """
 
 import pandas as pd
@@ -25,10 +23,8 @@ import warnings
 def plot_wm2front_vs_distance(
     data_file='all_results.pkl',
     gid=None,
-    hour=12,
-    dayofyear=None,
-    output_file=None,
-    time_offset=-0.5
+    timestamp=None,
+    output_file=None
 ):
     """
     Generate line plots comparing PySAM and bifacial radiance data for Wm2Front vs distance.
@@ -39,15 +35,11 @@ def plot_wm2front_vs_distance(
         Path to combined results pickle file with data_source column
     gid : int
         GID to plot (if None, uses first GID found)
-    hour : int, default 12
-        Hour of day to plot (0-23)
-    dayofyear : int, optional
-        Day of year to plot (if None, uses first day found)
+    timestamp : str or pd.Timestamp, optional
+        Timestamp to plot (e.g., "2023-01-01 12:00:00" or "2023-06-21 12:00:00")
+        If None, uses first timestamp found in the data
     output_file : str, optional
-        Output file path for the plot (default: wm2front_vs_distance_gid{gid}_hour{hour}.png)
-    time_offset : float, default -0.5
-        Time offset in hours for matching bifacial_radiance to pysam times
-        (bifacial_radiance is on :30, pysam is on :00)
+        Output file path for the plot (default: wm2front_vs_distance_gid{gid}_{timestamp}.png)
     
     Returns
     -------
@@ -62,22 +54,9 @@ def plot_wm2front_vs_distance(
     # Convert datetime columns
     all_data['datetime'] = pd.to_datetime(all_data['datetime'])
     
-    # Extract day of year and hour (ignoring year)
-    all_data['dayofyear'] = all_data['datetime'].dt.dayofyear
-    all_data['hour'] = all_data['datetime'].dt.hour
-    all_data['minute'] = all_data['datetime'].dt.minute
-    
     # Split into bifacial_radiance and pysam datasets
     validation = all_data[all_data['data_source'] == 'bifacial_radiance'].copy()
     pysam = all_data[all_data['data_source'] == 'pysam'].copy()
-    
-    # Adjust validation hour by offset to match pysam times
-    validation_adjusted = validation.copy()
-    if time_offset < 0:
-        validation_adjusted['hour_adjusted'] = validation_adjusted['hour'] - 1
-    else:
-        validation_adjusted['hour_adjusted'] = validation_adjusted['hour'] + 1
-    validation_adjusted['hour_adjusted'] = validation_adjusted['hour_adjusted'] % 24
     
     # Select GID
     if gid is None:
@@ -92,18 +71,30 @@ def plot_wm2front_vs_distance(
     if gid not in pysam['gid'].unique():
         raise ValueError(f"GID {gid} not found in pysam data")
     
-    # Select day of year
-    if dayofyear is None:
-        dayofyear = validation_adjusted[validation_adjusted['gid'] == gid]['dayofyear'].iloc[0]
-        print(f"No day of year specified, using first day found: {dayofyear}")
+    # Select timestamp
+    if timestamp is None:
+        target_datetime = validation[validation['gid'] == gid]['datetime'].iloc[0]
+        print(f"No timestamp specified, using first timestamp found: {target_datetime}")
     else:
-        print(f"Using day of year: {dayofyear}")
+        # Parse timestamp string to datetime
+        target_datetime = pd.to_datetime(timestamp)
+        print(f"Using timestamp: {target_datetime}")
     
-    print(f"Using hour: {hour}")
+    # Normalize to remove seconds/microseconds for matching (keep only date and hour)
+    target_datetime_normalized = target_datetime.replace(second=0, microsecond=0)
+    
+    # Normalize validation and pysam datetimes for matching (do this once before the loop)
+    validation['datetime_normalized'] = validation['datetime'].apply(
+        lambda dt: dt.replace(second=0, microsecond=0)
+    )
+    pysam['datetime_normalized'] = pysam['datetime'].apply(
+        lambda dt: dt.replace(second=0, microsecond=0)
+    )
     
     # Create figure with subplots for each setup (2 rows, 5 columns)
     fig, axes = plt.subplots(2, 5, figsize=(20, 10))
-    fig.suptitle(f'GID: {gid}, Day of Year: {dayofyear}, Hour: {hour:02d}:00', 
+    timestamp_str = target_datetime_normalized.strftime('%Y-%m-%d %H:%M')
+    fig.suptitle(f'GID: {gid}, Timestamp: {timestamp_str}', 
                  fontsize=16, fontweight='bold')
     
     axes = axes.flatten()
@@ -112,20 +103,18 @@ def plot_wm2front_vs_distance(
     for setup in range(1, 11):
         ax = axes[setup - 1]
         
-        # Filter validation data for this GID, setup, day, and hour
-        val_data = validation_adjusted[
-            (validation_adjusted['gid'] == gid) &
-            (validation_adjusted['setup'] == setup) &
-            (validation_adjusted['dayofyear'] == dayofyear) &
-            (validation_adjusted['hour_adjusted'] == hour)
+        # Filter validation data for this GID, setup, and timestamp
+        val_data = validation[
+            (validation['gid'] == gid) &
+            (validation['setup'] == setup) &
+            (validation['datetime_normalized'] == target_datetime_normalized)
         ].copy()
         
-        # Filter pysam data for this GID, setup, day, and hour
+        # Filter pysam data for this GID, setup, and timestamp
         pysam_data = pysam[
             (pysam['gid'] == gid) &
             (pysam['setup'] == setup) &
-            (pysam['dayofyear'] == dayofyear) &
-            (pysam['hour'] == hour)
+            (pysam['datetime_normalized'] == target_datetime_normalized)
         ].copy()
         
         if len(val_data) == 0 and len(pysam_data) == 0:
@@ -179,7 +168,8 @@ def plot_wm2front_vs_distance(
     
     # Save plot
     if output_file is None:
-        output_file = f'wm2front_vs_distance_gid{gid}_hour{hour:02d}.png'
+        timestamp_filename = target_datetime_normalized.strftime('%Y-%m-%d_%H-%M')
+        output_file = f'wm2front_vs_distance_gid{gid}_{timestamp_filename}.png'
     
     plt.savefig(output_file, dpi=300, bbox_inches='tight')
     print(f"\nPlot saved to: {output_file}")
@@ -194,9 +184,8 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python plot_wm2front_vs_distance.py --gid 886847 --hour 12
-  python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --dayofyear 59
-  python plot_wm2front_vs_distance.py --gid 886847 --hour 12 --output my_plot.png
+  python plot_wm2front_vs_distance.py --gid 886847 --timestamp "2023-01-01 12:00:00"
+  python plot_wm2front_vs_distance.py --data-file all_results.pkl --gid 886847 --timestamp "2023-01-01 12:00:00"
         """
     )
     
@@ -215,24 +204,17 @@ Examples:
     )
     
     parser.add_argument(
-        '--hour',
-        type=int,
-        default=12,
-        help='Hour of day to plot (0-23, default: 12 for midday)'
-    )
-    
-    parser.add_argument(
-        '--dayofyear',
-        type=int,
+        '--timestamp',
+        type=str,
         default=None,
-        help='Day of year to plot (if not specified, uses first day found)'
+        help='Timestamp to plot (e.g., "2023-01-01 12:00:00" or "2023-06-21 12:00:00"). If not specified, uses first timestamp found.'
     )
     
     parser.add_argument(
         '--output',
         type=str,
         default=None,
-        help='Output file path for the plot (default: wm2front_vs_distance_gid{gid}_hour{hour:02d}.png)'
+        help='Output file path for the plot (default: wm2front_vs_distance_gid{gid}_{timestamp}.png)'
     )
     
     args = parser.parse_args()
@@ -241,8 +223,7 @@ Examples:
     output_path = plot_wm2front_vs_distance(
         data_file=args.data_file,
         gid=args.gid,
-        hour=args.hour,
-        dayofyear=args.dayofyear,
+        timestamp=args.timestamp,
         output_file=args.output
     )
     

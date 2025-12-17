@@ -23,7 +23,7 @@ import pandas as pd
 import xarray as xr
 import fsspec
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 import re
 import warnings
 import argparse
@@ -134,6 +134,9 @@ def consolidate_br_results(folder_name, base_path="."):
                         f"{date_part} {hour:02d}:{minute:02d}", 
                         "%Y-%m-%d %H:%M"
                     )
+                    
+                    # Adjust timestamp: subtract 30 minutes so it occurs on the hour (00:00)
+                    file_datetime = file_datetime - timedelta(minutes=30)
                     
                     # Read CSV file
                     try:
@@ -329,6 +332,11 @@ def consolidate_s3_zarr_results(br_data, s3_bucket_path="oedi-data-lake/inspire/
             # Convert datetime to pandas datetime if needed
             if not pd.api.types.is_datetime64_any_dtype(df['datetime']):
                 df['datetime'] = pd.to_datetime(df['datetime'])
+            
+            # Adjust timestamp: change year to 2023, retaining month, day, and hour
+            df['datetime'] = df['datetime'].apply(
+                lambda dt: dt.replace(year=2023)
+            )
             
             # Convert gid to int
             df['gid'] = df['gid'].astype(int)
