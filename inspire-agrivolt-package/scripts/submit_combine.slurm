@@ -14,9 +14,13 @@
 source scripts/_env_utils.sh
 ENV_NAME="$(get_inspire_agrivolt_conda_env)"
 
+MODEL_OUTS_DIR="$(get_inspire_agrivolt_model_outs_dir)"
+POSTPROCESS_DIR="$(get_inspire_agrivolt_postprocess_dir)"
+FINAL_DIR="$(get_inspire_agrivolt_final_dir)"
+
 module load anaconda3
 source activate "$ENV_NAME"
 echo "environment activated"
 
 echo "calling combine.py"
-srun python scripts/combine.py
+srun python scripts/combine.py $MODEL_OUTS_DIR $POSTPROCESS_DIR $FINAL_DIR

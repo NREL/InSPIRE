@@ -13,9 +13,10 @@
 
 source scripts/_env_utils.sh
 ENV_NAME="$(get_inspire_agrivolt_conda_env)"
+FINAL_DIR="$(get_inspire_agrivolt_final_dir)"
 
 module load anaconda3
 source activate "$ENV_NAME"
 
 export PYTHONUNBUFFERED=1
-srun -u python scripts/check_combine.py
+srun -u python scripts/check_combine.py $FINAL_DIR

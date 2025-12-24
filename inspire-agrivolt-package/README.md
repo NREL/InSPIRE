@@ -64,6 +64,35 @@ This section describes how to create dataset using the scripts in `scripts/`. It
         │   ├── 09_pvsamv1.json
         ├── 10
         │   ├── 10_pvsamv1.json
+        ├── 11
+        │   ├── 11_pvsamv1.json
+
+3. INSPIRE_AGRIVOLT_MODEL_OUTS_DIR
+    Set to the path of the desired agrivoltaic irradiance outputs directory, e.g:
+
+        export INSPIRE_AGRIVOLT_MODEL_OUTS_DIR=/projects/inspire/PySAM-MAPS/v1.2/model-outs/
+
+    This is where the outputs of the irradiance model go. 
+    Produced by the following scripts in `scripts/`:
+    - `submit_state_conf.sh`
+    - `run_all_configs_state.sh`
+    - `run_all_states_config.sh`
+
+4. INSPIRE_AGRIVOLT_POSTPROCESS_DIR
+    Set to the path of the desired postprocessing outputs directory, e.g:
+
+        export INSPIRE_AGRIVOLT_POSTPROCESS_DIR=/projects/inspire/PySAM-MAPS/v1.2/postprocess/
+
+    This is where the outputs of the postprocessing step go. Produced by the following script in `scripts/`:
+    - `submit_postprocess.slurm`
+
+5. INSPIRE_AGRIVOLT_FINAL_DIR
+    Set to the path of the desired final combined outputs directory, e.g:
+
+        export INSPIRE_AGRIVOLT_FINAL_DIR=/projects/inspire/PySAM-MAPS/v1.2/final/
+
+    This is where the final outputs of the combine step are stored. This step takes results from `INSPIRE_AGRIVOLT_MODEL_OUTS_DIR` and `INSPIRE_AGRIVOLT_POSTPROCESSING_DIR` and combined them into their final state. No more processing is done on the combined files in `INSPIRE_AGRIVOLT_FINAL_DIR`. They are produced by the following script in `scripts/`:
+    - `submit_combine.slurm`.
 
 ### 1. Model Runs
 PySAM model runs as defined by the inspire_agrivolt cli.
