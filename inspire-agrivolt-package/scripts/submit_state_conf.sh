@@ -33,7 +33,7 @@ CONF=$2
 
 STATE_SLUG=${STATE// /_}
 
-OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1.2/"$STATE_SLUG"
+OUTPUT_DIR=/projects/inspire/PySAM-MAPS/v1.2/model-outs/"$STATE_SLUG"
 
 LOGFILE=scripts/logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.log
 ERRFILE=scripts/logs/agrivolt-irr-$SLURM_JOB_NAME-$SLURM_JOB_ID.err

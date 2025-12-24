@@ -141,7 +141,7 @@ pitch_temp, pitchfactor, tilt = -999, -999, -999
 TRACKING_SCENARIOS = {"01", "02", "03", "04", "05"}
 TRACKING_3_BEDS_SCENARIOS = {"01", "02", "03", "04"}
 TRACKING_6_BEDS_SCENARIOS = {"05"}
-VARIABLE_PITCH_SCENARIOS = {"06", "07", "08", "09"}
+VARIABLE_PITCH_SCENARIOS = {"06", "07", "08", "09", "11"}
 VERTICAL_SCENARIOS = {"10"}
 
 ALL_SCENARIOS = TRACKING_SCENARIOS | VARIABLE_PITCH_SCENARIOS | VERTICAL_SCENARIOS
@@ -387,8 +387,25 @@ def fixed_tilt_vertical_6_beds(dataset: xr.Dataset) -> xr.Dataset:
     return tracking_6_beds(dataset=dataset)
 
 
-def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
-    bins = np.array([3.8, 3.8492, 4.9491, 6.9355, 11.5465, 12.0001, np.inf])
+def iter_beds(scenario_dataset: xr.Dataset) -> xr.Dataset:
+    """
+    Iterate over scenario_dataset and create a beds aggregation.
+
+    Parameters
+    ----------
+    scenario_dataset: xr.Dataset
+
+    Returns
+    ----------
+    Resulting beds aggregate dataset contains the following datavars
+        under_panel (gid, time)
+        beda (gid, time)
+        bedb (gid, time)
+        bedc (gid, time)
+        edgetoedge (gid, time)
+    """
+
+    bins = np.array([3.8, 3.8492, 4.9491, 6.9355, 11.5465, 24.0001, np.inf])
 
     distance_index = np.arange(0, 10)
 
@@ -398,7 +415,7 @@ def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
             [0, 4, 4, 6, 6, 8, 8, 10],  # 3.8492,  4.9491
             [0, 3, 3, 5, 5, 8, 8, 10],  # 4.9491, 6.9355
             [0, 2, 2, 5, 5, 7, 7, 10],  # 6.9355, 11.5465
-            [0, 1, 1, 4, 4, 7, 7, 10],  # 11.5465, 12.0
+            [0, 1, 1, 4, 4, 7, 7, 10],  # 11.5465, 24.0
         ],
         dtype=int,
     )
@@ -406,8 +423,8 @@ def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
     digitized = np.digitize(scenario_dataset.pitch, bins)
 
     # if anything in the range
-    if np.any(digitized == 6):
-        raise ValueError("Invalid pitch value above 12 provided.")
+    if np.any(digitized >= 6):
+        raise ValueError("Recieved invalid pitch value above 24.")
 
     slice_index = digitized - 1
     selected_slices = slices[slice_index]
@@ -416,13 +433,13 @@ def iter_beds(scenario_dataset: xr.Dataset) -> xr.DataArray:
     for i, gid in enumerate(scenario_dataset.gid):
         # calculate mask
         under_start = selected_slices[i, 0]
-        under_end = selected_slices[i, 1]
-        beda_start = selected_slices[i, 2]
-        beda_end = selected_slices[i, 3]
-        bedb_start = selected_slices[i, 4]
-        bedb_end = selected_slices[i, 5]
-        bedc_start = selected_slices[i, 6]
-        bedc_end = selected_slices[i, 7]
+        under_end   = selected_slices[i, 1]
+        beda_start  = selected_slices[i, 2]
+        beda_end    = selected_slices[i, 3]
+        bedb_start  = selected_slices[i, 4]
+        bedb_end    = selected_slices[i, 5]  
+        bedc_start  = selected_slices[i, 6]
+        bedc_end    = selected_slices[i, 7]  
 
         mask_under = (distance_index >= under_start) & (distance_index < under_end)
         mask_edgetoedge = (distance_index >= beda_start) & (distance_index < bedc_end)
@@ -487,9 +504,6 @@ def fixed_tilt_3_beds(
         key: value for key, value in chunks.items() if key in keys_to_take
     }
 
-    # chunks_gid = chunks["gid"]
-    # chunks_time = chunks["time"]
-
     size_gid = sizes["gid"]
     size_time = sizes["time"]
 
@@ -497,10 +511,6 @@ def fixed_tilt_3_beds(
         return da.empty(
             dtype=float,
             shape=(size_gid, size_time),
-            # chunks=({
-            #     "gid":chunks_gid,
-            #     "time":chunks_time
-            # })
         )
 
     map_template = xr.Dataset(
